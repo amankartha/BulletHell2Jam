@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class Arm : MonoBehaviour
 {
     #region Variables
@@ -10,13 +11,16 @@ public class Arm : MonoBehaviour
     public Transform pivot;
     public float Radius = 2f;
 
-
+    
     private Camera mainCam;
+   
+    
     #endregion
 
     private void Start()
     {
         mainCam = Camera.main;
+       
     }
 
     private void Update()

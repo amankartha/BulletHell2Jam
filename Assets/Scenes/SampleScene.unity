@@ -394,6 +394,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 400720448928947624, guid: d9f89a9092585b648a90cb32e3851f58, type: 3}
+      propertyPath: Radius
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3196459381937730238, guid: d9f89a9092585b648a90cb32e3851f58, type: 3}
       propertyPath: m_LocalRotation.w
       value: 1
@@ -417,6 +421,22 @@ PrefabInstance:
     - target: {fileID: 3196459381937730238, guid: d9f89a9092585b648a90cb32e3851f58, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5555345675106925617, guid: d9f89a9092585b648a90cb32e3851f58, type: 3}
+      propertyPath: _heat
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 5555345675106925617, guid: d9f89a9092585b648a90cb32e3851f58, type: 3}
+      propertyPath: _health
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 5555345675106925617, guid: d9f89a9092585b648a90cb32e3851f58, type: 3}
+      propertyPath: _maxHeat
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 5555345675106925617, guid: d9f89a9092585b648a90cb32e3851f58, type: 3}
+      propertyPath: _maxHealth
+      value: 100
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
