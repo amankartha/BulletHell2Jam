@@ -13,6 +13,8 @@ public class MainPlayer : MonoBehaviour
     [Header("Costs")] 
     public int TeleportCost = 20;
     public int RelectHeatChargeUp = 5;
+    public int ShootThreshold = 60;
+    public int ShootingDrainPerSecond = 10;
     
     [SerializeField]
     private int _health;
@@ -29,16 +31,16 @@ public class MainPlayer : MonoBehaviour
     
     private StateMachine fsm;
     private Camera mainCamera;
-    private int Health {
+    public int Health {
         get => _health;
         set
         {
             _health = math.clamp(value, 0, _maxHealth);
         }
     }
-    private int MaxHealth { get; set; }
+    public int MaxHealth { get;private set; }
 
-    private int Heat
+    public int Heat
     {
         get
         {
@@ -64,11 +66,13 @@ public class MainPlayer : MonoBehaviour
         
         
         
+        fsm.AddTransition(new Transition("Melee","Shooting",transition => TransitionToShooting()));
+        fsm.AddTransition(new Transition("Shooting","Melee",transition => TransitionFromShooting()));
+
+
         fsm.SetStartState("Melee");
         fsm.Init();
-        
-        //TODO: REMOVE THIS
-        Heat = 50;
+      
     }
 
     // Update is called once per frame
@@ -117,4 +121,28 @@ public class MainPlayer : MonoBehaviour
     {
         transform.position = (Vector2)mainCamera.ScreenToWorldPoint(Input.mousePosition);
     }
+
+    #region TransitionFunctions
+
+    private bool TransitionToShooting()
+    {
+        if (Heat > ShootThreshold)
+        {
+            return true;
+        }
+
+        return false;
+    }
+
+    private bool TransitionFromShooting()
+    {
+        if (Heat == 0)
+        {
+            return true;
+        }
+
+        return false;
+    }
+
+    #endregion
 }
