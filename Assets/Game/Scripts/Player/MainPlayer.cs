@@ -12,6 +12,7 @@ public class MainPlayer : MonoBehaviour
 
     [Header("Costs")] 
     public int TeleportCost = 20;
+    public int RelectHeatChargeUp = 5;
     
     [SerializeField]
     private int _health;
@@ -23,6 +24,9 @@ public class MainPlayer : MonoBehaviour
     [SerializeField]
     private int _maxHeat;
 
+    [Header("CONNECTIONS")] 
+    public BulletCollider ArmCollider;
+    
     private StateMachine fsm;
     private Camera mainCamera;
     private int Health {
@@ -81,6 +85,11 @@ public class MainPlayer : MonoBehaviour
     public void Oncollide(BulletContainer Bcontainer, BulletCollider Bcollider)
     {
         Health -= (int)Bcontainer.Damage;
+    }
+
+    public void OnCollideArm(BulletContainer bulletContainer, BulletCollider bulletCollider)
+    {
+        Heat += RelectHeatChargeUp ;
     }
 
     public bool TryConsumeHeat(int value)

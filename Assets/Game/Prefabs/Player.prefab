@@ -90,10 +90,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   TeleportCost: 20
+  RelectHeatChargeUp: 5
   _health: 0
   _maxHealth: 0
   _heat: 0
   _maxHeat: 0
+  ArmCollider: {fileID: 6090467871960446947}
 --- !u!1 &1076504662954096943
 GameObject:
   m_ObjectHideFlags: 0
@@ -398,7 +400,19 @@ MonoBehaviour:
   pointC: {x: 0, y: 0, z: 0}
   OnCollide:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 5555345675106925617}
+        m_TargetAssemblyTypeName: MainPlayer, Assembly-CSharp
+        m_MethodName: OnCollideArm
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   bounce: 0
   lifetimeLoss: 0
   bounciness: 0
