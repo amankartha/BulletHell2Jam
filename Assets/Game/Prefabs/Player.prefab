@@ -32,7 +32,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8799562774804912510}
-  - {fileID: 4403497597303258870}
   - {fileID: 8157392805505859969}
   - {fileID: 4602746440313519860}
   m_Father: {fileID: 0}
@@ -90,6 +89,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8dfd44c0e6b6aba45bce28d75ae4b33f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  TeleportCost: 20
+  _health: 0
+  _maxHealth: 0
+  _heat: 0
+  _maxHeat: 0
 --- !u!1 &1076504662954096943
 GameObject:
   m_ObjectHideFlags: 0
@@ -120,7 +124,8 @@ Transform:
   m_LocalPosition: {x: -0.02, y: 1.02, z: 0}
   m_LocalScale: {x: 0.205, y: 0.6375, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 4403497597303258870}
   m_Father: {fileID: 4602746440313519860}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &5025131903992738830
@@ -361,12 +366,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8843030366623110404}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.99, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.09756098, y: -0.04705878, z: 0}
+  m_LocalScale: {x: 4.878049, y: 1.5686275, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 31429914335782348}
+  m_Father: {fileID: 3196459381937730238}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &6090467871960446947
 MonoBehaviour:
@@ -385,7 +390,7 @@ MonoBehaviour:
     m_Bits: 64
   shape: 1
   radius: 0.5
-  size: {x: 1.06, y: 0.43, z: 1}
+  size: {x: 0.16, y: 0.37, z: 1}
   destroyBullet: 1
   center: {x: 0, y: 0, z: 0}
   pointA: {x: 0, y: 0, z: 0}
