@@ -12,9 +12,9 @@ TagManager:
   - Water
   - UI
   - EnemyBullet
-  - 
-  - 
-  - 
+  - Wall
+  - Floor
+  - Pit
   - 
   - 
   - 
@@ -40,4 +40,19 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Floor
+    uniqueID: 793091421
+    locked: 0
+  - name: NonInteractables
+    uniqueID: 195190191
+    locked: 0
+  - name: Pits
+    uniqueID: 1293253429
+    locked: 0
+  - name: Walls
+    uniqueID: 983452061
+    locked: 0
+  - name: Player
+    uniqueID: 4075187033
     locked: 0
