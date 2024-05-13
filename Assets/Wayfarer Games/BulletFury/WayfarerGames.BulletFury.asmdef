@@ -1,0 +1,25 @@
+{
+    "name": "WayfarerGames.BulletFury",
+    "rootNamespace": "",
+    "references": [
+        "GUID:12fd33505e9c049dabc070e732f3f74b",
+        "GUID:d8b63aba1907145bea998dd612889d6b",
+        "GUID:2665a8d13d1b3f18800f46e256720795",
+        "GUID:49b49c76ee64f6b41bf28ef951cb0e50"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [
+        {
+            "name": "com.mackysoft.serializereference-extensions",
+            "expression": "1.0.0",
+            "define": "SERIALIZEREFERENCE_EXTENSIONS"
+        }
+    ],
+    "noEngineReferences": false
+}

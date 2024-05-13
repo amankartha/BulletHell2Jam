@@ -1,0 +1,59 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="True">
+    <Style src="project://database/Assets/Wayfarer%20Games/BulletFury/Editor/BulletSpawnerStyle.uss?fileID=7433441132597879392&amp;guid=1e23980b58c31465caf03b5ad3f8e3b6&amp;type=3#BulletSpawnerStyle" />
+    <uie:PropertyField name="Script" binding-path="m_Script" />
+    <ui:VisualElement name="MainData" class="main-body" style="flex-grow: 1;">
+        <ui:Label text="Bullet Spawner" style="-unity-font-style: bold; font-size: 18px; margin-top: 0; margin-right: 5px; margin-bottom: 0; margin-left: 5px; -unity-text-align: middle-left; letter-spacing: 2px; word-spacing: 10px; padding-right: 15px; padding-left: 15px; padding-top: 10px; padding-bottom: 10px;" />
+        <Wayfarer_Games.BulletFury.RenderData.SharedRenderDataVisualElement binding-path="renderData" name="RenderData" class="unity-collection-view__item--alternative-background" style="border-top-left-radius: 10px; border-top-right-radius: 10px; border-bottom-right-radius: 10px; border-bottom-left-radius: 10px;" />
+        <ui:VisualElement name="Main" class="panel" style="flex-grow: 1;">
+            <ui:Label text="Bullet Settings" class="title header" />
+            <ui:BindableElement binding-path="main" name="VisualBody" class="body">
+                <uie:PropertyField binding-path="FireMode" name="FireMode" />
+                <uie:PropertyField binding-path="FireRate" name="FireRate" />
+                <uie:PropertyField binding-path="Damage" name="Damage" />
+                <uie:PropertyField binding-path="Lifetime" name="Lifetime" />
+                <uie:PropertyField binding-path="Speed" name="Speed" />
+                <uie:PropertyField binding-path="StartColor" name="StartColor" />
+                <uie:PropertyField binding-path="StartSize" name="StartSize" />
+                <uie:PropertyField binding-path="UseRotationForDirection" name="UseRotation" />
+                <uie:PropertyField binding-path="ColliderType" name="ColliderType" />
+                <uie:PropertyField binding-path="ColliderSize" name="ColliderSize" />
+                <uie:PropertyField binding-path="CapsuleLength" name="ColliderSeparation" />
+            </ui:BindableElement>
+        </ui:VisualElement>
+        <ui:VisualElement name="SpawnShape" class="panel unity-collection-view__item--alternative-background" style="flex-grow: 1;">
+            <ui:VisualElement name="ShapeHeader" class="header" style="flex-grow: 1;">
+                <ui:Label tabindex="-1" text="Spawn Shape" display-tooltip-when-elided="true" name="Title" class="title" />
+            </ui:VisualElement>
+            <ui:BindableElement binding-path="spawnShapeData" name="ShapeBody" class="body">
+                <uie:PropertyField binding-path="spawnDir" label="Spawn Direction" name="SpawnDir" />
+                <ui:HelpBox message-type="Info" text="Bullets will travel away from the center of the shape, which will create a circular pattern" name="SpawnDirHelp" />
+                <uie:PropertyField binding-path="numPoints" name="NumPoints" label="Corners" />
+                <uie:PropertyField binding-path="radius" name="Radius" label="Shape Radius" />
+                <uie:PropertyField binding-path="arc" name="Arc" label="Shape Arc" />
+                <uie:PropertyField name="NumPerSide" binding-path="numPerSide" label="Bullets Per Side" />
+                <ui:VisualElement name="Group" style="flex-grow: 1;">
+                    <uie:PropertyField name="NumPerGroup" binding-path="numPerGroup" label="Bullets Per Group" />
+                    <uie:PropertyField name="GroupRadius" binding-path="groupRadius" label="Group Radius" />
+                    <uie:PropertyField binding-path="spawnCentreBullet" name="SpawnCentre" />
+                    <uie:PropertyField name="GroupDirection" binding-path="groupDirection" />
+                </ui:VisualElement>
+                <uie:PropertyField name="RemoveFromEdge" binding-path="removeFromEdgePercent" label="Remove Percent" />
+            </ui:BindableElement>
+        </ui:VisualElement>
+        <ui:VisualElement name="GroupData" class="panel" style="flex-grow: 1;">
+            <ui:VisualElement name="GroupHeader" class="header" style="flex-grow: 1;">
+                <ui:Label tabindex="-1" text="Group Data" display-tooltip-when-elided="true" name="Title" class="title" />
+            </ui:VisualElement>
+            <ui:BindableElement binding-path="burstData" name="GroupBody" class="body">
+                <uie:PropertyField binding-path="manualFire" name="ManualFire" />
+                <uie:PropertyField binding-path="fireRate" name="FireRate" />
+                <uie:PropertyField binding-path="delay" name="Delay" />
+                <uie:PropertyField binding-path="maxActiveBullets" name="MaxActiveBullets" />
+                <uie:PropertyField binding-path="burstCount" name="BurstCount" />
+                <uie:PropertyField binding-path="burstDelay" name="BurstDelay" />
+                <uie:PropertyField binding-path="stackSpeedIncrease" name="StackSpeedIncrease" />
+            </ui:BindableElement>
+        </ui:VisualElement>
+    </ui:VisualElement>
+    <ui:ListView reorderable="true" binding-path="allModules" virtualization-method="DynamicHeight" header-title="Init Modules" show-add-remove-footer="true" reorder-mode="Animated" show-border="false" name="InitModules" show-foldout-header="false" show-alternating-row-backgrounds="ContentOnly" allow-add="true" show-bound-collection-size="false" binding-source-selection-mode="AutoAssign" fixed-item-height="80" />
+</ui:UXML>

@@ -1,7 +1,6 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using BulletFury;
 using UnityEngine;
 
 
@@ -14,20 +13,20 @@ public class Arm : MonoBehaviour
 
     
     private Camera mainCam;
-    private BulletCollider ArmCollider;
+
     
     #endregion
 
     private void Start()
     {
         mainCam = Camera.main;
-        ArmCollider = this.GetComponentInChildren<BulletCollider>();
+       
     }
 
     private void Update()
     {
 
-        ArmCollider.enabled = Input.GetKey(KeyCode.Mouse0);
+       
         
         
         ArmRotation();
