@@ -34,7 +34,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 0
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -48,7 +48,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 256
+  spritePixelsToUnits: 512
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -69,7 +69,7 @@ TextureImporter:
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
-    maxTextureSize: 1024
+    maxTextureSize: 8192
     resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 0
@@ -181,7 +181,7 @@ TextureImporter:
       name: Floor_2
       rect:
         serializedVersion: 2
-        x: 1030
+        x: 1024
         y: 3584
         width: 512
         height: 512
@@ -308,7 +308,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 1024
-        y: 3074
+        y: 3072
         width: 512
         height: 512
       alignment: 0
@@ -346,7 +346,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Pit
+      name: PitUTop
       rect:
         serializedVersion: 2
         x: 2048
@@ -434,7 +434,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 1024
-        y: 2563
+        y: 2560
         width: 512
         height: 512
       alignment: 0
@@ -455,7 +455,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 1536
-        y: 2563
+        y: 2560
         width: 512
         height: 512
       alignment: 0
@@ -518,7 +518,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 2053
+        y: 2048
         width: 512
         height: 512
       alignment: 0
@@ -538,8 +538,8 @@ TextureImporter:
       name: WallCorner_UpperRight_Outer
       rect:
         serializedVersion: 2
-        x: 1022
-        y: 2046
+        x: 512
+        y: 2048
         width: 512
         height: 512
       alignment: 0
@@ -644,7 +644,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 1536
-        y: 1539
+        y: 1536
         width: 512
         height: 512
       alignment: 0
@@ -685,7 +685,7 @@ TextureImporter:
       name: Wall_Right_Inner
       rect:
         serializedVersion: 2
-        x: 2563
+        x: 2560
         y: 1536
         width: 512
         height: 512
@@ -807,6 +807,300 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: PitRim2_TopLeftCorner
+      rect:
+        serializedVersion: 2
+        x: 3072
+        y: 3584
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9777da7836b84d54eae2f2d958b45099
+      internalID: 1172162981
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PitRim2_Top
+      rect:
+        serializedVersion: 2
+        x: 3584
+        y: 3584
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: da741019371ed484c9bded752d634e58
+      internalID: -597819324
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PitRim2_TopRightCorner
+      rect:
+        serializedVersion: 2
+        x: 4096
+        y: 3584
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 03a7774550ad9eb43a4c60be30b7f5c2
+      internalID: 304348073
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PitRim2_Left
+      rect:
+        serializedVersion: 2
+        x: 3072
+        y: 3072
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e8e1485648845f7419d3902a31dbab57
+      internalID: 626803276
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pit_Top_2
+      rect:
+        serializedVersion: 2
+        x: 3584
+        y: 3072
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 814a337f2ca545946b51218d03ed87cc
+      internalID: -2112944380
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PitRim2_Right
+      rect:
+        serializedVersion: 2
+        x: 4096
+        y: 3072
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5a0a78db87d09ab419e7fbc75b4489b1
+      internalID: -439281295
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PitRim2_BottomRightCorner
+      rect:
+        serializedVersion: 2
+        x: 3072
+        y: 2560
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bc4d14bf692f2144a961f26f68624159
+      internalID: -1761250505
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PitRim2_Bottom
+      rect:
+        serializedVersion: 2
+        x: 3584
+        y: 2560
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5f57769d36f570e48a476510c1bab821
+      internalID: -958071098
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PitRim2_BottomLeftCorner
+      rect:
+        serializedVersion: 2
+        x: 4096
+        y: 2560
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 65be6113d9dc0c14baa2aec97b33754a
+      internalID: 1720324843
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sprite_Tileset_Floors_Walls_Pits_Blocks_9
+      rect:
+        serializedVersion: 2
+        x: 1024
+        y: 2048
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2f2005155ea515147a562bfff998d4fe
+      internalID: 1393862507
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pit3
+      rect:
+        serializedVersion: 2
+        x: 3584
+        y: 2048
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3d86e5a1dc74e714f80a5bc5a008e6f5
+      internalID: -1944064621
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sprite_Tileset_Floors_Walls_Pits_Blocks_11
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1536
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c2b31f6b17b946746b123ab661cf1ea3
+      internalID: -1087753275
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sprite_Tileset_Floors_Walls_Pits_Blocks_12
+      rect:
+        serializedVersion: 2
+        x: 1024
+        y: 1536
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c2534626c7ee5a4489381b3a07a11767
+      internalID: 2120548744
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sprite_Tileset_Floors_Walls_Pits_Blocks_13
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 1024
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3d0dcaf24b3e1144e8d5071bdd4b46e0
+      internalID: 2002944502
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -828,7 +1122,15 @@ TextureImporter:
       Floor_3: 451352940
       Floor_4: 759036577
       Floor_5: -124195549
-      Pit: -1386729581
+      Pit3: -1944064621
+      PitRim2_Bottom: -958071098
+      PitRim2_BottomLeftCorner: 1720324843
+      PitRim2_BottomRightCorner: -1761250505
+      PitRim2_Left: 626803276
+      PitRim2_Right: -439281295
+      PitRim2_Top: -597819324
+      PitRim2_TopLeftCorner: 1172162981
+      PitRim2_TopRightCorner: 304348073
       PitRim_Bottom: -1813980952
       PitRim_Corner_BottomLeft: -1481880801
       PitRim_Corner_BottomRight: 1160388403
@@ -837,6 +1139,10 @@ TextureImporter:
       PitRim_Left: -1622410916
       PitRim_Right: -1935178995
       PitRim_Top: 324716434
+      PitUTop: -1386729581
+      Pit_Top_2: -2112944380
+      Sprite_Tileset_Floors_Walls_Pits_Blocks_11: -1087753275
+      Sprite_Tileset_Floors_Walls_Pits_Blocks_12: 2120548744
       Sprite_Tileset_Floors_Walls_Pits_Blocks_13: 2002944502
       Sprite_Tileset_Floors_Walls_Pits_Blocks_20: -1937970501
       Sprite_Tileset_Floors_Walls_Pits_Blocks_21: -967451521
@@ -863,7 +1169,7 @@ TextureImporter:
       Sprite_Tileset_Floors_Walls_Pits_Blocks_56: 1320476363
       Sprite_Tileset_Floors_Walls_Pits_Blocks_57: 1183052679
       Sprite_Tileset_Floors_Walls_Pits_Blocks_58: 1338784801
-      Sprite_Tileset_Floors_Walls_Pits_Blocks_6: -1761250505
+      Sprite_Tileset_Floors_Walls_Pits_Blocks_9: 1393862507
       WallCorner_BottomLeft_Outer: -1941324967
       WallCorner_BottomRight_Outer: -1613392532
       WallCorner_Bottom_Right_Inner: 59352247
