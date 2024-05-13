@@ -36,7 +36,7 @@ namespace BulletFury.Modules
         public void Execute(ref Vector3 _, ref Quaternion rotation, float deltaTime)
         {
             if (target == null || thisTransform == null) return; // Safety check
-            Vector3 directionToTarget = (target.position - thisTransform.position).normalized;
+            Vector3 directionToTarget = (thisTransform.position - target.position).normalized;
             Quaternion targetRotation = Quaternion.Euler(0f, 0f, Mathf.Atan2(directionToTarget.y, directionToTarget.x) * Mathf.Rad2Deg + 90); // Calculate target rotation based on direction
 
             switch (type)
