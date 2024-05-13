@@ -87,7 +87,7 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   useRotationForDirection: 1
-  useSizeOverTime: 1
+  useSizeOverTime: 0
   sizeCurveUsage: 0
   sizeCurveTime: 0.5
   sizeOverTime:
