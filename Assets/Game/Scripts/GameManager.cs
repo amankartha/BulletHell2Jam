@@ -1,18 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
+using MoreMountains.Tools;
 using UnityEngine;
 
-public class GameManager : MonoBehaviour
+public class GameManager : MMSingleton<GameManager>
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public CompositeCollider2D CurrentRoomCollider;
 
-    // Update is called once per frame
-    void Update()
+
+
+    public void SetRoomCollider(GameObject GO)
     {
-        
+        GO.GetComponentInChildren<CompositeCollider2D>();
+    }
+    public bool CheckIfInBounds(Vector3 point)
+    {
+        return CurrentRoomCollider.bounds.Contains(point);
     }
 }

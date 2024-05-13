@@ -111,7 +111,7 @@ public class MainPlayer : MonoBehaviour
 
     private void Teleport()
     {
-        if (Input.GetKeyDown(KeyCode.Space) && TryConsumeHeat(TeleportCost) )
+        if (Input.GetKeyDown(KeyCode.Space) && TryConsumeHeat(TeleportCost) && GameManager.Instance.CheckIfInBounds((Vector2)mainCamera.ScreenToWorldPoint(Input.mousePosition)))
         {
             TeleportSequence();    
         }
