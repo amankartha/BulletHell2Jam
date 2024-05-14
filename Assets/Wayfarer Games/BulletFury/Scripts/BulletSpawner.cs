@@ -106,20 +106,21 @@ namespace BulletFury
         private NativeArray<BulletContainer> _bullets;
         private (BulletRenderData renderData, Camera cam)? _queuedRenderData;
 
-        private struct BulletRenderQueue
-        {
-            public BulletRenderData RenderData;
-            public Camera Cam;
-            public NativeArray<BulletContainer> Bullets;
-            public int Count;
-        }
-
-        private static SortedDictionary<int, BulletRenderQueue> _queue;
-        private bool _doUpdating;
         private Squirrel3 _rnd = new Squirrel3();
 
         private bool _disposed = false;
-        
+        public bool Disposed => _disposed;
+
+        public struct RenderQueueData
+        {
+            public BulletRenderData RenderData;
+            public int Count;
+            public NativeArray<BulletContainer> Bullets;
+            public BulletSpawner Spawner;
+        }
+        private static SortedList<float, RenderQueueData> _renderQueue = new();
+        public static SortedList<float, RenderQueueData> RenderQueue => _renderQueue;
+
         public void Start()
         {
             _bullets = new NativeArray<BulletContainer>(burstData.maxActiveBullets == 0 ? MaxBullets : burstData.maxActiveBullets, Allocator.Persistent, NativeArrayOptions.UninitializedMemory);
@@ -140,18 +141,12 @@ namespace BulletFury
                 useTriggers = true
             };
 
-            _doUpdating = false;
-            if (_queue == null)
-            {
-                _queue = new SortedDictionary<int, BulletRenderQueue>();
-                _doUpdating = true;
-            }
         }
 
-        [RuntimeInitializeOnLoadMethod]
-        private static void ResetQueue()
+        private void OnEnable()
         {
-            _queue = null;
+            if (burstData.delay > 0)
+                _currentTime = Main.FireRate - burstData.delay;
         }
 
         private void OnValidate()
@@ -189,11 +184,7 @@ namespace BulletFury
             if (preset.UseSubSpawners)
                 subSpawners = preset.SubSpawners;
             if (preset.UseModules)
-                bulletModules = preset.BulletModules;
-            if (preset.UseInitModules)
-                bulletInitModules = preset.BulletInitModules;
-            if (preset.UseSpawnModules)
-                spawnModules = preset.SpawnModules;
+                allModules = preset.BulletModules;
         }
         
         public void OnDestroy()
@@ -230,37 +221,28 @@ namespace BulletFury
                 .ToList();
         }
 
-        private void Update()
+        public void RenderBulletsNow()
         {
             if (_queuedRenderData == null || _disposed) return;
             
-            int priority = renderData.Data.Priority;
-            while (_queue.ContainsKey(priority))
-                ++priority;
-            _queue.Add(priority, new BulletRenderQueue
-            {
-                Bullets = _bullets,
-                Cam = renderData.Data.Camera,
-                Count = _bulletCount,
-                RenderData = _queuedRenderData.Value.renderData
-            });
-
-        }
-
-        public void RenderTheseBullets()
-        {
-            if (_queuedRenderData == null || _disposed) return;
             BulletRenderer.Render(_queuedRenderData.Value.renderData, _bullets, _bulletCount,
                 _queuedRenderData.Value.cam);
         }
         
         private void LateUpdate()
-        {
-            if (_queuedRenderData == null || _disposed || !_doUpdating || _queue == null || !_queue.Any()) return;
-
-            foreach (var item in _queue)
-                BulletRenderer.Render(item.Value.RenderData, item.Value.Bullets, item.Value.Count, item.Value.Cam);
-            _queue.Clear();
+        { 
+            if (_queuedRenderData == null || _disposed) return;
+            float priority = -_queuedRenderData.Value.renderData.Priority;
+            while (_renderQueue.ContainsKey(priority))
+                priority -= 0.01f;
+            
+            _renderQueue.Add(priority, new RenderQueueData
+            {
+                Bullets = _bullets,
+                Count = _bulletCount,
+                RenderData = _queuedRenderData.Value.renderData,
+                Spawner = this
+            });
         }
 
         public void UpdateAllBullets(Camera cam, float? dt = null)
@@ -464,18 +446,24 @@ namespace BulletFury
                 // make sure the positions and rotations are clear before doing anything
                 positions.Clear();
                 rotations.Clear();
+                int idx = 0;
                 // spawn the bullets
                 spawnShapeData.Spawn( (point, dir) =>
                 {
                     var pos = (Vector3) point;
 
                     var extraRotation = Quaternion.LookRotation(Vector3.forward, up);
+
+                    var fireRate = idx == 0 ? Main.FireRate : 0;
+                    if (!burstData.burstsUpdatePositionEveryBullet)
+                        fireRate = burstNum == 0 ? fireRate : 0;
+                    
                     foreach (var module in spawnModules)
-                        module?.Execute(ref pos, ref extraRotation, Main.FireRate);
+                        module?.Execute(ref pos, ref extraRotation, fireRate);
                     
                     foreach (var module in allModules)
                         if (module is IBulletSpawnModule mod)
-                            mod.Execute(ref pos, ref extraRotation, Main.FireRate);
+                            mod.Execute(ref pos, ref extraRotation, fireRate);
                     
                     // rotate dir by this new rotation
                     Vector3 rotatedDir = extraRotation * dir;
@@ -486,6 +474,7 @@ namespace BulletFury
 
                     rotations.Add(rotation);
                     positions.Add(spawnPosition);
+                    ++idx;
                 }, Squirrel3.Instance);
                 
                 // for every bullet we found
@@ -599,7 +588,8 @@ namespace BulletFury
                 // make sure the positions and rotations are clear before doing anything
                 positions.Clear();
                 rotations.Clear();
-                
+
+                int idx = 0;
                 // spawn the bullets
                 spawnShapeData.Spawn((point, dir) =>
                 {
@@ -607,10 +597,16 @@ namespace BulletFury
 
                     var extraRotation = Quaternion.LookRotation(Vector3.forward, obj.up);
                     
+                    var fireRate = idx == 0 ? Main.FireRate : 0;
+                    if (!burstData.burstsUpdatePositionEveryBullet)
+                        fireRate = burstNum == 0 ? fireRate : 0;
+                    
+                    foreach (var module in spawnModules)
+                        module?.Execute(ref pos, ref extraRotation, fireRate);
+                    
                     foreach (var module in allModules)
                         if (module is IBulletSpawnModule mod)
-                            mod.Execute(ref pos, ref extraRotation, Main.FireRate);
-                    
+                            mod.Execute(ref pos, ref extraRotation, fireRate);
                     // rotate dir by this new rotation
                     Vector3 rotatedDir = extraRotation * dir;
                     Quaternion rotation = Quaternion.LookRotation(Vector3.forward, rotatedDir);
@@ -620,7 +616,7 @@ namespace BulletFury
 
                     rotations.Add(rotation);
                     positions.Add(spawnPosition);
-
+                    ++idx;
                 }, Squirrel3.Instance);
                 
                 // for every bullet we found
