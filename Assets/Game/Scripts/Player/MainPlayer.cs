@@ -62,6 +62,12 @@ public class MainPlayer : MonoBehaviour, IBulletHitHandler
 
     #endregion
 
+    #region Links
+
+    [Header("TO BE LINKED")] 
+    public BulletSpawner armBulletSpawner;
+
+    #endregion
     private void Awake()
     {
           GameManager.Instance.MAINPLAYERGAMEOBJECT = this.gameObject;
