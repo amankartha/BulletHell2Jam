@@ -1396,6 +1396,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: -90
       objectReference: {fileID: 0}
+    - target: {fileID: 2681000327469427920, guid: ec3050a8a3dad624d9e0a12cf8b3af54, type: 3}
+      propertyPath: rotationSpeed
+      value: 60
+      objectReference: {fileID: 0}
     - target: {fileID: 5559133834439314383, guid: ec3050a8a3dad624d9e0a12cf8b3af54, type: 3}
       propertyPath: m_SortingOrder
       value: 1
@@ -12361,6 +12365,22 @@ PrefabInstance:
     - target: {fileID: 5555345675106925617, guid: d9f89a9092585b648a90cb32e3851f58, type: 3}
       propertyPath: _maxHealth
       value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 5687725497073091124, guid: d9f89a9092585b648a90cb32e3851f58, type: 3}
+      propertyPath: main.FireMode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5687725497073091124, guid: d9f89a9092585b648a90cb32e3851f58, type: 3}
+      propertyPath: allModules.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5687725497073091124, guid: d9f89a9092585b648a90cb32e3851f58, type: 3}
+      propertyPath: managedReferences[-2]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 5687725497073091124, guid: d9f89a9092585b648a90cb32e3851f58, type: 3}
+      propertyPath: allModules.Array.data[0]
+      value: -2
       objectReference: {fileID: 0}
     - target: {fileID: 8799562774804912510, guid: d9f89a9092585b648a90cb32e3851f58, type: 3}
       propertyPath: m_LocalScale.z
