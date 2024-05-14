@@ -23,7 +23,7 @@ public class MainPlayer : MonoBehaviour, IBulletHitHandler
     private int _maxHealth;
     
     [SerializeField]
-    private int _heat;
+    private float _heat;
     [SerializeField]
     private int _maxHeat;
 
@@ -40,7 +40,7 @@ public class MainPlayer : MonoBehaviour, IBulletHitHandler
     }
     public int MaxHealth { get;private set; }
 
-    public int Heat
+    public float Heat
     {
         get
         {
@@ -48,7 +48,7 @@ public class MainPlayer : MonoBehaviour, IBulletHitHandler
         }
         set
         {
-            _heat = math.clamp(value, 0, _maxHeat);
+            _heat = Mathf.Clamp(value, 0, _maxHeat);
         }
     }
 
@@ -74,6 +74,7 @@ public class MainPlayer : MonoBehaviour, IBulletHitHandler
         fsm.Init();
 
         GameManager.Instance.MAINPLAYERGAMEOBJECT = this.gameObject;
+        GameManager.Instance.MAINPLAYERSCRIPT = this;
 
     }
 
@@ -146,8 +147,10 @@ public class MainPlayer : MonoBehaviour, IBulletHitHandler
     {
         if (col.gameObject.layer == 3)
         {
-            col.TryGetComponent(out ITrigger trigger);
-            trigger.ActivateTrigger();
+            if (col.TryGetComponent(out ITrigger trigger))
+            {
+                trigger.ActivateTrigger();
+            }
         }
     }
 
@@ -155,6 +158,6 @@ public class MainPlayer : MonoBehaviour, IBulletHitHandler
 
     public void Hit(BulletContainer bullet)
     {
-        throw new NotImplementedException();
+        Health -= (int)bullet.Damage;
     }
 }
