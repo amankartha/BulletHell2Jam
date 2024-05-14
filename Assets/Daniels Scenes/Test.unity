@@ -12823,6 +12823,18 @@ PrefabInstance:
       propertyPath: m_RenderingLayerMask
       value: 4294967295
       objectReference: {fileID: 0}
+    - target: {fileID: 4791017273361646879, guid: 6d9f8133091bbe243bd9f7314aed00de, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4983438324101434567, guid: 6d9f8133091bbe243bd9f7314aed00de, type: 3}
+      propertyPath: m_ColliderPaths.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4983438324101434567, guid: 6d9f8133091bbe243bd9f7314aed00de, type: 3}
+      propertyPath: m_CompositePaths.m_Paths.Array.size
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4983438324101434567, guid: 6d9f8133091bbe243bd9f7314aed00de, type: 3}
       propertyPath: m_CompositePaths.m_Paths.Array.data[0].Array.data[0].x
       value: 6.9999704
