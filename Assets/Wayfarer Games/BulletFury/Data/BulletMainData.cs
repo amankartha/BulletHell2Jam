@@ -14,6 +14,9 @@ namespace BulletFury
         [Tooltip("Automatic: Spawns bullets automatically. Manual: Only spawns bullets when Spawn is called")]
         public FireMode FireMode = FireMode.Automatic;
 
+        [Tooltip("Should the spawner immediately start shooting? Only for Automatic fire mode")]
+        public bool PlayOnEnable = true;
+
         [Tooltip("Seconds between shots spawning")]
         public FloatOrRandom FireRate = 0.1f;
 
