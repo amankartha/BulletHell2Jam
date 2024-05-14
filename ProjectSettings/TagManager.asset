@@ -16,7 +16,7 @@ TagManager:
   - Floor
   - Pit
   - Player Bullet
-  - 
+  - Enemy
   - 
   - 
   - 
@@ -55,6 +55,9 @@ TagManager:
     locked: 0
   - name: Enemies
     uniqueID: 2316496183
+    locked: 0
+  - name: EnemyBullets
+    uniqueID: 1838023951
     locked: 0
   - name: Player
     uniqueID: 4075187033

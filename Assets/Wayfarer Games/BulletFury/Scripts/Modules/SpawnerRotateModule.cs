@@ -14,6 +14,8 @@ namespace BulletFury.Modules
         {
             _currentAngle += angularSpeed * deltaTime;
             rotation = Quaternion.AngleAxis(_currentAngle, Vector3.forward) * rotation;
+
+            //Debug.Log(_currentAngle);
         }
     }
 }
