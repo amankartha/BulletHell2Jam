@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,6 +9,11 @@ public class EnemyCannonArm : MonoBehaviour
     public float rotationSpeed = 5f; // Speed of rotation
     public float minAngle = -45f; // Minimum angle the arm can rotate
     public float maxAngle = 45f; // Maximum angle the arm can rotate
+
+    private void Start()
+    {
+        player = GameManager.Instance.transform;
+    }
 
     void Update()
     {
