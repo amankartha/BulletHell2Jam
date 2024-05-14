@@ -54,6 +54,7 @@
                 <uie:PropertyField binding-path="burstCount" name="BurstCount" />
                 <uie:PropertyField binding-path="burstDelay" name="BurstDelay" />
                 <uie:PropertyField binding-path="stackSpeedIncrease" name="StackSpeedIncrease" />
+                <uie:PropertyField binding-path="burstsUpdatePositionEveryBullet" name="StackSpeedIncrease" />
             </ui:BindableElement>
         </ui:VisualElement>
     </ui:VisualElement>

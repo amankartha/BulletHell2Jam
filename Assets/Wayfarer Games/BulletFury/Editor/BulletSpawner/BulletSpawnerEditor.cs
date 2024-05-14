@@ -86,7 +86,6 @@ namespace Wayfarer_Games.BulletFury
             _spawner.Start();
 
             SceneView.duringSceneGui += SceneGUI;
-            BulletRenderer.Init();
         }
 
         private void OnDisable()
@@ -95,15 +94,13 @@ namespace Wayfarer_Games.BulletFury
             _spawner = target as BulletSpawner;
             _spawner.OnDestroy();
             SceneView.duringSceneGui -= SceneGUI;
-            BulletRenderer.Dispose();
-            BulletRenderData.ResetMaterials();
         }
 
         private void SceneGUI(SceneView obj)
         {
             if (Application.isPlaying) return;
             _spawner.UpdateAllBullets(obj.camera, Convert.ToSingle(EditorApplication.timeSinceStartup - _previousTime));
-            _spawner.RenderTheseBullets();
+            _spawner.RenderBulletsNow();
             _previousTime = EditorApplication.timeSinceStartup;
             obj.Repaint();
         }
