@@ -20,4 +20,8 @@ MonoBehaviour:
     Columns: 3
     PerFrameLength: 0.25
     Layer: 6
+<<<<<<< Updated upstream
     Priority: 0
+=======
+    Priority: 10
+>>>>>>> Stashed changes
