@@ -147,6 +147,7 @@ namespace BulletFury
         {
             if (burstData.delay > 0)
                 _currentTime = Main.FireRate - burstData.delay;
+            _isStopped = !main.PlayOnEnable;
         }
 
         private void OnValidate()
@@ -356,9 +357,12 @@ namespace BulletFury
                         {
                             var hit = _hit[j];
                             if (!hit.isTrigger) shouldKill = true;
-                            var bulletHandlers = hit.GetComponentsInChildren<IBulletHitHandler>();
-                            foreach (var handler in bulletHandlers)
-                                handler.Hit(_bullets[i]);
+                            if (Application.isPlaying)
+                            {
+                                var bulletHandlers = hit.GetComponentsInChildren<IBulletHitHandler>();
+                                foreach (var handler in bulletHandlers)
+                                    handler.Hit(_bullets[i]);
+                            }
                         }
                         if (shouldKill)
                             _bulletsToKill.Add(i);
@@ -373,9 +377,12 @@ namespace BulletFury
                         {
                             var hit = _hit[j];
                             if (!hit.isTrigger) shouldKill = true;
-                            var bulletHandlers = hit.GetComponentsInChildren<IBulletHitHandler>();
-                            foreach (var handler in bulletHandlers)
-                                handler.Hit(_bullets[i]);
+                            if (Application.isPlaying)
+                            {
+                                var bulletHandlers = hit.GetComponentsInChildren<IBulletHitHandler>();
+                                foreach (var handler in bulletHandlers)
+                                    handler.Hit(_bullets[i]);
+                            }
                         }
                         if (shouldKill)
                             _bulletsToKill.Add(i);
@@ -386,7 +393,7 @@ namespace BulletFury
 
         private void OnDrawGizmosSelected()
         {
-            if (_bulletCount == 0) return;
+            if (_bulletCount == 0 || _disposed) return;
             #if UNITY_EDITOR
             if (UnityEditor.Selection.activeGameObject != gameObject) return;
             #endif
@@ -431,8 +438,8 @@ namespace BulletFury
             {
                 if (Mathf.Approximately(burstData.delay, 0))
                     _currentTime = Main.FireRate;
-                else
-                    _currentTime = Main.FireRate - burstData.delay;
+                //else
+                  //  _currentTime = Main.FireRate - burstData.delay;
                 _hasSpawnedSinceEnable = true;
             }
             
@@ -572,8 +579,8 @@ namespace BulletFury
             {
                 if (Mathf.Approximately(burstData.delay, 0))
                     _currentTime = Main.FireRate;
-                else
-                    _currentTime = Main.FireRate - burstData.delay;
+                //else
+                   // _currentTime = Main.FireRate - burstData.delay;
                 _hasSpawnedSinceEnable = true;
             }
             

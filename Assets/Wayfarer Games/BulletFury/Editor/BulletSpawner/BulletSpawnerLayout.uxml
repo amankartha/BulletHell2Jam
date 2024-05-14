@@ -8,6 +8,7 @@
             <ui:Label text="Bullet Settings" class="title header" />
             <ui:BindableElement binding-path="main" name="VisualBody" class="body">
                 <uie:PropertyField binding-path="FireMode" name="FireMode" />
+                <uie:PropertyField binding-path="PlayOnEnable" name="PlayOnEnable" />
                 <uie:PropertyField binding-path="FireRate" name="FireRate" />
                 <uie:PropertyField binding-path="Damage" name="Damage" />
                 <uie:PropertyField binding-path="Lifetime" name="Lifetime" />
