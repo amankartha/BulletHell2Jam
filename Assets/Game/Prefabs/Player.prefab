@@ -33,7 +33,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8799562774804912510}
-  - {fileID: 8157392805505859969}
   - {fileID: 4602746440313519860}
   - {fileID: 2483800220619728385}
   m_Father: {fileID: 0}
@@ -147,6 +146,7 @@ GameObject:
   - component: {fileID: 3196459381937730238}
   - component: {fileID: 5025131903992738830}
   - component: {fileID: 400720448928947624}
+  - component: {fileID: 5687725497073091124}
   m_Layer: 0
   m_Name: Arm
   m_TagString: Untagged
@@ -236,37 +236,112 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pivot: {fileID: 4602746440313519860}
   Radius: 2
---- !u!1 &1703196940151818044
-GameObject:
+--- !u!114 &5687725497073091124
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 8157392805505859969}
-  m_Layer: 0
-  m_Name: Shooting
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &8157392805505859969
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1703196940151818044}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 31429914335782348}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_GameObject: {fileID: 1076504662954096943}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2583716d8b9a4cf9ae2a2a52c75333ec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  renderData:
+    singleData:
+      Camera: {fileID: 0}
+      Texture: {fileID: 0}
+      Animated: 0
+      Rows: 1
+      Columns: 1
+      PerFrameLength: 0
+      Layer: 0
+      Priority: 0
+    sharedData: {fileID: 11400000, guid: 9aa15e800874f4e4c85c2ef94edf1a35, type: 2}
+  main:
+    FireMode: 1
+    FireRate:
+      isRandom: 0
+      minValue: 0.05
+      maxValue: 0.1
+    Damage:
+      isRandom: 0
+      minValue: 1
+      maxValue: 1
+    Lifetime:
+      isRandom: 0
+      minValue: 5
+      maxValue: 1
+    Speed:
+      isRandom: 0
+      minValue: 15
+      maxValue: 5
+    StartColor: {r: 1, g: 1, b: 1, a: 1}
+    StartSize:
+      isRandom: 0
+      minValue: 1
+      maxValue: 1
+    UseRotationForDirection: 1
+    MoveWithTransform: 0
+    RotateWithTransform: 0
+    ColliderType: 0
+    ColliderSize: 1
+    CapsuleLength: 0.1
+  spawnShapeData:
+    rotateSpeed: 0
+    spawnDir: 2
+    numPoints: 1
+    numPerSide: 1
+    numPerGroup: 1
+    groupRadius:
+      isRandom: 0
+      minValue: 0.25
+      maxValue: 0.25
+    spawnCentreBullet: 0
+    groupDirection: 0
+    removeFromEdgePercent: 0
+    radius:
+      isRandom: 0
+      minValue: 1
+      maxValue: 1
+    arc:
+      isRandom: 0
+      minValue: 360
+      maxValue: 360
+    randomise: 0
+    onEdge: 0
+    directionArc:
+      isRandom: 0
+      minValue: 360
+      maxValue: 360
+  burstData:
+    delay: 0
+    maxActiveBullets: 0
+    burstCount: 1
+    burstDelay: 0
+    stackSpeedIncrease: 0
+    burstsUpdatePositionEveryBullet: 0
+  subSpawners: []
+  bulletModules: []
+  bulletInitModules: []
+  spawnModules: []
+  allModules: []
+  OnBulletDied:
+    m_PersistentCalls:
+      m_Calls: []
+  OnBulletCancelled:
+    m_PersistentCalls:
+      m_Calls: []
+  OnBulletSpawned:
+    m_PersistentCalls:
+      m_Calls: []
+  OnWeaponFired:
+    m_PersistentCalls:
+      m_Calls: []
+  references:
+    version: 2
+    RefIds: []
 --- !u!1 &6383924269130449028
 GameObject:
   m_ObjectHideFlags: 0
