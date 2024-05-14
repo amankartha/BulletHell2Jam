@@ -1,12 +1,13 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-
+using BulletFury;
+using BulletFury.Data;
 using Unity.Mathematics;
 using UnityEngine;
 using UnityHFSM;
 
-public class MainPlayer : MonoBehaviour
+public class MainPlayer : MonoBehaviour, IBulletHitHandler
 {
     #region Variables
 
@@ -151,4 +152,9 @@ public class MainPlayer : MonoBehaviour
     }
 
     #endregion
+
+    public void Hit(BulletContainer bullet)
+    {
+        throw new NotImplementedException();
+    }
 }
