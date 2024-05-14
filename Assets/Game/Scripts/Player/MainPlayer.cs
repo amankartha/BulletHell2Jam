@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
-using BulletFury;
-using BulletFury.Data;
+
 using Unity.Mathematics;
 using UnityEngine;
 using UnityHFSM;
@@ -26,8 +25,7 @@ public class MainPlayer : MonoBehaviour
     [SerializeField]
     private int _maxHeat;
 
-    [Header("CONNECTIONS")] 
-    public BulletCollider ArmCollider;
+  
     
     private StateMachine fsm;
     private Camera mainCamera;
@@ -86,15 +84,7 @@ public class MainPlayer : MonoBehaviour
         
     }
 
-    public void Oncollide(BulletContainer Bcontainer, BulletCollider Bcollider)
-    {
-        Health -= (int)Bcontainer.Damage;
-    }
-
-    public void OnCollideArm(BulletContainer bulletContainer, BulletCollider bulletCollider)
-    {
-        Heat += RelectHeatChargeUp ;
-    }
+  
 
     public bool TryConsumeHeat(int value)
     {
@@ -111,7 +101,7 @@ public class MainPlayer : MonoBehaviour
 
     private void Teleport()
     {
-        if (Input.GetKeyDown(KeyCode.Space) && TryConsumeHeat(TeleportCost) )
+        if (Input.GetKeyDown(KeyCode.Space) && TryConsumeHeat(TeleportCost) && GameManager.Instance.CheckIfInBounds((Vector2)mainCamera.ScreenToWorldPoint(Input.mousePosition)))
         {
             TeleportSequence();    
         }

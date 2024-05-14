@@ -1,0 +1,25 @@
+{
+    "name": "WayfarerGames.BulletFury.Editor",
+    "rootNamespace": "",
+    "references": [
+        "GUID:494b4031ef9e74089b2cf8f66121fd6f",
+        "GUID:49b49c76ee64f6b41bf28ef951cb0e50"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [
+        {
+            "name": "com.mackysoft.serializereference-extensions",
+            "expression": "1.0.0",
+            "define": "SERIALIZEREFERENCE_EXTENSIONS"
+        }
+    ],
+    "noEngineReferences": false
+}
