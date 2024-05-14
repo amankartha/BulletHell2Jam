@@ -7,7 +7,7 @@ public class GameManager : MMSingleton<GameManager>
 {
     public CompositeCollider2D CurrentRoomCollider;
 
-
+    public GameObject MAINPLAYERGAMEOBJECT;
 
     public void SetRoomCollider(GameObject GO)
     {

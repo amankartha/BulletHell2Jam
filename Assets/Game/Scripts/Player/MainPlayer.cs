@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -70,7 +71,9 @@ public class MainPlayer : MonoBehaviour
 
         fsm.SetStartState("Melee");
         fsm.Init();
-      
+
+        GameManager.Instance.MAINPLAYERGAMEOBJECT = this.gameObject;
+
     }
 
     // Update is called once per frame
@@ -132,6 +135,19 @@ public class MainPlayer : MonoBehaviour
         }
 
         return false;
+    }
+
+    #endregion
+
+    #region COLLISION
+
+    private void OnTriggerEnter2D(Collider2D col)
+    {
+        if (col.gameObject.layer == 3)
+        {
+            col.TryGetComponent(out ITrigger trigger);
+            trigger.ActivateTrigger();
+        }
     }
 
     #endregion
