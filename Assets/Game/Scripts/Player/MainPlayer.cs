@@ -92,7 +92,7 @@ public class MainPlayer : MonoBehaviour, IBulletHitHandler
         fsm.SetStartState("Melee");
         fsm.Init();
 
-      
+        armBulletSpawner.Stop();
 
     }
 
@@ -143,7 +143,7 @@ public class MainPlayer : MonoBehaviour, IBulletHitHandler
 
     private bool TransitionToShooting()
     {
-        if (Heat > ShootThreshold)
+        if (Heat > ShootThreshold && Input.GetKeyDown(KeyCode.Mouse1))
         {
             return true;
         }
