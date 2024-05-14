@@ -12,7 +12,7 @@ public class EnemyCannonArm : MonoBehaviour
 
     private void Start()
     {
-        player = GameManager.Instance.transform;
+        player = GameManager.Instance.MAINPLAYERGAMEOBJECT.transform;
     }
 
     void Update()

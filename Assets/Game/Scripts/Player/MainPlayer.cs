@@ -61,9 +61,13 @@ public class MainPlayer : MonoBehaviour, IBulletHitHandler
     public UnityEvent OnPlayerHit;
 
     #endregion
-    
-    
-    
+
+    private void Awake()
+    {
+          GameManager.Instance.MAINPLAYERGAMEOBJECT = this.gameObject;
+          GameManager.Instance.MAINPLAYERSCRIPT = this;
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -82,8 +86,7 @@ public class MainPlayer : MonoBehaviour, IBulletHitHandler
         fsm.SetStartState("Melee");
         fsm.Init();
 
-        GameManager.Instance.MAINPLAYERGAMEOBJECT = this.gameObject;
-        GameManager.Instance.MAINPLAYERSCRIPT = this;
+      
 
     }
 
