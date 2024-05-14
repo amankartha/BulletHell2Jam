@@ -4,6 +4,7 @@ using BulletFury;
 using BulletFury.Data;
 using DG.Tweening;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Enemy : MonoBehaviour, IBulletHitHandler
 {
@@ -37,6 +38,12 @@ public class Enemy : MonoBehaviour, IBulletHitHandler
     }
 
     #endregion
+
+    #region Events
+
+    public UnityEvent OnTakeDamage;
+
+    #endregion
     
     // Start is called before the first frame update
     void Start()
@@ -65,5 +72,6 @@ public class Enemy : MonoBehaviour, IBulletHitHandler
     public void Hit(BulletContainer bullet)
     {
         Health -= bullet.Damage;
+        OnTakeDamage?.Invoke();
     }
 }

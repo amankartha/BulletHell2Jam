@@ -5,6 +5,7 @@ using BulletFury;
 using BulletFury.Data;
 using Unity.Mathematics;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityHFSM;
 
 public class MainPlayer : MonoBehaviour, IBulletHitHandler
@@ -54,7 +55,15 @@ public class MainPlayer : MonoBehaviour, IBulletHitHandler
 
     #endregion
 
+    #region Events
 
+
+    public UnityEvent OnPlayerHit;
+
+    #endregion
+    
+    
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -181,5 +190,6 @@ public class MainPlayer : MonoBehaviour, IBulletHitHandler
     public void Hit(BulletContainer bullet)
     {
         Health -= (int)bullet.Damage;
+        OnPlayerHit?.Invoke();
     }
 }
