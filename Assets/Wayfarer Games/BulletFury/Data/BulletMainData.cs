@@ -36,6 +36,12 @@ namespace BulletFury
         [Tooltip("Should the bullet use its rotation for its direction?")]
         public bool UseRotationForDirection = true;
 
+        [Tooltip("Should the bullets move with the gameobject?")]
+        public bool MoveWithTransform;
+        
+        [Tooltip("Should the bullets rotate with the gameobject?")]
+        public bool RotateWithTransform;
+
         [Tooltip("What shape should the bullet colliders be? Circle will run much faster!")]
         [Header("Collisions")]
         public ColliderType ColliderType = ColliderType.Circle;

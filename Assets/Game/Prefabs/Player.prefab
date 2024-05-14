@@ -9,7 +9,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 31429914335782348}
-  - component: {fileID: 2911263633292329011}
   - component: {fileID: 5555345675106925617}
   m_Layer: 0
   m_Name: Player
@@ -36,47 +35,6 @@ Transform:
   - {fileID: 4602746440313519860}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2911263633292329011
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 254829461606866309}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9add1c9d0cf8e4cb28a0121845c457c6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  bulletLayersToBeHitBy:
-    serializedVersion: 2
-    m_Bits: 64
-  shape: 3
-  radius: 0.5
-  size: {x: 1, y: 1, z: 1}
-  destroyBullet: 1
-  center: {x: 0, y: 0, z: 0}
-  pointA: {x: 0.53, y: -0.33, z: 0}
-  pointB: {x: -0.51, y: -0.33, z: 0}
-  pointC: {x: -0.01, y: 0.6, z: 0}
-  OnCollide:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 5555345675106925617}
-        m_TargetAssemblyTypeName: MainPlayer, Assembly-CSharp
-        m_MethodName: Oncollide
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  bounce: 0
-  lifetimeLoss: 0
-  bounciness: 0
 --- !u!114 &5555345675106925617
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -91,11 +49,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   TeleportCost: 20
   RelectHeatChargeUp: 5
+  ShootThreshold: 60
+  ShootingDrainPerSecond: 10
   _health: 0
   _maxHealth: 0
   _heat: 0
   _maxHeat: 0
-  ArmCollider: {fileID: 6090467871960446947}
 --- !u!1 &1076504662954096943
 GameObject:
   m_ObjectHideFlags: 0
@@ -352,7 +311,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4403497597303258870}
-  - component: {fileID: 6090467871960446947}
   m_Layer: 0
   m_Name: Reflector
   m_TagString: Untagged
@@ -375,44 +333,3 @@ Transform:
   m_Children: []
   m_Father: {fileID: 3196459381937730238}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6090467871960446947
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8843030366623110404}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9add1c9d0cf8e4cb28a0121845c457c6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  bulletLayersToBeHitBy:
-    serializedVersion: 2
-    m_Bits: 64
-  shape: 1
-  radius: 0.5
-  size: {x: 0.16, y: 0.37, z: 1}
-  destroyBullet: 1
-  center: {x: 0, y: 0, z: 0}
-  pointA: {x: 0, y: 0, z: 0}
-  pointB: {x: 0, y: 0, z: 0}
-  pointC: {x: 0, y: 0, z: 0}
-  OnCollide:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 5555345675106925617}
-        m_TargetAssemblyTypeName: MainPlayer, Assembly-CSharp
-        m_MethodName: OnCollideArm
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  bounce: 0
-  lifetimeLoss: 0
-  bounciness: 0

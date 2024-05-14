@@ -4,6 +4,10 @@ using Wayfarer_Games.Common;
 
 namespace BulletFury.Modules
 {
+    public enum AimType
+    {
+        Instant, Linear, Slerp, SmoothDamp, Predicted
+    }
     [Serializable]
     public class AimedShotModule : IBulletSpawnModule
     {
@@ -37,7 +41,7 @@ namespace BulletFury.Modules
         {
             if (target == null || thisTransform == null) return; // Safety check
             Vector3 directionToTarget = (target.position - thisTransform.position).normalized;
-            Quaternion targetRotation = Quaternion.Euler(0f, 0f, Mathf.Atan2(directionToTarget.y, directionToTarget.x) * Mathf.Rad2Deg + 90); // Calculate target rotation based on direction
+            Quaternion targetRotation = Quaternion.Euler(0f, 0f, Mathf.Atan2(directionToTarget.y, directionToTarget.x) * Mathf.Rad2Deg - 90); // Calculate target rotation based on direction
 
             switch (type)
             {

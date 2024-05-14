@@ -28,6 +28,7 @@ namespace BulletFury
         public int Priority;
         
         private Material _material = null;
+        private static readonly int SortOrder = Shader.PropertyToID("_SortOrder");
 
         public Material Material
         {
@@ -59,6 +60,7 @@ namespace BulletFury
                 {
                     _material = !Animated ? Object.Instantiate(_unlitMaterial) : Object.Instantiate(_animatedMaterial);
                     _material.SetTexture(MainTex, Texture);
+                    _material.SetFloat(SortOrder, Priority);
                     if (Animated)
                     {
                         _material.SetInt(Cols, Columns);
@@ -89,6 +91,7 @@ namespace BulletFury
         private static NativeArray<Vector4> _colors;
         private static NativeArray<float> _tex;
         private static Dictionary<BulletRenderData, (GraphicsBuffer color, GraphicsBuffer tex)> _colorBuffer;
+
         private static bool _hasBullets;
         private static readonly int InstanceColorBuffer = Shader.PropertyToID("_InstanceColorBuffer");
         private static readonly int InstanceTexBuffer = Shader.PropertyToID("_InstanceTexBuffer");
@@ -204,7 +207,6 @@ namespace BulletFury
             _colorBuffer[data].tex.SetData(_tex);
             data.Material.SetBuffer(InstanceColorBuffer, _colorBuffer[data].color);
             data.Material.SetBuffer(InstanceTexBuffer, _colorBuffer[data].tex);
-            
             
             Graphics.RenderMeshInstanced(renderParams, _mesh, 0, _matrices, length);
             #endif

@@ -46,17 +46,17 @@ namespace BulletFury
         [SerializeField] private SubSpawnerData[] subSpawners;
         
         #if SERIALIZEREFERENCE_EXTENSIONS
-        [SerializeReference, SubclassSelector]
+        [SerializeReference, SubclassSelector, Obsolete]
         #endif
         private List<IBulletModule> bulletModules = new ();
         
         #if SERIALIZEREFERENCE_EXTENSIONS
-        [SerializeReference, SubclassSelector]
+        [SerializeReference, SubclassSelector, Obsolete]
         #endif
         private List<IBulletInitModule> bulletInitModules = new ();
         
         #if SERIALIZEREFERENCE_EXTENSIONS
-        [SerializeReference, SubclassSelector]
+        [SerializeReference, SubclassSelector, Obsolete]
         #endif
         private List<IBulletSpawnModule> spawnModules = new ();
         
@@ -105,7 +105,17 @@ namespace BulletFury
 
         private NativeArray<BulletContainer> _bullets;
         private (BulletRenderData renderData, Camera cam)? _queuedRenderData;
-        
+
+        private struct BulletRenderQueue
+        {
+            public BulletRenderData RenderData;
+            public Camera Cam;
+            public NativeArray<BulletContainer> Bullets;
+            public int Count;
+        }
+
+        private static SortedDictionary<int, BulletRenderQueue> _queue;
+        private bool _doUpdating;
         private Squirrel3 _rnd = new Squirrel3();
 
         private bool _disposed = false;
@@ -129,6 +139,19 @@ namespace BulletFury
                 layerMask = Physics2D.GetLayerCollisionMask(gameObject.layer),
                 useTriggers = true
             };
+
+            _doUpdating = false;
+            if (_queue == null)
+            {
+                _queue = new SortedDictionary<int, BulletRenderQueue>();
+                _doUpdating = true;
+            }
+        }
+
+        [RuntimeInitializeOnLoadMethod]
+        private static void ResetQueue()
+        {
+            _queue = null;
         }
 
         private void OnValidate()
@@ -197,44 +220,47 @@ namespace BulletFury
 
         public T GetModule<T>() where T : IBaseBulletModule
         {
-            if (bulletModules.Any(m => m is T))
-                return (T) bulletModules.First(m => m is T);
-    
-            if (bulletInitModules.Any(m => m is T))
-                return (T) bulletInitModules.First(m => m is T);
-    
-            if (spawnModules.Any(m => m is T))
-                return (T) spawnModules.First(m => m is T);
-
             return (T) allModules.First(m => m is T);
         }
 
         public List<T> GetModulesOfType<T>() where T : IBaseBulletModule
         {
-            if (bulletModules.Any(m => m is T))
-                return bulletModules
-                    .OfType<T>()
-                    .ToList();
-            
-            if (bulletInitModules.Any(m => m is T))
-                return bulletInitModules
-                    .OfType<T>()
-                    .ToList();
-            if (spawnModules.Any(m => m is T))
-                return spawnModules 
-                    .OfType<T>()
-                    .ToList();
-            
             return allModules
                 .OfType<T>()
                 .ToList();
         }
 
-        public void LateUpdate()
+        private void Update()
         {
             if (_queuedRenderData == null || _disposed) return;
             
-            BulletRenderer.Render(_queuedRenderData.Value.renderData, _bullets, _bulletCount,_queuedRenderData .Value.cam);
+            int priority = renderData.Data.Priority;
+            while (_queue.ContainsKey(priority))
+                ++priority;
+            _queue.Add(priority, new BulletRenderQueue
+            {
+                Bullets = _bullets,
+                Cam = renderData.Data.Camera,
+                Count = _bulletCount,
+                RenderData = _queuedRenderData.Value.renderData
+            });
+
+        }
+
+        public void RenderTheseBullets()
+        {
+            if (_queuedRenderData == null || _disposed) return;
+            BulletRenderer.Render(_queuedRenderData.Value.renderData, _bullets, _bulletCount,
+                _queuedRenderData.Value.cam);
+        }
+        
+        private void LateUpdate()
+        {
+            if (_queuedRenderData == null || _disposed || !_doUpdating || _queue == null || !_queue.Any()) return;
+
+            foreach (var item in _queue)
+                BulletRenderer.Render(item.Value.RenderData, item.Value.Bullets, item.Value.Count, item.Value.Cam);
+            _queue.Clear();
         }
 
         public void UpdateAllBullets(Camera cam, float? dt = null)
@@ -253,15 +279,16 @@ namespace BulletFury
             
             _bulletsFree = false;
 
-            foreach (var module in bulletModules)
-            {
-                for (int i = _bulletCount - 1; i >= 0; --i)
-                {
-                    var bullet = _bullets[i];
-                    module?.Execute(ref bullet, deltaTime);
-                    _bullets[i] = bullet;
-                }
-            }
+            UpdateBullets.Update(_bullets,
+                main, 
+                deltaTime,
+                _enabled, 
+                _bulletCount,
+                transform,
+                _previousPos,
+                _previousRot);
+            _bulletsFree = true;
+            
 
             foreach (var module in allModules)
             {
@@ -273,13 +300,6 @@ namespace BulletFury
                     _bullets[i] = bullet;
                 }
             }
-
-            UpdateBullets.Update(_bullets,
-                main, 
-                deltaTime,
-                _enabled, 
-                _bulletCount);
-            _bulletsFree = true;
             
             HandleCollisions();
             

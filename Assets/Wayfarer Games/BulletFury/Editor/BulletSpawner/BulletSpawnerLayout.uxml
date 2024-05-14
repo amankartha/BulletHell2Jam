@@ -15,6 +15,8 @@
                 <uie:PropertyField binding-path="StartColor" name="StartColor" />
                 <uie:PropertyField binding-path="StartSize" name="StartSize" />
                 <uie:PropertyField binding-path="UseRotationForDirection" name="UseRotation" />
+                <uie:PropertyField binding-path="MoveWithTransform" name="MoveWithTransform" />
+                <uie:PropertyField binding-path="RotateWithTransform" name="RotateWithTransform" />
                 <uie:PropertyField binding-path="ColliderType" name="ColliderType" />
                 <uie:PropertyField binding-path="ColliderSize" name="ColliderSize" />
                 <uie:PropertyField binding-path="CapsuleLength" name="ColliderSeparation" />

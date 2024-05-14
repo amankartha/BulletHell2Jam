@@ -103,7 +103,7 @@ namespace Wayfarer_Games.BulletFury
         {
             if (Application.isPlaying) return;
             _spawner.UpdateAllBullets(obj.camera, Convert.ToSingle(EditorApplication.timeSinceStartup - _previousTime));
-            _spawner.LateUpdate();
+            _spawner.RenderTheseBullets();
             _previousTime = EditorApplication.timeSinceStartup;
             obj.Repaint();
         }
