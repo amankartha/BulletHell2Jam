@@ -231,6 +231,7 @@ MonoBehaviour:
     burstCount: 1
     burstDelay: 0
     stackSpeedIncrease: 0
+    burstsUpdatePositionEveryBullet: 0
   subSpawners: []
   bulletModules: []
   bulletInitModules: []
@@ -329,6 +330,11 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &186877371 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3564092691881542115, guid: acba648ed6628e24c92ee362ad1b4c4b, type: 3}
+  m_PrefabInstance: {fileID: 1530218611051687873}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &253891989
 GameObject:
   m_ObjectHideFlags: 0
@@ -492,6 +498,7 @@ MonoBehaviour:
     burstCount: 2
     burstDelay: 0.5
     stackSpeedIncrease: 0
+    burstsUpdatePositionEveryBullet: 0
   subSpawners: []
   bulletModules: []
   bulletInitModules: []
@@ -616,7 +623,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!212 &943277688
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -678,7 +685,7 @@ Transform:
   m_GameObject: {fileID: 943277686}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4.08, y: 6.23, z: 0}
+  m_LocalPosition: {x: -0.48, y: 4.26, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -706,7 +713,7 @@ MonoBehaviour:
       PerFrameLength: 0.5
       Layer: 6
       Priority: 0
-    sharedData: {fileID: 11400000, guid: 4fe6193ec372ac44a87ac92ced03adbd, type: 2}
+    sharedData: {fileID: 11400000, guid: 9aa15e800874f4e4c85c2ef94edf1a35, type: 2}
   main:
     FireMode: 0
     FireRate:
@@ -769,6 +776,7 @@ MonoBehaviour:
     burstCount: 1
     burstDelay: 0
     stackSpeedIncrease: 0
+    burstsUpdatePositionEveryBullet: 0
   subSpawners: []
   bulletModules: []
   bulletInitModules: []
@@ -1142,6 +1150,7 @@ MonoBehaviour:
     burstCount: 3
     burstDelay: 0.5
     stackSpeedIncrease: 0
+    burstsUpdatePositionEveryBullet: 0
   subSpawners: []
   bulletModules: []
   bulletInitModules: []
@@ -1265,6 +1274,7 @@ MonoBehaviour:
     burstCount: 3
     burstDelay: 0.25
     stackSpeedIncrease: 0
+    burstsUpdatePositionEveryBullet: 0
   subSpawners: []
   bulletModules: []
   bulletInitModules: []
@@ -1607,6 +1617,7 @@ MonoBehaviour:
     burstCount: 1
     burstDelay: 0
     stackSpeedIncrease: 0
+    burstsUpdatePositionEveryBullet: 0
   subSpawners: []
   bulletModules: []
   bulletInitModules: []
@@ -12388,7 +12399,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3564092691881542115, guid: acba648ed6628e24c92ee362ad1b4c4b, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.34
+      value: -0.981
       objectReference: {fileID: 0}
     - target: {fileID: 3564092691881542115, guid: acba648ed6628e24c92ee362ad1b4c4b, type: 3}
       propertyPath: m_LocalPosition.z
@@ -12428,12 +12439,20 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5116457814932440980, guid: acba648ed6628e24c92ee362ad1b4c4b, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8815197968049945640, guid: acba648ed6628e24c92ee362ad1b4c4b, type: 3}
-      propertyPath: managedReferences[5125869643372167180].target
+      propertyPath: managedReferences[5125869666082750464].type
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8815197968049945640, guid: acba648ed6628e24c92ee362ad1b4c4b, type: 3}
+      propertyPath: managedReferences[5125869666082750464].target
       value: 
       objectReference: {fileID: 45279566}
+    - target: {fileID: 8815197968049945640, guid: acba648ed6628e24c92ee362ad1b4c4b, type: 3}
+      propertyPath: managedReferences[5125869666082750464].thisTransform
+      value: 
+      objectReference: {fileID: 186877371}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -14195,7 +14214,7 @@ MonoBehaviour:
       PerFrameLength: 0.5
       Layer: 6
       Priority: 0
-    sharedData: {fileID: 11400000, guid: 4fe6193ec372ac44a87ac92ced03adbd, type: 2}
+    sharedData: {fileID: 11400000, guid: 9aa15e800874f4e4c85c2ef94edf1a35, type: 2}
   main:
     FireMode: 0
     FireRate:
@@ -14258,6 +14277,7 @@ MonoBehaviour:
     burstCount: 1
     burstDelay: 0
     stackSpeedIncrease: 0
+    burstsUpdatePositionEveryBullet: 0
   subSpawners: []
   bulletModules: []
   bulletInitModules: []
@@ -14285,7 +14305,7 @@ MonoBehaviour:
       type: {class: AimedShotModule, ns: BulletFury.Modules, asm: WayfarerGames.BulletFury}
       data:
         thisTransform: {fileID: 5466969032536293565}
-        target: {fileID: 0}
+        target: {fileID: 45279566}
         type: 0
         maxChangePerFrame: 10
         lerpSpeed: 0.1
@@ -14389,11 +14409,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1380330676343243115, guid: ec3050a8a3dad624d9e0a12cf8b3af54, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.085
+      value: 2.99
       objectReference: {fileID: 0}
     - target: {fileID: 1380330676343243115, guid: ec3050a8a3dad624d9e0a12cf8b3af54, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -3.59
+      value: -2
       objectReference: {fileID: 0}
     - target: {fileID: 1380330676343243115, guid: ec3050a8a3dad624d9e0a12cf8b3af54, type: 3}
       propertyPath: m_LocalPosition.z
@@ -14431,6 +14451,14 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 45279566}
+    - target: {fileID: 4318536270799453228, guid: ec3050a8a3dad624d9e0a12cf8b3af54, type: 3}
+      propertyPath: renderData.sharedData
+      value: 
+      objectReference: {fileID: 11400000, guid: 9aa15e800874f4e4c85c2ef94edf1a35, type: 2}
+    - target: {fileID: 5559133834439314383, guid: ec3050a8a3dad624d9e0a12cf8b3af54, type: 3}
+      propertyPath: m_SortingOrder
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6486201704300391242, guid: ec3050a8a3dad624d9e0a12cf8b3af54, type: 3}
       propertyPath: m_Name
       value: CannonEnemy
@@ -14525,6 +14553,7 @@ MonoBehaviour:
     burstCount: 1
     burstDelay: 0
     stackSpeedIncrease: 0
+    burstsUpdatePositionEveryBullet: 0
   subSpawners: []
   bulletModules: []
   bulletInitModules: []
@@ -14608,7 +14637,7 @@ Transform:
   m_GameObject: {fileID: 1388956710500037175}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -4, y: 0.36, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
