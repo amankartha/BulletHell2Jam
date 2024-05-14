@@ -72,6 +72,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  armBulletSpawner: {fileID: 5687725497073091124}
   TeleportCooldown: 2
 --- !u!58 &1324280391509440126
 CircleCollider2D:

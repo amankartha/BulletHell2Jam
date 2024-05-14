@@ -1396,6 +1396,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: -90
       objectReference: {fileID: 0}
+    - target: {fileID: 5559133834439314383, guid: ec3050a8a3dad624d9e0a12cf8b3af54, type: 3}
+      propertyPath: m_SortingOrder
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6486201704300391242, guid: ec3050a8a3dad624d9e0a12cf8b3af54, type: 3}
       propertyPath: m_Name
       value: CannonEnemy
