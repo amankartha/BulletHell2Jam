@@ -100,14 +100,14 @@ MonoBehaviour:
   renderData:
     singleData:
       Camera: {fileID: 0}
-      Texture: {fileID: 2800000, guid: e97c8196946b3aa4f8b6c2a53a28cc78, type: 3}
+      Texture: {fileID: 2800000, guid: 2bed93a190131234cacb7d75be3c2004, type: 3}
       Animated: 1
-      Rows: 3
-      Columns: 1
+      Rows: 1
+      Columns: 3
       PerFrameLength: 0.5
       Layer: 6
-      Priority: 0
-    sharedData: {fileID: 11400000, guid: 4fe6193ec372ac44a87ac92ced03adbd, type: 2}
+      Priority: 200
+    sharedData: {fileID: 11400000, guid: 9aa15e800874f4e4c85c2ef94edf1a35, type: 2}
   main:
     FireMode: 0
     FireRate:
@@ -132,6 +132,8 @@ MonoBehaviour:
       minValue: 0.5
       maxValue: 1
     UseRotationForDirection: 0
+    MoveWithTransform: 0
+    RotateWithTransform: 0
     ColliderType: 0
     ColliderSize: 0.5
     CapsuleLength: 0.1
@@ -168,12 +170,13 @@ MonoBehaviour:
     burstCount: 40
     burstDelay: 0.05
     stackSpeedIncrease: 0
+    burstsUpdatePositionEveryBullet: 0
   subSpawners: []
   bulletModules: []
   bulletInitModules: []
   spawnModules: []
   allModules:
-  - rid: 5125869643372167180
+  - rid: 5125869666082750464
   OnBulletDied:
     m_PersistentCalls:
       m_Calls: []
@@ -189,11 +192,11 @@ MonoBehaviour:
   references:
     version: 2
     RefIds:
-    - rid: 5125869643372167180
+    - rid: 5125869666082750464
       type: {class: AimedShotModule, ns: BulletFury.Modules, asm: WayfarerGames.BulletFury}
       data:
-        thisTransform: {fileID: 3564092691881542115}
-        target: {fileID: 31429914335782348, guid: d9f89a9092585b648a90cb32e3851f58, type: 3}
+        thisTransform: {fileID: 0}
+        target: {fileID: 0}
         type: 2
         maxChangePerFrame: 10
         lerpSpeed: 0.1
