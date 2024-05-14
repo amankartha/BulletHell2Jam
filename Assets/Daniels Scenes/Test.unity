@@ -231,6 +231,7 @@ MonoBehaviour:
     burstCount: 1
     burstDelay: 0
     stackSpeedIncrease: 0
+    burstsUpdatePositionEveryBullet: 0
   subSpawners: []
   bulletModules: []
   bulletInitModules: []
@@ -492,6 +493,7 @@ MonoBehaviour:
     burstCount: 2
     burstDelay: 0.5
     stackSpeedIncrease: 0
+    burstsUpdatePositionEveryBullet: 0
   subSpawners: []
   bulletModules: []
   bulletInitModules: []
@@ -616,7 +618,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!212 &943277688
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -769,6 +771,7 @@ MonoBehaviour:
     burstCount: 1
     burstDelay: 0
     stackSpeedIncrease: 0
+    burstsUpdatePositionEveryBullet: 0
   subSpawners: []
   bulletModules: []
   bulletInitModules: []
@@ -1118,6 +1121,7 @@ MonoBehaviour:
     burstCount: 3
     burstDelay: 0.5
     stackSpeedIncrease: 0
+    burstsUpdatePositionEveryBullet: 0
   subSpawners: []
   bulletModules: []
   bulletInitModules: []
@@ -1241,6 +1245,7 @@ MonoBehaviour:
     burstCount: 3
     burstDelay: 0.25
     stackSpeedIncrease: 0
+    burstsUpdatePositionEveryBullet: 0
   subSpawners: []
   bulletModules: []
   bulletInitModules: []
@@ -1583,6 +1588,7 @@ MonoBehaviour:
     burstCount: 1
     burstDelay: 0
     stackSpeedIncrease: 0
+    burstsUpdatePositionEveryBullet: 0
   subSpawners: []
   bulletModules: []
   bulletInitModules: []
@@ -12456,7 +12462,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5116457814932440980, guid: acba648ed6628e24c92ee362ad1b4c4b, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8815197968049945640, guid: acba648ed6628e24c92ee362ad1b4c4b, type: 3}
+      propertyPath: allModules.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8815197968049945640, guid: acba648ed6628e24c92ee362ad1b4c4b, type: 3}
+      propertyPath: managedReferences[-2]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 8815197968049945640, guid: acba648ed6628e24c92ee362ad1b4c4b, type: 3}
+      propertyPath: allModules.Array.data[1]
+      value: -2
       objectReference: {fileID: 0}
     - target: {fileID: 8815197968049945640, guid: acba648ed6628e24c92ee362ad1b4c4b, type: 3}
       propertyPath: managedReferences[5125869643372167180].target
@@ -12813,11 +12831,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4616614894933620801, guid: 6d9f8133091bbe243bd9f7314aed00de, type: 3}
       propertyPath: m_SortingLayer
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4616614894933620801, guid: 6d9f8133091bbe243bd9f7314aed00de, type: 3}
       propertyPath: m_SortingLayerID
-      value: 793091421
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4616614894933620801, guid: 6d9f8133091bbe243bd9f7314aed00de, type: 3}
       propertyPath: m_RenderingLayerMask
@@ -14246,6 +14264,7 @@ MonoBehaviour:
     burstCount: 1
     burstDelay: 0
     stackSpeedIncrease: 0
+    burstsUpdatePositionEveryBullet: 0
   subSpawners: []
   bulletModules: []
   bulletInitModules: []
@@ -14452,6 +14471,7 @@ MonoBehaviour:
     burstCount: 1
     burstDelay: 0
     stackSpeedIncrease: 0
+    burstsUpdatePositionEveryBullet: 0
   subSpawners: []
   bulletModules: []
   bulletInitModules: []

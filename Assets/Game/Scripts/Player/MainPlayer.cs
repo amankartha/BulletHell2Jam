@@ -104,9 +104,12 @@ public class MainPlayer : MonoBehaviour, IBulletHitHandler
         }
     }
 
+    public float TeleportCooldown = 2.0f;
+    private bool canTeleport = true;
+
     private void Teleport()
     {
-        if (Input.GetKeyDown(KeyCode.Space) && TryConsumeHeat(TeleportCost) && GameManager.Instance.CheckIfInBounds((Vector2)mainCamera.ScreenToWorldPoint(Input.mousePosition)))
+        if (canTeleport && Input.GetKeyDown(KeyCode.Space) && TryConsumeHeat(TeleportCost) && GameManager.Instance.CheckIfInBounds((Vector2)mainCamera.ScreenToWorldPoint(Input.mousePosition)))
         {
             TeleportSequence();    
         }
@@ -115,6 +118,7 @@ public class MainPlayer : MonoBehaviour, IBulletHitHandler
     private void TeleportSequence()
     {
         transform.position = (Vector2)mainCamera.ScreenToWorldPoint(Input.mousePosition);
+        StartCoroutine(TeleportCoolDownCounter());
     }
 
     #region TransitionFunctions
@@ -152,6 +156,24 @@ public class MainPlayer : MonoBehaviour, IBulletHitHandler
                 trigger.ActivateTrigger();
             }
         }
+    }
+
+    #endregion
+
+    #region Coroutines
+
+    IEnumerator TeleportCoolDownCounter()
+    {
+        canTeleport = false;
+        float counter = TeleportCooldown;
+
+        while (counter > 0)
+        {
+            counter -= Time.deltaTime;
+            yield return null;
+        }
+
+        canTeleport = true;
     }
 
     #endregion
