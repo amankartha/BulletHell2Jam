@@ -110,7 +110,6 @@ namespace BulletFury
 
         private bool _disposed = false;
         public bool Disposed => _disposed;
-
         public struct RenderQueueData
         {
             public BulletRenderData RenderData;
@@ -230,7 +229,7 @@ namespace BulletFury
                 _queuedRenderData.Value.cam);
         }
         
-        private void LateUpdate()
+        private void Update()
         { 
             if (_queuedRenderData == null || _disposed) return;
             float priority = -_queuedRenderData.Value.renderData.Priority;
