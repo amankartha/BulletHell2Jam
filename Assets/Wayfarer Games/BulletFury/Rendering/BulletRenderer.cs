@@ -62,6 +62,7 @@ namespace BulletFury
             #endif
         }
 
+        #if UNITY_EDITOR
         private static void PlayModeStateChanged(UnityEditor.PlayModeStateChange obj)
         {
             if (obj == UnityEditor.PlayModeStateChange.ExitingPlayMode)
@@ -69,7 +70,7 @@ namespace BulletFury
             if (obj == UnityEditor.PlayModeStateChange.EnteredEditMode)
                 Init();
         }
-
+        #endif
         private static async void LateUpdate()
         {
             while (!_disposed)
@@ -84,11 +85,9 @@ namespace BulletFury
                         Render(queue.RenderData, queue.Bullets, queue.Count, queue.RenderData.Camera);
                 
                 BulletSpawner.RenderQueue.Clear();
-                #if UNITY_2023_1_OR_NEWER
-                await Awaitable.EndOfFrameAsync();
-                #else
+                
                 await Task.Yield();
-                #endif
+                
                 if (_disposed)
                 {
                     BulletSpawner.RenderQueue.Clear();
