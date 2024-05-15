@@ -12746,6 +12746,14 @@ PrefabInstance:
       propertyPath: managedReferences[6140528671481135109].RandomizeOutput
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1324280391509440126, guid: d9f89a9092585b648a90cb32e3851f58, type: 3}
+      propertyPath: m_Radius
+      value: 0.2906568
+      objectReference: {fileID: 0}
+    - target: {fileID: 1324280391509440126, guid: d9f89a9092585b648a90cb32e3851f58, type: 3}
+      propertyPath: m_Offset.x
+      value: -0.0023739338
+      objectReference: {fileID: 0}
     - target: {fileID: 2270562933650602042, guid: d9f89a9092585b648a90cb32e3851f58, type: 3}
       propertyPath: m_SortingLayer
       value: 0
