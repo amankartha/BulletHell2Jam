@@ -6,7 +6,7 @@ using UnityHFSM;
 public class MainPlayerMovement : StateBase
 {
 
-    public float Speed = 5f;
+ 
     
     private Vector2 movementVectorContainer = new Vector2();
 
@@ -20,7 +20,7 @@ public class MainPlayerMovement : StateBase
     public override void OnLogic()
     {
         movementVectorContainer =  new Vector2(Input.GetAxis("Horizontal"),Input.GetAxis("Vertical"));
-        movementVectorContainer *= Speed;
+        movementVectorContainer *= _mainPlayer.Speed;
         movementVectorContainer *= Time.deltaTime;
         
         _mainPlayer.gameObject.transform.Translate(movementVectorContainer);
