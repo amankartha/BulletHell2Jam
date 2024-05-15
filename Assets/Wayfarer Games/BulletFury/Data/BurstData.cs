@@ -21,5 +21,8 @@ namespace BulletFury
 
         [Tooltip("The speed increase for each burst (if burstCount > 1).")]
         public float stackSpeedIncrease = 0f;
+
+        [Tooltip("Should bursts update the position & rotation for every bullet?")]
+        public bool burstsUpdatePositionEveryBullet;
     }
 }

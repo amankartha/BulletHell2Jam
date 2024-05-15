@@ -14,6 +14,9 @@ namespace BulletFury
         [Tooltip("Automatic: Spawns bullets automatically. Manual: Only spawns bullets when Spawn is called")]
         public FireMode FireMode = FireMode.Automatic;
 
+        [Tooltip("Should the spawner immediately start shooting? Only for Automatic fire mode")]
+        public bool PlayOnEnable = true;
+
         [Tooltip("Seconds between shots spawning")]
         public FloatOrRandom FireRate = 0.1f;
 
@@ -35,6 +38,12 @@ namespace BulletFury
 
         [Tooltip("Should the bullet use its rotation for its direction?")]
         public bool UseRotationForDirection = true;
+
+        [Tooltip("Should the bullets move with the gameobject?")]
+        public bool MoveWithTransform;
+        
+        [Tooltip("Should the bullets rotate with the gameobject?")]
+        public bool RotateWithTransform;
 
         [Tooltip("What shape should the bullet colliders be? Circle will run much faster!")]
         [Header("Collisions")]

@@ -1,11 +1,14 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
-
+using BulletFury;
+using BulletFury.Data;
 using Unity.Mathematics;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityHFSM;
 
-public class MainPlayer : MonoBehaviour
+public class MainPlayer : MonoBehaviour, IBulletHitHandler
 {
     #region Variables
 
@@ -21,7 +24,7 @@ public class MainPlayer : MonoBehaviour
     private int _maxHealth;
     
     [SerializeField]
-    private int _heat;
+    private float _heat;
     [SerializeField]
     private int _maxHeat;
 
@@ -38,7 +41,7 @@ public class MainPlayer : MonoBehaviour
     }
     public int MaxHealth { get;private set; }
 
-    public int Heat
+    public float Heat
     {
         get
         {
@@ -46,12 +49,30 @@ public class MainPlayer : MonoBehaviour
         }
         set
         {
-            _heat = math.clamp(value, 0, _maxHeat);
+            _heat = Mathf.Clamp(value, 0, _maxHeat);
         }
     }
 
     #endregion
 
+    #region Events
+
+
+    public UnityEvent OnPlayerHit;
+
+    #endregion
+
+    #region Links
+
+    [Header("TO BE LINKED")] 
+    public BulletSpawner armBulletSpawner;
+
+    #endregion
+    private void Awake()
+    {
+          GameManager.Instance.MAINPLAYERGAMEOBJECT = this.gameObject;
+          GameManager.Instance.MAINPLAYERSCRIPT = this;
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -70,7 +91,9 @@ public class MainPlayer : MonoBehaviour
 
         fsm.SetStartState("Melee");
         fsm.Init();
-      
+
+        armBulletSpawner.Stop();
+
     }
 
     // Update is called once per frame
@@ -99,9 +122,12 @@ public class MainPlayer : MonoBehaviour
         }
     }
 
+    public float TeleportCooldown = 2.0f;
+    private bool canTeleport = true;
+
     private void Teleport()
     {
-        if (Input.GetKeyDown(KeyCode.Space) && TryConsumeHeat(TeleportCost) && GameManager.Instance.CheckIfInBounds((Vector2)mainCamera.ScreenToWorldPoint(Input.mousePosition)))
+        if (canTeleport && Input.GetKeyDown(KeyCode.Space) && TryConsumeHeat(TeleportCost) && GameManager.Instance.CheckIfInBounds((Vector2)mainCamera.ScreenToWorldPoint(Input.mousePosition)))
         {
             TeleportSequence();    
         }
@@ -110,13 +136,14 @@ public class MainPlayer : MonoBehaviour
     private void TeleportSequence()
     {
         transform.position = (Vector2)mainCamera.ScreenToWorldPoint(Input.mousePosition);
+        StartCoroutine(TeleportCoolDownCounter());
     }
 
     #region TransitionFunctions
 
     private bool TransitionToShooting()
     {
-        if (Heat > ShootThreshold)
+        if (Heat > ShootThreshold && Input.GetKeyDown(KeyCode.Mouse1))
         {
             return true;
         }
@@ -135,4 +162,43 @@ public class MainPlayer : MonoBehaviour
     }
 
     #endregion
+
+    #region COLLISION
+
+    private void OnTriggerEnter2D(Collider2D col)
+    {
+        if (col.gameObject.layer == 3)
+        {
+            if (col.TryGetComponent(out ITrigger trigger))
+            {
+                trigger.ActivateTrigger();
+            }
+        }
+    }
+
+    #endregion
+
+    #region Coroutines
+
+    IEnumerator TeleportCoolDownCounter()
+    {
+        canTeleport = false;
+        float counter = TeleportCooldown;
+
+        while (counter > 0)
+        {
+            counter -= Time.deltaTime;
+            yield return null;
+        }
+
+        canTeleport = true;
+    }
+
+    #endregion
+
+    public void Hit(BulletContainer bullet)
+    {
+        Health -= (int)bullet.Damage;
+        OnPlayerHit?.Invoke();
+    }
 }

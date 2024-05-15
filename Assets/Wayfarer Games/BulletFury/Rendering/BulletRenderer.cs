@@ -1,84 +1,16 @@
-using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using BulletFury.Data;
 using Unity.Collections;
 using UnityEngine;
 using UnityEngine.Rendering;
-using Object = UnityEngine.Object;
 
 namespace BulletFury
 {
-    [Serializable]
-    public class BulletRenderData
-    {
-        private static Material _unlitMaterial;
-        private static Material _animatedMaterial;
-        private static readonly int MainTex = Shader.PropertyToID("_MainTex");
-        private static readonly int Cols = Shader.PropertyToID("_Cols");
-        private static readonly int Rows1 = Shader.PropertyToID("_Rows");
-        private static readonly int Frame = Shader.PropertyToID("_Frame");
-
-        public Camera Camera;
-        public Texture2D Texture;
-        public bool Animated;
-        [Min(1)]
-        public int Rows = 1, Columns = 1;
-        public float PerFrameLength;
-        public int Layer;
-        public int Priority;
-        
-        private Material _material = null;
-
-        public Material Material
-        {
-            get
-            {
-                if (_unlitMaterial == null || _animatedMaterial == null)
-                {
-                    _material = null;
-                    
-                    #if UNITY_WEBGL
-                    _unlitMaterial = new Material(Shader.Find("Shader Graphs/UnlitBulletWeb"))
-                    #else
-                    _unlitMaterial = new Material(Shader.Find("Shader Graphs/UnlitBullet"))
-                    #endif
-                    {
-                        enableInstancing = true
-                    };
-                    #if UNITY_WEBGL
-                    _animatedMaterial = new Material(Shader.Find("Shader Graphs/AnimatedBulletWeb"))
-                    #else
-                    _animatedMaterial = new Material(Shader.Find("Shader Graphs/AnimatedBullet"))
-                    #endif
-                    {
-                        enableInstancing = true
-                    };
-                }
-                
-                if (_material == null)
-                {
-                    _material = !Animated ? Object.Instantiate(_unlitMaterial) : Object.Instantiate(_animatedMaterial);
-                    _material.SetTexture(MainTex, Texture);
-                    if (Animated)
-                    {
-                        _material.SetInt(Cols, Columns);
-                        _material.SetInt(Rows1, Rows);
-                        _material.SetFloat(Frame, PerFrameLength);
-                    }
-                }
-                return _material;
-            }
-        }
-
-        public static void ResetMaterials()
-        {
-            _unlitMaterial = null;
-            _animatedMaterial = null;
-        }
-    }
-
     public static class BulletRenderer
     {
+        private static readonly int SortOrder = Shader.PropertyToID("_SortOrder");
         private const int BulletsPerChunk = 1023;
         private static HashSet<(BulletRenderData, NativeArray<BulletContainer>)> _toRender;
         private static Mesh _mesh;
@@ -89,16 +21,24 @@ namespace BulletFury
         private static NativeArray<Vector4> _colors;
         private static NativeArray<float> _tex;
         private static Dictionary<BulletRenderData, (GraphicsBuffer color, GraphicsBuffer tex)> _colorBuffer;
+
         private static bool _hasBullets;
         private static readonly int InstanceColorBuffer = Shader.PropertyToID("_InstanceColorBuffer");
         private static readonly int InstanceTexBuffer = Shader.PropertyToID("_InstanceTexBuffer");
-    
+
         private static int _newLength;
         private static int _num;
         private static bool _alreadyInitialised;
 
         private static bool _disposed = false;
-        
+
+
+        #if UNITY_EDITOR
+        static BulletRenderer()
+        {
+            Init();
+        }
+        #endif
         
         [RuntimeInitializeOnLoadMethod]
         public static void Init()
@@ -112,10 +52,51 @@ namespace BulletFury
             _colorBuffer = new Dictionary<BulletRenderData, (GraphicsBuffer color, GraphicsBuffer tex)>();
 
             _disposed = false;
+            
+            LateUpdate();
             if (_alreadyInitialised) return;
             _alreadyInitialised = true;
+            
+            #if UNITY_EDITOR
+            UnityEditor.EditorApplication.playModeStateChanged += PlayModeStateChanged;
+            #endif
         }
 
+        private static void PlayModeStateChanged(UnityEditor.PlayModeStateChange obj)
+        {
+            if (obj == UnityEditor.PlayModeStateChange.ExitingPlayMode)
+                Dispose();
+            if (obj == UnityEditor.PlayModeStateChange.EnteredEditMode)
+                Init();
+        }
+
+        private static async void LateUpdate()
+        {
+            while (!_disposed)
+            {
+                if (_disposed)
+                {
+                    BulletSpawner.RenderQueue.Clear();
+                    return;
+                }
+                foreach (var queue in BulletSpawner.RenderQueue.Values)
+                    if (!queue.Spawner.Disposed)
+                        Render(queue.RenderData, queue.Bullets, queue.Count, queue.RenderData.Camera);
+                
+                BulletSpawner.RenderQueue.Clear();
+                #if UNITY_2023_1_OR_NEWER
+                await Awaitable.EndOfFrameAsync();
+                #else
+                await Task.Yield();
+                #endif
+                if (_disposed)
+                {
+                    BulletSpawner.RenderQueue.Clear();
+                    return;
+                }
+            }
+        }
+        
         public static void Dispose()
         {
             Application.quitting -= Dispose;
@@ -128,11 +109,14 @@ namespace BulletFury
             }
             _chunk.Dispose();
             _disposed = true;
+            BulletSpawner.RenderQueue.Clear();
         }
 
         public static void Render(BulletRenderData data, NativeArray<BulletContainer> bullets, int numBullets, Camera cam)
         {
             if (numBullets == 0 || _disposed) return;
+
+            data.Material.SetFloat(SortOrder, data.Priority);
 
             _num = 0;
             while (_num < numBullets)
@@ -157,7 +141,7 @@ namespace BulletFury
             {
                 layer = data.Layer,
                 camera = cam,
-                rendererPriority = data.Priority
+                rendererPriority = data.Priority,
             };
             
             _hasBullets = false;
@@ -204,7 +188,6 @@ namespace BulletFury
             _colorBuffer[data].tex.SetData(_tex);
             data.Material.SetBuffer(InstanceColorBuffer, _colorBuffer[data].color);
             data.Material.SetBuffer(InstanceTexBuffer, _colorBuffer[data].tex);
-            
             
             Graphics.RenderMeshInstanced(renderParams, _mesh, 0, _matrices, length);
             #endif

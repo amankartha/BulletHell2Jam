@@ -8,6 +8,7 @@
             <ui:Label text="Bullet Settings" class="title header" />
             <ui:BindableElement binding-path="main" name="VisualBody" class="body">
                 <uie:PropertyField binding-path="FireMode" name="FireMode" />
+                <uie:PropertyField binding-path="PlayOnEnable" name="PlayOnEnable" />
                 <uie:PropertyField binding-path="FireRate" name="FireRate" />
                 <uie:PropertyField binding-path="Damage" name="Damage" />
                 <uie:PropertyField binding-path="Lifetime" name="Lifetime" />
@@ -15,6 +16,8 @@
                 <uie:PropertyField binding-path="StartColor" name="StartColor" />
                 <uie:PropertyField binding-path="StartSize" name="StartSize" />
                 <uie:PropertyField binding-path="UseRotationForDirection" name="UseRotation" />
+                <uie:PropertyField binding-path="MoveWithTransform" name="MoveWithTransform" />
+                <uie:PropertyField binding-path="RotateWithTransform" name="RotateWithTransform" />
                 <uie:PropertyField binding-path="ColliderType" name="ColliderType" />
                 <uie:PropertyField binding-path="ColliderSize" name="ColliderSize" />
                 <uie:PropertyField binding-path="CapsuleLength" name="ColliderSeparation" />
@@ -52,6 +55,7 @@
                 <uie:PropertyField binding-path="burstCount" name="BurstCount" />
                 <uie:PropertyField binding-path="burstDelay" name="BurstDelay" />
                 <uie:PropertyField binding-path="stackSpeedIncrease" name="StackSpeedIncrease" />
+                <uie:PropertyField binding-path="burstsUpdatePositionEveryBullet" name="StackSpeedIncrease" />
             </ui:BindableElement>
         </ui:VisualElement>
     </ui:VisualElement>

@@ -406,6 +406,8 @@ MonoBehaviour:
       minValue: 1
       maxValue: 1
     UseRotationForDirection: 1
+    MoveWithTransform: 0
+    RotateWithTransform: 0
     ColliderType: 0
     ColliderSize: 1
     CapsuleLength: 0.1
@@ -622,7 +624,8 @@ PrefabInstance:
       propertyPath: _maxHealth
       value: 100
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 2911263633292329011, guid: d9f89a9092585b648a90cb32e3851f58, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []

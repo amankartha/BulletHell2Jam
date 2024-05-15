@@ -4,6 +4,10 @@ using Wayfarer_Games.Common;
 
 namespace BulletFury.Modules
 {
+    public enum AimType
+    {
+        Instant, Linear, Slerp, SmoothDamp, Predicted
+    }
     [Serializable]
     public class AimedShotModule : IBulletSpawnModule
     {
@@ -27,6 +31,7 @@ namespace BulletFury.Modules
         [SerializeField] private float lookAheadTime = 1f;
         private Vector3? _previousPosition;
         private Quaternion _previousRotation;
+        private Vector3? _cachedVelocity;
 
         public void SetTarget(Transform newTarget)
         {
@@ -36,8 +41,8 @@ namespace BulletFury.Modules
         public void Execute(ref Vector3 _, ref Quaternion rotation, float deltaTime)
         {
             if (target == null || thisTransform == null) return; // Safety check
-            Vector3 directionToTarget = (thisTransform.position - target.position).normalized;
-            Quaternion targetRotation = Quaternion.Euler(0f, 0f, Mathf.Atan2(directionToTarget.y, directionToTarget.x) * Mathf.Rad2Deg + 90); // Calculate target rotation based on direction
+            Vector3 directionToTarget = (target.position - thisTransform.position).normalized;
+            Quaternion targetRotation = Quaternion.Euler(0f, 0f, Mathf.Atan2(directionToTarget.y, directionToTarget.x) * Mathf.Rad2Deg - 90); // Calculate target rotation based on direction
 
             switch (type)
             {
@@ -64,12 +69,17 @@ namespace BulletFury.Modules
                         _previousPosition = target.position;
                         return;
                     }
+                    
+                    if (!Mathf.Approximately(deltaTime, 0))
+                        _cachedVelocity = (target.position - _previousPosition.Value) / deltaTime;
 
-                    Vector3 targetVelocity = (target.position - _previousPosition.Value) / deltaTime;
+                    if (_cachedVelocity == null) return;
+
+                    Vector3 targetVelocity = _cachedVelocity.Value; 
                     Vector3 predictedPosition = target.position + targetVelocity * lookAheadTime;
 
                     directionToTarget = (predictedPosition - thisTransform.position).normalized;
-                    targetRotation = Quaternion.Euler(0f, 0f, Mathf.Atan2(directionToTarget.y, directionToTarget.x) * Mathf.Rad2Deg + 90);
+                    targetRotation = Quaternion.Euler(0f, 0f, Mathf.Atan2(directionToTarget.y, directionToTarget.x) * Mathf.Rad2Deg - 90);
 
                     rotation = targetRotation; // Aim at the predicted position instantly
 
