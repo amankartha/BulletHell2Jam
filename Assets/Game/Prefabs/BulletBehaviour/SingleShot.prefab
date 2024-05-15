@@ -110,6 +110,7 @@ MonoBehaviour:
     sharedData: {fileID: 11400000, guid: 4fe6193ec372ac44a87ac92ced03adbd, type: 2}
   main:
     FireMode: 0
+    PlayOnEnable: 1
     FireRate:
       isRandom: 0
       minValue: 1
@@ -132,6 +133,8 @@ MonoBehaviour:
       minValue: 0.5
       maxValue: 1
     UseRotationForDirection: 1
+    MoveWithTransform: 0
+    RotateWithTransform: 0
     ColliderType: 0
     ColliderSize: 0.5
     CapsuleLength: 0.1
@@ -168,6 +171,7 @@ MonoBehaviour:
     burstCount: 1
     burstDelay: 0
     stackSpeedIncrease: 0
+    burstsUpdatePositionEveryBullet: 0
   subSpawners: []
   bulletModules: []
   bulletInitModules: []

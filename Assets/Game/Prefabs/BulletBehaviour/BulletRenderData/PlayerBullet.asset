@@ -10,14 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 192fd0c5d60d454e87b7ef2822ba689e, type: 3}
-  m_Name: GenericEnemyBullet
+  m_Name: PlayerBullet
   m_EditorClassIdentifier: 
   data:
     Camera: {fileID: 0}
-    Texture: {fileID: 2800000, guid: 9b3f989d28a01ed4894cddb7b5ca1799, type: 3}
-    Animated: 1
-    Rows: 3
+    Texture: {fileID: 0}
+    Animated: 0
+    Rows: 1
     Columns: 1
-    PerFrameLength: 0.1
-    Layer: 12
-    Priority: -1
+    PerFrameLength: 0
+    Layer: 0
+    Priority: 0

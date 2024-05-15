@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 776f12e71fe334c4e9763ce892226b89
+guid: 9b3f989d28a01ed4894cddb7b5ca1799
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -48,7 +48,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 256
+  spritePixelsToUnits: 128
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -107,19 +107,6 @@ TextureImporter:
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
-    buildTarget: Windows Store Apps
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 3
     buildTarget: Server
     maxTextureSize: 2048
     resizeAlgorithm: 0
@@ -136,49 +123,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Bullet_Pointed_1
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 768
-        width: 256
-        height: 256
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 7f90f0be1dcc5904f8b07225e0bb4c82
-      internalID: 2076449655
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Bullet_Sphere_1
-      rect:
-        serializedVersion: 2
-        x: 256
-        y: 768
-        width: 256
-        height: 256
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 84a3b4239fb608745a06742990b157e2
-      internalID: -1333202223
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Bullet_Pointed_2
+      name: Generic_Bullet_Sprite_1
       rect:
         serializedVersion: 2
         x: 0
@@ -192,35 +137,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 944b1aa84618c234685a7dcfcdceb6e9
-      internalID: -422833917
+      spriteID: aabf827109d3c774d9fdab7def5f2533
+      internalID: 126660437
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Bullet_Sphere_2
-      rect:
-        serializedVersion: 2
-        x: 256
-        y: 512
-        width: 256
-        height: 256
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: dd52353c884a3a34cb27437d266b63c7
-      internalID: -1688280401
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Bullet_Pointed_3
+      name: Generic_Bullet_Sprite_2
       rect:
         serializedVersion: 2
         x: 0
@@ -234,35 +158,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a84ce1f80611b1048ac05f2627bd0c5b
-      internalID: -1486706088
+      spriteID: cfe5c4bc48d37644eb58339f324a0476
+      internalID: -665644227
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Bullet_Sphere_3
-      rect:
-        serializedVersion: 2
-        x: 256
-        y: 256
-        width: 256
-        height: 256
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 9e4b598ad5a3f2745b7317a228073046
-      internalID: 2107098683
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Bullet_Pointed_4
+      name: Generic_Bullet_Sprite_3
       rect:
         serializedVersion: 2
         x: 0
@@ -276,8 +179,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 600ebb567adc41f47a98880d8a30976b
-      internalID: 206706914
+      spriteID: f87a4dc2641d9f24282ef2ebe3f7204e
+      internalID: -820960167
       vertices: []
       indices: 
       edges: []
@@ -293,13 +196,9 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Bullet_Pointed_1: 2076449655
-      Bullet_Pointed_2: -422833917
-      Bullet_Pointed_3: -1486706088
-      Bullet_Pointed_4: 206706914
-      Bullet_Sphere_1: -1333202223
-      Bullet_Sphere_2: -1688280401
-      Bullet_Sphere_3: 2107098683
+      Generic_Bullet_Sprite_1: 126660437
+      Generic_Bullet_Sprite_2: -665644227
+      Generic_Bullet_Sprite_3: -820960167
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
