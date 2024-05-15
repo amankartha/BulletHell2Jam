@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 121d431d42d6fe34eb98858284673438
+guid: 3d2043e727d20ee4f9b07c21f5947a67
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -48,7 +48,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 256
+  spritePixelsToUnits: 128
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -69,10 +69,10 @@ TextureImporter:
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
-    maxTextureSize: 1024
+    maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -107,19 +107,6 @@ TextureImporter:
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
-    buildTarget: Windows Store Apps
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 3
     buildTarget: Server
     maxTextureSize: 2048
     resizeAlgorithm: 0
@@ -136,13 +123,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Sphere_1
+      name: Homing_Bullet_Sprite_1
       rect:
         serializedVersion: 2
         x: 0
-        y: 384
-        width: 128
-        height: 128
+        y: 768
+        width: 256
+        height: 256
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -150,20 +137,41 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 78b34f42ffca884478b44eb7a93fa1af
-      internalID: -645748819
+      spriteID: c4f626763b0888a46a159a316eedf3c1
+      internalID: 1174184359
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Sphere_2
+      name: Homing_Bullet_Sprite_2
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 512
+        width: 256
+        height: 256
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 682949307540ff842af59a8dd0f576a2
+      internalID: -225397706
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Homing_Bullet_Sprite_3
       rect:
         serializedVersion: 2
         x: 0
         y: 256
-        width: 128
-        height: 128
+        width: 256
+        height: 256
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -171,20 +179,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: bb72fb41a135481428db878490cacb9a
-      internalID: 472266702
+      spriteID: 9e08876c00be2ae44ae16bdeb32c3005
+      internalID: -819061174
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Sphere_3
+      name: Homing_Bullet_Sprite_4
       rect:
         serializedVersion: 2
         x: 0
-        y: 128
-        width: 128
-        height: 128
+        y: 0
+        width: 256
+        height: 256
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -192,8 +200,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e08aab1efb33ae344b3e2c3c7a21fe2d
-      internalID: -1047497110
+      spriteID: 74769fc7c13363e4eb9d284cfe1bdb67
+      internalID: -1206227890
       vertices: []
       indices: 
       edges: []
@@ -209,9 +217,10 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Sphere_1: -645748819
-      Sphere_2: 472266702
-      Sphere_3: -1047497110
+      Homing_Bullet_Sprite_1: 1174184359
+      Homing_Bullet_Sprite_2: -225397706
+      Homing_Bullet_Sprite_3: -819061174
+      Homing_Bullet_Sprite_4: -1206227890
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
