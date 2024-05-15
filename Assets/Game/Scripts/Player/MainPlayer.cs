@@ -62,6 +62,12 @@ public class MainPlayer : MonoBehaviour, IBulletHitHandler
 
     #endregion
 
+    #region Links
+
+    [Header("TO BE LINKED")] 
+    public BulletSpawner armBulletSpawner;
+
+    #endregion
     private void Awake()
     {
           GameManager.Instance.MAINPLAYERGAMEOBJECT = this.gameObject;
@@ -86,7 +92,7 @@ public class MainPlayer : MonoBehaviour, IBulletHitHandler
         fsm.SetStartState("Melee");
         fsm.Init();
 
-      
+        armBulletSpawner.Stop();
 
     }
 
@@ -137,7 +143,7 @@ public class MainPlayer : MonoBehaviour, IBulletHitHandler
 
     private bool TransitionToShooting()
     {
-        if (Heat > ShootThreshold)
+        if (Heat > ShootThreshold && Input.GetKeyDown(KeyCode.Mouse1))
         {
             return true;
         }

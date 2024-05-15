@@ -107,7 +107,7 @@ MonoBehaviour:
       PerFrameLength: 0
       Layer: 0
       Priority: 0
-    sharedData: {fileID: 11400000, guid: 4fe6193ec372ac44a87ac92ced03adbd, type: 2}
+    sharedData: {fileID: 11400000, guid: 9aa15e800874f4e4c85c2ef94edf1a35, type: 2}
   main:
     FireMode: 0
     FireRate:
@@ -170,6 +170,7 @@ MonoBehaviour:
     burstCount: 1
     burstDelay: 0
     stackSpeedIncrease: 0
+    burstsUpdatePositionEveryBullet: 0
   subSpawners: []
   bulletModules: []
   bulletInitModules: []
@@ -236,7 +237,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 31429914335782348, guid: d9f89a9092585b648a90cb32e3851f58, type: 3}
-  rotationSpeed: 5
+  rotationSpeed: 60
   minAngle: -45
   maxAngle: 45
 --- !u!1 &3989907350096774092
@@ -315,7 +316,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
   m_Color: {r: 1, g: 0, b: 0, a: 1}
   m_FlipX: 0

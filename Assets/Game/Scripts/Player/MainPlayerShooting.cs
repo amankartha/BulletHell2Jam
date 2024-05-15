@@ -6,7 +6,7 @@ using UnityHFSM;
 public class MainPlayerShooting : StateBase
 {
     private MainPlayer _player;
-
+    
    
     private float TimerCounter = 0f;
     
@@ -22,6 +22,7 @@ public class MainPlayerShooting : StateBase
     {
         base.OnEnter();
         TimerCounter = 0f;
+        _player.armBulletSpawner.Play();
     }
 
     public override void OnLogic()
@@ -39,6 +40,7 @@ public class MainPlayerShooting : StateBase
     public override void OnExit()
     {
         base.OnExit();
+        _player.armBulletSpawner.Stop();
     }
 
    
