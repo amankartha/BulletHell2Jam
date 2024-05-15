@@ -6,6 +6,7 @@ using BulletFury.Data;
 using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.SceneManagement;
 using UnityHFSM;
 
 public class MainPlayer : MonoBehaviour, IBulletHitHandler
@@ -28,7 +29,7 @@ public class MainPlayer : MonoBehaviour, IBulletHitHandler
     [SerializeField]
     private int _maxHeat;
 
-  
+    public float Speed = 5f;
     
     private StateMachine fsm;
     private Camera mainCamera;
@@ -72,6 +73,9 @@ public class MainPlayer : MonoBehaviour, IBulletHitHandler
     {
           GameManager.Instance.MAINPLAYERGAMEOBJECT = this.gameObject;
           GameManager.Instance.MAINPLAYERSCRIPT = this;
+          
+          DontDestroyOnLoad(gameObject);
+          SceneManager.sceneLoaded += SetPlayerPositionToSpawnPoint;
     }
 
     // Start is called before the first frame update
@@ -161,6 +165,16 @@ public class MainPlayer : MonoBehaviour, IBulletHitHandler
         return false;
     }
 
+    private void SetPlayerPositionToSpawnPoint(Scene scene, LoadSceneMode mode)
+    {
+        SpawnPosition spawnPos = FindObjectOfType<SpawnPosition>();
+       
+
+        if (spawnPos != null)
+        {
+            transform.position = spawnPos.transform.position;
+        }
+    }
     #endregion
 
     #region COLLISION
