@@ -1745,7 +1745,13 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 6486201704300391242, guid: ec3050a8a3dad624d9e0a12cf8b3af54, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1923406141}
+    - targetCorrespondingSourceObject: {fileID: 6486201704300391242, guid: ec3050a8a3dad624d9e0a12cf8b3af54, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1923406140}
   m_SourcePrefab: {fileID: 100100000, guid: ec3050a8a3dad624d9e0a12cf8b3af54, type: 3}
 --- !u!1 &1662090097
 GameObject:
@@ -12613,6 +12619,167 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 302e9991b3c727248aae2ec672abeba5, type: 3}
+--- !u!1 &1923406139 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6486201704300391242, guid: ec3050a8a3dad624d9e0a12cf8b3af54, type: 3}
+  m_PrefabInstance: {fileID: 1638298060}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1923406140
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1923406139}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -333801856, guid: aa0b1eebb5db27a419fa4564bbe5c9c5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  updateType: 0
+  isSpeedBased: 0
+  hasOnStart: 0
+  hasOnPlay: 0
+  hasOnUpdate: 0
+  hasOnStepComplete: 0
+  hasOnComplete: 0
+  hasOnTweenCreated: 0
+  hasOnRewind: 0
+  onStart:
+    m_PersistentCalls:
+      m_Calls: []
+  onPlay:
+    m_PersistentCalls:
+      m_Calls: []
+  onUpdate:
+    m_PersistentCalls:
+      m_Calls: []
+  onStepComplete:
+    m_PersistentCalls:
+      m_Calls: []
+  onComplete:
+    m_PersistentCalls:
+      m_Calls: []
+  onTweenCreated:
+    m_PersistentCalls:
+      m_Calls: []
+  onRewind:
+    m_PersistentCalls:
+      m_Calls: []
+  delay: 3
+  duration: 10
+  easeType: 6
+  easeCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  loops: 1
+  id: 
+  loopType: 0
+  orientType: 0
+  lookAtTransform: {fileID: 0}
+  lookAtPosition: {x: 0, y: 0, z: 0}
+  lookAhead: 0.01
+  autoPlay: 0
+  autoKill: 1
+  relative: 0
+  isLocal: 0
+  isClosedPath: 1
+  pathResolution: 10
+  pathMode: 1
+  lockRotation: 0
+  assignForwardAndUp: 0
+  forwardDirection: {x: 0, y: 0, z: 1}
+  upDirection: {x: 0, y: 1, z: 0}
+  tweenRigidbody: 0
+  wps:
+  - {x: 2.5932398, y: 1.1308887, z: 0}
+  - {x: 6.3503666, y: 3.692566, z: 0}
+  - {x: 0.82852817, y: 5.4952283, z: 0}
+  - {x: -4.1050735, y: 4.9639173, z: 0}
+  - {x: -5.7559323, y: 1.7760513, z: 0}
+  - {x: -3.346058, y: 0.5995773, z: 0}
+  fullWps: []
+  path:
+    wpLengths:
+    - 0
+    - 6.2043667
+    - 4.547328
+    - 5.808639
+    - 4.962128
+    - 3.5899615
+    - 2.6817133
+    - 3.8805149
+    wps:
+    - {x: -2, y: -3.04, z: 0}
+    - {x: 2.5932398, y: 1.1308887, z: 0}
+    - {x: 6.3503666, y: 3.692566, z: 0}
+    - {x: 0.82852817, y: 5.4952283, z: 0}
+    - {x: -4.1050735, y: 4.9639173, z: 0}
+    - {x: -5.7559323, y: 1.7760513, z: 0}
+    - {x: -3.346058, y: 0.5995773, z: 0}
+    - {x: -2, y: -3.04, z: 0}
+    type: 0
+    subdivisionsXSegment: 10
+    subdivisions: 80
+    controlPoints: []
+    length: 31.67465
+    isFinalized: 1
+    timesTable:
+    - 0
+    - 0.19587798
+    - 0.33944163
+    - 0.5228261
+    - 0.6794854
+    - 0.79282403
+    - 0.8774883
+    - 1
+    lengthsTable: []
+  inspectorMode: 0
+  pathType: 0
+  handlesType: 0
+  livePreview: 1
+  handlesDrawMode: 0
+  perspectiveHandleSize: 0.5
+  showIndexes: 1
+  showWpLength: 0
+  pathColor: {r: 1, g: 1, b: 1, a: 0.5}
+  lastSrcPosition: {x: -2, y: -3.04, z: 0}
+  lastSrcRotation: {x: -0, y: -0, z: -0.70710677, w: 0.7071068}
+  wpsDropdown: 0
+  dropToFloorOffset: 0
+--- !u!114 &1923406141
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1923406139}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b59d605ca47756d459588256b6bab6f9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1976451606
 PrefabInstance:
   m_ObjectHideFlags: 0
