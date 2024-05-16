@@ -7,12 +7,11 @@ public class EnemyMovementDelaySequence : MonoBehaviour
 {
     private DOTweenPath _doTweenPath;
 
-
     // Start is called before the first frame update
     void Start()
     {
         _doTweenPath = this.gameObject.GetComponent<DOTweenPath>();
-        transform.DOPath(_doTweenPath.path.wps, _doTweenPath.duration).SetLoops(-1).OnWaypointChange(Pause);
+        transform.DOPath(_doTweenPath.path.wps, _doTweenPath.duration).SetLoops(-1).SetEase(Ease.Linear).OnWaypointChange(Pause);
     }
 
     // Update is called once per frame

@@ -20,4 +20,4 @@ MonoBehaviour:
     Columns: 1
     PerFrameLength: 0.1
     Layer: 12
-    Priority: -1
+    Priority: 0

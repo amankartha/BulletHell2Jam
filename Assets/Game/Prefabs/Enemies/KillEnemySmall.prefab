@@ -64,7 +64,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: -0.034000278, y: -0.03923112}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -75,7 +75,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 0.5553806, y: 0.65999687}
   m_EdgeRadius: 0
 --- !u!1 &222536259669022914
 GameObject:
@@ -186,7 +186,7 @@ MonoBehaviour:
       m_Calls: []
   delay: 0
   duration: 1
-  easeType: 6
+  easeType: 1
   easeCurve:
     serializedVersion: 2
     m_Curve:
@@ -310,13 +310,13 @@ MonoBehaviour:
       PerFrameLength: 0.5
       Layer: 6
       Priority: 0
-    sharedData: {fileID: 11400000, guid: 9aa15e800874f4e4c85c2ef94edf1a35, type: 2}
+    sharedData: {fileID: 11400000, guid: d9f004339d47783469999981b771c2c4, type: 2}
   main:
     FireMode: 0
     PlayOnEnable: 1
     FireRate:
       isRandom: 0
-      minValue: 1
+      minValue: 2
       maxValue: 3
     Damage:
       isRandom: 0
@@ -328,19 +328,19 @@ MonoBehaviour:
       maxValue: 1
     Speed:
       isRandom: 0
-      minValue: 1
+      minValue: 0.75
       maxValue: 5
-    StartColor: {r: 1, g: 1, b: 1, a: 1}
+    StartColor: {r: 0.91474086, g: 0.2971698, b: 1, a: 1}
     StartSize:
       isRandom: 0
       minValue: 0.5
       maxValue: 1
     UseRotationForDirection: 1
     MoveWithTransform: 0
-    RotateWithTransform: 0
-    ColliderType: 0
-    ColliderSize: 0.5
-    CapsuleLength: 0.1
+    RotateWithTransform: 1
+    ColliderType: 1
+    ColliderSize: 0.25
+    CapsuleLength: 0.4
   spawnShapeData:
     rotateSpeed: 0
     spawnDir: 2
@@ -401,8 +401,8 @@ MonoBehaviour:
     - rid: 5125869643372167180
       type: {class: AimedShotModule, ns: BulletFury.Modules, asm: WayfarerGames.BulletFury}
       data:
-        thisTransform: {fileID: 3081321283622313194, guid: e252b2d5fd3c47748bb7c6f5be79d74a, type: 3}
-        target: {fileID: 31429914335782348, guid: d9f89a9092585b648a90cb32e3851f58, type: 3}
+        thisTransform: {fileID: 0}
+        target: {fileID: 0}
         type: 0
         maxChangePerFrame: 10
         lerpSpeed: 0.1
@@ -414,7 +414,7 @@ MonoBehaviour:
         Mode: 0
         Time: 0
         <ToTrack>k__BackingField: {fileID: 31429914335782348, guid: d9f89a9092585b648a90cb32e3851f58, type: 3}
-        <TurnSpeed>k__BackingField: 5
+        <TurnSpeed>k__BackingField: 2.5
         turnSpeedOverTime:
           serializedVersion: 2
           m_Curve:
@@ -867,7 +867,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.15, y: 0.15, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6736363538314505777}
@@ -913,8 +913,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
-  m_Color: {r: 1, g: 0, b: 0, a: 1}
+  m_Sprite: {fileID: 23408790, guid: bc467114aacb9f64f8ef79dd9395e97c, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0

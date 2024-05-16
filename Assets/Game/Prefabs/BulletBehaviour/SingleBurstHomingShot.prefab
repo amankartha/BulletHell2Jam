@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &529967081436354110
+--- !u!1 &8240196416601091680
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,38 +8,38 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 2731638562202382355}
-  - component: {fileID: 8885038956012969322}
-  - component: {fileID: 7239529709056219420}
+  - component: {fileID: 3081321283622313194}
+  - component: {fileID: 8011479749975640713}
+  - component: {fileID: 8940276639806005912}
   m_Layer: 11
-  m_Name: SingleShot
+  m_Name: SingleBurstHomingShot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &2731638562202382355
+--- !u!4 &3081321283622313194
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 529967081436354110}
+  m_GameObject: {fileID: 8240196416601091680}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.73, y: 0, z: 0}
+  m_LocalPosition: {x: 23.28, y: 0.3, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!212 &8885038956012969322
+--- !u!212 &8011479749975640713
 SpriteRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 529967081436354110}
+  m_GameObject: {fileID: 8240196416601091680}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
@@ -85,13 +85,13 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &7239529709056219420
+--- !u!114 &8940276639806005912
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 529967081436354110}
+  m_GameObject: {fileID: 8240196416601091680}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2583716d8b9a4cf9ae2a2a52c75333ec, type: 3}
@@ -107,7 +107,7 @@ MonoBehaviour:
       PerFrameLength: 0.5
       Layer: 6
       Priority: 0
-    sharedData: {fileID: 11400000, guid: 9aa15e800874f4e4c85c2ef94edf1a35, type: 2}
+    sharedData: {fileID: 11400000, guid: d9f004339d47783469999981b771c2c4, type: 2}
   main:
     FireMode: 0
     PlayOnEnable: 1
@@ -121,23 +121,23 @@ MonoBehaviour:
       maxValue: 1
     Lifetime:
       isRandom: 0
-      minValue: 10
+      minValue: 5
       maxValue: 1
     Speed:
       isRandom: 0
-      minValue: 3
+      minValue: 0.75
       maxValue: 5
-    StartColor: {r: 0, g: 1, b: 0.09604788, a: 1}
+    StartColor: {r: 0.91474086, g: 0.2971698, b: 1, a: 1}
     StartSize:
       isRandom: 0
       minValue: 0.5
       maxValue: 1
     UseRotationForDirection: 1
     MoveWithTransform: 0
-    RotateWithTransform: 0
-    ColliderType: 0
-    ColliderSize: 0.5
-    CapsuleLength: 0.1
+    RotateWithTransform: 1
+    ColliderType: 1
+    ColliderSize: 0.25
+    CapsuleLength: 0.4
   spawnShapeData:
     rotateSpeed: 0
     spawnDir: 2
@@ -168,8 +168,8 @@ MonoBehaviour:
   burstData:
     delay: 0
     maxActiveBullets: 0
-    burstCount: 1
-    burstDelay: 0
+    burstCount: 3
+    burstDelay: 0.25
     stackSpeedIncrease: 0
     burstsUpdatePositionEveryBullet: 0
   subSpawners: []
@@ -178,6 +178,8 @@ MonoBehaviour:
   spawnModules: []
   allModules:
   - rid: 5125869643372167180
+  - rid: 5125869643372167184
+  - rid: 5125869643372167185
   OnBulletDied:
     m_PersistentCalls:
       m_Calls: []
@@ -196,10 +198,98 @@ MonoBehaviour:
     - rid: 5125869643372167180
       type: {class: AimedShotModule, ns: BulletFury.Modules, asm: WayfarerGames.BulletFury}
       data:
-        thisTransform: {fileID: 2731638562202382355}
+        thisTransform: {fileID: 0}
         target: {fileID: 0}
         type: 0
         maxChangePerFrame: 10
         lerpSpeed: 0.1
         time: 0.5
         lookAheadTime: 1
+    - rid: 5125869643372167184
+      type: {class: TrackObjectModule, ns: BulletFury.Modules, asm: WayfarerGames.BulletFury}
+      data:
+        Mode: 0
+        Time: 0
+        <ToTrack>k__BackingField: {fileID: 31429914335782348, guid: d9f89a9092585b648a90cb32e3851f58, type: 3}
+        <TurnSpeed>k__BackingField: 2.5
+        turnSpeedOverTime:
+          serializedVersion: 2
+          m_Curve:
+          - serializedVersion: 3
+            time: 0.049987793
+            value: 0.0030212402
+            inSlope: 0
+            outSlope: 0
+            tangentMode: 0
+            weightedMode: 0
+            inWeight: 0
+            outWeight: 0
+          - serializedVersion: 3
+            time: 0.15003082
+            value: 1.0070491
+            inSlope: 0.06615555
+            outSlope: 0.06615555
+            tangentMode: 0
+            weightedMode: 0
+            inWeight: 0.2039295
+            outWeight: 0.33333334
+          - serializedVersion: 3
+            time: 0.17199798
+            value: 0.19374073
+            inSlope: 0
+            outSlope: 0
+            tangentMode: 0
+            weightedMode: 0
+            inWeight: 0
+            outWeight: 0
+          m_PreInfinity: 2
+          m_PostInfinity: 2
+          m_RotationOrder: 4
+    - rid: 5125869643372167185
+      type: {class: SpeedOverTimeModule, ns: BulletFury.Modules, asm: WayfarerGames.BulletFury}
+      data:
+        Mode: 0
+        Time: 0
+        speedOverTime:
+          serializedVersion: 2
+          m_Curve:
+          - serializedVersion: 3
+            time: 0.0011135354
+            value: 0.7266828
+            inSlope: 0.07266291
+            outSlope: 0.07266291
+            tangentMode: 0
+            weightedMode: 0
+            inWeight: 0
+            outWeight: 0.17636125
+          - serializedVersion: 3
+            time: 0.06713864
+            value: 0.2627427
+            inSlope: 0.24356498
+            outSlope: 0.24356498
+            tangentMode: 0
+            weightedMode: 0
+            inWeight: 0.16391706
+            outWeight: 0.19991218
+          - serializedVersion: 3
+            time: 0.13380367
+            value: 0.9143798
+            inSlope: 11.4788
+            outSlope: 11.4788
+            tangentMode: 0
+            weightedMode: 0
+            inWeight: 0.33333334
+            outWeight: 0.33333334
+          - serializedVersion: 3
+            time: 0.15056427
+            value: 0.99815726
+            inSlope: 0.44759724
+            outSlope: 0.44759724
+            tangentMode: 0
+            weightedMode: 0
+            inWeight: 0.8830736
+            outWeight: 0
+          m_PreInfinity: 2
+          m_PostInfinity: 2
+          m_RotationOrder: 4
+        scale: 6
