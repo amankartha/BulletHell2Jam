@@ -661,7 +661,7 @@ CompositeCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
-  m_GeometryType: 0
+  m_GeometryType: 1
   m_GenerationType: 0
   m_EdgeRadius: 0
   m_ColliderPaths:
@@ -3591,8 +3591,8 @@ TilemapRenderer:
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
-  - {fileID: 1867946860677820308}
   - {fileID: 3046984769644347704}
+  - {fileID: 1867946860677820308}
   - {fileID: 8956478767528735306}
   - {fileID: 3761679261962770708}
   - {fileID: 5477658978290322397}

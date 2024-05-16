@@ -3631,7 +3631,7 @@ CompositeCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
-  m_GeometryType: 0
+  m_GeometryType: 1
   m_GenerationType: 0
   m_EdgeRadius: 0
   m_ColliderPaths:
@@ -4198,6 +4198,7 @@ GameObject:
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
+  - {fileID: 5835520777258670966}
   - {fileID: 7160363310536635866}
   - {fileID: 502488117470013444}
   - {fileID: 5658444041608086362}
@@ -4205,7 +4206,6 @@ SceneRoots:
   - {fileID: 8640827498808474768}
   - {fileID: 6850964837949370776}
   - {fileID: 413442298106728304}
-  - {fileID: 5835520777258670966}
   - {fileID: 5609016389692557083}
   - {fileID: 6898048844934467402}
   - {fileID: 1138108561}

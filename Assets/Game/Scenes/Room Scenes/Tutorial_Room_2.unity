@@ -1711,67 +1711,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fc23865563f686a4eae48b70d767244b, type: 3}
---- !u!1001 &5658444041608086362
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 295112971720018467, guid: 9c3d0edbd1579b34289ef55c468efea6, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 295112971720018467, guid: 9c3d0edbd1579b34289ef55c468efea6, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 9.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 295112971720018467, guid: 9c3d0edbd1579b34289ef55c468efea6, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 295112971720018467, guid: 9c3d0edbd1579b34289ef55c468efea6, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 295112971720018467, guid: 9c3d0edbd1579b34289ef55c468efea6, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 295112971720018467, guid: 9c3d0edbd1579b34289ef55c468efea6, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 295112971720018467, guid: 9c3d0edbd1579b34289ef55c468efea6, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 295112971720018467, guid: 9c3d0edbd1579b34289ef55c468efea6, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 295112971720018467, guid: 9c3d0edbd1579b34289ef55c468efea6, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 295112971720018467, guid: 9c3d0edbd1579b34289ef55c468efea6, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6486448823631451295, guid: 9c3d0edbd1579b34289ef55c468efea6, type: 3}
-      propertyPath: m_Name
-      value: ChargingPad
-      objectReference: {fileID: 0}
-    - target: {fileID: 6486448823631451295, guid: 9c3d0edbd1579b34289ef55c468efea6, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 9c3d0edbd1579b34289ef55c468efea6, type: 3}
 --- !u!50 &5796475589271413153
 Rigidbody2D:
   serializedVersion: 4
@@ -3161,7 +3100,7 @@ CompositeCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
-  m_GeometryType: 0
+  m_GeometryType: 1
   m_GenerationType: 0
   m_EdgeRadius: 0
   m_ColliderPaths:
@@ -3746,14 +3685,13 @@ GameObject:
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
+  - {fileID: 5835520777258670966}
   - {fileID: 7160363310536635866}
   - {fileID: 502488117470013444}
-  - {fileID: 5658444041608086362}
   - {fileID: 3942464323955069331}
   - {fileID: 8640827498808474768}
   - {fileID: 6850964837949370776}
   - {fileID: 413442298106728304}
-  - {fileID: 5835520777258670966}
   - {fileID: 5609016389692557083}
   - {fileID: 6898048844934467402}
   - {fileID: 1138108561}
