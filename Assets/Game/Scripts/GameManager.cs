@@ -16,6 +16,6 @@ public class GameManager : MMPersistentSingleton<GameManager>
     }
     public bool CheckIfInBounds(Vector3 point)
     {
-        return CurrentRoomCollider.bounds.Contains(point);
+        return CurrentRoomCollider.OverlapPoint(point);
     }
 }

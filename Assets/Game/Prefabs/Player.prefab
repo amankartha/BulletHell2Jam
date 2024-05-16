@@ -37,6 +37,7 @@ Transform:
   - {fileID: 4602746440313519860}
   - {fileID: 2483800220619728385}
   - {fileID: 974008404939798566}
+  - {fileID: 7702642791011889852}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &5555345675106925617
@@ -55,11 +56,14 @@ MonoBehaviour:
   RelectHeatChargeUp: 5
   ShootThreshold: 60
   ShootingDrainPerSecond: 10
+  OverchargeCooldownPerSecond: 10
   _health: 100
   _maxHealth: 100
   _heat: 20
   _maxHeat: 100
   Speed: 3
+  OverheatedSpeed: 2
+  canCharge: 1
   OnPlayerHit:
     m_PersistentCalls:
       m_Calls:
@@ -907,6 +911,37 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &7489382956416212990
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7702642791011889852}
+  m_Layer: 0
+  m_Name: FeelOverCharged
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7702642791011889852
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7489382956416212990}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 31429914335782348}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8171545568721412497
 GameObject:
   m_ObjectHideFlags: 0

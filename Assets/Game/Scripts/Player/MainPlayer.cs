@@ -140,7 +140,7 @@ public class MainPlayer : MonoBehaviour, IBulletHitHandler
 
     private void Teleport()
     {
-        if (canTeleport && Input.GetKeyDown(KeyCode.Space) && TryConsumeHeat(TeleportCost) && GameManager.Instance.CheckIfInBounds((Vector2)mainCamera.ScreenToWorldPoint(Input.mousePosition)))
+        if (canTeleport && Input.GetKeyDown(KeyCode.Space) &&  GameManager.Instance.CheckIfInBounds((Vector2)mainCamera.ScreenToWorldPoint(Input.mousePosition)) && TryConsumeHeat(TeleportCost))
         {
             TeleportSequence();    
         }
