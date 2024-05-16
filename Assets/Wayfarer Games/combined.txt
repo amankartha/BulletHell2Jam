@@ -1,0 +1,3424 @@
+using UnityEngine;
+
+namespace Wayfarer_Games.Common
+{
+    public static class QuaternionUtil
+    {
+        public static Quaternion AngVelToDeriv(Quaternion current, Vector3 angVel)
+        {
+            var spin = new Quaternion(angVel.x, angVel.y, angVel.z, 0f);
+            var result = spin * current;
+            return new Quaternion(0.5f * result.x, 0.5f * result.y, 0.5f * result.z, 0.5f * result.w);
+        }
+
+        public static Vector3 DerivToAngVel(Quaternion current, Quaternion deriv)
+        {
+            var result = deriv * Quaternion.Inverse(current);
+            return new Vector3(2f * result.x, 2f * result.y, 2f * result.z);
+        }
+
+        public static Quaternion IntegrateRotation(Quaternion rotation, Vector3 angularVelocity, float deltaTime)
+        {
+            if (deltaTime < Mathf.Epsilon) return rotation;
+            var deriv = AngVelToDeriv(rotation, angularVelocity);
+            var pred = new Vector4(
+                rotation.x + deriv.x * deltaTime,
+                rotation.y + deriv.y * deltaTime,
+                rotation.z + deriv.z * deltaTime,
+                rotation.w + deriv.w * deltaTime
+            ).normalized;
+            return new Quaternion(pred.x, pred.y, pred.z, pred.w);
+        }
+
+        public static Quaternion SmoothDamp(Quaternion rot, Quaternion target, ref Quaternion deriv, float time,
+            float deltaTime)
+        {
+            if (deltaTime < Mathf.Epsilon) return rot;
+            // account for double-cover
+            var dot = Quaternion.Dot(rot, target);
+            var multi = dot > 0f ? 1f : -1f;
+            target.x *= multi;
+            target.y *= multi;
+            target.z *= multi;
+            target.w *= multi;
+            // smooth damp (nlerp approx)
+            var result = new Vector4(
+                Mathf.SmoothDamp(rot.x, target.x, ref deriv.x, time),
+                Mathf.SmoothDamp(rot.y, target.y, ref deriv.y, time),
+                Mathf.SmoothDamp(rot.z, target.z, ref deriv.z, time),
+                Mathf.SmoothDamp(rot.w, target.w, ref deriv.w, time)
+            ).normalized;
+
+            // ensure deriv is tangent
+            var derivError = Vector4.Project(new Vector4(deriv.x, deriv.y, deriv.z, deriv.w), result);
+            deriv.x -= derivError.x;
+            deriv.y -= derivError.y;
+            deriv.z -= derivError.z;
+            deriv.w -= derivError.w;
+
+            return new Quaternion(result.x, result.y, result.z, result.w);
+        }
+    }
+}using System;
+using System.Collections;
+using System.Collections.Generic;
+using TMPro;
+using UnityEngine;
+
+public class FPS : MonoBehaviour
+{
+    private TextMeshProUGUI _text;
+    private Dictionary<int, string> CachedNumberStrings = new();
+    private int[] _frameRateSamples;
+    private int _cacheNumbersAmount = 300;
+    private int _averageFromAmount = 30;
+    private int _averageCounter = 0;
+    private int _currentAveraged;
+ 
+    void Awake()
+    {
+        _text = GetComponent<TextMeshProUGUI>();
+        // Cache strings and create array
+        {
+            for (int i = 0; i < _cacheNumbersAmount; i++) {
+                CachedNumberStrings[i] = i.ToString();
+            }
+            _frameRateSamples = new int[_averageFromAmount];
+        }
+    }
+    void Update()
+    {
+        // Sample
+        {
+            var currentFrame = (int)Math.Round(1f / Time.unscaledDeltaTime); // If your game modifies Time.timeScale, use unscaledDeltaTime and smooth manually (or not).
+            _frameRateSamples[_averageCounter] = currentFrame;
+        }
+ 
+        // Average
+        {
+            var average = 0f;
+ 
+            foreach (var frameRate in _frameRateSamples) {
+                average += frameRate;
+            }
+ 
+            _currentAveraged = (int)Math.Round(average / _averageFromAmount);
+            _averageCounter = (_averageCounter + 1) % _averageFromAmount;
+        }
+ 
+        // Assign to UI
+        {
+            _text.text = _currentAveraged switch
+            {
+                var x when x >= 0 && x < _cacheNumbersAmount => CachedNumberStrings[x],
+                var x when x >= _cacheNumbersAmount => $"> {_cacheNumbersAmount}",
+                var x when x < 0 => "< 0",
+                _ => "?"
+            };
+        }
+    }
+}
+using System;
+using Common;
+using UnityEngine;
+
+namespace Wayfarer_Games.Common.FloatOrRandom
+{
+    [Serializable]
+    public struct IntOrRandom
+    {
+        [SerializeField] private bool isRandom;
+        [SerializeField] private int minValue;
+        [SerializeField] private int maxValue;
+        
+        public int GetValue(Squirrel3 rnd)
+        {
+            return isRandom ? rnd.Range(minValue, maxValue) : minValue;
+        }
+
+        public int Value => GetValue(Squirrel3.Instance);
+        
+        // implicit conversion from FloatOrRandom to float
+        public static implicit operator int(IntOrRandom value) => value.Value;
+        
+        // implicit conversion from float to FloatOrRandom
+        public static implicit operator IntOrRandom(int value)
+        {
+            return new IntOrRandom
+            {
+                isRandom = false,
+                minValue = value,
+                maxValue = value
+            };
+        }
+    }
+}using System;
+using UnityEngine;
+
+namespace Common.FloatOrRandom
+{
+    [Serializable]
+    public struct FloatOrRandom
+    {
+        [SerializeField] private bool isRandom;
+        [SerializeField] private float minValue;
+        [SerializeField] private float maxValue;
+        
+        public float GetValue(Squirrel3 rnd)
+        {
+            return isRandom ? rnd.Range(minValue, maxValue) : minValue;
+        }
+
+        public float Value => GetValue(Squirrel3.Instance);
+        
+        // implicit conversion from FloatOrRandom to float
+        public static implicit operator float(FloatOrRandom value) => value.Value;
+        
+        // implicit conversion from float to FloatOrRandom
+        public static implicit operator FloatOrRandom(float value)
+        {
+            return new FloatOrRandom
+            {
+                isRandom = false,
+                minValue = value,
+                maxValue = value
+            };
+        }
+    }
+}using UnityEditor;
+using UnityEditor.UIElements;
+using UnityEngine.UIElements;
+
+namespace Wayfarer_Games.Common.FloatOrRandom.Editor
+{
+    [CustomPropertyDrawer(typeof(global::Common.FloatOrRandom.FloatOrRandom))]
+    public class FloatOrRandomDrawer : PropertyDrawer
+    {
+        private static VisualTreeAsset UXML;
+        
+        public override VisualElement CreatePropertyGUI(SerializedProperty property)
+        {
+            if (UXML == null)
+                UXML = AssetDatabase.LoadAssetAtPath<VisualTreeAsset>("Assets/Wayfarer Games/Common/FloatOrRandom/Editor/PropertyDrawer.uxml");
+            
+            var root = new VisualElement();
+            UXML.CloneTree(root);
+
+            root.Q<Label>().text = property.displayName;
+
+            var to = root.Q<Label>("To");
+            var min = root.Q<FloatField>("Min");
+            var max = root.Q<FloatField>("Max");
+            var random = root.Q<Toggle>("IsRandom");
+            random.tooltip = "If true, the value will be random between min and max. If false, the value will be min.";
+            
+            min.bindingPath = property.propertyPath + ".minValue";
+            min.Bind(property.serializedObject);
+            max.bindingPath = property.propertyPath + ".maxValue";
+            max.Bind(property.serializedObject);
+            random.bindingPath = property.propertyPath + ".isRandom";
+            random.Bind(property.serializedObject);
+
+            
+            random.RegisterValueChangedCallback((evt) =>
+            {
+                to.style.display = evt.newValue ? DisplayStyle.Flex : DisplayStyle.None;
+                max.style.display = evt.newValue ? DisplayStyle.Flex : DisplayStyle.None;
+            });
+            return root;
+        }
+    }
+}using UnityEditor;
+using UnityEditor.UIElements;
+using UnityEngine.UIElements;
+
+namespace Wayfarer_Games.Common.FloatOrRandom.Editor
+{
+    [CustomPropertyDrawer(typeof(Common.FloatOrRandom.IntOrRandom))]
+    public class IntOrRandomDrawer : PropertyDrawer
+    {
+        private static VisualTreeAsset UXML;
+        
+        public override VisualElement CreatePropertyGUI(SerializedProperty property)
+        {
+            if (UXML == null)
+                UXML = AssetDatabase.LoadAssetAtPath<VisualTreeAsset>("Assets/Wayfarer Games/Common/FloatOrRandom/Editor/PropertyDrawer.uxml");
+            
+            var root = new VisualElement();
+            UXML.CloneTree(root);
+
+            root.Q<Label>().text = property.displayName;
+
+            var to = root.Q<Label>("To");
+            var min = root.Q<IntegerField>("Min");
+            var max = root.Q<IntegerField>("Max");
+            var random = root.Q<Toggle>("IsRandom");
+            random.tooltip = "If true, the value will be random between min and max. If false, the value will be min.";
+            
+            min.bindingPath = property.propertyPath + ".minValue";
+            min.Bind(property.serializedObject);
+            max.bindingPath = property.propertyPath + ".maxValue";
+            max.Bind(property.serializedObject);
+            random.bindingPath = property.propertyPath + ".isRandom";
+            random.Bind(property.serializedObject);
+            
+            random.RegisterValueChangedCallback((evt) =>
+            {
+                to.style.display = evt.newValue ? DisplayStyle.Flex : DisplayStyle.None;
+                max.style.display = evt.newValue ? DisplayStyle.Flex : DisplayStyle.None;
+            });
+            return root;
+        }
+    }
+}using System;
+using System.Collections.Generic;
+using System.Linq;
+using Unity.Mathematics;
+using UnityEngine;
+
+namespace Common
+{
+    public class Squirrel3
+    {
+        private static Squirrel3 _instance;
+        public static Squirrel3 Instance
+        {
+            get
+            {
+                if (_instance == null)
+                    _instance = new Squirrel3();
+                return _instance;
+            }
+        }
+
+        private const uint NOISE1 = 0xb5297a4d;
+        private const uint NOISE2 = 0x68e31da4;
+        private const uint NOISE3 = 0x1b56c4e9;
+        private const uint CAP = uint.MaxValue;
+    
+        private int _n = 0;
+        private int _seed;
+
+        public Squirrel3()
+        {
+            _seed = Environment.TickCount;
+        }
+        
+        public Squirrel3(int seed)
+        {
+            _seed = seed;
+        }
+
+        public void SetSeed(int seed)
+        {
+            _seed = seed;
+        }
+
+        public void ResetState()
+        {
+            _n = 0;
+        }
+        
+        public float Next()
+        {
+            ++_n;
+            return Rnd(_n, _seed) / (float)CAP;
+        }
+
+        public double NextDouble()
+        {
+            return Rnd(_n, _seed) / (double) CAP;
+        }
+
+        public Vector2 RandomPointInUnitCircle()
+        {
+            Vector2 result = Vector2.one;
+            while(result.magnitude > 1f)
+            {
+                result.x = Range(-1f, 1f);
+                result.y = Range(-1f, 1f);
+            }
+            return result;
+        }
+        
+        public float Range(float min, float max)
+        {
+            return Mathf.Lerp(min, max, Next());
+        }
+
+        public double Range(double min, double max)
+        {
+            return Lerp(min, max, NextDouble());
+        }
+        
+        private static double Lerp(double a, double b, double t)
+        {
+            return a + (b - a) * math.clamp(t, 0d, 1d);
+        }
+        
+        public int Range(int min, int max)
+        {
+            return Mathf.RoundToInt(Mathf.Lerp(min, max, Next()));
+        }
+
+        public T WeightedRandom<T>(Dictionary<T, float> items) where T : class
+        {
+            var sum = items.Sum(item => item.Value) * Next();
+            foreach (var item in items)
+            {
+                sum -= item.Value;
+                if (sum > 0)
+                    continue;
+
+                return item.Key;
+            }
+
+            return null;
+        }
+
+        public T WeightedRandom<T>(List<T> items) where T : class, IWeightedItem
+        {
+            var sum = items.Sum(item => item.Weight) * Next();
+            foreach (var item in items)
+            {
+                sum -= item.Weight;
+                if (sum > 0)
+                    continue;
+
+                return item;
+            }
+
+            return null;
+        }
+
+        public T GetRandomElement<T>(IEnumerable<T> list, out int idx)
+        {
+            var enumerable = list as T[] ?? list.ToArray();
+            idx = Range(0, enumerable.Length);
+            return enumerable[idx];
+        }
+
+        public bool Bool()
+        {
+            return NextDouble() > 0.5;
+        }
+        
+        public bool Bool(float chance)
+        {
+            return Next() < chance;
+        }
+        
+        public bool Bool(double chance)
+        {
+            return NextDouble() < chance;
+        }
+
+        private static long Rnd(long n, int seed = 0)
+        {
+            n *= NOISE1;
+            n += seed;
+            n ^= n >> 8;
+            n += NOISE2;
+            n ^= n << 8;
+            n *= NOISE3;
+            n ^= n >> 8;
+            return n % CAP;
+        }
+    }
+
+    public interface IWeightedItem
+    {
+        public float Weight { get; }
+    }
+}using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using BulletFury.Data;
+using Common;
+using Unity.Collections;
+using Unity.Jobs;
+using UnityEngine;
+using UnityEngine.Events;
+
+namespace BulletFury
+{
+    public interface IBulletHitHandler
+    {
+        public void Hit(BulletContainer bullet);
+    }
+    
+    public interface IBaseBulletModule { }
+
+    public interface IBulletModule : IBaseBulletModule
+    {
+        public void Execute(ref BulletContainer container, float deltaTime);
+    }
+    
+    public interface IBulletInitModule : IBaseBulletModule
+    {
+        public void Execute(ref BulletContainer container);
+    }
+
+    public interface IBulletSpawnModule : IBaseBulletModule
+    {
+        public void Execute(ref Vector3 position, ref Quaternion rotation, float deltaTime);
+    }
+    
+    [DefaultExecutionOrder(-1000)]
+    public class BulletSpawner : MonoBehaviour
+    {
+        private const int MaxBullets = 10000;
+        [SerializeField] private SharedRenderData renderData;
+        [SerializeField] private BulletMainData main;
+        [SerializeField] private SpawnShapeData spawnShapeData;
+        
+        [SerializeField] private BurstData burstData;
+        [SerializeField] private SubSpawnerData[] subSpawners;
+        
+        #if SERIALIZEREFERENCE_EXTENSIONS
+        [SerializeReference, SubclassSelector, Obsolete]
+        #endif
+        private List<IBulletModule> bulletModules = new ();
+        
+        #if SERIALIZEREFERENCE_EXTENSIONS
+        [SerializeReference, SubclassSelector, Obsolete]
+        #endif
+        private List<IBulletInitModule> bulletInitModules = new ();
+        
+        #if SERIALIZEREFERENCE_EXTENSIONS
+        [SerializeReference, SubclassSelector, Obsolete]
+        #endif
+        private List<IBulletSpawnModule> spawnModules = new ();
+        
+        #if SERIALIZEREFERENCE_EXTENSIONS
+        [SerializeReference, SubclassSelector]
+        #endif
+        private List<IBaseBulletModule> allModules = new ();
+
+        private bool _isStopped = false;
+        
+        // Unity Event that fires when a bullet reaches end-of-life, can be set in the inspector like a button 
+        // ReSharper disable once InconsistentNaming
+        [SerializeField] private BulletDiedEvent OnBulletDied;
+        public event Action<BulletContainer, bool> OnBulletDiedEvent;
+
+        [SerializeField] private BulletDiedEvent OnBulletCancelled;
+        public event Action<BulletContainer> OnBulletCancelledEvent;
+        
+        
+        // Unity Event that fires when a bullet is spawned, can be set in the inspector like a button 
+        // ReSharper disable once InconsistentNaming
+        [SerializeField] private BulletSpawnedEvent OnBulletSpawned;
+        public event Action<int, BulletContainer> OnBulletSpawnedEvent;
+        
+        [SerializeField] private UnityEvent OnWeaponFired;
+        public event Action OnWeaponFiredEvent;
+        
+        public SharedRenderData RenderData => renderData;
+        public BulletMainData Main => main;
+        public SpawnShapeData SpawnShapeData => spawnShapeData;
+        public BurstData BurstData => burstData;
+        public SubSpawnerData[] SubSpawners => subSpawners;
+
+        private bool _enabled = true;
+        private float _currentTime = float.MaxValue;
+        private Vector3 _previousPos, _previousRot;
+        private float _currentRotationAngle;
+        private bool _hasSpawnedSinceEnable = false;
+        private int _bulletCount;
+        private bool _bulletsFree = true;
+        
+        private Collider2D[] _hit = new Collider2D[4];
+        private ContactFilter2D _filter;
+        private HashSet<int> _bulletsToKill = new();
+        private int _bulletMaxCount = 0;
+
+        private NativeArray<BulletContainer> _bullets;
+        private (BulletRenderData renderData, Camera cam)? _queuedRenderData;
+
+        private Squirrel3 _rnd = new Squirrel3();
+
+        private bool _disposed = false;
+        public bool Disposed => _disposed;
+        public struct RenderQueueData
+        {
+            public BulletRenderData RenderData;
+            public int Count;
+            public NativeArray<BulletContainer> Bullets;
+            public BulletSpawner Spawner;
+        }
+        private static SortedList<float, RenderQueueData> _renderQueue = new();
+        public static SortedList<float, RenderQueueData> RenderQueue => _renderQueue;
+
+        public void Start()
+        {
+            _bullets = new NativeArray<BulletContainer>(burstData.maxActiveBullets == 0 ? MaxBullets : burstData.maxActiveBullets, Allocator.Persistent, NativeArrayOptions.UninitializedMemory);
+            _disposed = false;
+            for (int i = 0; i < _bullets.Length; i++)
+            {
+                _bullets[i] = new BulletContainer
+                {
+                    Id = i,
+                    Dead = 1
+                };
+            }
+
+            _filter = new ContactFilter2D
+            {
+                useLayerMask = true,
+                layerMask = Physics2D.GetLayerCollisionMask(gameObject.layer),
+                useTriggers = true
+            };
+
+        }
+
+        private void OnEnable()
+        {
+            if (burstData.delay > 0)
+                _currentTime = Main.FireRate - burstData.delay;
+            _isStopped = !main.PlayOnEnable;
+        }
+
+        private void OnValidate()
+        {
+            if (bulletInitModules.Any())
+            {
+                foreach (var mod in bulletInitModules)
+                    allModules.Add(mod);
+                bulletInitModules.Clear();
+            }
+
+            if (spawnModules.Any())
+            {
+                foreach (var mod in spawnModules)
+                    allModules.Add(mod);
+                spawnModules.Clear();
+            }
+
+            if (bulletModules.Any())
+            {
+                foreach (var mod in bulletModules)
+                    allModules.Add(mod);
+                bulletModules.Clear();
+            }
+        }
+
+        public void SetPreset(BulletSpawnerPreset preset)
+        {
+            if (preset.UseMain)
+                main = preset.Main;
+            if (preset.UseShape)
+                spawnShapeData = preset.ShapeData;
+            if (preset.UseBurstData)
+                burstData = preset.BurstData;
+            if (preset.UseSubSpawners)
+                subSpawners = preset.SubSpawners;
+            if (preset.UseModules)
+                allModules = preset.BulletModules;
+        }
+        
+        public void OnDestroy()
+        {
+            if (_disposed) return;
+            _bullets.Dispose();
+            _disposed = true;
+        }
+
+        public void Stop()
+        {
+            _isStopped = true;
+        }
+
+        public void Play()
+        {
+            _isStopped = false;
+        }
+
+        private void FixedUpdate()
+        {
+            UpdateAllBullets(renderData.Data.Camera, Time.fixedDeltaTime);
+        }
+
+        public T GetModule<T>() where T : IBaseBulletModule
+        {
+            return (T) allModules.First(m => m is T);
+        }
+
+        public List<T> GetModulesOfType<T>() where T : IBaseBulletModule
+        {
+            return allModules
+                .OfType<T>()
+                .ToList();
+        }
+
+        public void RenderBulletsNow()
+        {
+            if (_queuedRenderData == null || _disposed) return;
+            
+            BulletRenderer.Render(_queuedRenderData.Value.renderData, _bullets, _bulletCount,
+                _queuedRenderData.Value.cam);
+        }
+        
+        private void Update()
+        { 
+            if (_queuedRenderData == null || _disposed) return;
+            float priority = -_queuedRenderData.Value.renderData.Priority;
+            while (_renderQueue.ContainsKey(priority))
+                priority -= 0.01f;
+            
+            _renderQueue.Add(priority, new RenderQueueData
+            {
+                Bullets = _bullets,
+                Count = _bulletCount,
+                RenderData = _queuedRenderData.Value.renderData,
+                Spawner = this
+            });
+        }
+
+        public void UpdateAllBullets(Camera cam, float? dt = null)
+        {
+            if (!_bulletsFree || this == null || renderData.Data.Texture == null) return;
+            var deltaTime = dt ?? Time.deltaTime;
+            
+            _currentRotationAngle += spawnShapeData.rotateSpeed * deltaTime;
+            // increment the current timer
+            _currentTime += deltaTime;
+            
+            if (Main.FireMode == FireMode.Automatic && enabled && !_isStopped)
+                Spawn(transform, deltaTime);
+            if (_bulletCount == 0) return;
+            _bulletMaxCount = Mathf.Max(_bulletMaxCount, _bulletCount);
+            
+            _bulletsFree = false;
+
+            UpdateBullets.Update(_bullets,
+                main, 
+                deltaTime,
+                _enabled, 
+                _bulletCount,
+                transform,
+                _previousPos,
+                _previousRot);
+            _bulletsFree = true;
+            
+
+            foreach (var module in allModules)
+            {
+                if (module is not IBulletModule mod) continue;
+                for (int i = _bulletCount - 1; i >= 0; --i)
+                {
+                    var bullet = _bullets[i];
+                    mod.Execute(ref bullet, deltaTime);
+                    _bullets[i] = bullet;
+                }
+            }
+            
+            HandleCollisions();
+            
+            _previousPos = transform.position;
+            _previousRot = transform.eulerAngles;
+
+            for (int i = _bulletCount - 1; i >= 0; --i)
+            {
+                var bullet = _bullets[i];
+                if (_bullets[i].EndOfLife == 1)
+                {
+                    OnBulletDied?.Invoke(_bullets[i].Id, _bullets[i], true);
+                    OnBulletDiedEvent?.Invoke(_bullets[i], true);
+                    bullet.EndOfLife = 0;
+                    --_bulletCount;
+                    foreach (var subSpawner in subSpawners)
+                    {
+                        if (subSpawner.emitOnLifeEnd)
+                            subSpawner.Spawn(_bullets[i]);
+                    }
+                }
+
+                if (_bulletsToKill.Contains(i))
+                {
+                    bullet.Dead = 1;
+                    --_bulletCount;
+                    OnBulletDied?.Invoke(_bullets[i].Id, _bullets[i], false);
+                    OnBulletDiedEvent?.Invoke(_bullets[i], false);
+                    
+                    foreach (var subSpawner in subSpawners)
+                    {
+                        if (subSpawner.emitOnCollide)
+                            subSpawner.Spawn(_bullets[i]);
+                    }
+                }
+
+                _bullets[i] = bullet;
+            }
+            
+            _bulletsToKill.Clear();
+            
+            var quickSort = new QuickSortJob
+            {
+                entries = _bullets,
+                Count = _bulletMaxCount
+            };
+            
+            if (Application.isPlaying)
+            {
+                // start the job
+                quickSort
+                    .Schedule()
+                    .Complete();
+            }
+
+            _queuedRenderData = (renderData, cam);
+        }
+
+        private void HandleCollisions()
+        {
+            var shouldKill = false;
+            for (int i = _bulletCount - 1; i >= 0; --i)
+            {
+                if (_bullets[i].UseCapsule == 0)
+                {
+                    int numHit =
+                        Physics2D.OverlapCircle((Vector3)_bullets[i].Position, _bullets[i].ColliderSize, _filter, _hit);
+                    if (numHit > 0)
+                    {
+                        
+                        for (int j = 0; j < numHit; ++j)
+                        {
+                            var hit = _hit[j];
+                            if (!hit.isTrigger) shouldKill = true;
+                            if (Application.isPlaying)
+                            {
+                                var bulletHandlers = hit.GetComponentsInChildren<IBulletHitHandler>();
+                                foreach (var handler in bulletHandlers)
+                                    handler.Hit(_bullets[i]);
+                            }
+                        }
+                        if (shouldKill)
+                            _bulletsToKill.Add(i);
+                    }
+                }
+                else
+                {
+                    int numHit = Physics2D.OverlapCapsule((Vector3)_bullets[i].Position, new Vector2(_bullets[i].ColliderSize, _bullets[i].CapsuleLength), CapsuleDirection2D.Vertical, _bullets[i].Rotation.eulerAngles.z, _filter, _hit);
+                    if (numHit > 0)
+                    {
+                        for (int j = 0; j < numHit; ++j)
+                        {
+                            var hit = _hit[j];
+                            if (!hit.isTrigger) shouldKill = true;
+                            if (Application.isPlaying)
+                            {
+                                var bulletHandlers = hit.GetComponentsInChildren<IBulletHitHandler>();
+                                foreach (var handler in bulletHandlers)
+                                    handler.Hit(_bullets[i]);
+                            }
+                        }
+                        if (shouldKill)
+                            _bulletsToKill.Add(i);
+                    }
+                }
+            }
+        }
+
+        private void OnDrawGizmosSelected()
+        {
+            if (_bulletCount == 0 || _disposed) return;
+            #if UNITY_EDITOR
+            if (UnityEditor.Selection.activeGameObject != gameObject) return;
+            #endif
+            for (int i = _bulletCount - 1; i >= 0; --i)
+            {
+                if (_bullets[i].Dead == 1) continue;
+                if (_bullets[i].UseCapsule == 0)
+                    Gizmos.DrawWireSphere(_bullets[i].Position, _bullets[i].ColliderSize);
+                else
+                {
+                    Gizmos.DrawWireSphere(_bullets[i].Position + _bullets[i].Up * _bullets[i].CurrentSize * _bullets[i].CapsuleLength * 0.5f, _bullets[i].ColliderSize);
+                    Gizmos.DrawWireSphere(_bullets[i].Position - _bullets[i].Up * _bullets[i].CurrentSize * _bullets[i].CapsuleLength * 0.5f, _bullets[i].ColliderSize);
+                }
+                //Debug.Log(_bullets[i].Position);
+            }
+        }
+
+        public bool CheckBulletsRemaining()
+        {
+            if (burstData.maxActiveBullets != 0)
+                return _bulletCount < burstData.maxActiveBullets - 1;
+            
+            return _bulletCount < MaxBullets - 1;
+
+        }
+
+        public async void Spawn(Vector3 position, Vector3 up, float deltaTime)
+        {
+            if (_disposed) return;
+            while (!_bulletsFree) await Task.Yield();
+            var hasBulletsLeft = CheckBulletsRemaining();
+            
+            // don't spawn a bullet if we haven't reached the correct fire rate
+            if (_currentTime < Main.FireRate || !hasBulletsLeft|| !_enabled)
+                return;
+            // reset the current time
+            _currentTime = 0;
+
+            if (!gameObject.activeInHierarchy) return;
+            
+            if (!_hasSpawnedSinceEnable)
+            {
+                if (Mathf.Approximately(burstData.delay, 0))
+                    _currentTime = Main.FireRate;
+                //else
+                  //  _currentTime = Main.FireRate - burstData.delay;
+                _hasSpawnedSinceEnable = true;
+            }
+            
+            OnWeaponFired?.Invoke();
+            OnWeaponFiredEvent?.Invoke();
+            // keep a list of positions and rotations, so we can update the bullets all at once
+            var positions = new List<Vector3>();
+            var rotations = new List<Quaternion>();
+            for (int burstNum = 0; burstNum < burstData.burstCount; ++burstNum)
+            {
+                // make sure the positions and rotations are clear before doing anything
+                positions.Clear();
+                rotations.Clear();
+                int idx = 0;
+                // spawn the bullets
+                spawnShapeData.Spawn( (point, dir) =>
+                {
+                    var pos = (Vector3) point;
+
+                    var extraRotation = Quaternion.LookRotation(Vector3.forward, up);
+
+                    var fireRate = idx == 0 ? Main.FireRate : 0;
+                    if (!burstData.burstsUpdatePositionEveryBullet)
+                        fireRate = burstNum == 0 ? fireRate : 0;
+                    
+                    foreach (var module in spawnModules)
+                        module?.Execute(ref pos, ref extraRotation, fireRate);
+                    
+                    foreach (var module in allModules)
+                        if (module is IBulletSpawnModule mod)
+                            mod.Execute(ref pos, ref extraRotation, fireRate);
+                    
+                    // rotate dir by this new rotation
+                    Vector3 rotatedDir = extraRotation * dir;
+                    Quaternion rotation = Quaternion.LookRotation(Vector3.forward, rotatedDir);
+                    
+                    
+                    Vector3 spawnPosition = position + extraRotation * pos;
+
+                    rotations.Add(rotation);
+                    positions.Add(spawnPosition);
+                    ++idx;
+                }, Squirrel3.Instance);
+                
+                // for every bullet we found
+                for (int i = 0; i < positions.Count; i++)
+                {
+                    // create a new container that isn't dead, at the position and rotation we found with the spawner
+                    var newContainer = new BulletContainer
+                    {
+                        Dead = 0,
+                        Position = positions[i],
+                        Rotation = rotations[i],
+                        Direction = rotations[i]
+                    }; 
+                    
+                    var j = 0;
+                    // find a bullet that isn't alive and replace it with this one
+                    for (j = 0; j < _bullets.Length; ++j)
+                    {
+                        if (_bullets[j].Dead == 0) continue;
+                        newContainer.Id = j;
+                        _bullets[j] = newContainer;
+                        break;
+                    }
+                    if ((burstData.maxActiveBullets == 0 && j >= _bullets.Length) || (burstData.maxActiveBullets > 0 && j >= burstData.maxActiveBullets))
+                    {
+                        #if UNITY_EDITOR
+                        Debug.LogWarning($"Tried to spawn too many bullets on manager {name}, didn't spawn one.");
+                        #endif
+                        return;
+                    }
+                    // initialise the bullet
+                    var bullet = _bullets[j];
+                    
+                    bullet.Damage = main.Damage;
+                    bullet.Lifetime = main.Lifetime;
+                    bullet.Speed = main.Speed;
+                    bullet.CurrentSpeed = bullet.Speed;
+                    bullet.AngularVelocity = 0f;
+                    bullet.StartSize = main.StartSize.GetValue(_rnd);
+                    bullet.CurrentSize = bullet.StartSize;
+                    bullet.StartColor = main.StartColor;
+                    bullet.Color = bullet.StartColor;
+                    bullet.ColliderSize = bullet.CurrentSize * main.ColliderSize / 2f;
+                    bullet.UseCapsule = main.ColliderType == ColliderType.Capsule ? (byte) 1 : (byte) 0;
+                    bullet.CapsuleLength = main.CapsuleLength;
+                    bullet.MovingToOrigin = 0;
+
+                    foreach (var module in allModules)
+                    {
+                        if (module is IBulletInitModule initMod)
+                            initMod.Execute(ref bullet);
+                        if (module is IBulletModule bulletMod)
+                            bulletMod.Execute(ref bullet, deltaTime);
+                    }
+                    
+                    bullet.Speed += burstNum * burstData.stackSpeedIncrease;
+                    bullet.CurrentSpeed += burstNum * burstData.stackSpeedIncrease;
+                    _bullets[j] = bullet;
+                    
+                    ++_bulletCount;
+                    OnBulletSpawned?.Invoke(j, _bullets[j]);
+                    OnBulletSpawnedEvent?.Invoke(j, _bullets[j]);
+                }
+                
+                
+                #if UNITY_2023_1_OR_NEWER
+                // wait a little bit before doing the next burst
+                await Awaitable.WaitForSecondsAsync(burstData.burstDelay);
+                #else
+                var timer = burstData.burstDelay;
+                while (timer >= 0)
+                {
+                    timer -= Time.deltaTime;
+                    await Task.Yield();
+                }
+                #endif
+            }
+        }
+
+        public async void Spawn(Transform obj, float deltaTime)
+        {
+            while (!_bulletsFree) await Task.Yield();
+            if (_disposed) return;
+            var hasBulletsLeft = CheckBulletsRemaining();
+            
+            // don't spawn a bullet if we haven't reached the correct fire rate
+            if (_currentTime < Main.FireRate || !hasBulletsLeft|| !_enabled)
+                return;
+            // reset the current time
+            _currentTime = 0;
+
+            if (!gameObject.activeInHierarchy) return;
+            
+            if (!_hasSpawnedSinceEnable)
+            {
+                if (Mathf.Approximately(burstData.delay, 0))
+                    _currentTime = Main.FireRate;
+                //else
+                   // _currentTime = Main.FireRate - burstData.delay;
+                _hasSpawnedSinceEnable = true;
+            }
+            
+            OnWeaponFired?.Invoke();
+            OnWeaponFiredEvent?.Invoke();
+            // keep a list of positions and rotations, so we can update the bullets all at once
+            var positions = new List<Vector3>();
+            var rotations = new List<Quaternion>();
+            for (int burstNum = 0; burstNum < burstData.burstCount; ++burstNum)
+            {
+                if (_disposed) return;
+                // make sure the positions and rotations are clear before doing anything
+                positions.Clear();
+                rotations.Clear();
+
+                int idx = 0;
+                // spawn the bullets
+                spawnShapeData.Spawn((point, dir) =>
+                {
+                    var pos = (Vector3) point;
+
+                    var extraRotation = Quaternion.LookRotation(Vector3.forward, obj.up);
+                    
+                    var fireRate = idx == 0 ? Main.FireRate : 0;
+                    if (!burstData.burstsUpdatePositionEveryBullet)
+                        fireRate = burstNum == 0 ? fireRate : 0;
+                    
+                    foreach (var module in spawnModules)
+                        module?.Execute(ref pos, ref extraRotation, fireRate);
+                    
+                    foreach (var module in allModules)
+                        if (module is IBulletSpawnModule mod)
+                            mod.Execute(ref pos, ref extraRotation, fireRate);
+                    // rotate dir by this new rotation
+                    Vector3 rotatedDir = extraRotation * dir;
+                    Quaternion rotation = Quaternion.LookRotation(Vector3.forward, rotatedDir);
+                    
+                    
+                    Vector3 spawnPosition = obj.position + extraRotation * pos;
+
+                    rotations.Add(rotation);
+                    positions.Add(spawnPosition);
+                    ++idx;
+                }, Squirrel3.Instance);
+                
+                // for every bullet we found
+                for (int i = 0; i < positions.Count; i++)
+                {
+                    // create a new container that isn't dead, at the position and rotation we found with the spawner
+                    var newContainer = new BulletContainer
+                    {
+                        Dead = 0,
+                        Position = positions[i],
+                        Rotation = rotations[i],
+                        Direction = rotations[i]
+                    }; 
+                    
+                    var j = 0;
+                    // find a bullet that isn't alive and replace it with this one
+                    for (j = 0; j < _bullets.Length; ++j)
+                    {
+                        if (_bullets[j].Dead == 0) continue;
+                        newContainer.Id = j;
+                        _bullets[j] = newContainer;
+                        break;
+                    }
+                    if ((burstData.maxActiveBullets == 0 && j >= _bullets.Length) || (burstData.maxActiveBullets > 0 && j >= burstData.maxActiveBullets))
+                    {
+                        #if UNITY_EDITOR
+                        Debug.LogWarning($"Tried to spawn too many bullets on manager {name}, didn't spawn one.");
+                        #endif
+                        return;
+                    }
+                    // initialise the bullet
+                    var bullet = _bullets[j];
+                    
+                    bullet.Damage = main.Damage;
+                    bullet.Lifetime = main.Lifetime;
+                    bullet.Speed = main.Speed;
+                    bullet.CurrentSpeed = bullet.Speed;
+                    bullet.AngularVelocity = 0f;
+                    bullet.StartSize = main.StartSize.GetValue(_rnd);
+                    bullet.CurrentSize = bullet.StartSize;
+                    bullet.StartColor = main.StartColor;
+                    bullet.Color = bullet.StartColor;
+                    bullet.ColliderSize = bullet.CurrentSize * main.ColliderSize / 2f;
+                    bullet.UseCapsule = main.ColliderType == ColliderType.Capsule ? (byte) 1 : (byte) 0;
+                    bullet.CapsuleLength = main.CapsuleLength;
+                    bullet.MovingToOrigin = 0;
+
+                    foreach (var module in allModules)
+                    {
+                        if (module is IBulletInitModule initMod)
+                            initMod.Execute(ref bullet);
+                        if (module is IBulletModule bulletMod)
+                            bulletMod.Execute(ref bullet, deltaTime);
+                    }
+
+                    bullet.Speed += burstNum * burstData.stackSpeedIncrease;
+                    bullet.CurrentSpeed += burstNum * burstData.stackSpeedIncrease;
+                    _bullets[j] = bullet;
+                    
+                    ++_bulletCount;
+                    OnBulletSpawned?.Invoke(j, _bullets[j]);
+                    OnBulletSpawnedEvent?.Invoke(j, _bullets[j]);
+                }
+                
+                // wait a little bit before doing the next burst
+                #if UNITY_2023_1_OR_NEWER
+                // wait a little bit before doing the next burst
+                await Awaitable.WaitForSecondsAsync(burstData.burstDelay);
+                #else
+                var timer = burstData.burstDelay;
+                while (timer >= 0)
+                {
+                    timer -= Time.deltaTime;
+                    await Task.Yield();
+                }
+                #endif
+            }
+        }
+        
+        /// <summary>
+        /// Activate any waiting bullets.
+        /// Use this when you want to do bullet tracing.
+        /// </summary>
+        public async void ActivateWaitingBullets()
+        {
+            #if UNITY_2023_1_OR_NEWER
+            await Awaitable.EndOfFrameAsync();
+            #else
+            await Task.Yield();
+            #endif
+            for (int i = 0; i < _bullets.Length; i++)
+            {
+                var bullet = _bullets[i];
+                bullet.Waiting = 0;
+                _bullets[i] = bullet;
+            }
+            
+        }
+    }
+}using BulletFury.Data;
+using Unity.Burst;
+using Unity.Collections;
+using Unity.Jobs;
+using Unity.Mathematics;
+using UnityEngine;
+
+namespace BulletFury
+{
+    [BurstCompile]
+    public struct QuickSortJob : IJob 
+    {
+        public NativeArray<BulletContainer> entries;
+        [ReadOnly] public int Count;
+ 
+        public void Execute() {
+            if (this.entries.Length > 0) {
+                Quicksort(0, Count -1);
+            }
+        }
+ 
+        private void Quicksort(int left, int right) {
+            int i = left;
+            int j = right;
+            BulletContainer pivot = this.entries[(left + right) / 2];
+ 
+            while (i <= j) {
+                // Lesser
+                while (Compare(this.entries[i], ref pivot) < 0) {
+                    ++i;
+                }
+ 
+                // Greater
+                while (Compare(this.entries[j], ref pivot) > 0) {
+                    --j;
+                }
+ 
+                if (i <= j) {
+                    // Swap
+                    (this.entries[i], this.entries[j]) = (this.entries[j], this.entries[i]);
+
+                    ++i;
+                    --j;
+                }
+            }
+ 
+            // Recurse
+            if (left < j) {
+                Quicksort(left, j);
+            }
+ 
+            if (i < right) {
+                Quicksort(i, right);
+            }
+        }
+ 
+        private int Compare(BulletContainer a, ref BulletContainer b) {
+            return a.Dead.CompareTo(b.Dead);
+        }
+    }
+    
+    /// <summary>
+    /// A C# job that moves all bullets based on their velocity and current force
+    /// </summary>
+#if !UNITY_EDITOR
+    [BurstCompile]
+#endif
+    public struct BulletJob : IJobParallelFor
+    {
+        public NativeArray<BulletContainer> Bullets;
+        [ReadOnly] public float DeltaTime;
+        
+        public void Execute(int index)
+        {
+            var container = Bullets[index];
+
+            if (container.Dead == 1 || container.Waiting == 1 && container.CurrentLifeSeconds > container.TimeToWait)
+                return;
+
+            if (container.MovingToOrigin == 1)
+            {
+                container.MoveToOriginCurrentTime += DeltaTime;
+                container.Position = math.lerp(container.MoveToOriginStartPosition, container.OriginPosition,
+                    container.MoveToOriginCurrentTime / container.MoveToOriginTime);
+                if(container.MoveToOriginCurrentTime >= container.MoveToOriginTime)
+                    container.MovingToOrigin = 0;
+                Bullets[index] = container;
+                
+                if (container.MovingToOrigin == 1)
+                    return;
+            }
+
+            container.CurrentLifeSeconds += DeltaTime;
+            if (container.CurrentLifeSeconds > container.Lifetime)
+            {
+                container.Dead = 1;
+                container.EndOfLife = 1;
+
+                Bullets[index] = container;
+                return;
+            }
+
+            container.CurrentLifePercent = container.CurrentLifeSeconds / container.Lifetime;
+            container.Position += container.Velocity * DeltaTime +
+                                  container.Force * DeltaTime;
+            
+           
+            container.Rotation =  math.normalize(container.Rotation);
+            Bullets[index] = container;
+        }
+    }
+}using System.Collections.Generic;
+using UnityEngine;
+
+namespace BulletFury
+{
+    [CreateAssetMenu(menuName = "Bulletfury/Spawner Preset")]
+    public class BulletSpawnerPreset : ScriptableObject
+    { 
+        public bool UseMain;
+        public BulletMainData Main;
+        public bool UseShape;
+        public SpawnShapeData ShapeData;
+        public bool UseBurstData;
+        public BurstData BurstData;
+        public bool UseSubSpawners;
+        public SubSpawnerData[] SubSpawners;
+
+        public bool UseModules;
+        
+#if SERIALIZEREFERENCE_EXTENSIONS
+        [SerializeReference, SubclassSelector]
+#endif
+        public List<IBaseBulletModule> BulletModules = new ();
+    }
+}using BulletFury.Data;
+using UnityEngine;
+
+namespace BulletFury
+{
+    public abstract class BulletModule : IBulletModule
+    {
+        [Tooltip("Should the gradient loop after a set time, or be applied over the lifetime of the bullet?")]
+        public CurveUsage Mode = CurveUsage.Lifetime;
+
+        [Tooltip("The time in seconds it takes for the curve to loop")]
+        public float Time = 1f;
+
+
+        public abstract void Execute(ref BulletContainer bullet, float deltaTime);
+    }
+}using System.Threading.Tasks;
+using BulletFury.Data;
+using Unity.Collections;
+using Unity.Jobs;
+using Unity.Mathematics;
+using UnityEngine;
+
+namespace BulletFury
+{
+    public static class UpdateBullets
+    {
+        public static void Update(NativeArray<BulletContainer> bullets,
+            BulletMainData visuals, float deltaTime, bool active, int numBullets, Transform transform, Vector3 previousPosition, Vector3 prevRotation)
+        {
+            for (int i = numBullets - 1; i >= 0; --i)
+            {
+                var bullet = bullets[i];
+                // if the bullet is dead or waiting, don't do anything
+                if (bullet.Dead == 1 || (bullet.Waiting == 1 && bullet.CurrentLifeSeconds > bullet.TimeToWait))
+                    continue;
+                
+                if (!active)
+                    bullet.Dead = 1;
+
+                bullet.ColliderSize = bullet.CurrentSize * visuals.ColliderSize / 2f;
+
+                if (visuals.UseRotationForDirection)
+                    bullet.Velocity = bullet.Rotation * Vector3.up;
+                else
+                    bullet.Velocity = bullet.Direction * Vector3.up;
+                
+                bullet.Velocity *= bullet.CurrentSpeed;
+                
+                if (visuals.MoveWithTransform)
+                    bullet.Position += (float3)(transform.position - previousPosition);
+
+                if (visuals.RotateWithTransform)
+                {
+                    var rotationDelta = Quaternion.Euler(transform.eulerAngles - prevRotation);
+                    bullet.Position = (rotationDelta) * (bullet.Position - (float3) transform.position) + transform.position;
+                    bullet.Rotation = rotationDelta * bullet.Rotation;
+                }
+
+                bullets[i] = bullet;
+            }
+
+            // create a new job
+            var bulletJob = new BulletJob
+            {
+                DeltaTime = deltaTime,
+                Bullets = bullets,
+            };
+
+            // start the job
+            var handle = bulletJob.Schedule(bullets.Length, 256);
+
+            //if (Application.isPlaying)
+              //  await Awaitable.FixedUpdateAsync();
+
+            // make sure the job is finished
+            handle.Complete();
+        }
+    }
+}using System;
+using BulletFury.Data;
+using Unity.Collections;
+using UnityEngine;
+using UnityEngine.Rendering;
+
+namespace BulletFury.Modules
+{
+    [Serializable]
+    public class BulletColorOverTimeModule : BulletModule
+    {
+        [GradientUsage(true)] [Tooltip("The gradient to apply to the bullet over time")]
+        public Gradient colorOverTime;
+
+        public override void Execute(ref BulletContainer bullet, float deltaTime)
+        {
+            bullet.Color = bullet.StartColor * colorOverTime.Evaluate(Mode == CurveUsage.Lifetime
+                ? bullet.CurrentLifePercent
+                : bullet.CurrentLifeSeconds % Time / Time);
+        }
+    }
+}using System;
+using UnityEngine;
+
+namespace BulletFury.Modules
+{
+    [Serializable]
+    public class SpawnerRotateModule : IBulletSpawnModule
+    {
+        [SerializeField] private float angularSpeed;
+
+        [NonSerialized] private float _currentAngle;
+        
+        public void Execute(ref Vector3 _, ref Quaternion rotation, float deltaTime)
+        {
+            _currentAngle += angularSpeed * deltaTime;
+            rotation = Quaternion.AngleAxis(_currentAngle, Vector3.forward) * rotation;
+            _currentAngle = (_currentAngle + 360) % 360f;
+        }
+    }
+}using System;
+using BulletFury.Data;
+using UnityEngine;
+
+namespace BulletFury.Modules
+{
+    [Serializable]
+    public class SpawnFromTransformModule : IBulletInitModule
+    {
+        [SerializeField] private float secondsToOriginalPosition;
+        [SerializeField] private Transform spawnPosition;
+        
+        public void Execute(ref BulletContainer container)
+        {
+            if (spawnPosition == null) return;
+            container.OriginPosition = container.Position;
+            container.Position = spawnPosition.position;
+            container.MovingToOrigin = 1;
+            container.MoveToOriginCurrentTime = 0;
+            container.MoveToOriginTime = secondsToOriginalPosition;
+            container.MoveToOriginStartPosition = container.Position;
+        }
+    }
+}using System;
+using BulletFury.Data;
+using UnityEngine;
+
+namespace BulletFury.Modules
+{
+    [Serializable]
+    public class BulletSizeOverTimeModule : BulletModule
+    {
+        [Tooltip("The size curve to apply to the bullet over time")]
+        public AnimationCurve sizeOverTime = AnimationCurve.Constant(0, 1, 1);
+
+        public override void Execute(ref BulletContainer bullet, float deltaTime)
+        {
+            bullet.CurrentSize = bullet.StartSize * sizeOverTime.Evaluate(Mode == CurveUsage.Lifetime
+                ? bullet.CurrentLifePercent
+                : bullet.CurrentLifeSeconds % Time / Time);
+        }
+    }
+}using System;
+using BulletFury.Data;
+using Unity.Mathematics;
+using UnityEngine;
+
+namespace BulletFury.Modules
+{
+    [Serializable, Tooltip("Settings for controlling bullet force over time.")]
+    public class ForceOverTimeModule : BulletModule
+    {
+        public ForceSpace space = ForceSpace.World;
+        public Vector3 scale = Vector3.one;
+        public AnimationCurve forceOverTimeX;
+        public AnimationCurve forceOverTimeY;
+        public AnimationCurve forceOverTimeZ;
+
+        public override void Execute(ref BulletContainer bullet, float deltaTime)
+        {
+
+            // if the force space is local, use the bullet's local axes 
+            if (space == ForceSpace.Local)
+            {
+                bullet.Force += bullet.Right * forceOverTimeX.Evaluate(Mode == CurveUsage.Lifetime
+                                    ? bullet.CurrentLifePercent
+                                    : bullet.CurrentLifeSeconds % Time / Time) * scale.x +
+                                bullet.Up * forceOverTimeY.Evaluate(Mode == CurveUsage.Lifetime
+                                    ? bullet.CurrentLifePercent
+                                    : bullet.CurrentLifeSeconds % Time / Time) * scale.y +
+                                bullet.Forward * forceOverTimeZ.Evaluate(Mode == CurveUsage.Lifetime
+                                    ? bullet.CurrentLifePercent
+                                    : bullet.CurrentLifeSeconds % Time / Time) * scale.z;
+            }
+            else // if the force space is world, use the world axes
+            {
+                bullet.Force += new float3(
+                    forceOverTimeX.Evaluate(Mode == CurveUsage.Lifetime
+                        ? bullet.CurrentLifePercent
+                        : bullet.CurrentLifeSeconds % Time / Time) * scale.x,
+                    forceOverTimeY.Evaluate(Mode == CurveUsage.Lifetime
+                        ? bullet.CurrentLifePercent
+                        : bullet.CurrentLifeSeconds % Time / Time) * scale.y,
+                    forceOverTimeZ.Evaluate(Mode == CurveUsage.Lifetime
+                        ? bullet.CurrentLifePercent
+                        : bullet.CurrentLifeSeconds % Time / Time) * scale.z
+                );
+            }
+        }
+    }
+}using System;
+using BulletFury.Data;
+using UnityEngine;
+
+namespace BulletFury.Modules
+{
+    [Serializable]
+    public class SpeedOverTimeModule : BulletModule
+    {
+        [SerializeField] private AnimationCurve speedOverTime = AnimationCurve.Constant(0, 1, 1);
+        [SerializeField] private float scale = 1;
+        
+        public override void Execute(ref BulletContainer bullet, float deltaTime)
+        {
+            bullet.CurrentSpeed = bullet.Speed * speedOverTime.Evaluate(Mode == CurveUsage.Lifetime
+                ? bullet.CurrentLifePercent
+                : bullet.CurrentLifeSeconds % Time / Time)
+                * scale;
+        }
+    }
+}using System;
+using BulletFury.Data;
+using UnityEngine;
+
+namespace BulletFury.Modules
+{
+    [Serializable]
+    public class WaitToContinueModule : IBulletInitModule
+    {
+        [SerializeField] private float timeToPlayBeforeWaiting;
+        public void Execute(ref BulletContainer container)
+        {
+            container.Waiting = 1;
+            container.TimeToWait = timeToPlayBeforeWaiting;
+        }
+    }
+}using System;
+using BulletFury.Data;
+using UnityEngine;
+
+namespace BulletFury.Modules
+{
+    [Serializable]
+    public class TrackObjectModule : BulletModule
+    {
+        [field: SerializeField] public Transform ToTrack { get; private set;}
+        [field: SerializeField] public float TurnSpeed { get; private set;}
+        
+        [SerializeField] private AnimationCurve turnSpeedOverTime = AnimationCurve.Constant(0, 1, 1);
+        
+        public override void Execute(ref BulletContainer bullet, float deltaTime)
+        {
+            if (bullet.Dead == 1 || ToTrack == null) return;
+
+            var target = ToTrack.position - (Vector3)bullet.Position;
+            var turn = TurnSpeed * turnSpeedOverTime.Evaluate(Mode == CurveUsage.Lifetime
+                ? bullet.CurrentLifePercent
+                : bullet.CurrentLifeSeconds % Time / Time);
+
+            bullet.Up = bullet.Rotation * Vector3.up;
+            bullet.Up = Vector3.RotateTowards(bullet.Up, target.normalized, turn * deltaTime, 0.0f);
+            bullet.Forward = bullet.Rotation * Vector3.forward;
+            bullet.Right = bullet.Rotation * Vector3.right;
+
+            bullet.Rotation = Quaternion.LookRotation(bullet.Forward, bullet.Up);
+        }
+    }
+}using System;
+using UnityEngine;
+using Wayfarer_Games.Common;
+
+namespace BulletFury.Modules
+{
+    public enum AimType
+    {
+        Instant, Linear, Slerp, SmoothDamp, Predicted
+    }
+    [Serializable]
+    public class AimedShotModule : IBulletSpawnModule
+    {
+        [SerializeField] private Transform thisTransform;
+        [SerializeField] private Transform target;
+        [SerializeField] private AimType type;
+
+        [Header("Linear")]
+        [SerializeField, Tooltip("How much can the rotation change, in degrees, every time bullets are spawned?")] 
+        private float maxChangePerFrame = 10f;
+
+        [Header("Slerp")]
+        [SerializeField] private float lerpSpeed = 0.1f;
+
+        [Header("SmoothDamp")] 
+        [SerializeField]
+        private float time = 0.5f;
+        private Quaternion _velocity;
+
+        [Header("Predicted")] 
+        [SerializeField] private float lookAheadTime = 1f;
+        private Vector3? _previousPosition;
+        private Quaternion _previousRotation;
+        private Vector3? _cachedVelocity;
+
+        public void SetTarget(Transform newTarget)
+        {
+            target = newTarget;
+        }
+        
+        public void Execute(ref Vector3 _, ref Quaternion rotation, float deltaTime)
+        {
+            if (target == null || thisTransform == null) return; // Safety check
+            Vector3 directionToTarget = (target.position - thisTransform.position).normalized;
+            Quaternion targetRotation = Quaternion.Euler(0f, 0f, Mathf.Atan2(directionToTarget.y, directionToTarget.x) * Mathf.Rad2Deg - 90); // Calculate target rotation based on direction
+
+            switch (type)
+            {
+                case AimType.Instant:
+                    rotation = targetRotation; // Instant rotation to face the target
+                    break;
+
+                case AimType.Linear:
+                    rotation = Quaternion.RotateTowards(_previousRotation, targetRotation, maxChangePerFrame * deltaTime); // Linear rotation with max angle change
+                    break;
+
+                case AimType.Slerp:
+                    float t = 1f - Mathf.Pow(0.5f, deltaTime * lerpSpeed); // Framerate-independent t value
+                    rotation = Quaternion.Slerp(_previousRotation, targetRotation, t); // Smooth slerp rotation
+                    break;
+
+                case AimType.SmoothDamp:
+                    rotation = QuaternionUtil.SmoothDamp(_previousRotation, targetRotation, ref _velocity, time, deltaTime); // Use your custom SmoothDamp implementation
+                    break;
+
+                case AimType.Predicted:
+                    if (_previousPosition == null)
+                    {
+                        _previousPosition = target.position;
+                        rotation = targetRotation; // Instant rotation to face the target
+                        _previousRotation = rotation;
+                        return;
+                    }
+                    
+                    if (!Mathf.Approximately(deltaTime, 0))
+                        _cachedVelocity = (target.position - _previousPosition.Value) / deltaTime;
+
+                    if (_cachedVelocity == null)
+                    {
+                        rotation = targetRotation; // Instant rotation to face the target
+                        _previousRotation = rotation;
+                        return;
+                    }
+
+                    Vector3 targetVelocity = _cachedVelocity.Value; 
+                    Vector3 predictedPosition = target.position + targetVelocity * lookAheadTime;
+
+                    directionToTarget = (predictedPosition - thisTransform.position).normalized;
+                    targetRotation = Quaternion.Euler(0f, 0f, Mathf.Atan2(directionToTarget.y, directionToTarget.x) * Mathf.Rad2Deg - 90);
+
+                    rotation = targetRotation; // Aim at the predicted position instantly
+
+                    _previousPosition = target.position; // Update previous position for the next frame
+                    break;
+            }
+
+            _previousRotation = rotation;
+        }
+    }
+}using System;
+using BulletFury.Data;
+using UnityEngine;
+
+namespace BulletFury.Modules
+{
+    [Serializable]
+    public class AngularVelocityModule : BulletModule
+    {
+        [SerializeField] private AnimationCurve angularVelocity = AnimationCurve.Constant(0, 1, 1);
+        [SerializeField] private float scale;
+
+        public override void Execute(ref BulletContainer bullet, float deltaTime)
+        {
+            var vel = angularVelocity.Evaluate(Mode == CurveUsage.Lifetime
+                          ? bullet.CurrentLifePercent
+                          : bullet.CurrentLifeSeconds % Time / Time) *
+                      scale;
+
+            bullet.Rotation *= Quaternion.Euler(0, 0, vel * deltaTime);
+            
+            bullet.Forward = bullet.Rotation * Vector3.forward;
+            bullet.Right = bullet.Rotation * Vector3.right;
+            bullet.Up = bullet.Rotation * Vector3.up;
+        }
+    }
+}using System;
+using UnityEngine;
+using Object = UnityEngine.Object;
+
+namespace BulletFury
+{
+    [Serializable]
+    public class BulletRenderData
+    {
+        private static Material _unlitMaterial;
+        private static Material _animatedMaterial;
+        private static readonly int MainTex = Shader.PropertyToID("_MainTex");
+        private static readonly int Cols = Shader.PropertyToID("_Cols");
+        private static readonly int Rows1 = Shader.PropertyToID("_Rows");
+        private static readonly int Frame = Shader.PropertyToID("_Frame");
+
+        public Camera Camera;
+        public Texture2D Texture;
+        public bool Animated;
+        [Min(1)]
+        public int Rows = 1, Columns = 1;
+        public float PerFrameLength;
+        public int Layer;
+        public int Priority;
+        
+        private Material _material = null;
+
+        public Material Material
+        {
+            get
+            {
+                if (_unlitMaterial == null || _animatedMaterial == null)
+                {
+                    _material = null;
+                    
+#if UNITY_WEBGL
+                    _unlitMaterial = new Material(Shader.Find("Shader Graphs/UnlitBulletWeb"))
+#else
+                    _unlitMaterial = new Material(Shader.Find("Shader Graphs/UnlitBullet"))
+#endif
+                    {
+                        enableInstancing = true
+                    };
+#if UNITY_WEBGL
+                    _animatedMaterial = new Material(Shader.Find("Shader Graphs/AnimatedBulletWeb"))
+#else
+                    _animatedMaterial = new Material(Shader.Find("Shader Graphs/AnimatedBullet"))
+#endif
+                    {
+                        enableInstancing = true
+                    };
+                }
+                
+                if (_material == null)
+                {
+                    _material = !Animated ? Object.Instantiate(_unlitMaterial) : Object.Instantiate(_animatedMaterial);
+                    _material.SetTexture(MainTex, Texture);
+                    if (Animated)
+                    {
+                        _material.SetInt(Cols, Columns);
+                        _material.SetInt(Rows1, Rows);
+                        _material.SetFloat(Frame, PerFrameLength);
+                    }
+                }
+                return _material;
+            }
+        }
+
+        public static void ResetMaterials()
+        {
+            _unlitMaterial = null;
+            _animatedMaterial = null;
+        }
+    }
+}using System.Collections;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using BulletFury.Data;
+using Unity.Collections;
+using UnityEngine;
+using UnityEngine.Rendering;
+
+namespace BulletFury
+{
+    public static class BulletRenderer
+    {
+        private static readonly int SortOrder = Shader.PropertyToID("_SortOrder");
+        private const int BulletsPerChunk = 1023;
+        private static HashSet<(BulletRenderData, NativeArray<BulletContainer>)> _toRender;
+        private static Mesh _mesh;
+        public static Mesh Mesh => _mesh;
+        private static NativeArray<BulletContainer> _chunk = new(BulletsPerChunk, Allocator.Persistent);
+        
+        private static NativeArray<Matrix4x4> _matrices;
+        private static NativeArray<Vector4> _colors;
+        private static NativeArray<float> _tex;
+        private static Dictionary<BulletRenderData, (GraphicsBuffer color, GraphicsBuffer tex)> _colorBuffer;
+
+        private static bool _hasBullets;
+        private static readonly int InstanceColorBuffer = Shader.PropertyToID("_InstanceColorBuffer");
+        private static readonly int InstanceTexBuffer = Shader.PropertyToID("_InstanceTexBuffer");
+
+        private static int _newLength;
+        private static int _num;
+        private static bool _alreadyInitialised;
+
+        private static bool _disposed = false;
+
+
+        #if UNITY_EDITOR
+        static BulletRenderer()
+        {
+            Init();
+        }
+        #endif
+        
+        [RuntimeInitializeOnLoadMethod]
+        public static void Init()
+        {
+            InitMesh();
+            _toRender = new HashSet<(BulletRenderData, NativeArray<BulletContainer>)>();
+            _matrices = new NativeArray<Matrix4x4>(BulletsPerChunk, Allocator.Persistent);
+            _colors = new NativeArray<Vector4>(BulletsPerChunk, Allocator.Persistent);
+            _tex = new NativeArray<float>(BulletsPerChunk, Allocator.Persistent);
+            _chunk = new NativeArray<BulletContainer>(BulletsPerChunk, Allocator.Persistent);
+            _colorBuffer = new Dictionary<BulletRenderData, (GraphicsBuffer color, GraphicsBuffer tex)>();
+
+            _disposed = false;
+            
+            LateUpdate();
+            if (_alreadyInitialised) return;
+            _alreadyInitialised = true;
+            
+            #if UNITY_EDITOR
+            UnityEditor.EditorApplication.playModeStateChanged += PlayModeStateChanged;
+            #endif
+        }
+
+        #if UNITY_EDITOR
+        private static void PlayModeStateChanged(UnityEditor.PlayModeStateChange obj)
+        {
+            if (obj == UnityEditor.PlayModeStateChange.ExitingPlayMode)
+                Dispose();
+            if (obj == UnityEditor.PlayModeStateChange.EnteredEditMode)
+                Init();
+        }
+        #endif
+        private static async void LateUpdate()
+        {
+            while (!_disposed)
+            {
+                if (_disposed)
+                {
+                    BulletSpawner.RenderQueue.Clear();
+                    return;
+                }
+                foreach (var queue in BulletSpawner.RenderQueue.Values)
+                    if (!queue.Spawner.Disposed)
+                        Render(queue.RenderData, queue.Bullets, queue.Count, queue.RenderData.Camera);
+                
+                BulletSpawner.RenderQueue.Clear();
+                
+                await Task.Yield();
+                
+                if (_disposed)
+                {
+                    BulletSpawner.RenderQueue.Clear();
+                    return;
+                }
+            }
+        }
+        
+        public static void Dispose()
+        {
+            Application.quitting -= Dispose;
+            _matrices.Dispose();
+            _colors.Dispose();
+            foreach (var buf in _colorBuffer.Values)
+            {
+                buf.color.Dispose();
+                buf.tex.Dispose();
+            }
+            _chunk.Dispose();
+            _disposed = true;
+            BulletSpawner.RenderQueue.Clear();
+        }
+
+        public static void Render(BulletRenderData data, NativeArray<BulletContainer> bullets, int numBullets, Camera cam)
+        {
+            if (numBullets == 0 || _disposed) return;
+
+            data.Material.SetFloat(SortOrder, data.Priority);
+
+            _num = 0;
+            while (_num < numBullets)
+            {
+                _newLength = Mathf.Min(bullets.Length - _num, BulletsPerChunk);
+                NativeArray<BulletContainer>.Copy(bullets, _num, _chunk, 0, _newLength);
+                RenderChunk(data, _chunk, _newLength, cam);
+                _num += _newLength;
+            }
+        }
+
+        private static void RenderChunk(BulletRenderData data, NativeArray<BulletContainer> bullets, int length, Camera cam)
+        {
+            #if !UNITY_WEBGL
+            if (!_colorBuffer.ContainsKey(data))
+                _colorBuffer.Add(data,  (new GraphicsBuffer (GraphicsBuffer.Target.Structured,
+                    BulletsPerChunk, sizeof(float) * 4), new GraphicsBuffer (GraphicsBuffer.Target.Structured,
+                    BulletsPerChunk, sizeof(float))));
+            #endif
+            // create a new material property block - this contains the different colours for every instance
+            var renderParams = new RenderParams(data.Material)
+            {
+                layer = data.Layer,
+                camera = cam,
+                rendererPriority = data.Priority,
+            };
+            
+            _hasBullets = false;
+
+            for (int i = bullets.Length - 1; i >= 0; --i)
+            {
+                if (bullets[i].Dead == 1 || i >= length)
+                {
+                    _matrices[i] = Matrix4x4.TRS(Vector3.zero, Quaternion.identity, Vector3.zero);
+                    continue;
+                }
+                
+                _hasBullets = true;
+                
+                // set the colour for the bullet
+                _colors[i] = bullets[i].Color;
+                _tex[i] = bullets[i].CurrentLifeSeconds;
+                    
+                // if the "w" part of the rotation is 0, the Quaternion is invalid. Set it to the a rotation of 0,0,0
+                if (Mathf.Approximately(bullets[i].Rotation.w, 0) || IsNaN(bullets[i].Rotation))
+                    _matrices[i] = Matrix4x4.TRS(Vector3.zero, Quaternion.identity, Vector3.zero);
+                else
+                {
+                    // set the matrix for the current bullet - translation, rotation, scale, in that order.
+                    _matrices [i] = Matrix4x4.TRS(bullets[i].Position,
+                        bullets[i].Rotation,
+                        Vector3.one * bullets[i].CurrentSize);
+                }
+                
+                #if UNITY_WEBGL
+                var mat = Object.Instantiate(data.Material);
+                mat.SetColor("_Color", bullets[i].Color);
+                renderParams.material = mat;
+                Graphics.RenderMesh(renderParams, _mesh, 0, _matrices[i]);
+                #endif
+            }
+
+            #if !UNITY_WEBGL
+            
+            if (!_hasBullets)
+                return;
+            
+            _colorBuffer[data].color.SetData(_colors);
+            _colorBuffer[data].tex.SetData(_tex);
+            data.Material.SetBuffer(InstanceColorBuffer, _colorBuffer[data].color);
+            data.Material.SetBuffer(InstanceTexBuffer, _colorBuffer[data].tex);
+            
+            Graphics.RenderMeshInstanced(renderParams, _mesh, 0, _matrices, length);
+            #endif
+        }
+        
+        private static bool IsNaN(Quaternion q) {
+            return float.IsNaN(q.x) || float.IsNaN(q.y) || float.IsNaN(q.z) || float.IsNaN(q.w);
+        }
+
+        private static void InitMesh()
+        {
+            var vertices = new Vector3[]
+            {
+                new(-0.5f, -0.5f),
+                new(0.5f, -0.5f),
+                new(-0.5f, 0.5f),
+                new(0.5f, 0.5f)
+            };
+
+            var triangles = new[]
+            {
+                0, 3, 1,
+                3, 0, 2
+            };
+
+            var uv = new Vector2[]
+            {
+                new(0, 0),
+                new(1, 0),
+                new(0, 1),
+                new(1, 1)
+            };
+
+            _mesh = new Mesh
+            {
+                vertices = vertices,
+                triangles = triangles,
+                uv = uv
+            };
+        }
+    }
+}using System;
+using BulletFury.Data;
+using UnityEngine;
+
+namespace BulletFury
+{
+    [Serializable]
+    public class SubSpawnerData
+    {
+        public bool emitOnCollide = true;
+        public bool emitOnLifeEnd = true;
+        public bool inheritRotation = true;
+        public bool inheritColor = true;
+        
+        public BulletSpawner spawner;
+
+        public void Spawn(BulletContainer parent)
+        {
+            if (inheritColor)
+                spawner.Main.StartColor = parent.Color;
+            
+            if (inheritRotation)
+                spawner.Spawn(parent.Position, parent.Up, Time.deltaTime);
+            else
+                spawner.Spawn(parent.Position, spawner.transform.up, Time.deltaTime);
+        }
+    }
+}using System;
+using UnityEngine;
+
+namespace BulletFury
+{
+    [Serializable, Tooltip("Settings for controlling burst behavior of bullet spawning.")]
+    public class BurstData
+    {
+       
+        [Tooltip("The delay before the first bullet is generated.")]
+        public float delay = 0f;
+        
+        [Tooltip("The maximum number of bullets that this spawner can have active at once. 0 for no limit."), Min(0)]
+        public int maxActiveBullets = 0;
+
+        [Tooltip("The number of bursts to spawn.")]
+        public int burstCount = 1;
+
+        [Tooltip("The delay between spawning each burst (if burstCount > 1).")]
+        public float burstDelay = 0f;
+
+        [Tooltip("The speed increase for each burst (if burstCount > 1).")]
+        public float stackSpeedIncrease = 0f;
+
+        [Tooltip("Should bursts update the position & rotation for every bullet?")]
+        public bool burstsUpdatePositionEveryBullet;
+    }
+}namespace BulletFury.Data
+{
+    /// <summary>
+    /// Small enum to describe which space the force/velocity will use
+    /// </summary>
+    public enum ForceSpace
+    {
+        Local,
+        World
+    }
+}using System;
+using UnityEngine.Events;
+
+namespace BulletFury.Data
+{
+    /// <summary>
+    /// Custom serializable unity even for bullet death
+    /// Doing this means it'll show up as an event in the inspector
+    /// </summary>
+    [Serializable]
+    public class BulletDiedEvent : UnityEvent<int, BulletContainer, bool>
+    { }
+}namespace BulletFury.Data
+{
+}using System;
+using Common.FloatOrRandom;
+using UnityEngine;
+using Wayfarer_Games.Common.FloatOrRandom;
+
+namespace BulletFury
+{
+    public enum FireMode { Automatic, Manual }
+    public enum ColliderType { Circle, Capsule }
+    
+    [Serializable]
+    public class BulletMainData
+    {
+        [Tooltip("Automatic: Spawns bullets automatically. Manual: Only spawns bullets when Spawn is called")]
+        public FireMode FireMode = FireMode.Automatic;
+
+        [Tooltip("Should the spawner immediately start shooting? Only for Automatic fire mode")]
+        public bool PlayOnEnable = true;
+
+        [Tooltip("Seconds between shots spawning")]
+        public FloatOrRandom FireRate = 0.1f;
+
+        [Tooltip("How much damage should the bullet deal?")]
+        public FloatOrRandom Damage = 1f;
+
+        [Tooltip("How many seconds the bullet stay alive for?")]
+        public FloatOrRandom Lifetime = 1f;
+
+        [Tooltip("How many units should the bullet move per second?")]
+        public FloatOrRandom Speed = 5f;
+
+        [Tooltip("What colour should the bullets be?"), ColorUsage(true, true)]
+        [Header("Visuals")]
+        public Color StartColor = Color.white;
+
+        [Tooltip("What size should the bullets be?")]
+        public FloatOrRandom StartSize = 1f;
+
+        [Tooltip("Should the bullet use its rotation for its direction?")]
+        public bool UseRotationForDirection = true;
+
+        [Tooltip("Should the bullets move with the gameobject?")]
+        public bool MoveWithTransform;
+        
+        [Tooltip("Should the bullets rotate with the gameobject?")]
+        public bool RotateWithTransform;
+
+        [Tooltip("What shape should the bullet colliders be? Circle will run much faster!")]
+        [Header("Collisions")]
+        public ColliderType ColliderType = ColliderType.Circle;
+        
+        [Range(0, 1), Tooltip("How big should the bullet colliders be as a percentage of bullet size?")]
+        public float ColliderSize = 1f;
+        
+        [Range(0, 1), Tooltip("How long should the collider be?")]
+        public float CapsuleLength = 0.1f;
+    }
+}using UnityEngine;
+
+namespace BulletFury
+{
+    [CreateAssetMenu]
+    public class SharedRenderDataSO : ScriptableObject
+    {
+        [SerializeField] private BulletRenderData data;
+        
+        public void SetData (BulletRenderData data)
+        {
+            this.data = data;
+        }
+        
+        public static implicit operator BulletRenderData(SharedRenderDataSO sharedData)
+        {
+            return sharedData.data;
+        }
+    }
+}using System;
+using BulletFury.Data;
+using Common;
+using Common.FloatOrRandom;
+using UnityEngine;
+using Wayfarer_Games.Common.FloatOrRandom;
+
+namespace BulletFury
+{
+    [Serializable, Tooltip("Settings for controlling the shape and direction of bullet spawning.")]
+    public class SpawnShapeData
+    {
+        public float rotateSpeed;
+        
+        public SpawnDir spawnDir = SpawnDir.Spherised;
+
+        [Min(1), Tooltip("The number of sides in the shape for spawning bullets.")]
+        public int numPoints = 4;
+
+        [Min(1), Tooltip("The number of bullets to spawn per side of the shape.")]
+        public int numPerSide = 1;
+        
+        [Min(1), Tooltip("The number of bullets per group, arranged in a circle.")]
+        public int numPerGroup = 1;
+        
+        [Tooltip("The radius of the bullet grouping")]
+        public FloatOrRandom groupRadius = 0.25f;
+
+        [Tooltip("Spawn the centre bullet in the group")]
+        public bool spawnCentreBullet;
+        
+        [Tooltip("Make all bullets in the group travel in the same direction")]
+        public bool groupDirection;
+
+        [Range(0, 1f), Tooltip("Percentage of bullets to remove from the edge of each side.")]
+        public float removeFromEdgePercent = 0f;
+
+        [Tooltip("The radius of the spawn shape.")]
+        public FloatOrRandom radius = 1f;
+
+        [Tooltip("The arc of the spawn shape (in degrees).")]
+        public FloatOrRandom arc = 360f;
+        
+        [Tooltip("Randomise the position of the bullet")]
+        public bool randomise = false;
+        
+        [Tooltip("Force the random points to be in a ring")]
+        public bool onEdge = false;
+        
+        [Tooltip("The possible directions for the randomised direction mode")]
+        public FloatOrRandom directionArc = 360f;
+
+
+        private void SpawnGroup(Vector2 position, Vector2 direction, Action<Vector2, Vector2> onGetPoint)
+        {
+            var offset = 360f / (2 * numPerGroup) - ((0.5f * 360)) + 90f;
+            var anglePerSide = 360 / numPerGroup;
+            
+            for (int i = 0; i < numPerGroup; i++)
+            {
+                var angle = (i * anglePerSide) + offset;
+
+                angle *= Mathf.Deg2Rad;
+                
+                Vector2 pos = Quaternion.LookRotation(Vector3.forward, direction) * new Vector2(Mathf.Cos(angle), Mathf.Sin(angle)) * groupRadius;
+                
+                onGetPoint (pos + position, groupDirection ? direction : (pos).normalized);
+            }
+        }
+
+        
+        private void SpawnLine (Action<Vector2, Vector2> onGetPoint, Squirrel3 rnd)
+        {
+            Vector2 dir = Vector2.up;
+                
+            if (spawnDir == SpawnDir.Randomised)
+            {
+                var rndAngle = rnd.Next() * directionArc * Mathf.Deg2Rad;
+                dir = new Vector2(Mathf.Cos(rndAngle), Mathf.Sin(rndAngle));
+            }
+
+            // for every bullet we should spawn on this side of the shape
+            for (int i = 0; i < numPerSide; ++i)
+            {
+                // position the current point a percentage of the way between each end of the side
+                var t = i / (float) numPerSide;
+                t += (1f / numPerSide) / 2f;
+                var point = Vector2.Lerp(new Vector2(-1, 0), new Vector2(1, 0), t);
+                point *= radius;
+                    
+                // spawn a group of bullets
+                
+                if (numPerGroup == 1)
+                    onGetPoint?.Invoke(point, dir);
+                else 
+                    SpawnGroup(point, dir, onGetPoint);
+                
+                if (spawnCentreBullet && numPerGroup > 1)
+                    onGetPoint?.Invoke(point, dir);
+                    
+            }
+        }
+        
+        /// <summary>
+        /// Get a point based on the spawning settings
+        /// </summary>
+        /// <param name="onGetPoint"> a function to run for every point that has been found </param>
+        public void Spawn(Action<Vector2, Vector2> onGetPoint, Squirrel3 rnd)
+        {
+            // initialise the array
+            var points = new Vector2[numPoints];
+            // take a first pass and add some points to every side
+
+            var offset = arc / (2 * numPoints) - ((0.5f * arc)) + 90f;
+            var anglePerSide = arc / numPoints;
+
+            if (numPoints == 1)
+            {
+                SpawnLine(onGetPoint, rnd);
+                return;
+            }
+
+            for (int i = 0; i < numPoints; i++)
+            {
+                var angle = (!randomise ? i * anglePerSide : rnd.Next() * arc) + offset;  
+
+                angle *= Mathf.Deg2Rad;
+                points[i] = new Vector2(Mathf.Cos(angle), Mathf.Sin(angle));
+
+                // set the direction based on the spawnDir enum
+                Vector2 dir;
+                switch (spawnDir)
+                {
+                    case SpawnDir.Shape:
+                        dir = points[i];
+                        break;
+                    case SpawnDir.Randomised:
+                        dir = Vector2.up;
+                        break;
+                    case SpawnDir.Spherised:
+                        dir = points[i];
+                        break;
+                    case SpawnDir.Direction:
+                        dir = Vector2.up;
+                        break;
+                    case SpawnDir.Point:
+                        dir = points[i];
+                        break;
+                    default:
+                        dir = Vector2.up;
+                        break;
+                }
+
+                if (spawnDir == SpawnDir.Randomised)
+                {
+                    var rndAngle = rnd.Next() * directionArc * Mathf.Deg2Rad;
+                    dir = new Vector2(Mathf.Cos(rndAngle), Mathf.Sin(rndAngle));
+                }
+                
+                if ((randomise || spawnDir == SpawnDir.Randomised) && !onEdge)
+                    points[i] *= rnd.Next();
+
+
+                if (numPerSide == 1)
+                {
+                    if (numPerGroup == 1)
+                        onGetPoint?.Invoke(points[i] * radius, dir);
+                    else 
+                        SpawnGroup(points[i] * radius, dir, onGetPoint);
+                    
+                    
+                    if (spawnCentreBullet && numPerGroup > 1)
+                        onGetPoint?.Invoke(points[i] * radius, dir);
+                }
+            }
+
+            if (numPerSide == 1)
+                return;
+
+            // for every side
+            for (int i = 0; i < numPoints; ++i)
+            {
+                // get the next position
+                var next = i + 1;
+                if (next == numPoints)
+                    next = 0;
+
+                // the normal of the current side
+                var direction = Vector2.Lerp(points[i], points[next], 0.5f).normalized;
+
+                // for every bullet we should spawn on this side of the shape
+                for (int j = 0; j < numPerSide; ++j)
+                {
+                    // position the current point a percentage of the way between each end of the side
+                    var t = j / (float) numPerSide;
+                    
+                    t += (1f / numPerSide) / 2f;
+
+                    if (t > 0.5f - removeFromEdgePercent / 2f && t < 0.5f + removeFromEdgePercent / 2f)
+                    {
+                        //Debug.Log(t);
+                        continue;
+                    }
+                    var point = Vector2.Lerp(points[i], points[next], t);
+                    point *= radius;
+
+                    Vector2 dir;
+                    switch (spawnDir)
+                    {
+                        case SpawnDir.Shape:
+                            dir = direction;
+                            break;
+                        case SpawnDir.Randomised:
+                            var rndAngle = rnd.Next() * directionArc * Mathf.Deg2Rad;
+                            dir = new Vector2(Mathf.Cos(rndAngle), Mathf.Sin(rndAngle));
+                            break;
+                        case SpawnDir.Spherised:
+                            dir = point.normalized;
+                            break;
+                        case SpawnDir.Direction:
+                            dir = Vector2.up;
+                            break;
+                        case SpawnDir.Point:
+                            dir = t < 0.5f ? points[i] : points[next];
+                            break;
+                        default:
+                            dir = Vector2.up;
+                            break;
+                    }
+                    
+                    // tell function what the point and direction is 
+                    onGetPoint?.Invoke(point, dir);
+                }
+            }
+        }
+    }
+}namespace BulletFury.Data
+{
+    /// <summary>
+    /// Small enum to describe how a curve is used
+    /// </summary>
+    public enum CurveUsage
+    {
+        Lifetime,
+        LoopedTime
+    }
+}using System;
+using UnityEngine.Events;
+
+namespace BulletFury.Data
+{
+    [Serializable]
+    public class BulletSpawnedEvent : UnityEvent<int, BulletContainer>
+    {}
+}using Unity.Burst;
+using Unity.Mathematics;
+using UnityEngine;
+
+namespace BulletFury.Data
+{
+    /// <summary>
+    /// Container for bullet data, to be used for rendering
+    /// </summary>
+    #if !UNITY_EDITOR
+    [BurstCompile]
+    #endif
+    public struct BulletContainer
+    {
+        public int Id;
+        public float3 Position;
+        public float CurrentSize;
+        public float ColliderSize;
+        public float StartSize;
+        public byte Waiting;
+        public float TimeToWait;
+        public byte Collided;
+        public byte UseCapsule;
+        public float CapsuleLength;
+        public Color Color;
+        public Color StartColor;
+        public Quaternion Rotation;
+        public float3 Forward;
+        public float3 Right;
+        public float3 Up;
+        public float CurrentLifePercent;
+        public float CurrentLifeSeconds;
+        public byte Dead;
+        public byte EndOfLife;
+        public float Lifetime;
+        public float AngularVelocity;
+        public float CurrentSpeed;
+        public float3 Velocity;
+        public float3 Force;
+        public float Damage;
+        public Quaternion Direction;
+        public byte MovingToOrigin;
+        public float3 OriginPosition;
+        public float MoveToOriginTime;
+        public float MoveToOriginCurrentTime;
+        public float3 MoveToOriginStartPosition;
+        public float Speed;
+
+        public void InitWithPositionRotationDirection(float3 position, Quaternion rotation, Quaternion direction)
+        {
+            Position = position;
+            Rotation = rotation;
+            Direction = direction;
+            Dead = 0;
+            EndOfLife = 0;
+            Waiting = 0;
+        }
+    }
+}using System;
+using UnityEngine;
+using UnityEngine.Events;
+
+
+
+
+namespace BulletFury.Data
+{
+    /// <summary>
+    /// Custom serializable unity even for bullet collision
+    /// Doing this means it'll show up as an event in the inspector
+    /// </summary>
+    [Serializable]
+    public class BulletCollisionEvent : UnityEvent<BulletContainer, Transform>
+    {}
+}
+
+namespace BulletFury.Data
+{
+    /// <summary>
+    /// Small enum to describe the possible methods of deciding which direction to spawn the bullet
+    /// </summary>
+    public enum SpawnDir { Shape, Randomised, Spherised, Direction, Point  }
+}using System;
+using UnityEngine;
+
+namespace BulletFury
+{
+    
+    [Serializable]
+    public struct SharedRenderData
+    {
+        [SerializeField] private BulletRenderData singleData;
+        [SerializeField] private SharedRenderDataSO sharedData;
+        public BulletRenderData Data => sharedData == null ? singleData : sharedData;
+        
+        #if UNITY_EDITOR
+        public SharedRenderDataSO SharedDataSO => sharedData;
+        #endif
+        
+        // implicit conversion from SharedVisualData to BulletVisualData
+        public static implicit operator BulletRenderData(SharedRenderData sharedData)
+        {
+            return sharedData.Data;
+        }
+        
+        public static implicit operator SharedRenderData(BulletRenderData data)
+        {
+            return new SharedRenderData
+            {
+                singleData = data
+            };
+        }
+        
+        public static implicit operator SharedRenderData(SharedRenderDataSO sharedData)
+        {
+            return new SharedRenderData
+            {
+                sharedData = sharedData
+            };
+        }
+    }
+}using BulletFury;
+using UnityEditor;
+using UnityEditor.UIElements;
+using UnityEngine;
+using UnityEngine.UIElements;
+
+namespace Wayfarer_Games.BulletFury.RenderData
+{
+    [CustomPropertyDrawer(typeof(BulletRenderData), true)]
+    public class RenderDataChildPropertyDrawer : PropertyDrawer
+    {
+        public static VisualTreeAsset UXML;
+        
+        private SerializedProperty _property;
+        private Image _preview;
+        private VisualElement _animatedProperties;
+        private VisualElement[] _colliderPreview;
+        private Label _frameCount;
+        private int _currentFrame;
+
+        public override VisualElement CreatePropertyGUI(SerializedProperty property)
+        {
+            _property = property;
+            if (UXML == null)
+                UXML = AssetDatabase.LoadAssetAtPath<VisualTreeAsset>(
+                    "Assets/Wayfarer Games/BulletFury/Editor/RenderData/RenderDataTextureSettings.uxml");
+            
+            var root = new VisualElement();
+            UXML.CloneTree(root);
+            
+            _preview = root.Q<Image>("Preview");
+            root.Q<ObjectField>("Texture").RegisterCallback<ChangeEvent<Object>>(SetTexture);
+            _animatedProperties = root.Q<VisualElement>("AnimatedProperties");
+            if (property.FindPropertyRelative("Animated").boolValue)
+                _animatedProperties.RemoveFromClassList("hidden");
+            else 
+                _animatedProperties.AddToClassList("hidden");
+            
+            root.Q<PropertyField>("Animated").RegisterCallback<ChangeEvent<bool>>(ChangeAnimated);
+            root.Q<PropertyField>("Rows").RegisterCallback<ChangeEvent<int>>(ChangeRows);
+            root.Q<PropertyField>("Columns").RegisterCallback<ChangeEvent<int>>(ChangeColumns);
+
+            _frameCount = root.Q<Label>("FrameCount");
+            
+            _currentFrame = 0;
+            var uv = _preview.uv;
+            uv.x = 0;
+            uv.y = 0;
+            _preview.uv = uv;
+            _preview.MarkDirtyRepaint();
+            _frameCount.text = "0 " +
+                               property.FindPropertyRelative("Rows").intValue *
+                               property.FindPropertyRelative("Columns").intValue;
+            
+            root.Q<Button>("NextFrame").clicked += () =>
+            {
+                _currentFrame++;
+                if (_currentFrame >= property.FindPropertyRelative("Rows").intValue *
+                    property.FindPropertyRelative("Columns").intValue)
+                    _currentFrame = 0;
+                
+                var uv = _preview.uv;
+                uv.x += uv.width;
+                if (uv.x >= 1)
+                {
+                    uv.x = 0;
+                    uv.y -= uv.height;
+                    
+                    if (uv.y < 0)
+                        uv.y = 1-uv.height;
+                }
+                _preview.uv = uv;
+                _preview.MarkDirtyRepaint();
+                _frameCount.text = $"Frame {_currentFrame} / " +
+                                   property.FindPropertyRelative("Rows").intValue *
+                                   property.FindPropertyRelative("Columns").intValue;
+            };
+
+            root.Q<Button>("PreviousFrame").clicked += () =>
+            {
+                _currentFrame--;
+                if (_currentFrame < 0)
+                    _currentFrame = property.FindPropertyRelative("Rows").intValue *
+                                    property.FindPropertyRelative("Columns")
+                                        .intValue;
+                
+                var uv = _preview.uv;
+                uv.x -= uv.width;
+                if (uv.x < 0)
+                {
+                    uv.x = 1-uv.width;
+                    uv.y += uv.height;
+                    
+                    if (uv.y > 1)
+                        uv.y = 0;
+                }
+                _preview.uv = uv;
+                _preview.MarkDirtyRepaint();
+                _frameCount.text = $"Frame {_currentFrame} / " +
+                                   property.FindPropertyRelative("Rows").intValue *
+                                   property.FindPropertyRelative("Columns").intValue;
+            };
+
+            return root;
+        }
+        
+        
+        private void ChangeColumns(ChangeEvent<int> evt)
+        {
+            var uv = _preview.uv;
+            uv.height = 1f / evt.newValue;
+            _preview.uv = uv;
+            _preview.MarkDirtyRepaint();
+            _frameCount.text = $"Frame {_currentFrame} / " +
+                               _property.FindPropertyRelative("Rows").intValue *
+                               _property.FindPropertyRelative("Columns").intValue;
+        }
+
+        private void ChangeRows(ChangeEvent<int> evt)
+        {
+            var uv = _preview.uv;
+            uv.width = 1f / evt.newValue;
+            _preview.uv = uv;
+            _preview.MarkDirtyRepaint();
+            _frameCount.text = $"Frame {_currentFrame} / " +
+                               _property.FindPropertyRelative("Rows").intValue *
+                               _property.FindPropertyRelative("Columns").intValue;
+        }
+
+        private void ChangeAnimated(ChangeEvent<bool> evt)
+        {
+            _animatedProperties.SetEnabled(evt.newValue);
+            if (evt.newValue)
+            {
+                var uv = _preview.uv;
+                uv.width = 1f / _property.FindPropertyRelative("Rows").intValue;
+                uv.height = 1f/ _property.FindPropertyRelative("Columns").intValue;
+                _preview.uv = uv;
+                _preview.MarkDirtyRepaint();
+                _animatedProperties.RemoveFromClassList("hidden");
+            }
+            else
+            {
+                _animatedProperties.AddToClassList("hidden");
+                var uv = _preview.uv;
+                uv.width = 1f;
+                uv.height = 1f;
+                _preview.uv = uv;
+                _preview.MarkDirtyRepaint();
+            }
+            
+        }
+        
+        private void SetTexture(ChangeEvent<Object> evt)
+        {
+            //_preview.style.backgroundImage = evt.newValue as Texture2D;
+            _preview.image = evt.newValue as Texture2D;
+            Debug.Log($"Setting texture from {evt.previousValue} to {evt.newValue} on object {_preview.parent.parent.parent.parent.parent.parent.name}");
+        }
+    }
+}using BulletFury;
+using UnityEditor;
+using UnityEditor.UIElements;
+using UnityEngine;
+using UnityEngine.UIElements;
+
+namespace Wayfarer_Games.BulletFury.RenderData
+{
+    [CustomPropertyDrawer(typeof(SharedRenderDataSO))]
+    public class SharedRenderDataSOPropertyDrawer : PropertyDrawer
+    {
+        public override VisualElement CreatePropertyGUI(SerializedProperty property)
+        {
+            var root = new VisualElement();
+            if (property.objectReferenceValue == null) return root;
+            var serializedObject = new SerializedObject(property.objectReferenceValue);
+            Debug.Log(serializedObject.FindProperty("data").displayName);
+            var prop = new PropertyField(serializedObject.FindProperty("data"));
+            prop.Bind(serializedObject);
+            root.Add(prop);
+            return root;
+        }
+    }
+}using BulletFury;
+using UnityEditor;
+using UnityEditor.UIElements;
+using UnityEngine;
+using UnityEngine.UIElements;
+
+namespace Wayfarer_Games.BulletFury.RenderData
+{
+    [CustomPropertyDrawer(typeof(SharedRenderData), true)]
+    public class RenderDataPropertyDrawer : PropertyDrawer
+    {
+        private static EditorWindow Inspector;
+        public static VisualTreeAsset UXML;
+
+        public override VisualElement CreatePropertyGUI(SerializedProperty property)
+        {
+            var sharedData = property.FindPropertyRelative("sharedData");
+            var singleData = property.FindPropertyRelative("singleData");
+            
+            if (UXML == null)
+                UXML = AssetDatabase.LoadAssetAtPath<VisualTreeAsset>(
+                    "Assets/Wayfarer Games/BulletFury/Editor/RenderData/RenderData.uxml");
+            
+            var root = new VisualElement();
+            UXML.CloneTree(root);
+            
+            var singleDataVE = root.Q<VisualElement>("SingleData");
+            var sharedDataVE = root.Q<VisualElement>("SharedData");
+            singleDataVE.style.display = sharedData.objectReferenceValue == null ? DisplayStyle.Flex : DisplayStyle.None;
+            sharedDataVE.style.display = sharedData.objectReferenceValue == null ? DisplayStyle.None : DisplayStyle.Flex;
+            root.Q<ObjectField>("SharedDataSO").objectType = typeof(SharedRenderDataSO);
+
+            void ChangedSharedData(ChangeEvent<Object> e)
+            {
+                var singlePreview = singleDataVE.Q<Image>("Preview");
+                var sharedPreview = sharedDataVE.Q<Image>("Preview");
+                if (singlePreview != null)
+                    singlePreview.name = e.newValue == null ? "Preview" : "InactivePreview";
+                if (sharedPreview != null)
+                    sharedPreview.name = e.newValue != null ? "Preview" : "InactivePreview";
+                
+                singleDataVE.style.display = e.newValue == null ? DisplayStyle.Flex : DisplayStyle.None;
+                sharedDataVE.style.display = e.newValue == null ? DisplayStyle.None : DisplayStyle.Flex;
+            }
+
+            root.Q<ObjectField>("SharedDataSO").RegisterCallback<ChangeEvent<Object>>(ChangedSharedData);
+                
+            root.Q<Button>("Create").clicked += () =>
+            {
+                var path = EditorUtility.SaveFilePanelInProject("Save Render Data", "New Render Data", "asset", "Save Render Data");
+                var sharedDataSO = ScriptableObject.CreateInstance<SharedRenderDataSO>();
+                var currentData = new BulletRenderData
+                {
+                    Texture = singleData.FindPropertyRelative("Texture").objectReferenceValue as Texture2D,
+                    Animated = singleData.FindPropertyRelative("Animated").boolValue,
+                    Rows = singleData.FindPropertyRelative("Rows").intValue,
+                    Columns = singleData.FindPropertyRelative("Columns").intValue,
+                    PerFrameLength = singleData.FindPropertyRelative("PerFrameLength").floatValue,
+                    Layer = singleData.FindPropertyRelative("Layer").intValue,
+                    Priority = singleData.FindPropertyRelative("Priority").intValue
+                };
+                sharedDataSO.SetData(currentData);
+                AssetDatabase.CreateAsset(sharedDataSO, path);
+                sharedData.objectReferenceValue = sharedDataSO;
+            };
+            
+            return root;
+        }
+        
+        
+    }
+}
+using System;
+using System.Linq;
+using BulletFury;
+using JetBrains.Annotations;
+using UnityEditor;
+using UnityEditor.UIElements;
+using UnityEngine;
+using UnityEngine.UIElements;
+using Object = UnityEngine.Object;
+
+namespace Wayfarer_Games.BulletFury.RenderData
+{
+    public class SharedRenderDataVisualElement : BindableElement
+    {
+        public new class UxmlFactory : UxmlFactory<SharedRenderDataVisualElement, UxmlTraits>
+        {
+        }
+
+        private static VisualTreeAsset UXML;
+        
+        public event Action<ChangeEvent<Object>> SharedDataChanged; 
+        private SerializedProperty _singleData, _sharedData;
+
+
+        public RenderDataVisualElement SingleData { get; private set; }
+        public RenderDataVisualElement SharedData { get; private set; }
+
+        public (Image, Image) GetPreview()
+        {
+            return (SingleData.Preview, SharedData.Preview);
+        }
+        
+        public (VisualElement[], VisualElement[]) GetColliderPreview()
+        {
+            return (SingleData.ColliderPreview, SharedData.ColliderPreview);
+        }
+
+        public SharedRenderDataVisualElement()
+        {
+            if (UXML == null)
+                UXML = AssetDatabase.LoadAssetAtPath<VisualTreeAsset>(
+                    "Assets/Wayfarer Games/BulletFury/Editor/RenderData/RenderData.uxml");
+
+            UXML.CloneTree(this);
+            
+            SingleData = this.Q<RenderDataVisualElement>("SingleData");
+            SharedData = this.Q<RenderDataVisualElement>("SharedData");
+            
+            this.Q<ObjectField>("SharedDataSO").objectType = typeof(SharedRenderDataSO);
+        }
+        
+        public void InitWithProperties (SerializedProperty singleData, [CanBeNull] SerializedProperty sharedData)
+        {
+            _singleData = singleData;
+            _sharedData = sharedData;
+            
+            SingleData.InitWithProperty(singleData);
+            if (sharedData != null)
+                SharedData.InitWithProperty(sharedData);
+
+            if (sharedData != null)
+            {
+                #if UNITY_2022_1_OR_NEWER
+                SingleData.style.display =
+                    sharedData.boxedValue == null ? DisplayStyle.Flex : DisplayStyle.None;
+                SharedData.style.display =
+                    sharedData.boxedValue == null ? DisplayStyle.None : DisplayStyle.Flex;
+                #else
+                SingleData.style.display =
+                    sharedData.objectReferenceValue == null ? DisplayStyle.Flex : DisplayStyle.None;
+                SharedData.style.display =
+                    sharedData.objectReferenceValue == null ? DisplayStyle.None : DisplayStyle.Flex;
+                #endif
+            }
+            else
+            {
+                SingleData.style.display = DisplayStyle.Flex;
+                SharedData.style.display = DisplayStyle.None;
+            }
+
+            this.Q<ObjectField>("SharedDataSO").RegisterCallback<ChangeEvent<Object>>(OnSharedDataChanged);
+
+            this.Q<Button>("Create").clicked -= OnClicked;
+            this.Q<Button>("Create").clicked += OnClicked;
+            return;
+
+            void OnClicked()
+            {
+                var path = EditorUtility.SaveFilePanelInProject("Save Render Data", "New Render Data", "asset", "Save Render Data");
+                var sharedDataSO = ScriptableObject.CreateInstance<SharedRenderDataSO>();
+                var currentData = new BulletRenderData
+                {
+                    Texture = singleData.FindPropertyRelative("Texture").objectReferenceValue as Texture2D,
+                    Animated = singleData.FindPropertyRelative("Animated").boolValue,
+                    Rows = singleData.FindPropertyRelative("Rows").intValue,
+                    Columns = singleData.FindPropertyRelative("Columns").intValue,
+                    PerFrameLength = singleData.FindPropertyRelative("PerFrameLength").floatValue,
+                    Layer = singleData.FindPropertyRelative("Layer").intValue,
+                    Priority = singleData.FindPropertyRelative("Priority").intValue
+                };
+                sharedDataSO.SetData(currentData);
+                AssetDatabase.CreateAsset(sharedDataSO, path);
+                if (sharedData != null)
+                    sharedData.objectReferenceValue = sharedDataSO;
+            }
+        }
+
+        private void OnSharedDataChanged(ChangeEvent<Object> evt)
+        {
+            SharedDataChanged?.Invoke(evt);
+            if (evt.newValue == null)
+            {
+                InitWithProperties(_singleData, null);
+            }
+            else
+            {
+                var sharedData = new SerializedObject(evt.newValue).FindProperty("data");
+                InitWithProperties(_singleData, sharedData);
+            }
+        }
+    }
+}using System.Linq;
+using BulletFury;
+using UnityEditor;
+using UnityEditor.UIElements;
+using UnityEngine;
+using UnityEngine.UIElements;
+
+namespace Wayfarer_Games.BulletFury.RenderData
+{
+    public class RenderDataVisualElement : BindableElement
+    {
+        public new class UxmlFactory : UxmlFactory<RenderDataVisualElement, UxmlTraits>
+        {
+        }
+
+        private static VisualTreeAsset UXML;
+
+        public Image Preview { get; private set; }
+
+        public VisualElement[] ColliderPreview { get; private set; }
+        
+        
+        private SerializedProperty _property;
+        private Image _preview;
+        private VisualElement _animatedProperties;
+        private VisualElement[] _colliderPreview;
+        private Label _frameCount;
+        private int _currentFrame;
+
+        public RenderDataVisualElement()
+        {
+            if (UXML == null)
+                UXML = AssetDatabase.LoadAssetAtPath<VisualTreeAsset>(
+                    "Assets/Wayfarer Games/BulletFury/Editor/RenderData/RenderDataTextureSettings.uxml");
+
+            UXML.CloneTree(this);
+
+            Preview = this.Q<Image>("Preview");
+
+            ColliderPreview = Preview.Children().ToArray();
+        }
+
+        public void InitWithProperty(SerializedProperty property)
+        {
+            if (property == null) return;
+            
+            _property = property;
+
+            this.BindProperty(property);
+            
+            
+            this.Q<ObjectField>("Texture").RegisterCallback<ChangeEvent<Object>>(SetTexture);
+            _animatedProperties = this.Q<VisualElement>("AnimatedProperties");
+            if (property.FindPropertyRelative("Animated").boolValue)
+                _animatedProperties.RemoveFromClassList("hidden");
+            else 
+                _animatedProperties.AddToClassList("hidden");
+            
+            this.Q<PropertyField>("Animated").RegisterCallback<ChangeEvent<bool>>(ChangeAnimated);
+            this.Q<PropertyField>("Rows").RegisterCallback<ChangeEvent<int>>(ChangeRows);
+            this.Q<PropertyField>("Columns").RegisterCallback<ChangeEvent<int>>(ChangeColumns);
+
+            _frameCount = this.Q<Label>("FrameCount");
+            
+            _currentFrame = 0;
+            var uv = Preview.uv;
+            uv.x = 0;
+            uv.y = 0;
+            Preview.uv = uv;
+            Preview.MarkDirtyRepaint();
+            _frameCount.text = "0 " +
+                               property.FindPropertyRelative("Rows").intValue *
+                               property.FindPropertyRelative("Columns").intValue;
+            
+            this.Q<Button>("NextFrame").clicked += () =>
+            {
+                _currentFrame++;
+                if (_currentFrame >= property.FindPropertyRelative("Rows").intValue *
+                    property.FindPropertyRelative("Columns").intValue)
+                    _currentFrame = 0;
+                
+                var uv = Preview.uv;
+                uv.x += uv.width;
+                if (uv.x >= 1)
+                {
+                    uv.x = 0;
+                    uv.y -= uv.height;
+                    
+                    if (uv.y < 0)
+                        uv.y = 1-uv.height;
+                }
+                Preview.uv = uv;
+                Preview.MarkDirtyRepaint();
+                _frameCount.text = $"Frame {_currentFrame} / " +
+                                   property.FindPropertyRelative("Rows").intValue *
+                                   property.FindPropertyRelative("Columns").intValue;
+            };
+
+            this.Q<Button>("PreviousFrame").clicked += () =>
+            {
+                _currentFrame--;
+                if (_currentFrame < 0)
+                    _currentFrame = property.FindPropertyRelative("Rows").intValue *
+                                    property.FindPropertyRelative("Columns")
+                                        .intValue;
+                
+                var uv = Preview.uv;
+                uv.x -= uv.width;
+                if (uv.x < 0)
+                {
+                    uv.x = 1-uv.width;
+                    uv.y += uv.height;
+                    
+                    if (uv.y > 1)
+                        uv.y = 0;
+                }
+                Preview.uv = uv;
+                Preview.MarkDirtyRepaint();
+                _frameCount.text = $"Frame {_currentFrame} / " +
+                                   property.FindPropertyRelative("Rows").intValue *
+                                   property.FindPropertyRelative("Columns").intValue;
+            };
+
+        }
+        
+        private void ChangeColumns(ChangeEvent<int> evt)
+        {
+            var uv = Preview.uv;
+            uv.height = 1f / evt.newValue;
+            Preview.uv = uv;
+            Preview.MarkDirtyRepaint();
+            _frameCount.text = $"Frame {_currentFrame} / " +
+                               _property.FindPropertyRelative("Rows").intValue *
+                               _property.FindPropertyRelative("Columns").intValue;
+        }
+
+        private void ChangeRows(ChangeEvent<int> evt)
+        {
+            var uv = Preview.uv;
+            uv.width = 1f / evt.newValue;
+            Preview.uv = uv;
+            Preview.MarkDirtyRepaint();
+            _frameCount.text = $"Frame {_currentFrame} / " +
+                               _property.FindPropertyRelative("Rows").intValue *
+                               _property.FindPropertyRelative("Columns").intValue;
+        }
+
+        private void ChangeAnimated(ChangeEvent<bool> evt)
+        {
+            _animatedProperties.SetEnabled(evt.newValue);
+            if (evt.newValue)
+            {
+                var uv = Preview.uv;
+                uv.width = 1f / _property.FindPropertyRelative("Rows").intValue;
+                uv.height = 1f/ _property.FindPropertyRelative("Columns").intValue;
+                Preview.uv = uv;
+                Preview.MarkDirtyRepaint();
+                _animatedProperties.RemoveFromClassList("hidden");
+            }
+            else
+            {
+                _animatedProperties.AddToClassList("hidden");
+                var uv = Preview.uv;
+                uv.width = 1f;
+                uv.height = 1f;
+                Preview.uv = uv;
+                Preview.MarkDirtyRepaint();
+            }
+            
+        }
+        
+        private void SetTexture(ChangeEvent<Object> evt)
+        {
+            Preview.image = evt.newValue as Texture2D;
+        }
+
+    }
+}using System;
+using System.Collections.Generic;
+using System.Linq;
+using BulletFury;
+using BulletFury.Data;
+using BulletFury.Modules;
+using Unity.Collections;
+using UnityEditor;
+using UnityEditor.Build;
+using UnityEditor.PackageManager;
+using UnityEditor.Rendering;
+using UnityEditor.UIElements;
+using UnityEngine;
+using UnityEngine.Rendering;
+using UnityEngine.UIElements;
+using Wayfarer_Games.BulletFury.RenderData;
+using Object = UnityEngine.Object;
+using PopupWindow = UnityEditor.PopupWindow;
+
+namespace Wayfarer_Games.BulletFury
+{
+    [CustomEditor(typeof(BulletSpawner))]
+    public class BulletSpawnerEditor : Editor
+    {
+        public VisualTreeAsset UXML;
+        private VisualElement _root;
+        private Image _preview, _sharedPreview;
+        private VisualElement _animatedProperties;
+        private VisualElement[] _colliderPreview, _sharedColliderPreview;
+        private VisualElement _visualBody;
+        private VisualElement _shapeBody;
+        private VisualElement _group;
+        private PropertyField _colliderSpacing;
+        private HelpBox _shapeHelp;
+        private Label _frameCount;
+
+        private int _currentFrame;
+
+        private BulletSpawner _spawner;
+
+        private Vector3 _previousPos;
+        private Vector3 _previousRot;
+        private Camera _sceneCamera;
+        private SharedRenderDataSO _data;
+
+        private const float DeltaTime = 1 / 60f;
+        private double _previousTime;
+
+        public override VisualElement CreateInspectorGUI()
+        {
+            var root = new VisualElement();
+            root.RegisterCallback<ChangeEvent<int>>(AnyObjectHasChanged);
+            root.RegisterCallback<ChangeEvent<float>>(AnyObjectHasChanged);
+            root.RegisterCallback<ChangeEvent<bool>>(AnyObjectHasChanged);
+            UXML.CloneTree(root);
+            _root = root;
+            BuildRenderData(ref root);
+            BuildVisualData(ref root);
+            BuildSpawnShape(ref root);
+            return root;
+        }
+
+        private void AnyObjectHasChanged(ChangeEvent<int> evt)
+        {
+            BulletFuryEditorUtils.RepaintScene();
+        }
+
+        private void AnyObjectHasChanged(ChangeEvent<float> evt)
+        {
+            BulletFuryEditorUtils.RepaintScene();
+        }
+
+        private void AnyObjectHasChanged(ChangeEvent<bool> evt)
+        {
+            BulletFuryEditorUtils.RepaintScene();
+        }
+
+        private void OnEnable()
+        {
+#if !SERIALIZEREFERENCE_EXTENSIONS
+            BulletFuryEditorUtils.AddPackage();
+#endif
+            if (Application.isPlaying) return;
+            _previousTime = EditorApplication.timeSinceStartup;
+            _spawner = target as BulletSpawner;
+            _spawner.Start();
+
+            SceneView.duringSceneGui += SceneGUI;
+        }
+
+        private void OnDisable()
+        {
+            if (Application.isPlaying) return;
+            _spawner = target as BulletSpawner;
+            _spawner.OnDestroy();
+            SceneView.duringSceneGui -= SceneGUI;
+        }
+
+        private void SceneGUI(SceneView obj)
+        {
+            if (Application.isPlaying) return;
+            _spawner.UpdateAllBullets(obj.camera, Convert.ToSingle(EditorApplication.timeSinceStartup - _previousTime));
+            _spawner.RenderBulletsNow();
+            _previousTime = EditorApplication.timeSinceStartup;
+            obj.Repaint();
+        }
+        //
+        // private void BuildModules(ref VisualElement root)
+        // {
+        //     var spawnModules = serializedObject.FindProperty("spawnModules");
+        //     var spawnModulesRoot = root.Q<ListView>("SpawnModules");
+        //     spawnModulesRoot.itemsRemoved += SpawnModulesRootOnItemsRemoved;
+        // }
+        //
+        // private void SpawnModulesRootOnItemsRemoved(IEnumerable<int> obj)
+        // {
+        //     var spawnModules = serializedObject.FindProperty("spawnModules");
+        //     var spawnModulesRoot = _root.Q<ListView>("SpawnModules");
+        //
+        //     spawnModules.serializedObject.Update();
+        //     spawnModules.serializedObject.ApplyModifiedProperties();
+        //     spawnModulesRoot.Rebuild();
+        // }
+
+        private void BuildSpawnShape(ref VisualElement root)
+        {
+            root.Q<VisualElement>("ShapeHeader").RegisterCallback<ClickEvent>(ToggleShape);
+            root.Q<PropertyField>("SpawnDir").RegisterValueChangeCallback(ChangeSpawnDir);
+            _shapeHelp = root.Q<HelpBox>("SpawnDirHelp");
+            _shapeBody = root.Q<VisualElement>("ShapeBody");
+            _group = root.Q<VisualElement>("Group");
+
+            root.Q<PropertyField>("NumPerSide").RegisterCallback<ChangeEvent<int>>(ChangeNumPerSide);
+
+            var prop = serializedObject.FindProperty("spawnShapeData").FindPropertyRelative("spawnDir");
+            if (Enum.TryParse<SpawnDir>(prop.enumNames[prop.enumValueIndex], out var dir))
+            {
+                _shapeHelp.text = dir switch
+                {
+                    SpawnDir.Shape =>
+                        "Bullets will travel in the direction of the shape's edge, e.g. for a square, they will travel up, down, left, or right.",
+                    SpawnDir.Randomised => "Bullets will travel in a random direction",
+                    SpawnDir.Spherised =>
+                        "Bullets will travel away from the center of the shape, which will create a circular pattern",
+                    SpawnDir.Direction =>
+                        $"Bullets will travel in the direction of the spawner's UP vector - the green arrow in the scene view.",
+                    SpawnDir.Point =>
+                        "Bullets will travel in the direction of shape's vertex, e.g. for a square, they will travel in the diagonal directions.",
+                    _ => throw new ArgumentOutOfRangeException()
+                };
+            }
+        }
+
+        private void ChangeNumPerSide(ChangeEvent<int> evt)
+        {
+            if (evt.newValue == 1)
+                _group.RemoveFromClassList("collapsed");
+            else
+                _group.AddToClassList("collapsed");
+        }
+
+        private void ChangeSpawnDir(SerializedPropertyChangeEvent evt)
+        {
+            if (Enum.TryParse<SpawnDir>(evt.changedProperty.enumNames[evt.changedProperty.enumValueIndex], out var dir))
+            {
+                _shapeHelp.text = dir switch
+                {
+                    SpawnDir.Shape =>
+                        "Bullets will travel in the direction of the shape's edge, e.g. for a square, they will travel up, down, left, or right.",
+                    SpawnDir.Randomised => "Bullets will travel in a random direction",
+                    SpawnDir.Spherised =>
+                        "Bullets will travel away from the center of the shape, which will create a circular pattern",
+                    SpawnDir.Direction =>
+                        $"Bullets will travel in the direction of the spawner's UP vector - the green arrow in the scene view.",
+                    SpawnDir.Point =>
+                        "Bullets will travel in the direction of shape's vertex, e.g. for a square, they will travel in the diagonal directions.",
+                    _ => throw new ArgumentOutOfRangeException()
+                };
+            }
+        }
+
+        private void BuildVisualData(ref VisualElement root)
+        {
+            root.Q<PropertyField>("StartColor").RegisterValueChangeCallback(ChangeColor);
+            root.Q<PropertyField>("ColliderSize").RegisterCallback<ChangeEvent<float>>(ChangeColliderSize);
+            //root.Q<VisualElement>("VisualHeader").RegisterCallback<ClickEvent>(ToggleVisual);
+            //_visualBody = root.Q<VisualElement>("VisualBody");
+
+            root.Q<PropertyField>("ColliderType").RegisterCallback<ChangeEvent<string>>(ChangeColliderCount);
+            _colliderSpacing = root.Q<PropertyField>("ColliderSeparation");
+            _colliderSpacing.RegisterCallback<ChangeEvent<float>>(ChangeColliderSeparation);
+        }
+
+        private void GrabPreviewAndChildren(VisualElement root)
+        {
+            if (_root == null) return;
+            (_preview, _sharedPreview) = root.Q<SharedRenderDataVisualElement>().GetPreview();
+            (_colliderPreview, _sharedColliderPreview) = root.Q<SharedRenderDataVisualElement>().GetColliderPreview();
+        }
+
+        private void ChangeColliderSeparation(ChangeEvent<float> evt)
+        {
+            GrabPreviewAndChildren(_root);
+            if (_preview == null) return;
+
+            var useCollider =
+                serializedObject.FindProperty("main").FindPropertyRelative("ColliderType").enumValueIndex ==
+                (int)ColliderType.Capsule;
+            if (useCollider)
+            {
+                for (int i = 0; i < _colliderPreview.Length; ++i)
+                {
+                    var pos = _colliderPreview[i].transform.position;
+                    pos.y = evt.newValue * (i - 0.5f) * 100;
+                    _colliderPreview[i].transform.position = pos;
+                }
+
+                for (int i = 0; i < _sharedColliderPreview.Length; ++i)
+                {
+                    var pos = _sharedColliderPreview[i].transform.position;
+                    pos.y = evt.newValue * (i - 0.5f) * 100;
+                    _sharedColliderPreview[i].transform.position = pos;
+                }
+            }
+        }
+
+        private void ChangeColliderCount(ChangeEvent<string> evt)
+        {
+            GrabPreviewAndChildren(_root);
+            if (_preview == null) return;
+
+            if (evt.newValue == ColliderType.Capsule.ToString())
+                _colliderSpacing.RemoveFromClassList("collapsed");
+            else
+                _colliderSpacing.AddToClassList("collapsed");
+
+            var element = _colliderPreview[1];
+            if (evt.newValue == ColliderType.Capsule.ToString())
+                element.RemoveFromClassList("collapsed");
+            else
+                element.AddToClassList("collapsed");
+
+            element = _sharedColliderPreview[1];
+            if (evt.newValue == ColliderType.Capsule.ToString())
+                element.RemoveFromClassList("collapsed");
+            else
+                element.AddToClassList("collapsed");
+
+            var spacing = serializedObject.FindProperty("main").FindPropertyRelative("CapsuleLength").floatValue;
+
+            if (evt.newValue == ColliderType.Capsule.ToString())
+            {
+                for (int i = 0; i < _colliderPreview.Length; ++i)
+                {
+                    var pos = _colliderPreview[i].transform.position;
+                    pos.y = spacing * (i - 0.5f) * 100;
+                    _colliderPreview[i].transform.position = pos;
+                }
+
+                for (int i = 0; i < _sharedColliderPreview.Length; ++i)
+                {
+                    var pos = _sharedColliderPreview[i].transform.position;
+                    pos.y = spacing * (i - 0.5f) * 100;
+                    _sharedColliderPreview[i].transform.position = pos;
+                }
+            }
+            else
+            {
+                var pos = _colliderPreview[0].transform.position;
+                pos.y = 0;
+                _colliderPreview[0].transform.position = pos;
+
+                pos = _sharedColliderPreview[0].transform.position;
+                pos.y = 0;
+                _sharedColliderPreview[0].transform.position = pos;
+            }
+        }
+
+        private void ToggleShape(ClickEvent evt)
+        {
+            _shapeBody.ToggleInClassList("collapsed");
+        }
+
+        private void ToggleVisual(ClickEvent evt)
+        {
+            _visualBody.ToggleInClassList("collapsed");
+        }
+
+        private void ChangeColliderSize(ChangeEvent<float> evt)
+        {
+            GrabPreviewAndChildren(_root);
+            if (_preview == null) return;
+
+            foreach (var p in _colliderPreview)
+                p.transform.scale = Vector3.one * evt.newValue;
+
+            foreach (var p in _sharedColliderPreview)
+                p.transform.scale = Vector3.one * evt.newValue;
+        }
+
+        private void ChangeColor(SerializedPropertyChangeEvent evt)
+        {
+            GrabPreviewAndChildren(_root);
+            if (_preview == null) return;
+
+            if (evt?.changedProperty == null) return;
+            var color = evt.changedProperty.colorValue;
+            _preview.tintColor = color;
+            _sharedPreview.tintColor = color;
+        }
+
+        private void BuildRenderData(ref VisualElement root)
+        {
+            root.Q<PropertyField>("Script").SetEnabled(false);
+            var renderData = serializedObject.FindProperty("renderData");
+            var singleData = renderData.FindPropertyRelative("singleData");
+
+            _data = (target as BulletSpawner).RenderData.SharedDataSO;
+
+
+            var sharedRenderDataVisualElement = root.Q<SharedRenderDataVisualElement>();
+
+            if (_data != null)
+            {
+                var targetObj = new SerializedObject(_data);
+                sharedRenderDataVisualElement.InitWithProperties(singleData, targetObj.FindProperty("data"));
+            }
+            else
+                sharedRenderDataVisualElement.InitWithProperties(singleData, null);
+
+            sharedRenderDataVisualElement.SharedDataChanged += SharedDataChanged;
+
+        }
+
+        private void SharedDataChanged(ChangeEvent<Object> obj)
+        {
+            if (obj.newValue == null)
+            {
+                _data = null;
+                return;
+            }
+
+            _data = obj.newValue as SharedRenderDataSO;
+        }
+    }
+}

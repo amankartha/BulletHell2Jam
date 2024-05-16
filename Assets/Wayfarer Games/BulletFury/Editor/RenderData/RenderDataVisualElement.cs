@@ -63,62 +63,58 @@ namespace Wayfarer_Games.BulletFury.RenderData
             _frameCount = this.Q<Label>("FrameCount");
             
             _currentFrame = 0;
+            var rows = property.FindPropertyRelative("Rows").intValue;
+            var columns = property.FindPropertyRelative("Columns").intValue;
+            
+            // Calculate UV directly based on current frame and grid dimensions
+            int currentRow = _currentFrame / columns;
+            int currentColumn = _currentFrame % columns;
+
             var uv = Preview.uv;
-            uv.x = 0;
-            uv.y = 0;
+            uv.x = (float)currentColumn / columns;
+            uv.y = 1f - (float)(currentRow + 1) / rows;  
+
             Preview.uv = uv;
             Preview.MarkDirtyRepaint();
-            _frameCount.text = "0 " +
-                               property.FindPropertyRelative("Rows").intValue *
-                               property.FindPropertyRelative("Columns").intValue;
+            _frameCount.text = $"Frame {_currentFrame} / " + (rows * columns); 
             
             this.Q<Button>("NextFrame").clicked += () =>
             {
+                
                 _currentFrame++;
-                if (_currentFrame >= property.FindPropertyRelative("Rows").intValue *
-                    property.FindPropertyRelative("Columns").intValue)
+                if (_currentFrame >= rows * columns)
                     _currentFrame = 0;
                 
+                // Calculate UV directly based on current frame and grid dimensions
+                int currentRow = _currentFrame / columns;
+                int currentColumn = _currentFrame % columns;
+
                 var uv = Preview.uv;
-                uv.x += uv.width;
-                if (uv.x >= 1)
-                {
-                    uv.x = 0;
-                    uv.y -= uv.height;
-                    
-                    if (uv.y < 0)
-                        uv.y = 1-uv.height;
-                }
+                uv.x = (float)currentColumn / columns;
+                uv.y = 1f - (float)(currentRow + 1) / rows;  
+
                 Preview.uv = uv;
                 Preview.MarkDirtyRepaint();
-                _frameCount.text = $"Frame {_currentFrame} / " +
-                                   property.FindPropertyRelative("Rows").intValue *
-                                   property.FindPropertyRelative("Columns").intValue;
+                _frameCount.text = $"Frame {_currentFrame} / " + (rows * columns); 
             };
 
             this.Q<Button>("PreviousFrame").clicked += () =>
             {
                 _currentFrame--;
                 if (_currentFrame < 0)
-                    _currentFrame = property.FindPropertyRelative("Rows").intValue *
-                                    property.FindPropertyRelative("Columns")
-                                        .intValue;
+                    _currentFrame = rows * columns - 1;
                 
+                // Calculate UV directly based on current frame and grid dimensions
+                int currentRow = _currentFrame / columns;
+                int currentColumn = _currentFrame % columns;
+
                 var uv = Preview.uv;
-                uv.x -= uv.width;
-                if (uv.x < 0)
-                {
-                    uv.x = 1-uv.width;
-                    uv.y += uv.height;
-                    
-                    if (uv.y > 1)
-                        uv.y = 0;
-                }
+                uv.x = (float)currentColumn / columns;
+                uv.y = 1f - (float)(currentRow + 1) / rows;  
+
                 Preview.uv = uv;
                 Preview.MarkDirtyRepaint();
-                _frameCount.text = $"Frame {_currentFrame} / " +
-                                   property.FindPropertyRelative("Rows").intValue *
-                                   property.FindPropertyRelative("Columns").intValue;
+                _frameCount.text = $"Frame {_currentFrame} / " + (rows * columns); 
             };
 
         }
