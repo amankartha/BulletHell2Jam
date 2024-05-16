@@ -55,11 +55,14 @@ MonoBehaviour:
   RelectHeatChargeUp: 5
   ShootThreshold: 60
   ShootingDrainPerSecond: 10
+  OverchargeCooldownPerSecond: 10
   _health: 100
   _maxHealth: 100
   _heat: 20
   _maxHeat: 100
-  Speed: 3
+  Speed: 4
+  OverheatedSpeed: 2
+  canCharge: 1
   OnPlayerHit:
     m_PersistentCalls:
       m_Calls:
