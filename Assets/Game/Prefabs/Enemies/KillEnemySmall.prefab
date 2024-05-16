@@ -315,7 +315,7 @@ MonoBehaviour:
     FireMode: 0
     PlayOnEnable: 1
     FireRate:
-      isRandom: 0
+      isRandom: 1
       minValue: 2
       maxValue: 3
     Damage:
@@ -324,7 +324,7 @@ MonoBehaviour:
       maxValue: 1
     Lifetime:
       isRandom: 0
-      minValue: 5
+      minValue: 15
       maxValue: 1
     Speed:
       isRandom: 0

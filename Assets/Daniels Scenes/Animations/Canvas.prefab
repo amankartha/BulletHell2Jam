@@ -413,7 +413,7 @@ GameObject:
   - component: {fileID: 1575202747475139519}
   - component: {fileID: 2653075990655696787}
   m_Layer: 5
-  m_Name: SurgeRoomPopup
+  m_Name: BlastRoomPopup
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -958,7 +958,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: SURGE
+  m_text: BLAST
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: fb56ec506d478044b8df177e31c903e8, type: 2}
   m_sharedMaterial: {fileID: 4911384808728751679, guid: fb56ec506d478044b8df177e31c903e8, type: 2}
