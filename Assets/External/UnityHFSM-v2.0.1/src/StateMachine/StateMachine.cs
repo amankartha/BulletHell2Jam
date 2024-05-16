@@ -401,7 +401,7 @@ namespace UnityHFSM
 			runOnLogic:
 			activeState?.OnLogic();
 		}
-
+		
 		public override void OnExit()
 		{
 			if (activeState != null)
@@ -412,7 +412,7 @@ namespace UnityHFSM
 				activeState = null;
 			}
 		}
-
+	
 		public override void OnExitRequest()
 		{
 			if (activeState.needsExitTime)

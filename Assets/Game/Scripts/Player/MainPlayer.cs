@@ -18,8 +18,8 @@ public class MainPlayer : MonoBehaviour, IBulletHitHandler
     public int RelectHeatChargeUp = 5;
     public int ShootThreshold = 60;
     public int ShootingDrainPerSecond = 10;
-    
-    [SerializeField]
+    public float OverchargeCooldownPerSecond = 10f;
+    [SerializeField]    
     private int _health;
     [SerializeField]
     private int _maxHealth;
@@ -30,6 +30,7 @@ public class MainPlayer : MonoBehaviour, IBulletHitHandler
     private int _maxHeat;
 
     public float Speed = 5f;
+    public float OverheatedSpeed = 2f;
     
     private StateMachine fsm;
     private Camera mainCamera;
@@ -54,13 +55,15 @@ public class MainPlayer : MonoBehaviour, IBulletHitHandler
         }
     }
 
+    public bool canCharge = true;
+
     #endregion
 
     #region Events
 
 
     public UnityEvent OnPlayerHit;
-
+    
     #endregion
 
     #region Links
@@ -91,6 +94,9 @@ public class MainPlayer : MonoBehaviour, IBulletHitHandler
         
         fsm.AddTransition(new Transition("Melee","Shooting",transition => TransitionToShooting()));
         fsm.AddTransition(new Transition("Shooting","Melee",transition => TransitionFromShooting()));
+        
+        fsm.AddTransition(new Transition("Melee","OverCharged",transition => TransitionToOverheated()));
+        fsm.AddTransition(new Transition("OverCharged","Melee",transition => TransitionFromOverheated()));
 
 
         fsm.SetStartState("Melee");
@@ -111,7 +117,10 @@ public class MainPlayer : MonoBehaviour, IBulletHitHandler
         
     }
 
-  
+    private void FixedUpdate()
+    {
+        
+    }
 
     public bool TryConsumeHeat(int value)
     {
@@ -143,6 +152,11 @@ public class MainPlayer : MonoBehaviour, IBulletHitHandler
         StartCoroutine(TeleportCoolDownCounter());
     }
 
+    public string GetCurrentState()
+    {
+        return fsm.ActiveStateName;
+    }
+    
     #region TransitionFunctions
 
     private bool TransitionToShooting()
@@ -165,6 +179,26 @@ public class MainPlayer : MonoBehaviour, IBulletHitHandler
         return false;
     }
 
+    private bool TransitionToOverheated()
+    {
+        if (Math.Abs(Heat - _maxHeat) < 0.1)
+        {
+            return true;
+        }
+
+        return false;
+    }
+
+    private bool TransitionFromOverheated()
+    {
+        if (Heat == 0)
+        {
+            return true;
+        }
+
+        return false;
+    }
+    
     private void SetPlayerPositionToSpawnPoint(Scene scene, LoadSceneMode mode)
     {
         SpawnPosition spawnPos = FindObjectOfType<SpawnPosition>();

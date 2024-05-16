@@ -16,14 +16,24 @@ public class MainPlayerMovement : StateBase
         _mainPlayer = player;
     }
 
+    public override void OnEnter()
+    {
+        base.OnEnter();
+        _mainPlayer.canCharge = true;
+    }
 
     public override void OnLogic()
     {
-        movementVectorContainer =  new Vector2(Input.GetAxis("Horizontal"),Input.GetAxis("Vertical"));
+        movementVectorContainer =  new Vector2(Input.GetAxisRaw("Horizontal"),Input.GetAxisRaw("Vertical"));
         movementVectorContainer *= _mainPlayer.Speed;
         movementVectorContainer *= Time.deltaTime;
         
         _mainPlayer.gameObject.transform.Translate(movementVectorContainer);
     }
 
+    public override void OnExit()
+    {
+        base.OnExit();
+        _mainPlayer.canCharge = false;
+    }
 }
