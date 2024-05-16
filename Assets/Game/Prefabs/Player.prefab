@@ -59,7 +59,7 @@ MonoBehaviour:
   _maxHealth: 100
   _heat: 20
   _maxHeat: 100
-  Speed: 8
+  Speed: 3
   OnPlayerHit:
     m_PersistentCalls:
       m_Calls:
