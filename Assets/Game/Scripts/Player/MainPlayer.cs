@@ -111,7 +111,10 @@ public class MainPlayer : MonoBehaviour, IBulletHitHandler
         
     }
 
-  
+    private void FixedUpdate()
+    {
+        
+    }
 
     public bool TryConsumeHeat(int value)
     {

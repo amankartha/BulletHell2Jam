@@ -19,7 +19,7 @@ public class MainPlayerMovement : StateBase
 
     public override void OnLogic()
     {
-        movementVectorContainer =  new Vector2(Input.GetAxis("Horizontal"),Input.GetAxis("Vertical"));
+        movementVectorContainer =  new Vector2(Input.GetAxisRaw("Horizontal"),Input.GetAxisRaw("Vertical"));
         movementVectorContainer *= _mainPlayer.Speed;
         movementVectorContainer *= Time.deltaTime;
         
