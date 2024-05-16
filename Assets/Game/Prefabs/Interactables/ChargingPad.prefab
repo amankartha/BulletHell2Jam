@@ -5045,7 +5045,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ec2dae23048851148a5e71ce629301b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  HeatChargePerSecond: 5
+  HeatChargePerSecond: 1
 --- !u!61 &2145713186223849429
 BoxCollider2D:
   m_ObjectHideFlags: 0

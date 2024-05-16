@@ -27,7 +27,7 @@ public class ChargingPad : MonoBehaviour
     {
         if (other.gameObject == GameManager.Instance.MAINPLAYERGAMEOBJECT && GameManager.Instance.MAINPLAYERSCRIPT.canCharge)
         {
-            GameManager.Instance.MAINPLAYERSCRIPT.Heat += 5 * Time.fixedDeltaTime;
+            GameManager.Instance.MAINPLAYERSCRIPT.Heat += HeatChargePerSecond * Time.fixedDeltaTime;
         }
     }
 

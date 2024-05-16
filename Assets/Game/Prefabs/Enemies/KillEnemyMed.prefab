@@ -89,7 +89,7 @@ GameObject:
   - component: {fileID: 5579394803312826129}
   - component: {fileID: 358473439169415082}
   m_Layer: 11
-  m_Name: KillEnemyWeak
+  m_Name: KillEnemyMed
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

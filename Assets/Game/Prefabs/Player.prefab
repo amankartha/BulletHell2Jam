@@ -52,17 +52,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8dfd44c0e6b6aba45bce28d75ae4b33f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TeleportCost: 20
+  TeleportCost: 2
   RelectHeatChargeUp: 5
-  ShootThreshold: 60
-  ShootingDrainPerSecond: 10
-  OverchargeCooldownPerSecond: 10
-  _health: 100
-  _maxHealth: 100
-  _heat: 20
-  _maxHeat: 100
-  Speed: 3
-  OverheatedSpeed: 2
+  ShootThreshold: 5
+  ShootingDrainPerSecond: 3
+  OverchargeCooldownPerSecond: 2.5
+  _health: 5
+  _maxHealth: 5
+  _heat: 0
+  _maxHeat: 10
+  Speed: 5
+  OverheatedSpeed: 3
   canCharge: 1
   OnPlayerHit:
     m_PersistentCalls:
@@ -186,7 +186,7 @@ GameObject:
   - component: {fileID: 5025131903992738830}
   - component: {fileID: 400720448928947624}
   - component: {fileID: 5687725497073091124}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Arm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -297,7 +297,7 @@ MonoBehaviour:
       PerFrameLength: 0
       Layer: 0
       Priority: 0
-    sharedData: {fileID: 11400000, guid: 9aa15e800874f4e4c85c2ef94edf1a35, type: 2}
+    sharedData: {fileID: 11400000, guid: 65488aebb66ce0f43b0e77e9349dc376, type: 2}
   main:
     FireMode: 0
     PlayOnEnable: 1
@@ -317,17 +317,17 @@ MonoBehaviour:
       isRandom: 0
       minValue: 15
       maxValue: 5
-    StartColor: {r: 1, g: 1, b: 1, a: 1}
+    StartColor: {r: 0, g: 0.9806144, b: 1, a: 1}
     StartSize:
       isRandom: 0
-      minValue: 1
+      minValue: 0.75
       maxValue: 1
     UseRotationForDirection: 1
     MoveWithTransform: 0
     RotateWithTransform: 0
     ColliderType: 0
-    ColliderSize: 1
-    CapsuleLength: 0.1
+    ColliderSize: 0.4
+    CapsuleLength: 0
   spawnShapeData:
     rotateSpeed: 0
     spawnDir: 2
@@ -983,7 +983,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4403497597303258870}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Reflector
   m_TagString: Untagged
   m_Icon: {fileID: 0}
