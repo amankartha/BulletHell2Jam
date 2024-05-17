@@ -841,6 +841,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2964740587485847152}
   - component: {fileID: 7384241035186303769}
+  - component: {fileID: 3583135874676003584}
   m_Layer: 12
   m_Name: BulletSpawner
   m_TagString: Untagged
@@ -1065,6 +1066,18 @@ MonoBehaviour:
       type: {class: SpawnerRotateModule, ns: BulletFury.Modules, asm: WayfarerGames.BulletFury}
       data:
         angularSpeed: 20
+--- !u!114 &3583135874676003584
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6773269482118459790}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fa808113a8795c1408e94e3f5456bbe3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6967046368531937456
 GameObject:
   m_ObjectHideFlags: 0
