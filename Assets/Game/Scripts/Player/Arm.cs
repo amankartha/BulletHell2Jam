@@ -43,7 +43,9 @@ public class Arm : MonoBehaviour
 
         float x = Radius * MathF.Cos(angle);
         float y = Radius * MathF.Sin(angle);
-
+        
+        GameManager.Instance.MAINPLAYERSCRIPT.Anim.SetFloat("Blend",y);
+        
         this.transform.position = center + new Vector2(x, y);
         this.transform.rotation = Quaternion.LookRotation(Vector3.forward,mousePos - center);
     }
