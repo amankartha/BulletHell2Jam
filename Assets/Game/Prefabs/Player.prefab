@@ -53,16 +53,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8dfd44c0e6b6aba45bce28d75ae4b33f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TeleportCost: 2
-  RelectHeatChargeUp: 5
-  ShootThreshold: 5
+  TeleportCost: 0
+  RelectHeatChargeUp: 1
+  ShootThreshold: 0
   ShootingDrainPerSecond: 3
-  OverchargeCooldownPerSecond: 2.5
+  OverchargeCooldownPerSecond: 2
   _health: 5
   _maxHealth: 5
   _heat: 0
   _maxHeat: 10
-  Speed: 5
+  Speed: 4
   OverheatedSpeed: 3
   Anim: {fileID: 5692651010108587286}
   canCharge: 1
@@ -206,7 +206,7 @@ Transform:
   m_GameObject: {fileID: 1076504662954096943}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.02, y: 1.02, z: 0}
+  m_LocalPosition: {x: 0, y: 0.5, z: 0}
   m_LocalScale: {x: 0.175, y: 0.175, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -277,7 +277,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pivot: {fileID: 4602746440313519860}
-  Radius: 1
+  Radius: 0.5
 --- !u!114 &5687725497073091124
 MonoBehaviour:
   m_ObjectHideFlags: 0

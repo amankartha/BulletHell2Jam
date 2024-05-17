@@ -3272,11 +3272,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1507581684497198230, guid: 18b1a842abfd2174293c24710842e77a, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2880718370534303137, guid: 18b1a842abfd2174293c24710842e77a, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5940933313025189386, guid: 18b1a842abfd2174293c24710842e77a, type: 3}
       propertyPath: m_Name
       value: ExitDoor
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 1507581684497198230, guid: 18b1a842abfd2174293c24710842e77a, type: 3}
+    - {fileID: 2880718370534303137, guid: 18b1a842abfd2174293c24710842e77a, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -3433,6 +3443,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2999514686074919822, guid: 6d9f8133091bbe243bd9f7314aed00de, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4327067380709366579, guid: 6d9f8133091bbe243bd9f7314aed00de, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -3479,6 +3493,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5902030989720562620, guid: 6d9f8133091bbe243bd9f7314aed00de, type: 3}
       propertyPath: m_ColliderPaths.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6640658738159360037, guid: 6d9f8133091bbe243bd9f7314aed00de, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8015849222251319570, guid: 6d9f8133091bbe243bd9f7314aed00de, type: 3}
+      propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8561345237803357297, guid: 6d9f8133091bbe243bd9f7314aed00de, type: 3}
@@ -7334,6 +7356,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5e4e1affdc177a47b1c0aa1e4d73143, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _health: 10
   MaxHealth: 10
   OnTakeDamage:
     m_PersistentCalls:
