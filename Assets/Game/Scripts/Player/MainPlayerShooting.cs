@@ -29,14 +29,11 @@ public class MainPlayerShooting : StateBase
 
     public override void OnLogic()
     {
-        base.OnLogic();
-        TimerCounter += Time.deltaTime;
 
-        if (TimerCounter >= 1f)
-        {
-            TimerCounter = 0f;
-            _player.Heat -= _player.ShootingDrainPerSecond;
-        }
+
+
+        _player.Heat -= _player.ShootingDrainPerSecond * Time.deltaTime;
+
     }
 
     public override void OnExit()
