@@ -34,6 +34,9 @@ public class MainPlayer : MonoBehaviour, IBulletHitHandler
     
     private StateMachine fsm;
     private Camera mainCamera;
+
+    public Animator Anim;
+    
     public int Health {
         get => _health;
         set
@@ -56,6 +59,7 @@ public class MainPlayer : MonoBehaviour, IBulletHitHandler
     }
 
     public bool canCharge = true;
+    public bool canReflect = true;
 
     #endregion
 

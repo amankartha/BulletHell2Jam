@@ -20,6 +20,7 @@ public class MainPlayerMovement : StateBase
     {
         base.OnEnter();
         _mainPlayer.canCharge = true;
+        _mainPlayer.canReflect = true;
     }
 
     public override void OnLogic()
@@ -35,5 +36,6 @@ public class MainPlayerMovement : StateBase
     {
         base.OnExit();
         _mainPlayer.canCharge = false;
+        _mainPlayer.canReflect = false;
     }
 }
