@@ -107,6 +107,8 @@ namespace Wayfarer_Games.BulletFury.RenderData
 
         private void OnSharedDataChanged(ChangeEvent<Object> evt)
         {
+            if (evt.newValue == evt.previousValue) return;
+            
             SharedDataChanged?.Invoke(evt);
             if (evt.newValue == null)
             {

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using MoreMountains.Tools;
 using UnityEngine;
 
-public class GameManager : MMSingleton<GameManager>
+public class GameManager : MMPersistentSingleton<GameManager>
 {
     public CompositeCollider2D CurrentRoomCollider;
 
@@ -16,6 +16,6 @@ public class GameManager : MMSingleton<GameManager>
     }
     public bool CheckIfInBounds(Vector3 point)
     {
-        return CurrentRoomCollider.bounds.Contains(point);
+        return CurrentRoomCollider.OverlapPoint(point);
     }
 }

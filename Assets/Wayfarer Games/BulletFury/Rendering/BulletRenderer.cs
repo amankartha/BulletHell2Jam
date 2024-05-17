@@ -62,6 +62,7 @@ namespace BulletFury
             #endif
         }
 
+        #if UNITY_EDITOR
         private static void PlayModeStateChanged(UnityEditor.PlayModeStateChange obj)
         {
             if (obj == UnityEditor.PlayModeStateChange.ExitingPlayMode)
@@ -69,7 +70,7 @@ namespace BulletFury
             if (obj == UnityEditor.PlayModeStateChange.EnteredEditMode)
                 Init();
         }
-
+        #endif
         private static async void LateUpdate()
         {
             while (!_disposed)
@@ -79,16 +80,18 @@ namespace BulletFury
                     BulletSpawner.RenderQueue.Clear();
                     return;
                 }
+
                 foreach (var queue in BulletSpawner.RenderQueue.Values)
+                {
+                    Debug.Log($"Rendering {queue.Spawner.name} with priority {queue.RenderData.Priority}"); 
                     if (!queue.Spawner.Disposed)
                         Render(queue.RenderData, queue.Bullets, queue.Count, queue.RenderData.Camera);
+                }
                 
                 BulletSpawner.RenderQueue.Clear();
-                #if UNITY_2023_1_OR_NEWER
-                await Awaitable.EndOfFrameAsync();
-                #else
+                
                 await Task.Yield();
-                #endif
+                
                 if (_disposed)
                 {
                     BulletSpawner.RenderQueue.Clear();
@@ -115,6 +118,7 @@ namespace BulletFury
         public static void Render(BulletRenderData data, NativeArray<BulletContainer> bullets, int numBullets, Camera cam)
         {
             if (numBullets == 0 || _disposed) return;
+            
 
             data.Material.SetFloat(SortOrder, data.Priority);
 
@@ -188,9 +192,8 @@ namespace BulletFury
             _colorBuffer[data].tex.SetData(_tex);
             data.Material.SetBuffer(InstanceColorBuffer, _colorBuffer[data].color);
             data.Material.SetBuffer(InstanceTexBuffer, _colorBuffer[data].tex);
-            
             Graphics.RenderMeshInstanced(renderParams, _mesh, 0, _matrices, length);
-            #endif
+#endif
         }
         
         private static bool IsNaN(Quaternion q) {

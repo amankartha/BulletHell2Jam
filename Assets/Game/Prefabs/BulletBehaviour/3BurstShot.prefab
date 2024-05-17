@@ -72,7 +72,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1978471113
-  m_SortingLayer: 5
+  m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 2747690628134850419, guid: b670ab75dde984907b8570040daa08c5, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -107,9 +107,10 @@ MonoBehaviour:
       PerFrameLength: 0.5
       Layer: 6
       Priority: 0
-    sharedData: {fileID: 11400000, guid: 4fe6193ec372ac44a87ac92ced03adbd, type: 2}
+    sharedData: {fileID: 11400000, guid: d9f004339d47783469999981b771c2c4, type: 2}
   main:
     FireMode: 0
+    PlayOnEnable: 1
     FireRate:
       isRandom: 0
       minValue: 2
@@ -132,6 +133,8 @@ MonoBehaviour:
       minValue: 0.5
       maxValue: 1
     UseRotationForDirection: 1
+    MoveWithTransform: 0
+    RotateWithTransform: 0
     ColliderType: 0
     ColliderSize: 0.5
     CapsuleLength: 0.1
@@ -168,6 +171,7 @@ MonoBehaviour:
     burstCount: 3
     burstDelay: 0.15
     stackSpeedIncrease: 0
+    burstsUpdatePositionEveryBullet: 0
   subSpawners: []
   bulletModules: []
   bulletInitModules: []

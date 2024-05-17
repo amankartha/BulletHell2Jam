@@ -6,6 +6,7 @@ using BulletFury.Data;
 using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.SceneManagement;
 using UnityHFSM;
 
 public class MainPlayer : MonoBehaviour, IBulletHitHandler
@@ -17,8 +18,8 @@ public class MainPlayer : MonoBehaviour, IBulletHitHandler
     public int RelectHeatChargeUp = 5;
     public int ShootThreshold = 60;
     public int ShootingDrainPerSecond = 10;
-    
-    [SerializeField]
+    public float OverchargeCooldownPerSecond = 10f;
+    [SerializeField]    
     private int _health;
     [SerializeField]
     private int _maxHealth;
@@ -28,10 +29,14 @@ public class MainPlayer : MonoBehaviour, IBulletHitHandler
     [SerializeField]
     private int _maxHeat;
 
-  
+    public float Speed = 5f;
+    public float OverheatedSpeed = 2f;
     
     private StateMachine fsm;
     private Camera mainCamera;
+
+    public Animator Anim;
+    
     public int Health {
         get => _health;
         set
@@ -53,13 +58,16 @@ public class MainPlayer : MonoBehaviour, IBulletHitHandler
         }
     }
 
+    public bool canCharge = true;
+    public bool canReflect = true;
+
     #endregion
 
     #region Events
 
 
     public UnityEvent OnPlayerHit;
-
+    
     #endregion
 
     #region Links
@@ -67,11 +75,16 @@ public class MainPlayer : MonoBehaviour, IBulletHitHandler
     [Header("TO BE LINKED")] 
     public BulletSpawner armBulletSpawner;
 
+    public SpriteRenderer Renderer;
+
     #endregion
     private void Awake()
     {
           GameManager.Instance.MAINPLAYERGAMEOBJECT = this.gameObject;
           GameManager.Instance.MAINPLAYERSCRIPT = this;
+          
+          DontDestroyOnLoad(gameObject);
+          SceneManager.sceneLoaded += SetPlayerPositionToSpawnPoint;
     }
 
     // Start is called before the first frame update
@@ -87,6 +100,9 @@ public class MainPlayer : MonoBehaviour, IBulletHitHandler
         
         fsm.AddTransition(new Transition("Melee","Shooting",transition => TransitionToShooting()));
         fsm.AddTransition(new Transition("Shooting","Melee",transition => TransitionFromShooting()));
+        
+        fsm.AddTransition(new Transition("Melee","OverCharged",transition => TransitionToOverheated()));
+        fsm.AddTransition(new Transition("OverCharged","Melee",transition => TransitionFromOverheated()));
 
 
         fsm.SetStartState("Melee");
@@ -107,7 +123,10 @@ public class MainPlayer : MonoBehaviour, IBulletHitHandler
         
     }
 
-  
+    private void FixedUpdate()
+    {
+        
+    }
 
     public bool TryConsumeHeat(int value)
     {
@@ -127,7 +146,7 @@ public class MainPlayer : MonoBehaviour, IBulletHitHandler
 
     private void Teleport()
     {
-        if (canTeleport && Input.GetKeyDown(KeyCode.Space) && TryConsumeHeat(TeleportCost) && GameManager.Instance.CheckIfInBounds((Vector2)mainCamera.ScreenToWorldPoint(Input.mousePosition)))
+        if (canTeleport && Input.GetKeyDown(KeyCode.Space) &&  GameManager.Instance.CheckIfInBounds((Vector2)mainCamera.ScreenToWorldPoint(Input.mousePosition)) && TryConsumeHeat(TeleportCost))
         {
             TeleportSequence();    
         }
@@ -139,6 +158,11 @@ public class MainPlayer : MonoBehaviour, IBulletHitHandler
         StartCoroutine(TeleportCoolDownCounter());
     }
 
+    public string GetCurrentState()
+    {
+        return fsm.ActiveStateName;
+    }
+    
     #region TransitionFunctions
 
     private bool TransitionToShooting()
@@ -161,6 +185,36 @@ public class MainPlayer : MonoBehaviour, IBulletHitHandler
         return false;
     }
 
+    private bool TransitionToOverheated()
+    {
+        if (Math.Abs(Heat - _maxHeat) < 0.1)
+        {
+            return true;
+        }
+
+        return false;
+    }
+
+    private bool TransitionFromOverheated()
+    {
+        if (Heat == 0)
+        {
+            return true;
+        }
+
+        return false;
+    }
+    
+    private void SetPlayerPositionToSpawnPoint(Scene scene, LoadSceneMode mode)
+    {
+        SpawnPosition spawnPos = FindObjectOfType<SpawnPosition>();
+       
+
+        if (spawnPos != null)
+        {
+            transform.position = spawnPos.transform.position;
+        }
+    }
     #endregion
 
     #region COLLISION

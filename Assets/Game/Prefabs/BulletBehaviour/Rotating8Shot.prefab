@@ -72,7 +72,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1978471113
-  m_SortingLayer: 5
+  m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 2747690628134850419, guid: b670ab75dde984907b8570040daa08c5, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -107,9 +107,10 @@ MonoBehaviour:
       PerFrameLength: 0.5
       Layer: 6
       Priority: 0
-    sharedData: {fileID: 11400000, guid: 4fe6193ec372ac44a87ac92ced03adbd, type: 2}
+    sharedData: {fileID: 11400000, guid: d9f004339d47783469999981b771c2c4, type: 2}
   main:
     FireMode: 0
+    PlayOnEnable: 1
     FireRate:
       isRandom: 0
       minValue: 0.5
@@ -120,21 +121,23 @@ MonoBehaviour:
       maxValue: 1
     Lifetime:
       isRandom: 0
-      minValue: 5
+      minValue: 15
       maxValue: 1
     Speed:
       isRandom: 0
-      minValue: 1.75
+      minValue: 1
       maxValue: 5
-    StartColor: {r: 1, g: 1, b: 1, a: 1}
+    StartColor: {r: 0.91474086, g: 0.2971698, b: 1, a: 1}
     StartSize:
       isRandom: 0
       minValue: 0.5
       maxValue: 1
     UseRotationForDirection: 1
-    ColliderType: 0
-    ColliderSize: 0.5
-    CapsuleLength: 0.1
+    MoveWithTransform: 0
+    RotateWithTransform: 1
+    ColliderType: 1
+    ColliderSize: 0.25
+    CapsuleLength: 0.4
   spawnShapeData:
     rotateSpeed: 0
     spawnDir: 2
@@ -143,7 +146,7 @@ MonoBehaviour:
     numPerGroup: 1
     groupRadius:
       isRandom: 0
-      minValue: 0
+      minValue: 0.25
       maxValue: 0.25
     spawnCentreBullet: 0
     groupDirection: 0
@@ -168,13 +171,15 @@ MonoBehaviour:
     burstCount: 1
     burstDelay: 0
     stackSpeedIncrease: 0
+    burstsUpdatePositionEveryBullet: 0
   subSpawners: []
   bulletModules: []
   bulletInitModules: []
   spawnModules: []
   allModules:
-  - rid: 5125869643372167191
-  - rid: 5125869643372167204
+  - rid: 5125869715220070401
+  - rid: 5125869643372167184
+  - rid: 5125869643372167185
   OnBulletDied:
     m_PersistentCalls:
       m_Calls: []
@@ -190,21 +195,19 @@ MonoBehaviour:
   references:
     version: 2
     RefIds:
-    - rid: 5125869643372167191
-      type: {class: SpawnerRotateModule, ns: BulletFury.Modules, asm: WayfarerGames.BulletFury}
-      data:
-        angularSpeed: 2.5
-    - rid: 5125869643372167204
-      type: {class: AngularVelocityModule, ns: BulletFury.Modules, asm: WayfarerGames.BulletFury}
+    - rid: 5125869643372167184
+      type: {class: TrackObjectModule, ns: BulletFury.Modules, asm: WayfarerGames.BulletFury}
       data:
         Mode: 0
-        Time: 1
-        angularVelocity:
+        Time: 0
+        <ToTrack>k__BackingField: {fileID: 31429914335782348, guid: d9f89a9092585b648a90cb32e3851f58, type: 3}
+        <TurnSpeed>k__BackingField: 2.5
+        turnSpeedOverTime:
           serializedVersion: 2
           m_Curve:
           - serializedVersion: 3
-            time: 0
-            value: 1
+            time: 0.049987793
+            value: 0.0030212402
             inSlope: 0
             outSlope: 0
             tangentMode: 0
@@ -212,8 +215,17 @@ MonoBehaviour:
             inWeight: 0
             outWeight: 0
           - serializedVersion: 3
-            time: 1
-            value: 1
+            time: 0.055922244
+            value: 1.6434228
+            inSlope: 6.2230506
+            outSlope: 6.2230506
+            tangentMode: 0
+            weightedMode: 0
+            inWeight: 0.2039295
+            outWeight: 0.057377208
+          - serializedVersion: 3
+            time: 0.17199798
+            value: 0.19374073
             inSlope: 0
             outSlope: 0
             tangentMode: 0
@@ -223,4 +235,55 @@ MonoBehaviour:
           m_PreInfinity: 2
           m_PostInfinity: 2
           m_RotationOrder: 4
-        scale: 0
+    - rid: 5125869643372167185
+      type: {class: SpeedOverTimeModule, ns: BulletFury.Modules, asm: WayfarerGames.BulletFury}
+      data:
+        Mode: 0
+        Time: 0
+        speedOverTime:
+          serializedVersion: 2
+          m_Curve:
+          - serializedVersion: 3
+            time: -0.000065206084
+            value: 0.5909864
+            inSlope: 0.07266291
+            outSlope: 0.07266291
+            tangentMode: 0
+            weightedMode: 0
+            inWeight: 0
+            outWeight: 0.17636125
+          - serializedVersion: 3
+            time: 0.059887588
+            value: 0.3048735
+            inSlope: 0.24356498
+            outSlope: 0.24356498
+            tangentMode: 0
+            weightedMode: 0
+            inWeight: 0.16391706
+            outWeight: 0.19991218
+          - serializedVersion: 3
+            time: 0.090488404
+            value: 1.0714233
+            inSlope: 11.4788
+            outSlope: 11.4788
+            tangentMode: 0
+            weightedMode: 0
+            inWeight: 0.33333334
+            outWeight: 0.33333334
+          - serializedVersion: 3
+            time: 0.14933799
+            value: 1.2428356
+            inSlope: 0.44759724
+            outSlope: 0.44759724
+            tangentMode: 0
+            weightedMode: 0
+            inWeight: 0.8830736
+            outWeight: 0
+          m_PreInfinity: 2
+          m_PostInfinity: 2
+          m_RotationOrder: 4
+        scale: 4
+    - rid: 5125869715220070401
+      type: {class: SpawnerRotateModule, ns: BulletFury.Modules, asm: WayfarerGames.BulletFury}
+      data:
+        angularSpeed: 20

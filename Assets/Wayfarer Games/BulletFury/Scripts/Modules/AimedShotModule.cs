@@ -67,13 +67,20 @@ namespace BulletFury.Modules
                     if (_previousPosition == null)
                     {
                         _previousPosition = target.position;
+                        rotation = targetRotation; // Instant rotation to face the target
+                        _previousRotation = rotation;
                         return;
                     }
                     
                     if (!Mathf.Approximately(deltaTime, 0))
                         _cachedVelocity = (target.position - _previousPosition.Value) / deltaTime;
 
-                    if (_cachedVelocity == null) return;
+                    if (_cachedVelocity == null)
+                    {
+                        rotation = targetRotation; // Instant rotation to face the target
+                        _previousRotation = rotation;
+                        return;
+                    }
 
                     Vector3 targetVelocity = _cachedVelocity.Value; 
                     Vector3 predictedPosition = target.position + targetVelocity * lookAheadTime;

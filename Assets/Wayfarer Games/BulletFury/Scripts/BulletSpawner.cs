@@ -110,7 +110,6 @@ namespace BulletFury
 
         private bool _disposed = false;
         public bool Disposed => _disposed;
-
         public struct RenderQueueData
         {
             public BulletRenderData RenderData;
@@ -230,12 +229,12 @@ namespace BulletFury
                 _queuedRenderData.Value.cam);
         }
         
-        private void LateUpdate()
+        private void Update()
         { 
             if (_queuedRenderData == null || _disposed) return;
             float priority = -_queuedRenderData.Value.renderData.Priority;
             while (_renderQueue.ContainsKey(priority))
-                priority -= 0.01f;
+                priority += 0.01f;
             
             _renderQueue.Add(priority, new RenderQueueData
             {
@@ -422,8 +421,8 @@ namespace BulletFury
 
         public async void Spawn(Vector3 position, Vector3 up, float deltaTime)
         {
-            if (_disposed) return;
             while (!_bulletsFree) await Task.Yield();
+            if (_disposed) return;
             var hasBulletsLeft = CheckBulletsRemaining();
             
             // don't spawn a bullet if we haven't reached the correct fire rate
@@ -450,6 +449,7 @@ namespace BulletFury
             var rotations = new List<Quaternion>();
             for (int burstNum = 0; burstNum < burstData.burstCount; ++burstNum)
             {
+                if (_disposed) return;
                 // make sure the positions and rotations are clear before doing anything
                 positions.Clear();
                 rotations.Clear();

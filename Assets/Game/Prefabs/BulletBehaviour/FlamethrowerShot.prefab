@@ -17,7 +17,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &3564092691881542115
 Transform:
   m_ObjectHideFlags: 0
@@ -72,7 +72,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1978471113
-  m_SortingLayer: 5
+  m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 2747690628134850419, guid: b670ab75dde984907b8570040daa08c5, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -110,6 +110,7 @@ MonoBehaviour:
     sharedData: {fileID: 11400000, guid: 9aa15e800874f4e4c85c2ef94edf1a35, type: 2}
   main:
     FireMode: 0
+    PlayOnEnable: 1
     FireRate:
       isRandom: 0
       minValue: 5
@@ -195,9 +196,9 @@ MonoBehaviour:
     - rid: 5125869666082750464
       type: {class: AimedShotModule, ns: BulletFury.Modules, asm: WayfarerGames.BulletFury}
       data:
-        thisTransform: {fileID: 0}
+        thisTransform: {fileID: 3564092691881542115}
         target: {fileID: 0}
-        type: 2
+        type: 0
         maxChangePerFrame: 10
         lerpSpeed: 0.1
         time: 0.5

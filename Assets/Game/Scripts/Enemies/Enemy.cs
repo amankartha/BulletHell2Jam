@@ -13,7 +13,7 @@ public class Enemy : MonoBehaviour, IBulletHitHandler
     private BulletSpawner _bulletSpawner;
     private DOTweenPath _doTweenPath;
 
-    private float _health = 10f;
+    public float _health = 10f;
     public float MaxHealth = 10f;
     
     #endregion"

@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4479730722398744903}
   - component: {fileID: 150402854941987091}
-  - component: {fileID: 1803195556175251459}
   m_Layer: 3
   m_Name: RoomStartTrigger
   m_TagString: Untagged
@@ -78,18 +77,3 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 2.078198, y: 1.0829377}
   m_EdgeRadius: 0
---- !u!114 &1803195556175251459
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4817401514183107075}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 477da9e3fea24524693581fef7183baf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  MethodstoCall:
-    m_PersistentCalls:
-      m_Calls: []

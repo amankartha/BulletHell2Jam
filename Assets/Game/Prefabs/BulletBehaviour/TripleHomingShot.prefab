@@ -72,7 +72,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1978471113
-  m_SortingLayer: 5
+  m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 2747690628134850419, guid: b670ab75dde984907b8570040daa08c5, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -107,12 +107,13 @@ MonoBehaviour:
       PerFrameLength: 0.5
       Layer: 6
       Priority: 0
-    sharedData: {fileID: 11400000, guid: 4fe6193ec372ac44a87ac92ced03adbd, type: 2}
+    sharedData: {fileID: 11400000, guid: d9f004339d47783469999981b771c2c4, type: 2}
   main:
     FireMode: 0
+    PlayOnEnable: 1
     FireRate:
       isRandom: 0
-      minValue: 2
+      minValue: 3
       maxValue: 3
     Damage:
       isRandom: 0
@@ -126,15 +127,17 @@ MonoBehaviour:
       isRandom: 0
       minValue: 1
       maxValue: 5
-    StartColor: {r: 1, g: 1, b: 1, a: 1}
+    StartColor: {r: 0.91474086, g: 0.2971698, b: 1, a: 1}
     StartSize:
       isRandom: 0
       minValue: 0.5
       maxValue: 1
     UseRotationForDirection: 1
-    ColliderType: 0
-    ColliderSize: 0.5
-    CapsuleLength: 0.1
+    MoveWithTransform: 0
+    RotateWithTransform: 1
+    ColliderType: 1
+    ColliderSize: 0.25
+    CapsuleLength: 0.4
   spawnShapeData:
     rotateSpeed: 0
     spawnDir: 2
@@ -168,6 +171,7 @@ MonoBehaviour:
     burstCount: 1
     burstDelay: 0
     stackSpeedIncrease: 0
+    burstsUpdatePositionEveryBullet: 0
   subSpawners: []
   bulletModules: []
   bulletInitModules: []
@@ -194,7 +198,7 @@ MonoBehaviour:
     - rid: 5125869643372167180
       type: {class: AimedShotModule, ns: BulletFury.Modules, asm: WayfarerGames.BulletFury}
       data:
-        thisTransform: {fileID: 8458059501990138549}
+        thisTransform: {fileID: 0}
         target: {fileID: 0}
         type: 0
         maxChangePerFrame: 10
@@ -206,8 +210,8 @@ MonoBehaviour:
       data:
         Mode: 0
         Time: 0
-        <ToTrack>k__BackingField: {fileID: 0}
-        <TurnSpeed>k__BackingField: 10
+        <ToTrack>k__BackingField: {fileID: 31429914335782348, guid: d9f89a9092585b648a90cb32e3851f58, type: 3}
+        <TurnSpeed>k__BackingField: 2.5
         turnSpeedOverTime:
           serializedVersion: 2
           m_Curve:
@@ -221,17 +225,17 @@ MonoBehaviour:
             inWeight: 0
             outWeight: 0
           - serializedVersion: 3
-            time: 0.15003082
-            value: 1.0070491
-            inSlope: 0.06615555
-            outSlope: 0.06615555
+            time: 0.055922244
+            value: 1.6434228
+            inSlope: 6.2230506
+            outSlope: 6.2230506
             tangentMode: 0
             weightedMode: 0
             inWeight: 0.2039295
-            outWeight: 0.33333334
+            outWeight: 0.057377208
           - serializedVersion: 3
-            time: 0.15144926
-            value: 0.0041503906
+            time: 0.17199798
+            value: 0.19374073
             inSlope: 0
             outSlope: 0
             tangentMode: 0
@@ -250,8 +254,8 @@ MonoBehaviour:
           serializedVersion: 2
           m_Curve:
           - serializedVersion: 3
-            time: 0.0011135354
-            value: 0.7266828
+            time: -0.000065206084
+            value: 0.5909864
             inSlope: 0.07266291
             outSlope: 0.07266291
             tangentMode: 0
@@ -259,8 +263,8 @@ MonoBehaviour:
             inWeight: 0
             outWeight: 0.17636125
           - serializedVersion: 3
-            time: 0.06713864
-            value: 0.2627427
+            time: 0.059887588
+            value: 0.3048735
             inSlope: 0.24356498
             outSlope: 0.24356498
             tangentMode: 0
@@ -268,8 +272,8 @@ MonoBehaviour:
             inWeight: 0.16391706
             outWeight: 0.19991218
           - serializedVersion: 3
-            time: 0.13380367
-            value: 0.9143798
+            time: 0.090488404
+            value: 1.0714233
             inSlope: 11.4788
             outSlope: 11.4788
             tangentMode: 0
@@ -277,8 +281,8 @@ MonoBehaviour:
             inWeight: 0.33333334
             outWeight: 0.33333334
           - serializedVersion: 3
-            time: 0.15056427
-            value: 0.99815726
+            time: 0.14933799
+            value: 1.2428356
             inSlope: 0.44759724
             outSlope: 0.44759724
             tangentMode: 0
@@ -288,4 +292,4 @@ MonoBehaviour:
           m_PreInfinity: 2
           m_PostInfinity: 2
           m_RotationOrder: 4
-        scale: 8
+        scale: 4

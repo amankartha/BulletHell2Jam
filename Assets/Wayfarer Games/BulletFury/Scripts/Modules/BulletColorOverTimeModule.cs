@@ -1,6 +1,8 @@
 using System;
 using BulletFury.Data;
+using Unity.Collections;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 namespace BulletFury.Modules
 {

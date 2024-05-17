@@ -35,9 +35,10 @@ void GetAnimatedFrameUV_float (UnityTexture2D tex, float _Rows, float _Cols, flo
     int current = floor(frame);
     float dx = 1.0 / _Cols;
     float dy = 1.0 / _Rows;
+    float cellX = fmod(current, _Cols);
 
     float2 newUV = float2(
-        (uv.x * dx) + fmod(current, _Cols) * dx,
+    cellX * dx + (1.0f - uv.x) * dx, // Corrected mirroring
         1.0 - ((uv.y * dy) + floor(current / _Cols) * dy)
       );
 
