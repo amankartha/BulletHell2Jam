@@ -75,6 +75,8 @@ public class MainPlayer : MonoBehaviour, IBulletHitHandler
     [Header("TO BE LINKED")] 
     public BulletSpawner armBulletSpawner;
 
+    public SpriteRenderer Renderer;
+
     #endregion
     private void Awake()
     {

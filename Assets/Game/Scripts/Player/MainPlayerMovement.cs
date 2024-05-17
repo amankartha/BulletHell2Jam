@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using BulletFury;
 using UnityEngine;
 using UnityHFSM;
 
@@ -11,6 +12,10 @@ public class MainPlayerMovement : StateBase
     private Vector2 movementVectorContainer = new Vector2();
 
     private MainPlayer _mainPlayer;
+    
+    private Vector3 previous;
+    private float velocity;
+    
     public MainPlayerMovement(bool needsExitTime,MainPlayer player, bool isGhostState = false) : base(needsExitTime, isGhostState)
     {
         _mainPlayer = player;
@@ -30,6 +35,16 @@ public class MainPlayerMovement : StateBase
         movementVectorContainer *= Time.deltaTime;
         
         _mainPlayer.gameObject.transform.Translate(movementVectorContainer);
+        
+        if(movementVectorContainer.x != 0) _mainPlayer.Renderer.flipX = movementVectorContainer.x < 0;
+        
+        velocity = ((_mainPlayer.transform.position - previous).magnitude) / Time.deltaTime;
+        previous = _mainPlayer.transform.position;
+        
+       
+        _mainPlayer.Anim.SetBool("Walk",velocity > 0);
+        
+        
     }
 
     public override void OnExit()
@@ -37,5 +52,6 @@ public class MainPlayerMovement : StateBase
         base.OnExit();
         _mainPlayer.canCharge = false;
         _mainPlayer.canReflect = false;
+       
     }
 }
