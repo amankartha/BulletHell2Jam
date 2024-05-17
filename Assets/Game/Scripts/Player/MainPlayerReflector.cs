@@ -21,7 +21,7 @@ public class MainPlayerReflector : MonoBehaviour,IBulletHitHandler
 
     public void Hit(BulletContainer bullet)
     {
-        _player.Heat += HeatGained;
+        if(_reflectCollider.enabled) _player.Heat += HeatGained;
     }
 
     private void Update()
