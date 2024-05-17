@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 121d431d42d6fe34eb98858284673438
+guid: e4d66c1f31662f04281cb73f086f77a0
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -69,7 +69,7 @@ TextureImporter:
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
-    maxTextureSize: 512
+    maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 1
@@ -134,7 +134,74 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: OverchargeMeter
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1025
+        width: 2048
+        height: 512
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e0b39106a1fad044bbe49256e1922e8c
+      internalID: 1932692677
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LightningSymbol
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 512
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -256, y: 256}
+        - {x: -256, y: -256}
+        - {x: 256, y: -256}
+        - {x: 256, y: 256}
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7edeaee45aa29564ba93592bc1a9d51d
+      internalID: 1549931861
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MenuButton
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1536
+        width: 1536
+        height: 512
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e18dd172acd681047ad57c86482b7224
+      internalID: 267563323
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -145,7 +212,19 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      LightningSymbol: 1549931861
+      MenuButton: 267563323
+      OverchargeMeter: 1932692677
+      UI_Button_ChargeMeter_ElectricIcon_10: 594965275
+      UI_Button_ChargeMeter_ElectricIcon_11: -1931169254
+      UI_Button_ChargeMeter_ElectricIcon_3: -451054070
+      UI_Button_ChargeMeter_ElectricIcon_4: 1138613283
+      UI_Button_ChargeMeter_ElectricIcon_5: -1645103390
+      UI_Button_ChargeMeter_ElectricIcon_6: -204343212
+      UI_Button_ChargeMeter_ElectricIcon_7: -1143046714
+      UI_Button_ChargeMeter_ElectricIcon_8: -461428632
+      UI_Button_ChargeMeter_ElectricIcon_9: -949326022
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
