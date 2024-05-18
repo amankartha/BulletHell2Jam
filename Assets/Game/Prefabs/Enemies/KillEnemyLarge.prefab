@@ -776,253 +776,6 @@ MonoBehaviour:
         WiggleRotationDuration: 0
         WiggleScale: 0
         WiggleScaleDuration: 0
---- !u!1 &6773269482118459790
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2964740587485847152}
-  - component: {fileID: 7384241035186303769}
-  - component: {fileID: 3583135874676003584}
-  m_Layer: 12
-  m_Name: BulletSpawner
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &2964740587485847152
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6773269482118459790}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 4455502052931751663}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7384241035186303769
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6773269482118459790}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2583716d8b9a4cf9ae2a2a52c75333ec, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  renderData:
-    singleData:
-      Camera: {fileID: 0}
-      Texture: {fileID: 2800000, guid: e97c8196946b3aa4f8b6c2a53a28cc78, type: 3}
-      Animated: 1
-      Rows: 3
-      Columns: 1
-      PerFrameLength: 0.5
-      Layer: 6
-      Priority: 0
-    sharedData: {fileID: 11400000, guid: d9f004339d47783469999981b771c2c4, type: 2}
-  main:
-    FireMode: 0
-    PlayOnEnable: 1
-    FireRate:
-      isRandom: 0
-      minValue: 0.5
-      maxValue: 3
-    Damage:
-      isRandom: 0
-      minValue: 1
-      maxValue: 1
-    Lifetime:
-      isRandom: 0
-      minValue: 15
-      maxValue: 1
-    Speed:
-      isRandom: 0
-      minValue: 1
-      maxValue: 5
-    StartColor: {r: 0.91474086, g: 0.2971698, b: 1, a: 1}
-    StartSize:
-      isRandom: 0
-      minValue: 0.5
-      maxValue: 1
-    UseRotationForDirection: 1
-    MoveWithTransform: 0
-    RotateWithTransform: 1
-    ColliderType: 1
-    ColliderSize: 0.25
-    CapsuleLength: 0.4
-  spawnShapeData:
-    rotateSpeed: 0
-    spawnDir: 2
-    numPoints: 8
-    numPerSide: 1
-    numPerGroup: 1
-    groupRadius:
-      isRandom: 0
-      minValue: 0.25
-      maxValue: 0.25
-    spawnCentreBullet: 0
-    groupDirection: 0
-    removeFromEdgePercent: 0
-    radius:
-      isRandom: 0
-      minValue: 1
-      maxValue: 0
-    arc:
-      isRandom: 0
-      minValue: 360
-      maxValue: 360
-    randomise: 0
-    onEdge: 0
-    directionArc:
-      isRandom: 0
-      minValue: 360
-      maxValue: 360
-  burstData:
-    delay: 0
-    maxActiveBullets: 0
-    burstCount: 1
-    burstDelay: 0
-    stackSpeedIncrease: 0
-    burstsUpdatePositionEveryBullet: 0
-  subSpawners: []
-  bulletModules: []
-  bulletInitModules: []
-  spawnModules: []
-  allModules:
-  - rid: 5125869715220070401
-  - rid: 5125869643372167184
-  - rid: 5125869643372167185
-  OnBulletDied:
-    m_PersistentCalls:
-      m_Calls: []
-  OnBulletCancelled:
-    m_PersistentCalls:
-      m_Calls: []
-  OnBulletSpawned:
-    m_PersistentCalls:
-      m_Calls: []
-  OnWeaponFired:
-    m_PersistentCalls:
-      m_Calls: []
-  references:
-    version: 2
-    RefIds:
-    - rid: 5125869643372167184
-      type: {class: TrackObjectModule, ns: BulletFury.Modules, asm: WayfarerGames.BulletFury}
-      data:
-        Mode: 0
-        Time: 0
-        <ToTrack>k__BackingField: {fileID: 31429914335782348, guid: d9f89a9092585b648a90cb32e3851f58, type: 3}
-        <TurnSpeed>k__BackingField: 2.5
-        turnSpeedOverTime:
-          serializedVersion: 2
-          m_Curve:
-          - serializedVersion: 3
-            time: 0.049987793
-            value: 0.0030212402
-            inSlope: 0
-            outSlope: 0
-            tangentMode: 0
-            weightedMode: 0
-            inWeight: 0
-            outWeight: 0
-          - serializedVersion: 3
-            time: 0.055922244
-            value: 1.6434228
-            inSlope: 6.2230506
-            outSlope: 6.2230506
-            tangentMode: 0
-            weightedMode: 0
-            inWeight: 0.2039295
-            outWeight: 0.057377208
-          - serializedVersion: 3
-            time: 0.17199798
-            value: 0.19374073
-            inSlope: 0
-            outSlope: 0
-            tangentMode: 0
-            weightedMode: 0
-            inWeight: 0
-            outWeight: 0
-          m_PreInfinity: 2
-          m_PostInfinity: 2
-          m_RotationOrder: 4
-    - rid: 5125869643372167185
-      type: {class: SpeedOverTimeModule, ns: BulletFury.Modules, asm: WayfarerGames.BulletFury}
-      data:
-        Mode: 0
-        Time: 0
-        speedOverTime:
-          serializedVersion: 2
-          m_Curve:
-          - serializedVersion: 3
-            time: -0.000065206084
-            value: 0.5909864
-            inSlope: 0.07266291
-            outSlope: 0.07266291
-            tangentMode: 0
-            weightedMode: 0
-            inWeight: 0
-            outWeight: 0.17636125
-          - serializedVersion: 3
-            time: 0.059887588
-            value: 0.3048735
-            inSlope: 0.24356498
-            outSlope: 0.24356498
-            tangentMode: 0
-            weightedMode: 0
-            inWeight: 0.16391706
-            outWeight: 0.19991218
-          - serializedVersion: 3
-            time: 0.090488404
-            value: 1.0714233
-            inSlope: 11.4788
-            outSlope: 11.4788
-            tangentMode: 0
-            weightedMode: 0
-            inWeight: 0.33333334
-            outWeight: 0.33333334
-          - serializedVersion: 3
-            time: 0.14933799
-            value: 1.2428356
-            inSlope: 0.44759724
-            outSlope: 0.44759724
-            tangentMode: 0
-            weightedMode: 0
-            inWeight: 0.8830736
-            outWeight: 0
-          m_PreInfinity: 2
-          m_PostInfinity: 2
-          m_RotationOrder: 4
-        scale: 4
-    - rid: 5125869715220070401
-      type: {class: SpawnerRotateModule, ns: BulletFury.Modules, asm: WayfarerGames.BulletFury}
-      data:
-        angularSpeed: 20
---- !u!114 &3583135874676003584
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6773269482118459790}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fa808113a8795c1408e94e3f5456bbe3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &6967046368531937456
 GameObject:
   m_ObjectHideFlags: 0
@@ -1055,7 +808,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 2964740587485847152}
+  - {fileID: 2851680653660940440}
   - {fileID: 5854154219283496891}
   - {fileID: 2452305765765032924}
   m_Father: {fileID: 0}
@@ -1074,6 +827,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _health: 20
   MaxHealth: 20
+  canRespawnAfterDelay: 0
+  delay: 10
+  Child: {fileID: 0}
   OnTakeDamage:
     m_PersistentCalls:
       m_Calls:
@@ -1254,3 +1010,205 @@ MonoBehaviour:
   lastSrcRotation: {x: -0, y: -0, z: -0, w: 1}
   wpsDropdown: 1
   dropToFloorOffset: 0
+--- !u!1 &9012251457625037693
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2851680653660940440}
+  - component: {fileID: 7252069507047431761}
+  - component: {fileID: 1769789614392746342}
+  m_Layer: 12
+  m_Name: BulletSpawner
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2851680653660940440
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9012251457625037693}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4455502052931751663}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7252069507047431761
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9012251457625037693}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2583716d8b9a4cf9ae2a2a52c75333ec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  renderData:
+    singleData:
+      Camera: {fileID: 0}
+      Texture: {fileID: 2800000, guid: e97c8196946b3aa4f8b6c2a53a28cc78, type: 3}
+      Animated: 1
+      Rows: 3
+      Columns: 1
+      PerFrameLength: 0.5
+      Layer: 6
+      Priority: 0
+    sharedData: {fileID: 11400000, guid: 9aa15e800874f4e4c85c2ef94edf1a35, type: 2}
+  main:
+    FireMode: 0
+    PlayOnEnable: 1
+    FireRate:
+      isRandom: 0
+      minValue: 5
+      maxValue: 3
+    Damage:
+      isRandom: 0
+      minValue: 1
+      maxValue: 1
+    Lifetime:
+      isRandom: 0
+      minValue: 15
+      maxValue: 1
+    Speed:
+      isRandom: 0
+      minValue: 1.5
+      maxValue: 5
+    StartColor: {r: 0.91474086, g: 0.2971698, b: 1, a: 1}
+    StartSize:
+      isRandom: 0
+      minValue: 2
+      maxValue: 1
+    UseRotationForDirection: 1
+    MoveWithTransform: 0
+    RotateWithTransform: 0
+    ColliderType: 0
+    ColliderSize: 0.55
+    CapsuleLength: 0.4
+  spawnShapeData:
+    rotateSpeed: 0
+    spawnDir: 2
+    numPoints: 5
+    numPerSide: 1
+    numPerGroup: 1
+    groupRadius:
+      isRandom: 0
+      minValue: 0.25
+      maxValue: 0.25
+    spawnCentreBullet: 0
+    groupDirection: 0
+    removeFromEdgePercent: 0
+    radius:
+      isRandom: 0
+      minValue: 1
+      maxValue: 0
+    arc:
+      isRandom: 0
+      minValue: 180
+      maxValue: 360
+    randomise: 0
+    onEdge: 0
+    directionArc:
+      isRandom: 0
+      minValue: 360
+      maxValue: 360
+  burstData:
+    delay: 1
+    maxActiveBullets: 0
+    burstCount: 1
+    burstDelay: 0
+    stackSpeedIncrease: 0
+    burstsUpdatePositionEveryBullet: 0
+  subSpawners: []
+  bulletModules: []
+  bulletInitModules: []
+  spawnModules: []
+  allModules:
+  - rid: 5125869732026122240
+  - rid: 5125869732736008194
+  OnBulletDied:
+    m_PersistentCalls:
+      m_Calls: []
+  OnBulletCancelled:
+    m_PersistentCalls:
+      m_Calls: []
+  OnBulletSpawned:
+    m_PersistentCalls:
+      m_Calls: []
+  OnWeaponFired:
+    m_PersistentCalls:
+      m_Calls: []
+  references:
+    version: 2
+    RefIds:
+    - rid: 5125869732026122240
+      type: {class: AimedShotModule, ns: BulletFury.Modules, asm: WayfarerGames.BulletFury}
+      data:
+        thisTransform: {fileID: 0}
+        target: {fileID: 0}
+        type: 0
+        maxChangePerFrame: 10
+        lerpSpeed: 0.1
+        time: 0.5
+        lookAheadTime: 1
+    - rid: 5125869732736008194
+      type: {class: BulletSizeOverTimeModule, ns: BulletFury.Modules, asm: WayfarerGames.BulletFury}
+      data:
+        Mode: 0
+        Time: 1
+        sizeOverTime:
+          serializedVersion: 2
+          m_Curve:
+          - serializedVersion: 3
+            time: 0
+            value: 1
+            inSlope: 0
+            outSlope: 0
+            tangentMode: 0
+            weightedMode: 0
+            inWeight: 0
+            outWeight: 0
+          - serializedVersion: 3
+            time: 0.9
+            value: 0.9999962
+            inSlope: 0
+            outSlope: 0
+            tangentMode: 0
+            weightedMode: 0
+            inWeight: 0.33333334
+            outWeight: 0.33333334
+          - serializedVersion: 3
+            time: 1
+            value: 0
+            inSlope: 0
+            outSlope: 0
+            tangentMode: 0
+            weightedMode: 0
+            inWeight: 0
+            outWeight: 0
+          m_PreInfinity: 2
+          m_PostInfinity: 2
+          m_RotationOrder: 4
+--- !u!114 &1769789614392746342
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9012251457625037693}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fa808113a8795c1408e94e3f5456bbe3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
