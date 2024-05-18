@@ -17,7 +17,7 @@ public class MainPlayer : MonoBehaviour, IBulletHitHandler
     public int TeleportCost = 20;
     public int RelectHeatChargeUp = 5;
     public int ShootThreshold = 60;
-    public int ShootingDrainPerSecond = 10;
+    public float ShootingDrainPerSecond = 10f;
     public float OverchargeCooldownPerSecond = 10f;
     [SerializeField]    
     private int _health;

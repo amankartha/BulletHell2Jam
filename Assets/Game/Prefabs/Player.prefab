@@ -53,16 +53,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8dfd44c0e6b6aba45bce28d75ae4b33f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TeleportCost: 2
-  RelectHeatChargeUp: 5
-  ShootThreshold: 5
+  TeleportCost: 0
+  RelectHeatChargeUp: 1
+  ShootThreshold: 0
   ShootingDrainPerSecond: 3
-  OverchargeCooldownPerSecond: 2.5
+  OverchargeCooldownPerSecond: 2
   _health: 5
   _maxHealth: 5
   _heat: 0
   _maxHeat: 10
-  Speed: 5
+  Speed: 4
   OverheatedSpeed: 3
   Anim: {fileID: 5692651010108587286}
   canCharge: 1
@@ -138,7 +138,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.07202268}
+  m_Offset: {x: 0.0024574995, y: -0.1689806}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -149,7 +149,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.49789906, y: 0.65840673}
+  m_Size: {x: 0.55196404, y: 0.7200718}
   m_EdgeRadius: 0
 --- !u!50 &5783193847798220454
 Rigidbody2D:
@@ -175,7 +175,7 @@ Rigidbody2D:
     serializedVersion: 2
     m_Bits: 0
   m_Interpolate: 0
-  m_SleepingMode: 1
+  m_SleepingMode: 0
   m_CollisionDetection: 0
   m_Constraints: 4
 --- !u!1 &1076504662954096943
@@ -206,7 +206,7 @@ Transform:
   m_GameObject: {fileID: 1076504662954096943}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.02, y: 1.02, z: 0}
+  m_LocalPosition: {x: 0, y: 0.5, z: 0}
   m_LocalScale: {x: 0.175, y: 0.175, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -277,7 +277,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pivot: {fileID: 4602746440313519860}
-  Radius: 1
+  Radius: 0.5
 --- !u!114 &5687725497073091124
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -318,14 +318,14 @@ MonoBehaviour:
       maxValue: 1
     Speed:
       isRandom: 0
-      minValue: 15
+      minValue: 10
       maxValue: 5
     StartColor: {r: 0, g: 0.9806144, b: 1, a: 1}
     StartSize:
       isRandom: 0
-      minValue: 0.75
+      minValue: 0.5
       maxValue: 1
-    UseRotationForDirection: 1
+    UseRotationForDirection: 0
     MoveWithTransform: 0
     RotateWithTransform: 0
     ColliderType: 0
@@ -333,8 +333,8 @@ MonoBehaviour:
     CapsuleLength: 0
   spawnShapeData:
     rotateSpeed: 0
-    spawnDir: 2
-    numPoints: 1
+    spawnDir: 0
+    numPoints: 2
     numPerSide: 1
     numPerGroup: 1
     groupRadius:
@@ -346,12 +346,12 @@ MonoBehaviour:
     removeFromEdgePercent: 0
     radius:
       isRandom: 0
-      minValue: 1
-      maxValue: 1
+      minValue: 0.5
+      maxValue: 10
     arc:
-      isRandom: 0
-      minValue: 360
-      maxValue: 360
+      isRandom: 1
+      minValue: -5
+      maxValue: 5
     randomise: 0
     onEdge: 0
     directionArc:
