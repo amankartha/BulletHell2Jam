@@ -21,6 +21,7 @@ public class Enemy : MonoBehaviour, IBulletHitHandler
     public bool canRespawnAfterDelay = false;
     public float delay = 10f;
     public GameObject Child;
+    public Collider2D colliderToDisable;
     #endregion"
 
     #region Properties
@@ -71,6 +72,7 @@ public class Enemy : MonoBehaviour, IBulletHitHandler
         {
             _bulletSpawner.CancelAll();
             Child.SetActive(false);
+            colliderToDisable.enabled = false;
             Invoke(nameof(Respawn),delay);
         }
         else
@@ -82,6 +84,7 @@ public class Enemy : MonoBehaviour, IBulletHitHandler
     protected void Respawn()
     {
         Child.SetActive(true);
+        colliderToDisable.enabled = true;
     }
     
 
