@@ -93,6 +93,12 @@ public class Enemy : MonoBehaviour, IBulletHitHandler
         Health -= bullet.Damage;
         OnTakeDamage?.Invoke();
     }
-    
-    
+
+    private void OnTriggerEnter2D(Collider2D col)
+    {
+        if (col.gameObject == GameManager.Instance.MAINPLAYERGAMEOBJECT)
+        {
+            Health -= 1;
+        }
+    }
 }
