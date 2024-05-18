@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using BulletFury;
+using Unity.Mathematics;
 using UnityEngine;
 using UnityHFSM;
 
@@ -42,7 +43,7 @@ public class MainPlayerMovement : StateBase
         previous = _mainPlayer.transform.position;
         
        
-        _mainPlayer.Anim.SetBool("Walk",velocity > 0);
+        _mainPlayer.Anim.SetBool("Walk",  math.abs(velocity) > 0);
         
         
     }
