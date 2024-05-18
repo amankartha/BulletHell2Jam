@@ -1,6 +1,8 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using BulletFury;
+using MoreMountains.Feedbacks;
 using UnityEngine;
 
 public class EnemyCannonArm : MonoBehaviour
@@ -12,11 +14,15 @@ public class EnemyCannonArm : MonoBehaviour
 
     private Quaternion initialRotation;
 
+    [SerializeField] private MMF_Player Shoot;
+    [SerializeField] private BulletSpawner _bulletSpawner;
+    
     private void Start()
     {
         player = GameManager.Instance.MAINPLAYERGAMEOBJECT.transform;
         // Store the initial rotation of the arm
         initialRotation = transform.rotation;
+        _bulletSpawner.OnWeaponFiredEvent += Shoot.PlayFeedbacks;
     }
 
     void Update()
