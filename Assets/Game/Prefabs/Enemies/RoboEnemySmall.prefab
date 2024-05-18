@@ -90,7 +90,7 @@ GameObject:
   - component: {fileID: 358473439169415082}
   - component: {fileID: 329414379074237537}
   m_Layer: 13
-  m_Name: KillEnemySmall
+  m_Name: RoboEnemySmall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -127,8 +127,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5e4e1affdc177a47b1c0aa1e4d73143, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _health: 8
-  MaxHealth: 8
+  _health: 15
+  MaxHealth: 15
   OnTakeDamage:
     m_PersistentCalls:
       m_Calls:
@@ -290,7 +290,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.061676502, y: -0.029590845}
+  m_Offset: {x: 0.0018291473, y: -0.027438164}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -301,7 +301,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.41954708, y: 0.6072316}
+  m_Size: {x: 0.59391785, y: 0.6890354}
   m_EdgeRadius: 0
 --- !u!1 &3135911484732825279
 GameObject:
@@ -949,7 +949,6 @@ GameObject:
   - component: {fileID: 2033011400730550179}
   - component: {fileID: 659626487292845447}
   - component: {fileID: 9129043846636886600}
-  - component: {fileID: 6630424812234712748}
   m_Layer: 13
   m_Name: Body
   m_TagString: Untagged
@@ -1350,24 +1349,3 @@ MonoBehaviour:
     NoiseShiftMin: {x: 0, y: 0, z: 0}
     NoiseShiftMax: {x: 0, y: 0, z: 0}
   DebugWiggleDuration: 2
---- !u!95 &6630424812234712748
-Animator:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7801124652737206384}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: f4c5914c567f4fa47afdca418cdde570, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0

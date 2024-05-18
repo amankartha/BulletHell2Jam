@@ -522,7 +522,7 @@ MonoBehaviour:
   RotationActive: 0
   ScaleActive: 0
   PositionWiggleProperties:
-    WigglePermitted: 1
+    WigglePermitted: 0
     WiggleType: 1
     UseUnscaledTime: 0
     StartWigglingAutomatically: 1
@@ -881,8 +881,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5e4e1affdc177a47b1c0aa1e4d73143, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _health: 10
-  MaxHealth: 10
+  _health: 20
+  MaxHealth: 20
   OnTakeDamage:
     m_PersistentCalls:
       m_Calls:
@@ -1044,7 +1044,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.11151171, y: -0.07434082}
+  m_Offset: {x: -0.13121614, y: -0.0915823}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -1055,7 +1055,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.0346928, y: 1.2874527}
+  m_Size: {x: 0.75883096, y: 1.213561}
   m_EdgeRadius: 0
 --- !u!1 &8384610372710962919
 GameObject:
@@ -1117,9 +1117,9 @@ MonoBehaviour:
     FireMode: 0
     PlayOnEnable: 1
     FireRate:
-      isRandom: 0
+      isRandom: 1
       minValue: 3
-      maxValue: 3
+      maxValue: 4
     Damage:
       isRandom: 0
       minValue: 1
@@ -1171,7 +1171,7 @@ MonoBehaviour:
       minValue: 360
       maxValue: 360
   burstData:
-    delay: 0
+    delay: 2
     maxActiveBullets: 0
     burstCount: 1
     burstDelay: 0

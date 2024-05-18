@@ -103,7 +103,7 @@ MonoBehaviour:
   RotationActive: 0
   ScaleActive: 0
   PositionWiggleProperties:
-    WigglePermitted: 1
+    WigglePermitted: 0
     WiggleType: 1
     UseUnscaledTime: 0
     StartWigglingAutomatically: 1
@@ -1222,8 +1222,7 @@ MonoBehaviour:
   forwardDirection: {x: 0, y: 0, z: 1}
   upDirection: {x: 0, y: 1, z: 0}
   tweenRigidbody: 0
-  wps:
-  - {x: -7, y: 22.5, z: 0}
+  wps: []
   fullWps: []
   path:
     wpLengths:
