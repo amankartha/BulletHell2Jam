@@ -25,6 +25,7 @@ public class MainPlayerShooting : StateBase
         _player.armBulletSpawner.gameObject.GetComponent<SpriteRenderer>().enabled = true;
         _player.Anim.SetBool("Dump",true);
         _player.armBulletSpawner.Play();
+        _player.canReflect = false;
     }
 
     public override void OnLogic()
@@ -39,6 +40,7 @@ public class MainPlayerShooting : StateBase
     public override void OnExit()
     {
         base.OnExit();
+        _player.canReflect = true;
         _player.armBulletSpawner.gameObject.GetComponent<SpriteRenderer>().enabled = false;
         _player.Anim.SetBool("Dump",false);
         _player.armBulletSpawner.Stop();

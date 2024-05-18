@@ -13,7 +13,12 @@ public class MainPlayerOvercharged : StateBase
         _player = player;
     }
 
-    
+    public override void OnEnter()
+    {
+        base.OnEnter();
+        _player.canReflect = false;
+    }
+
     public override void OnLogic()
     {
         _player.Heat -= Time.deltaTime * _player.OverchargeCooldownPerSecond;
@@ -25,6 +30,9 @@ public class MainPlayerOvercharged : StateBase
         _player.gameObject.transform.Translate(movementVectorContainer);
     }
 
-        
-    
+    public override void OnExit()
+    {
+        base.OnExit();
+        _player.canReflect = true;
+    }
 }

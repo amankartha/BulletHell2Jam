@@ -409,7 +409,17 @@ namespace BulletFury
                 //Debug.Log(_bullets[i].Position);
             }
         }
-
+        public void CancelAll()
+        {
+            for (int i = 0; i < _bulletCount; ++i)
+            {
+                var bullet = _bullets[i];
+                bullet.Dead = 1;
+                OnBulletDied?.Invoke(bullet.Id, bullet, false);
+                OnBulletDiedEvent?.Invoke(bullet, false);
+                _bullets[i] = bullet;
+            }
+        }
         public bool CheckBulletsRemaining()
         {
             if (burstData.maxActiveBullets != 0)

@@ -1,8 +1,10 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using BulletFury;
 using BulletFury.Data;
 using DG.Tweening;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -15,7 +17,10 @@ public class Enemy : MonoBehaviour, IBulletHitHandler
 
     public float _health = 10f;
     public float MaxHealth = 10f;
-    
+
+    public bool canRespawnAfterDelay = false;
+    public float delay = 10f;
+    public GameObject Child;
     #endregion"
 
     #region Properties
@@ -58,14 +63,25 @@ public class Enemy : MonoBehaviour, IBulletHitHandler
         
     }
 
+ 
+
     protected void Death()
     {
-        this.gameObject.SetActive(false);
+        if (canRespawnAfterDelay)
+        {
+            _bulletSpawner.CancelAll();
+            Child.SetActive(false);
+            Invoke(nameof(Respawn),delay);
+        }
+        else
+        {
+            this.gameObject.SetActive(false);
+        }
     }
 
     protected void Respawn()
     {
-        
+        Child.SetActive(true);
     }
     
 
@@ -74,4 +90,6 @@ public class Enemy : MonoBehaviour, IBulletHitHandler
         Health -= bullet.Damage;
         OnTakeDamage?.Invoke();
     }
+    
+    
 }
