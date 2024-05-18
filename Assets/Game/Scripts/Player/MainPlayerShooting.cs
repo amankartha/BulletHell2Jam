@@ -22,7 +22,7 @@ public class MainPlayerShooting : StateBase
     {
         base.OnEnter();
         TimerCounter = 0f;
-        _player.armBulletSpawner.gameObject.SetActive(true);
+        _player.armBulletSpawner.gameObject.GetComponent<SpriteRenderer>().enabled = true;
         _player.Anim.SetBool("Dump",true);
         _player.armBulletSpawner.Play();
     }
@@ -39,7 +39,7 @@ public class MainPlayerShooting : StateBase
     public override void OnExit()
     {
         base.OnExit();
-        _player.armBulletSpawner.gameObject.SetActive(false);
+        _player.armBulletSpawner.gameObject.GetComponent<SpriteRenderer>().enabled = false;
         _player.Anim.SetBool("Dump",false);
         _player.armBulletSpawner.Stop();
     }
