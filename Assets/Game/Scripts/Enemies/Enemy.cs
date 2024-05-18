@@ -96,7 +96,7 @@ public class Enemy : MonoBehaviour, IBulletHitHandler
         OnTakeDamage?.Invoke();
     }
 
-    private void OnTriggerEnter2D(Collider2D col)
+    private void OnCollisionEnter2D(Collision2D col)
     {
         if (col.gameObject == GameManager.Instance.MAINPLAYERGAMEOBJECT)
         {
