@@ -385,6 +385,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pivot: {fileID: 4602746440313519860}
   Radius: 0.5
+  RendererAsist: {fileID: 8844273057087788291}
 --- !u!114 &5687725497073091124
 MonoBehaviour:
   m_ObjectHideFlags: 0

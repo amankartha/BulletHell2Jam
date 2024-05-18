@@ -14,6 +14,8 @@ public class Arm : MonoBehaviour
     
     private Camera mainCam;
 
+    [SerializeField] private GameObject RendererAsist;
+
     
     #endregion
 
@@ -48,5 +50,7 @@ public class Arm : MonoBehaviour
         
         this.transform.position = center + new Vector2(x, y);
         this.transform.rotation = Quaternion.LookRotation(Vector3.forward,mousePos - center);
+
+        RendererAsist.transform.rotation = Quaternion.AngleAxis(angle * Mathf.Rad2Deg -210, RendererAsist.transform.forward);
     }
 }
