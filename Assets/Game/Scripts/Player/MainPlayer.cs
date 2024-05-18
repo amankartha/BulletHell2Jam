@@ -60,7 +60,7 @@ public class MainPlayer : MonoBehaviour, IBulletHitHandler
 
     public bool canCharge = true;
     public bool canReflect = true;
-
+    public bool canTakeDamage = true;
     #endregion
 
     #region Events
@@ -250,9 +250,18 @@ public class MainPlayer : MonoBehaviour, IBulletHitHandler
 
     #endregion
 
+    public void SetCanHit()
+    {
+        canTakeDamage = true;
+    }
+
     public void Hit(BulletContainer bullet)
     {
-        Health -= (int)bullet.Damage;
-        OnPlayerHit?.Invoke();
+        if (canTakeDamage)
+        {
+            Health -= (int)bullet.Damage;
+            OnPlayerHit?.Invoke();
+            canTakeDamage = false;
+        }
     }
 }
