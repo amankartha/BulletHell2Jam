@@ -425,7 +425,7 @@ MonoBehaviour:
       maxValue: 1
     Speed:
       isRandom: 0
-      minValue: 10
+      minValue: 12
       maxValue: 5
     StartColor: {r: 0, g: 0.9806144, b: 1, a: 1}
     StartSize:
