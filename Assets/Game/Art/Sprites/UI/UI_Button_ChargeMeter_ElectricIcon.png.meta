@@ -43,7 +43,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -134,7 +134,154 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: UI_Button_ChargeMeter_ElectricIcon_0
+      rect:
+        serializedVersion: 2
+        x: 4
+        y: 1548
+        width: 1073
+        height: 497
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 446, z: 1065, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3f5ac8742591d004a8ff493494d96a0f
+      internalID: -1640994170
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UI_Button_ChargeMeter_ElectricIcon_1
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 475
+        width: 1536
+        height: 116
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bb2344f1e1a460e4b9d647f5e6a4c0e8
+      internalID: 1093320848
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UI_Button_ChargeMeter_ElectricIcon_2
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 1527
+        height: 131
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 764b34729c7535341966ea5d846e67fe
+      internalID: -1879420585
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UI_Button_ChargeMeter_ElectricIcon_3
+      rect:
+        serializedVersion: 2
+        x: 1523
+        y: 59
+        width: 525
+        height: 348
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 20c12ae8f78fcb64eb7038b2a116109a
+      internalID: -752578295
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UI_Button_ChargeMeter_ElectricIcon_4
+      rect:
+        serializedVersion: 2
+        x: 7
+        y: 490
+        width: 503
+        height: 534
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8d489342ae0bda342b88cfe340cb4dfc
+      internalID: -1603375748
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UI_Button_ChargeMeter_ElectricIcon_5
+      rect:
+        serializedVersion: 2
+        x: 1075
+        y: 1548
+        width: 736
+        height: 466
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2f7d091001ddd5549bb9041d586ada9d
+      internalID: -908557014
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UI_Button_ChargeMeter_ElectricIcon_6
+      rect:
+        serializedVersion: 2
+        x: 12
+        y: 1027
+        width: 1801
+        height: 505
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 707, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4be47e8ea8cbdfc459d0160781b2a125
+      internalID: -151393793
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -145,7 +292,16 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      UI_Button_ChargeMeter_ElectricIcon_0: -1640994170
+      UI_Button_ChargeMeter_ElectricIcon_1: 1093320848
+      UI_Button_ChargeMeter_ElectricIcon_2: -1879420585
+      UI_Button_ChargeMeter_ElectricIcon_3: -752578295
+      UI_Button_ChargeMeter_ElectricIcon_4: -1603375748
+      UI_Button_ChargeMeter_ElectricIcon_5: -908557014
+      UI_Button_ChargeMeter_ElectricIcon_6: -151393793
+      UI_Button_ChargeMeter_ElectricIcon_7: 362569710
+      UI_Button_ChargeMeter_ElectricIcon_8: 2146586706
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

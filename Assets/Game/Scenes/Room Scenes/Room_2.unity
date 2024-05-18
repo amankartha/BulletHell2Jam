@@ -4176,6 +4176,10 @@ PrefabInstance:
       propertyPath: m_Offset.y
       value: -0.10289097
       objectReference: {fileID: 0}
+    - target: {fileID: 2689250434828571379, guid: 234da3e5bf7eee748b310296240bf3df, type: 3}
+      propertyPath: PositionWiggleProperties.WigglePermitted
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4455502052931751663, guid: 234da3e5bf7eee748b310296240bf3df, type: 3}
       propertyPath: m_LocalPosition.x
       value: 3
