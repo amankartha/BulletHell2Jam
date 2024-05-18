@@ -14,6 +14,12 @@ public class AssignTargetMainPlayer : MonoBehaviour
         foreach (var module in this.GetComponent<BulletSpawner>().GetModulesOfType<AimedShotModule>())
         {
             module.SetTarget(GameManager.Instance.MAINPLAYERGAMEOBJECT.transform);
+            module.SetSelf(this.transform);
+        }
+
+        foreach (var module in this.GetComponent<BulletSpawner>().GetModulesOfType<TrackObjectModule>())
+        {
+            module.SetTarget(GameManager.Instance.MAINPLAYERGAMEOBJECT.transform);
         }
     }
 

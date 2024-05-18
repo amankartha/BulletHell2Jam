@@ -37,7 +37,12 @@ namespace BulletFury.Modules
         {
             target = newTarget;
         }
-        
+
+        public void SetSelf(Transform selfTarget)
+        {
+            thisTransform = selfTarget;
+        }
+
         public void Execute(ref Vector3 _, ref Quaternion rotation, float deltaTime)
         {
             if (target == null || thisTransform == null) return; // Safety check

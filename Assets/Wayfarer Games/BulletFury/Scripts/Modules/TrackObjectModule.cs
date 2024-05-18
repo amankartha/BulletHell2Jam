@@ -1,6 +1,7 @@
 using System;
 using BulletFury.Data;
 using UnityEngine;
+using static UnityEngine.GraphicsBuffer;
 
 namespace BulletFury.Modules
 {
@@ -11,7 +12,12 @@ namespace BulletFury.Modules
         [field: SerializeField] public float TurnSpeed { get; private set;}
         
         [SerializeField] private AnimationCurve turnSpeedOverTime = AnimationCurve.Constant(0, 1, 1);
-        
+
+        public void SetTarget(Transform newTarget)
+        {
+            ToTrack = newTarget;
+        }
+
         public override void Execute(ref BulletContainer bullet, float deltaTime)
         {
             if (bullet.Dead == 1 || ToTrack == null) return;
