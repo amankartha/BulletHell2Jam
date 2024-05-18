@@ -365,7 +365,7 @@ MonoBehaviour:
     FireRate:
       isRandom: 1
       minValue: 2
-      maxValue: 3
+      maxValue: 4
     Damage:
       isRandom: 0
       minValue: 1
@@ -376,7 +376,7 @@ MonoBehaviour:
       maxValue: 1
     Speed:
       isRandom: 0
-      minValue: 0.75
+      minValue: 0.5
       maxValue: 5
     StartColor: {r: 0.91474086, g: 0.2971698, b: 1, a: 1}
     StartSize:
@@ -431,6 +431,7 @@ MonoBehaviour:
   - rid: 5125869643372167180
   - rid: 5125869643372167184
   - rid: 5125869643372167185
+  - rid: 5125869732736008192
   OnBulletDied:
     m_PersistentCalls:
       m_Calls: []
@@ -544,6 +545,44 @@ MonoBehaviour:
           m_PostInfinity: 2
           m_RotationOrder: 4
         scale: 6
+    - rid: 5125869732736008192
+      type: {class: BulletSizeOverTimeModule, ns: BulletFury.Modules, asm: WayfarerGames.BulletFury}
+      data:
+        Mode: 0
+        Time: 1
+        sizeOverTime:
+          serializedVersion: 2
+          m_Curve:
+          - serializedVersion: 3
+            time: 0
+            value: 1
+            inSlope: 0
+            outSlope: 0
+            tangentMode: 0
+            weightedMode: 0
+            inWeight: 0
+            outWeight: 0
+          - serializedVersion: 3
+            time: 0.9
+            value: 0.9999962
+            inSlope: 0
+            outSlope: 0
+            tangentMode: 0
+            weightedMode: 0
+            inWeight: 0.33333334
+            outWeight: 0.33333334
+          - serializedVersion: 3
+            time: 1
+            value: 0.94999695
+            inSlope: 0
+            outSlope: 0
+            tangentMode: 0
+            weightedMode: 0
+            inWeight: 0
+            outWeight: 0
+          m_PreInfinity: 2
+          m_PostInfinity: 2
+          m_RotationOrder: 4
 --- !u!114 &8417122321852446767
 MonoBehaviour:
   m_ObjectHideFlags: 0
