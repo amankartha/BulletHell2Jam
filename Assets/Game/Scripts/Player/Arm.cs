@@ -16,7 +16,9 @@ public class Arm : MonoBehaviour
 
     [SerializeField] private GameObject RendererAsist;
 
-    
+    [SerializeField]
+    private float MinusAngleSpin = 210f;
+        
     #endregion
 
     private void Start()
@@ -51,6 +53,6 @@ public class Arm : MonoBehaviour
         this.transform.position = center + new Vector2(x, y);
         this.transform.rotation = Quaternion.LookRotation(Vector3.forward,mousePos - center);
 
-        RendererAsist.transform.rotation = Quaternion.AngleAxis(angle * Mathf.Rad2Deg -210, RendererAsist.transform.forward);
+        RendererAsist.transform.rotation = Quaternion.AngleAxis(angle * Mathf.Rad2Deg - MinusAngleSpin, RendererAsist.transform.forward);
     }
 }
