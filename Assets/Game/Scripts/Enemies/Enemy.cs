@@ -22,6 +22,8 @@ public class Enemy : MonoBehaviour, IBulletHitHandler
     public float delay = 10f;
     public GameObject Child;
     public Collider2D colliderToDisable;
+
+    public float PunchDamage = 1f;
     #endregion"
 
     #region Properties
@@ -98,7 +100,7 @@ public class Enemy : MonoBehaviour, IBulletHitHandler
     {
         if (col.gameObject == GameManager.Instance.MAINPLAYERGAMEOBJECT)
         {
-            Health -= 1;
+            Health -= PunchDamage;
         }
     }
 }
