@@ -18,6 +18,6 @@ MonoBehaviour:
     Animated: 1
     Rows: 3
     Columns: 1
-    PerFrameLength: 0.1
+    PerFrameLength: 0.05
     Layer: 12
     Priority: 0
