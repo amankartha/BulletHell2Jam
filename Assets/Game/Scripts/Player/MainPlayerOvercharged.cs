@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Mathematics;
 using UnityEngine;
 using UnityHFSM;
 
@@ -8,6 +9,7 @@ public class MainPlayerOvercharged : StateBase
 
     private MainPlayer _player;
     private Vector2 movementVectorContainer = new Vector2();
+    private Vector3 previous;
     public MainPlayerOvercharged(bool needsExitTime,MainPlayer player ,bool isGhostState = false) : base(needsExitTime, isGhostState)
     {
         _player = player;
@@ -28,6 +30,12 @@ public class MainPlayerOvercharged : StateBase
         movementVectorContainer *= Time.deltaTime;
         
         _player.gameObject.transform.Translate(movementVectorContainer);
+        
+        float velocity = ((_player.transform.position - previous).magnitude) / Time.deltaTime;
+        previous = _player.transform.position;
+        
+        if(movementVectorContainer.x != 0) _player.Renderer.flipX = movementVectorContainer.x < 0;
+        _player.Anim.SetBool("Walk",  math.abs(velocity) > 0);
     }
 
     public override void OnExit()
