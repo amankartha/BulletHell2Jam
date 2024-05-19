@@ -6997,6 +6997,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _health: 20
   MaxHealth: 20
+  canRespawnAfterDelay: 0
+  delay: 10
+  Child: {fileID: 0}
+  colliderToDisable: {fileID: 0}
+  PunchDamage: 1
   OnTakeDamage:
     m_PersistentCalls:
       m_Calls:
@@ -7275,7 +7280,7 @@ TilemapRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 4
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
   m_MaxChunkCount: 16

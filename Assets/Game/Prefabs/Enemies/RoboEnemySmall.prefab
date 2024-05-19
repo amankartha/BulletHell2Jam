@@ -159,11 +159,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5e4e1affdc177a47b1c0aa1e4d73143, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _health: 10
-  MaxHealth: 10
+  _health: 8
+  MaxHealth: 8
   canRespawnAfterDelay: 1
   delay: 8
   Child: {fileID: 79601991785000959}
+  colliderToDisable: {fileID: 0}
+  PunchDamage: 5
   OnTakeDamage:
     m_PersistentCalls:
       m_Calls:

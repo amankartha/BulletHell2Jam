@@ -129,6 +129,8 @@ MonoBehaviour:
   canRespawnAfterDelay: 0
   delay: 3
   Child: {fileID: 8695982224409618085}
+  colliderToDisable: {fileID: 0}
+  PunchDamage: 5
   OnTakeDamage:
     m_PersistentCalls:
       m_Calls:

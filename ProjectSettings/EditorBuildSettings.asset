@@ -30,10 +30,10 @@ EditorBuildSettings:
     path: Assets/Game/Scenes/Final Rooms/Tutorial_Room_3.unity
     guid: 618de4bc67edce44b8c9770b3ecb0a00
   - enabled: 1
-    path: Assets/Game/Scenes/Final Rooms/Tutorial_Room_4.unity
+    path: Assets/Game/Scenes/Final Rooms/Tutorial_Room_3.unity
     guid: 25c5fd5df2599124ea49faa2d248afb9
   - enabled: 1
-    path: Assets/Game/Scenes/Final Rooms/Tutorial_Room_5.unity
+    path: Assets/Game/Scenes/Final Rooms/Tutorial_Room_4.unity
     guid: e4f867f0a10105340b87799453522d23
   - enabled: 1
     path: Assets/Game/Scenes/Final Rooms/Hub_Room.unity
