@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 105153ff55208ee4a87c092ed532203c
+guid: 6318685797dc8624fab83bf3c5428dbf
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -69,7 +69,7 @@ TextureImporter:
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
-    maxTextureSize: 2048
+    maxTextureSize: 1024
     resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 1
@@ -136,190 +136,85 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Button
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 1536
-        width: 1536
-        height: 512
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 3f5ac8742591d004a8ff493494d96a0f
-      internalID: -1640994170
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: UI_Flame_Back_1
-      rect:
-        serializedVersion: 2
-        x: 1536
-        y: 1536
-        width: 512
-        height: 512
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: bb2344f1e1a460e4b9d647f5e6a4c0e8
-      internalID: 1093320848
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: UI_Flame_Back_2
-      rect:
-        serializedVersion: 2
-        x: 1536
-        y: 1024
-        width: 512
-        height: 512
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 764b34729c7535341966ea5d846e67fe
-      internalID: -1879420585
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Charge_Meter
+      name: Boss_Finger
       rect:
         serializedVersion: 2
         x: 0
         y: 1024
-        width: 1536
-        height: 512
+        width: 512
+        height: 1024
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 20c12ae8f78fcb64eb7038b2a116109a
-      internalID: -752578295
+      spriteID: 1c099f0342cf8e3439f2ed30eb531810
+      internalID: 1434133296
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Electric_Icon
+      name: Boss_Thumb
       rect:
         serializedVersion: 2
-        x: 0
-        y: 512
+        x: 1024
+        y: 1022
         width: 512
         height: 512
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8d489342ae0bda342b88cfe340cb4dfc
-      internalID: -1603375748
+      spriteID: 16fe0547752ceba4d9ccacc821a64e0b
+      internalID: -1063085519
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Flame_Side_2
-      rect:
-        serializedVersion: 2
-        x: 512
-        y: 512
-        width: 1536
-        height: 512
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 2f7d091001ddd5549bb9041d586ada9d
-      internalID: -908557014
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: FlameSide_1
+      name: Boss_Palm
       rect:
         serializedVersion: 2
         x: 0
-        y: 0
-        width: 1536
-        height: 512
+        y: 2
+        width: 1024
+        height: 1024
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4be47e8ea8cbdfc459d0160781b2a125
-      internalID: -151393793
+      spriteID: 3a0fa2421d78c9b4399f69050723a60c
+      internalID: 2085703897
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: UI_Button_ChargeMeter_ElectricIcon_7
+      name: Boss_Palm_Attack
       rect:
         serializedVersion: 2
-        x: 0
-        y: 2047
-        width: 1288
-        height: 1
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 422e69af99c9f1e4587d6034ee84f646
-      internalID: 362569710
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Pulse
-      rect:
-        serializedVersion: 2
-        x: 1536
+        x: 1024
         y: 0
-        width: 512
-        height: 512
+        width: 1024
+        height: 1024
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0dbf4d72545c96c44a7042b79362a019
-      internalID: -381991224
+      spriteID: f40c643f9090a9246b333cb541089a68
+      internalID: -1271734992
       vertices: []
       indices: 
       edges: []
@@ -335,15 +230,10 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Button: -1640994170
-      Charge_Meter: -752578295
-      Electric_Icon: -1603375748
-      FlameSide_1: -151393793
-      Flame_Side_2: -908557014
-      Pulse: 2146586706
-      UI_Button_ChargeMeter_ElectricIcon_7: 362569710
-      UI_Flame_Back_1: 1093320848
-      UI_Flame_Back_2: -1879420585
+      Boss_Finger: 1434133296
+      Boss_Palm: 2085703897
+      Boss_Palm_Attack: -1271734992
+      Boss_Thumb: -1063085519
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
