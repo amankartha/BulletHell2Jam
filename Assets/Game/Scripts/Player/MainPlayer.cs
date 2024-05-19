@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using BulletFury;
 using BulletFury.Data;
+using MoreMountains.Feedbacks;
 using MoreMountains.Tools;
 using Unity.Mathematics;
 using UnityEngine;
@@ -85,6 +86,8 @@ public class MainPlayer : MonoBehaviour, IBulletHitHandler
     public BulletSpawner armBulletSpawner;
 
     public SpriteRenderer Renderer;
+
+    public MMF_Player OverChargedFeedbacks;
 
     #endregion
     private void Awake()
@@ -170,6 +173,16 @@ public class MainPlayer : MonoBehaviour, IBulletHitHandler
     public string GetCurrentState()
     {
         return fsm.ActiveStateName;
+    }
+
+    public void SetOvercharging()
+    {
+        OverChargedFeedbacks?.PlayFeedbacks();
+    }
+
+    public void SetOverChargingOff()
+    {
+        OverChargedFeedbacks?.StopFeedbacks();
     }
     
     #region TransitionFunctions

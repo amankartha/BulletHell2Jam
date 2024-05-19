@@ -19,6 +19,7 @@ public class MainPlayerOvercharged : StateBase
     {
         base.OnEnter();
         _player.canReflect = false;
+        _player.SetOvercharging();
     }
 
     public override void OnLogic()
@@ -42,5 +43,6 @@ public class MainPlayerOvercharged : StateBase
     {
         base.OnExit();
         _player.canReflect = true;
+        _player.SetOverChargingOff();
     }
 }
