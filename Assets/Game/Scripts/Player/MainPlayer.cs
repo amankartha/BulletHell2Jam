@@ -43,6 +43,9 @@ public class MainPlayer : MonoBehaviour, IBulletHitHandler
     #region MMF stuff
 
     [SerializeField] private MMProgressBar _heatBar;
+    public MMF_Player OverChargedFeedbacks;
+    public MMF_Player OverChargedFeedbacksEnd;
+    public MMF_Player OverChargedFeedbacksEnd2;
 
     #endregion
     
@@ -64,7 +67,7 @@ public class MainPlayer : MonoBehaviour, IBulletHitHandler
         set
         {
             _heat = Mathf.Clamp(value, 0, _maxHeat);
-            _heatBar.UpdateBar01(_heat/_maxHeat);
+            _heatBar.UpdateBar(_heat,0,_maxHeat);
         }
     }
 
@@ -87,7 +90,7 @@ public class MainPlayer : MonoBehaviour, IBulletHitHandler
 
     public SpriteRenderer Renderer;
 
-    public MMF_Player OverChargedFeedbacks;
+   
 
     #endregion
     private void Awake()
@@ -182,7 +185,10 @@ public class MainPlayer : MonoBehaviour, IBulletHitHandler
 
     public void SetOverChargingOff()
     {
+        
         OverChargedFeedbacks?.StopFeedbacks();
+        OverChargedFeedbacksEnd?.PlayFeedbacks();
+        OverChargedFeedbacksEnd2?.PlayFeedbacks();
     }
     
     #region TransitionFunctions
