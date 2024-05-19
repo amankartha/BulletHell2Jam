@@ -46,8 +46,7 @@ public class MainPlayerReflector : MonoBehaviour,IBulletHitHandler
             Timer -= Time.deltaTime;
             yield return null;
         }
-
-        _player.canReflect = true;
+            if(_player.GetCurrentState() == "Melee") _player.canReflect = true;
     }
 
     private void TurnOffCollider()
