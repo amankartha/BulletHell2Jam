@@ -43,8 +43,10 @@ public class MainPlayer : MonoBehaviour, IBulletHitHandler
     #region MMF stuff
 
     [SerializeField] private MMProgressBar _heatBar;
+    [SerializeField] private MMProgressBar _healthBar;
     public MMF_Player OverChargedFeedbacks;
     public MMF_Player OverChargedFeedbacksEnd;
+    
     
    
 
@@ -55,6 +57,7 @@ public class MainPlayer : MonoBehaviour, IBulletHitHandler
         set
         {
             _health = math.clamp(value, 0, _maxHealth);
+            _healthBar.UpdateBar01((float)_health/_maxHealth);
         }
     }
     public int MaxHealth { get;private set; }
