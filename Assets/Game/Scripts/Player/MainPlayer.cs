@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using BulletFury;
 using BulletFury.Data;
+using MoreMountains.Tools;
 using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.Events;
@@ -36,6 +37,13 @@ public class MainPlayer : MonoBehaviour, IBulletHitHandler
     private Camera mainCamera;
 
     public Animator Anim;
+
+
+    #region MMF stuff
+
+    [SerializeField] private MMProgressBar _heatBar;
+
+    #endregion
     
     public int Health {
         get => _health;
@@ -55,6 +63,7 @@ public class MainPlayer : MonoBehaviour, IBulletHitHandler
         set
         {
             _heat = Mathf.Clamp(value, 0, _maxHeat);
+            _heatBar.UpdateBar01(_heat/_maxHeat);
         }
     }
 
