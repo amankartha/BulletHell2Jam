@@ -45,7 +45,8 @@ public class MainPlayer : MonoBehaviour, IBulletHitHandler
     [SerializeField] private MMProgressBar _heatBar;
     public MMF_Player OverChargedFeedbacks;
     public MMF_Player OverChargedFeedbacksEnd;
-    public MMF_Player OverChargedFeedbacksEnd2;
+    
+   
 
     #endregion
     
@@ -188,7 +189,7 @@ public class MainPlayer : MonoBehaviour, IBulletHitHandler
         
         OverChargedFeedbacks?.StopFeedbacks();
         OverChargedFeedbacksEnd?.PlayFeedbacks();
-        OverChargedFeedbacksEnd2?.PlayFeedbacks();
+       
     }
     
     #region TransitionFunctions
