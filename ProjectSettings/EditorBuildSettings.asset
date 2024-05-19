@@ -38,4 +38,16 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Game/Scenes/Final Rooms/Hub_Room.unity
     guid: 0d11cb185dd2b0544ab24bdf04a97536
+  - enabled: 1
+    path: Assets/Game/Scenes/Final Rooms/Room_1 Final.unity
+    guid: dcf85c0294c86ef449a726ea0fdf937b
+  - enabled: 1
+    path: Assets/Game/Scenes/Final Rooms/Room_2 Final.unity
+    guid: dec46001adda7494abbc8c151610f593
+  - enabled: 1
+    path: Assets/Game/Scenes/Final Rooms/Room_3 Final.unity
+    guid: 63734d77fccb8444b99664c3fdbb05aa
+  - enabled: 1
+    path: Assets/Game/Scenes/Final Rooms/Room_4 Final.unity
+    guid: d4da0c7201e9b714db5b55289d1b07d1
   m_configObjects: {}

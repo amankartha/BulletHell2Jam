@@ -55,8 +55,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8dfd44c0e6b6aba45bce28d75ae4b33f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TeleportCost: 0
-  RelectHeatChargeUp: 1
+  TeleportCost: 2
+  ReflectHeatChargeUp: 1
   ShootThreshold: 0
   ShootingDrainPerSecond: 3
   OverchargeCooldownPerSecond: 2

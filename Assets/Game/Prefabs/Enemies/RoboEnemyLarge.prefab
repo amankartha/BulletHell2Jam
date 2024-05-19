@@ -1471,13 +1471,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5e4e1affdc177a47b1c0aa1e4d73143, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _health: 8
-  MaxHealth: 8
-  canRespawnAfterDelay: 0
+  _health: 30
+  MaxHealth: 30
+  canRespawnAfterDelay: 1
+  isRobot: 1
   delay: 8
   Child: {fileID: 8847658002275337159}
   colliderToDisable: {fileID: 2127742100619433973}
-  PunchDamage: 5
+  PunchDamage: 15
+  RobotDown: {fileID: 0}
+  RobotUp: {fileID: 0}
   OnTakeDamage:
     m_PersistentCalls:
       m_Calls:

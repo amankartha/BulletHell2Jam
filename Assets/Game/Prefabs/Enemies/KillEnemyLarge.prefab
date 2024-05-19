@@ -75,7 +75,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 5
   m_Sprite: {fileID: 23408790, guid: bc467114aacb9f64f8ef79dd9395e97c, type: 3}
   m_Color: {r: 1, g: 0, b: 0.17842817, a: 1}
   m_FlipX: 0
@@ -838,13 +838,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5e4e1affdc177a47b1c0aa1e4d73143, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _health: 75
-  MaxHealth: 75
+  _health: 50
+  MaxHealth: 50
   canRespawnAfterDelay: 0
+  isRobot: 0
   delay: 10
   Child: {fileID: 0}
   colliderToDisable: {fileID: 0}
   PunchDamage: 5
+  RobotDown: {fileID: 0}
+  RobotUp: {fileID: 0}
   OnTakeDamage:
     m_PersistentCalls:
       m_Calls:
