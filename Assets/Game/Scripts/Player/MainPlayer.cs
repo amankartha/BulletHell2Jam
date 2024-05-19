@@ -15,7 +15,7 @@ public class MainPlayer : MonoBehaviour, IBulletHitHandler
 
     [Header("Costs")] 
     public int TeleportCost = 20;
-    public int RelectHeatChargeUp = 5;
+    public int ReflectHeatChargeUp = 5;
     public int ShootThreshold = 60;
     public float ShootingDrainPerSecond = 10f;
     public float OverchargeCooldownPerSecond = 10f;

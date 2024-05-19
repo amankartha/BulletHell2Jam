@@ -5827,18 +5827,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: EntranceDoor
       objectReference: {fileID: 0}
-    - target: {fileID: 974439338841082425, guid: 604f46c20ba7ba94d8faab9470850619, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2852947627820119999, guid: 604f46c20ba7ba94d8faab9470850619, type: 3}
-      propertyPath: m_SortingOrder
-      value: 12
-      objectReference: {fileID: 0}
-    - target: {fileID: 3627068070036990814, guid: 604f46c20ba7ba94d8faab9470850619, type: 3}
-      propertyPath: m_SortingOrder
-      value: 12
-      objectReference: {fileID: 0}
     - target: {fileID: 7752264144048435630, guid: 604f46c20ba7ba94d8faab9470850619, type: 3}
       propertyPath: m_LocalPosition.x
       value: -24.5
@@ -10133,10 +10121,6 @@ PrefabInstance:
     - target: {fileID: 5940933313025189386, guid: 18b1a842abfd2174293c24710842e77a, type: 3}
       propertyPath: m_Name
       value: ExitDoor
-      objectReference: {fileID: 0}
-    - target: {fileID: 5940933313025189386, guid: 18b1a842abfd2174293c24710842e77a, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

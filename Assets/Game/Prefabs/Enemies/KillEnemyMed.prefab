@@ -466,6 +466,7 @@ GameObject:
   - component: {fileID: 1496491177712380929}
   - component: {fileID: 8678829461817906096}
   - component: {fileID: 8177168844072953079}
+  - component: {fileID: 4007584388980743794}
   m_Layer: 13
   m_Name: Body
   m_TagString: Untagged
@@ -866,6 +867,18 @@ MonoBehaviour:
     NoiseShiftMin: {x: 0, y: 0, z: 0}
     NoiseShiftMax: {x: 0, y: 0, z: 0}
   DebugWiggleDuration: 2
+--- !u!114 &4007584388980743794
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7504721430774435967}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3a0408141f8930c44bb225ae89c58fcf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7862833095625634492
 GameObject:
   m_ObjectHideFlags: 0
@@ -918,6 +931,8 @@ MonoBehaviour:
   canRespawnAfterDelay: 0
   delay: 10
   Child: {fileID: 2645523137346095352}
+  colliderToDisable: {fileID: 0}
+  PunchDamage: 5
   OnTakeDamage:
     m_PersistentCalls:
       m_Calls:
@@ -1371,7 +1386,7 @@ MonoBehaviour:
             outWeight: 0.33333334
           - serializedVersion: 3
             time: 1
-            value: 0.94999695
+            value: 0
             inSlope: 0
             outSlope: 0
             tangentMode: 0

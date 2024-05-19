@@ -83,7 +83,7 @@ namespace BulletFury
 
                 foreach (var queue in BulletSpawner.RenderQueue.Values)
                 {
-                    Debug.Log($"Rendering {queue.Spawner.name} with priority {queue.RenderData.Priority}"); 
+                  //  Debug.Log($"Rendering {queue.Spawner.name} with priority {queue.RenderData.Priority}"); 
                     if (!queue.Spawner.Disposed)
                         Render(queue.RenderData, queue.Bullets, queue.Count, queue.RenderData.Camera);
                 }

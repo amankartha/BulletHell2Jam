@@ -129,6 +129,8 @@ MonoBehaviour:
   canRespawnAfterDelay: 0
   delay: 3
   Child: {fileID: 8695982224409618085}
+  colliderToDisable: {fileID: 0}
+  PunchDamage: 5
   OnTakeDamage:
     m_PersistentCalls:
       m_Calls:
@@ -486,8 +488,8 @@ MonoBehaviour:
             inWeight: 0.2039295
             outWeight: 0.33333334
           - serializedVersion: 3
-            time: 0.17199798
-            value: 0.19374073
+            time: 0.172
+            value: 0.19999683
             inSlope: 0
             outSlope: 0
             tangentMode: 0
@@ -533,8 +535,8 @@ MonoBehaviour:
             inWeight: 0.33333334
             outWeight: 0.33333334
           - serializedVersion: 3
-            time: 0.15056427
-            value: 0.99815726
+            time: 0.15100001
+            value: 0.99999976
             inSlope: 0.44759724
             outSlope: 0.44759724
             tangentMode: 0
@@ -563,8 +565,8 @@ MonoBehaviour:
             inWeight: 0
             outWeight: 0
           - serializedVersion: 3
-            time: 0.9
-            value: 0.9999962
+            time: 0.9010986
+            value: 0.99969864
             inSlope: 0
             outSlope: 0
             tangentMode: 0
@@ -572,8 +574,8 @@ MonoBehaviour:
             inWeight: 0.33333334
             outWeight: 0.33333334
           - serializedVersion: 3
-            time: 1
-            value: 0.94999695
+            time: 1.0500001
+            value: -0.0018502246
             inSlope: 0
             outSlope: 0
             tangentMode: 0
@@ -950,6 +952,7 @@ GameObject:
   - component: {fileID: 659626487292845447}
   - component: {fileID: 9129043846636886600}
   - component: {fileID: 6630424812234712748}
+  - component: {fileID: 5886174843383250157}
   m_Layer: 13
   m_Name: Body
   m_TagString: Untagged
@@ -1371,6 +1374,18 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &5886174843383250157
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7801124652737206384}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3a0408141f8930c44bb225ae89c58fcf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8695982224409618085
 GameObject:
   m_ObjectHideFlags: 0
