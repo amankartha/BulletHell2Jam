@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using BulletFury;
 using BulletFury.Data;
 using DG.Tweening;
+using MoreMountains.Feedbacks;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
@@ -19,11 +20,17 @@ public class Enemy : MonoBehaviour, IBulletHitHandler
     public float MaxHealth = 10f;
 
     public bool canRespawnAfterDelay = false;
+    public bool isRobot = false;    
+    
     public float delay = 10f;
     public GameObject Child;
     public Collider2D colliderToDisable;
 
     public float PunchDamage = 1f;
+
+
+    public MMF_Player RobotDown;
+    public MMF_Player RobotUp;
     #endregion"
 
     #region Properties
@@ -72,10 +79,19 @@ public class Enemy : MonoBehaviour, IBulletHitHandler
     {
         if (canRespawnAfterDelay)
         {
-            _bulletSpawner.CancelAll();
-            Child.SetActive(false);
-            colliderToDisable.enabled = false;
-            Invoke(nameof(Respawn),delay);
+            if (isRobot)
+            {
+                DisableRobot();
+                Invoke(nameof(EnableRobot),delay);
+            }
+            else
+            {
+                _bulletSpawner.CancelAll();
+                Child.SetActive(false);
+                colliderToDisable.enabled = false;
+                Invoke(nameof(Respawn),delay);
+            }
+            
         }
         else
         {
@@ -103,4 +119,15 @@ public class Enemy : MonoBehaviour, IBulletHitHandler
             Health -= PunchDamage;
         }
     }
+
+    private void DisableRobot()
+    {
+        RobotDown?.PlayFeedbacks();
+    }
+
+    private void EnableRobot()
+    {
+        RobotUp?.PlayFeedbacks();
+    }
+    
 }
