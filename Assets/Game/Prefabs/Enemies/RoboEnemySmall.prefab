@@ -269,32 +269,23 @@ MonoBehaviour:
   forwardDirection: {x: 0, y: 0, z: 1}
   upDirection: {x: 0, y: 1, z: 0}
   tweenRigidbody: 0
-  wps:
-  - {x: -7.7700047, y: 5.512461, z: 0}
-  - {x: -7.6107926, y: -6.564927, z: 0}
-  - {x: 3.3293676, y: -6.3602257, z: 0}
+  wps: []
   fullWps: []
   path:
     wpLengths:
     - 0
-    - 11.781156
-    - 12.078438
-    - 10.942076
+    - 9.526814
     wps:
-    - {x: 4, y: 5, z: 0}
+    - {x: 0, y: 0, z: 0}
     - {x: -7.7700047, y: 5.512461, z: 0}
-    - {x: -7.6107926, y: -6.564927, z: 0}
-    - {x: 3.3293676, y: -6.3602257, z: 0}
     type: 0
     subdivisionsXSegment: 10
-    subdivisions: 40
+    subdivisions: 20
     controlPoints: []
-    length: 34.801666
+    length: 9.526814
     isFinalized: 1
     timesTable:
     - 0
-    - 0.33852273
-    - 0.68558764
     - 1
     lengthsTable: []
   inspectorMode: 0
@@ -306,9 +297,9 @@ MonoBehaviour:
   showIndexes: 1
   showWpLength: 0
   pathColor: {r: 1, g: 1, b: 1, a: 0.5}
-  lastSrcPosition: {x: 4, y: 5, z: 0}
+  lastSrcPosition: {x: 0, y: 0, z: 0}
   lastSrcRotation: {x: 0, y: 0, z: 0, w: 1}
-  wpsDropdown: 0
+  wpsDropdown: 1
   dropToFloorOffset: 0
 --- !u!61 &329414379074237537
 BoxCollider2D:
