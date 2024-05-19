@@ -342,9 +342,10 @@ namespace BulletFury
 
         private void HandleCollisions()
         {
-            var shouldKill = false;
+          
             for (int i = _bulletCount - 1; i >= 0; --i)
             {
+                var shouldKill = false;
                 if (_bullets[i].UseCapsule == 0)
                 {
                     int numHit =

@@ -24,6 +24,7 @@ public class MainPlayerOvercharged : StateBase
 
     public override void OnLogic()
     {
+        
         _player.Heat -= Time.deltaTime * _player.OverchargeCooldownPerSecond;
         
         movementVectorContainer =  new Vector2(Input.GetAxisRaw("Horizontal"),Input.GetAxisRaw("Vertical"));

@@ -26,7 +26,7 @@ public class MainPlayerReflector : MonoBehaviour,IBulletHitHandler
 
     private void Update()
     {
-        if (_player.canReflect && Input.GetKeyDown(KeyCode.Mouse0))
+        if (_player.canReflect&&_player.GetCurrentState() == "Melee" && Input.GetKeyDown(KeyCode.Mouse0))
         {
             _player.canReflect = false;
             _reflectCollider.enabled = true;
