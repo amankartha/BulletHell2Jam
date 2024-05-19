@@ -14,7 +14,7 @@ public class MainPlayerReflector : MonoBehaviour,IBulletHitHandler
 
     [SerializeField] private float HeatGained = 10f;
 
-    [SerializeField] private BoxCollider2D _reflectCollider;
+    [SerializeField] private Collider2D _reflectCollider;
 
     [SerializeField] private float _reflectTimerDuration = 0.4f;
   

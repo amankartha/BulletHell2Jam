@@ -918,6 +918,8 @@ MonoBehaviour:
   canRespawnAfterDelay: 0
   delay: 10
   Child: {fileID: 2645523137346095352}
+  colliderToDisable: {fileID: 0}
+  PunchDamage: 5
   OnTakeDamage:
     m_PersistentCalls:
       m_Calls:
@@ -1371,7 +1373,7 @@ MonoBehaviour:
             outWeight: 0.33333334
           - serializedVersion: 3
             time: 1
-            value: 0.94999695
+            value: 0
             inSlope: 0
             outSlope: 0
             tangentMode: 0
