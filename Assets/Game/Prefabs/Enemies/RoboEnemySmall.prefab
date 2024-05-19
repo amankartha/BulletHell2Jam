@@ -164,8 +164,8 @@ MonoBehaviour:
   canRespawnAfterDelay: 1
   delay: 8
   Child: {fileID: 79601991785000959}
-  colliderToDisable: {fileID: 0}
-  PunchDamage: 5
+  colliderToDisable: {fileID: 329414379074237537}
+  PunchDamage: 8
   OnTakeDamage:
     m_PersistentCalls:
       m_Calls:
@@ -269,30 +269,45 @@ MonoBehaviour:
   forwardDirection: {x: 0, y: 0, z: 1}
   upDirection: {x: 0, y: 1, z: 0}
   tweenRigidbody: 0
-  wps: []
+  wps:
+  - {x: -7.7700047, y: 5.512461, z: 0}
+  - {x: -7.6107926, y: -6.564927, z: 0}
+  - {x: 3.3293676, y: -6.3602257, z: 0}
   fullWps: []
   path:
-    wpLengths: []
-    wps: []
+    wpLengths:
+    - 0
+    - 11.781156
+    - 12.078438
+    - 10.942076
+    wps:
+    - {x: 4, y: 5, z: 0}
+    - {x: -7.7700047, y: 5.512461, z: 0}
+    - {x: -7.6107926, y: -6.564927, z: 0}
+    - {x: 3.3293676, y: -6.3602257, z: 0}
     type: 0
     subdivisionsXSegment: 10
-    subdivisions: 0
+    subdivisions: 40
     controlPoints: []
-    length: 0
-    isFinalized: 0
-    timesTable: []
+    length: 34.801666
+    isFinalized: 1
+    timesTable:
+    - 0
+    - 0.33852273
+    - 0.68558764
+    - 1
     lengthsTable: []
   inspectorMode: 0
   pathType: 0
-  handlesType: 0
+  handlesType: 1
   livePreview: 1
   handlesDrawMode: 0
   perspectiveHandleSize: 0.5
   showIndexes: 1
   showWpLength: 0
   pathColor: {r: 1, g: 1, b: 1, a: 0.5}
-  lastSrcPosition: {x: 0, y: 0, z: 0}
-  lastSrcRotation: {x: 0, y: 0, z: 0, w: 0}
+  lastSrcPosition: {x: 4, y: 5, z: 0}
+  lastSrcRotation: {x: 0, y: 0, z: 0, w: 1}
   wpsDropdown: 0
   dropToFloorOffset: 0
 --- !u!61 &329414379074237537
@@ -327,7 +342,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.0018291473, y: -0.027438164}
+  m_Offset: {x: 0, y: 0.03}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -338,7 +353,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.59391785, y: 0.6890354}
+  m_Size: {x: 0.59391785, y: 0.53}
   m_EdgeRadius: 0
 --- !u!1 &3135911484732825279
 GameObject:
@@ -395,13 +410,13 @@ MonoBehaviour:
       PerFrameLength: 0.5
       Layer: 6
       Priority: 0
-    sharedData: {fileID: 11400000, guid: d9f004339d47783469999981b771c2c4, type: 2}
+    sharedData: {fileID: 11400000, guid: 9aa15e800874f4e4c85c2ef94edf1a35, type: 2}
   main:
     FireMode: 0
     PlayOnEnable: 1
     FireRate:
-      isRandom: 1
-      minValue: 2
+      isRandom: 0
+      minValue: 3
       maxValue: 5
     Damage:
       isRandom: 0
@@ -413,9 +428,9 @@ MonoBehaviour:
       maxValue: 1
     Speed:
       isRandom: 0
-      minValue: 0.5
+      minValue: 1.5
       maxValue: 5
-    StartColor: {r: 0.91474086, g: 0.2971698, b: 1, a: 1}
+    StartColor: {r: 0, g: 1, b: 0.071448326, a: 1}
     StartSize:
       isRandom: 0
       minValue: 0.5
@@ -423,13 +438,13 @@ MonoBehaviour:
     UseRotationForDirection: 1
     MoveWithTransform: 0
     RotateWithTransform: 1
-    ColliderType: 1
-    ColliderSize: 0.25
+    ColliderType: 0
+    ColliderSize: 0.5
     CapsuleLength: 0.4
   spawnShapeData:
     rotateSpeed: 0
     spawnDir: 2
-    numPoints: 1
+    numPoints: 4
     numPerSide: 1
     numPerGroup: 1
     groupRadius:
@@ -441,11 +456,11 @@ MonoBehaviour:
     removeFromEdgePercent: 0
     radius:
       isRandom: 0
-      minValue: 1
+      minValue: 0.25
       maxValue: 0
     arc:
       isRandom: 0
-      minValue: 180
+      minValue: 360
       maxValue: 360
     randomise: 0
     onEdge: 0
@@ -456,19 +471,19 @@ MonoBehaviour:
   burstData:
     delay: 2
     maxActiveBullets: 0
-    burstCount: 1
-    burstDelay: 0
+    burstCount: 3
+    burstDelay: 0.25
     stackSpeedIncrease: 0
-    burstsUpdatePositionEveryBullet: 0
+    burstsUpdatePositionEveryBullet: 1
   subSpawners: []
   bulletModules: []
   bulletInitModules: []
   spawnModules: []
   allModules:
-  - rid: 5125869643372167180
-  - rid: 5125869643372167184
-  - rid: 5125869643372167185
   - rid: 5125869732736008192
+  - rid: 5125869763846209536
+  - rid: 5125869763846209537
+  - rid: -2
   OnBulletDied:
     m_PersistentCalls:
       m_Calls: []
@@ -484,104 +499,8 @@ MonoBehaviour:
   references:
     version: 2
     RefIds:
-    - rid: 5125869643372167180
-      type: {class: AimedShotModule, ns: BulletFury.Modules, asm: WayfarerGames.BulletFury}
-      data:
-        thisTransform: {fileID: 0}
-        target: {fileID: 0}
-        type: 0
-        maxChangePerFrame: 10
-        lerpSpeed: 0.1
-        time: 0.5
-        lookAheadTime: 1
-    - rid: 5125869643372167184
-      type: {class: TrackObjectModule, ns: BulletFury.Modules, asm: WayfarerGames.BulletFury}
-      data:
-        Mode: 0
-        Time: 0
-        <ToTrack>k__BackingField: {fileID: 31429914335782348, guid: d9f89a9092585b648a90cb32e3851f58, type: 3}
-        <TurnSpeed>k__BackingField: 2.5
-        turnSpeedOverTime:
-          serializedVersion: 2
-          m_Curve:
-          - serializedVersion: 3
-            time: 0.049987793
-            value: 0.0030212402
-            inSlope: 0
-            outSlope: 0
-            tangentMode: 0
-            weightedMode: 0
-            inWeight: 0
-            outWeight: 0
-          - serializedVersion: 3
-            time: 0.15003082
-            value: 1.0070491
-            inSlope: 0.06615555
-            outSlope: 0.06615555
-            tangentMode: 0
-            weightedMode: 0
-            inWeight: 0.2039295
-            outWeight: 0.33333334
-          - serializedVersion: 3
-            time: 0.17199798
-            value: 0.19374073
-            inSlope: 0
-            outSlope: 0
-            tangentMode: 0
-            weightedMode: 0
-            inWeight: 0
-            outWeight: 0
-          m_PreInfinity: 2
-          m_PostInfinity: 2
-          m_RotationOrder: 4
-    - rid: 5125869643372167185
-      type: {class: SpeedOverTimeModule, ns: BulletFury.Modules, asm: WayfarerGames.BulletFury}
-      data:
-        Mode: 0
-        Time: 0
-        speedOverTime:
-          serializedVersion: 2
-          m_Curve:
-          - serializedVersion: 3
-            time: 0.0011135354
-            value: 0.7266828
-            inSlope: 0.07266291
-            outSlope: 0.07266291
-            tangentMode: 0
-            weightedMode: 0
-            inWeight: 0
-            outWeight: 0.17636125
-          - serializedVersion: 3
-            time: 0.06713864
-            value: 0.2627427
-            inSlope: 0.24356498
-            outSlope: 0.24356498
-            tangentMode: 0
-            weightedMode: 0
-            inWeight: 0.16391706
-            outWeight: 0.19991218
-          - serializedVersion: 3
-            time: 0.13380367
-            value: 0.9143798
-            inSlope: 11.4788
-            outSlope: 11.4788
-            tangentMode: 0
-            weightedMode: 0
-            inWeight: 0.33333334
-            outWeight: 0.33333334
-          - serializedVersion: 3
-            time: 0.15056427
-            value: 0.99815726
-            inSlope: 0.44759724
-            outSlope: 0.44759724
-            tangentMode: 0
-            weightedMode: 0
-            inWeight: 0.8830736
-            outWeight: 0
-          m_PreInfinity: 2
-          m_PostInfinity: 2
-          m_RotationOrder: 4
-        scale: 6
+    - rid: -2
+      type: {class: , ns: , asm: }
     - rid: 5125869732736008192
       type: {class: BulletSizeOverTimeModule, ns: BulletFury.Modules, asm: WayfarerGames.BulletFury}
       data:
@@ -620,6 +539,40 @@ MonoBehaviour:
           m_PreInfinity: 2
           m_PostInfinity: 2
           m_RotationOrder: 4
+    - rid: 5125869763846209536
+      type: {class: SpawnerRotateModule, ns: BulletFury.Modules, asm: WayfarerGames.BulletFury}
+      data:
+        angularSpeed: 2
+    - rid: 5125869763846209537
+      type: {class: AngularVelocityModule, ns: BulletFury.Modules, asm: WayfarerGames.BulletFury}
+      data:
+        Mode: 0
+        Time: 1
+        angularVelocity:
+          serializedVersion: 2
+          m_Curve:
+          - serializedVersion: 3
+            time: 0
+            value: 0.99950784
+            inSlope: -0.99950784
+            outSlope: -0.99950784
+            tangentMode: 34
+            weightedMode: 0
+            inWeight: 0
+            outWeight: 0.33333334
+          - serializedVersion: 3
+            time: 1
+            value: 0
+            inSlope: -0.99950784
+            outSlope: -0.99950784
+            tangentMode: 34
+            weightedMode: 0
+            inWeight: 0.33333334
+            outWeight: 0
+          m_PreInfinity: 2
+          m_PostInfinity: 2
+          m_RotationOrder: 4
+        scale: 20
 --- !u!114 &8417122321852446767
 MonoBehaviour:
   m_ObjectHideFlags: 0
