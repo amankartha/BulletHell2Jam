@@ -101,7 +101,7 @@ MonoBehaviour:
       maxValue: 5
     Damage:
       isRandom: 0
-      minValue: 1
+      minValue: 2
       maxValue: 1
     Lifetime:
       isRandom: 0
@@ -303,7 +303,7 @@ MonoBehaviour:
       maxValue: 5
     Damage:
       isRandom: 0
-      minValue: 1
+      minValue: 2
       maxValue: 1
     Lifetime:
       isRandom: 0
@@ -505,7 +505,7 @@ MonoBehaviour:
       maxValue: 5
     Damage:
       isRandom: 0
-      minValue: 1
+      minValue: 2
       maxValue: 1
     Lifetime:
       isRandom: 0
@@ -690,8 +690,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5e4e1affdc177a47b1c0aa1e4d73143, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _health: 250
-  MaxHealth: 250
+  _health: 500
+  MaxHealth: 500
   canRespawnAfterDelay: 0
   isRobot: 0
   delay: 3
@@ -1191,7 +1191,7 @@ MonoBehaviour:
       maxValue: 5
     Damage:
       isRandom: 0
-      minValue: 1
+      minValue: 2
       maxValue: 1
     Lifetime:
       isRandom: 0
@@ -1785,7 +1785,7 @@ MonoBehaviour:
       maxValue: 5
     Damage:
       isRandom: 0
-      minValue: 1
+      minValue: 2
       maxValue: 1
     Lifetime:
       isRandom: 0
@@ -2411,7 +2411,7 @@ MonoBehaviour:
       maxValue: 5
     Damage:
       isRandom: 0
-      minValue: 1
+      minValue: 2
       maxValue: 1
     Lifetime:
       isRandom: 0

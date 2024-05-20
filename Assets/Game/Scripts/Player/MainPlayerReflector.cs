@@ -36,7 +36,7 @@ public class MainPlayerReflector : MonoBehaviour,IBulletHitHandler
     {
         if (_reflectCollider.enabled)
         {
-            _player.Heat += HeatGained;
+            _player.Heat += bullet.Damage;
             var p = _pooler.GetPooledGameObject();
                 p.transform.position = bullet.Position;
                 p.SetActive(true);
