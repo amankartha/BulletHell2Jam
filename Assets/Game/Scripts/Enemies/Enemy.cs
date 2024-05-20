@@ -33,6 +33,8 @@ public class Enemy : MonoBehaviour, IBulletHitHandler
     public MMF_Player RobotUp;
 
     public MMF_Player ShootFeel;
+
+    public MMF_Player OnDeath;
     public bool REQUIREDTOBEKILLED = false;
     #endregion"
 
@@ -122,6 +124,7 @@ public class Enemy : MonoBehaviour, IBulletHitHandler
             }
             this.gameObject.SetActive(false);
         }
+        OnDeath?.PlayFeedbacks();
     }
 
     protected void Respawn()
