@@ -713,6 +713,7 @@ GameObject:
   - component: {fileID: 2027021662}
   - component: {fileID: 2027021661}
   - component: {fileID: 2027021660}
+  - component: {fileID: 2027021665}
   m_Layer: 8
   m_Name: Tilemap_Floor
   m_TagString: Untagged
@@ -3254,6 +3255,18 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
+--- !u!114 &2027021665
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2027021658}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: be88b08410cdde3479af7a9a4092fe47, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &24758039267397847
 GameObject:
   m_ObjectHideFlags: 0
@@ -3441,7 +3454,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4817401514183107075, guid: 9ccbc1af9779d5646ac63d8f9339f564, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -4539,7 +4552,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6841094020397526249, guid: 302e9991b3c727248aae2ec672abeba5, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7761232761454931462, guid: 302e9991b3c727248aae2ec672abeba5, type: 3}
       propertyPath: m_LocalPosition.x
@@ -4620,7 +4633,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 254829461606866309, guid: d9f89a9092585b648a90cb32e3851f58, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

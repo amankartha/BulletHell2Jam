@@ -245,6 +245,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 45
       objectReference: {fileID: 0}
+    - target: {fileID: 5258769572570146875, guid: ec3050a8a3dad624d9e0a12cf8b3af54, type: 3}
+      propertyPath: REQUIREDTOBEKILLED
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6486201704300391242, guid: ec3050a8a3dad624d9e0a12cf8b3af54, type: 3}
       propertyPath: m_Name
       value: CannonEnemy (1)
@@ -263,6 +267,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1380330676343243115, guid: ec3050a8a3dad624d9e0a12cf8b3af54, type: 3}
   m_PrefabInstance: {fileID: 161577645}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &201453535 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3945465321093273938, guid: 18b1a842abfd2174293c24710842e77a, type: 3}
+  m_PrefabInstance: {fileID: 8947076767815948175}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 208fe72db8e839143b20c7628b33745d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &258107844 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 295112971720018467, guid: 9c3d0edbd1579b34289ef55c468efea6, type: 3}
@@ -382,6 +397,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 415228004}
     m_Modifications:
+    - target: {fileID: 252423242409917892, guid: 96119b1d7bec14c4da3371fa95abe294, type: 3}
+      propertyPath: REQUIREDTOBEKILLED
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3039482354374923524, guid: 96119b1d7bec14c4da3371fa95abe294, type: 3}
       propertyPath: autoPlay
       value: 1
@@ -627,6 +646,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6227174221581807475, guid: 234da3e5bf7eee748b310296240bf3df, type: 3}
+      propertyPath: REQUIREDTOBEKILLED
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6967046368531937456, guid: 234da3e5bf7eee748b310296240bf3df, type: 3}
       propertyPath: m_Name
       value: KillEnemyLarge
@@ -693,6 +716,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: -45
       objectReference: {fileID: 0}
+    - target: {fileID: 5258769572570146875, guid: ec3050a8a3dad624d9e0a12cf8b3af54, type: 3}
+      propertyPath: REQUIREDTOBEKILLED
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6486201704300391242, guid: ec3050a8a3dad624d9e0a12cf8b3af54, type: 3}
       propertyPath: m_Name
       value: CannonEnemy (3)
@@ -754,6 +781,10 @@ PrefabInstance:
     - target: {fileID: 4364326735263776945, guid: 522e5a3815afd3e438e904dee84e319b, type: 3}
       propertyPath: managedReferences[5125869643372167184].<ToTrack>k__BackingField
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 5579394803312826129, guid: 522e5a3815afd3e438e904dee84e319b, type: 3}
+      propertyPath: REQUIREDTOBEKILLED
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6736363538314505777, guid: 522e5a3815afd3e438e904dee84e319b, type: 3}
       propertyPath: m_LocalPosition.x
@@ -891,6 +922,10 @@ PrefabInstance:
       propertyPath: managedReferences[5125869643372167184].<ToTrack>k__BackingField
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 5579394803312826129, guid: 522e5a3815afd3e438e904dee84e319b, type: 3}
+      propertyPath: REQUIREDTOBEKILLED
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6736363538314505777, guid: 522e5a3815afd3e438e904dee84e319b, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -1027,6 +1062,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 225
       objectReference: {fileID: 0}
+    - target: {fileID: 5258769572570146875, guid: ec3050a8a3dad624d9e0a12cf8b3af54, type: 3}
+      propertyPath: REQUIREDTOBEKILLED
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6486201704300391242, guid: ec3050a8a3dad624d9e0a12cf8b3af54, type: 3}
       propertyPath: m_Name
       value: CannonEnemy (2)
@@ -1088,6 +1127,10 @@ PrefabInstance:
     - target: {fileID: 1380330676343243115, guid: ec3050a8a3dad624d9e0a12cf8b3af54, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 135
+      objectReference: {fileID: 0}
+    - target: {fileID: 5258769572570146875, guid: ec3050a8a3dad624d9e0a12cf8b3af54, type: 3}
+      propertyPath: REQUIREDTOBEKILLED
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6486201704300391242, guid: ec3050a8a3dad624d9e0a12cf8b3af54, type: 3}
       propertyPath: m_Name
@@ -1340,6 +1383,10 @@ PrefabInstance:
       propertyPath: managedReferences[5125869643372167184].<ToTrack>k__BackingField
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 5579394803312826129, guid: 522e5a3815afd3e438e904dee84e319b, type: 3}
+      propertyPath: REQUIREDTOBEKILLED
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6736363538314505777, guid: 522e5a3815afd3e438e904dee84e319b, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -1426,6 +1473,17 @@ Transform:
   m_Children: []
   m_Father: {fileID: 766723873}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1292518895 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6431430155397522461, guid: d9f89a9092585b648a90cb32e3851f58, type: 3}
+  m_PrefabInstance: {fileID: 6112369883782044295}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0cb29398a27cf104bb97fac0554c9457, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1305214680
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1473,6 +1531,10 @@ PrefabInstance:
     - target: {fileID: 4364326735263776945, guid: 522e5a3815afd3e438e904dee84e319b, type: 3}
       propertyPath: managedReferences[5125869643372167184].<ToTrack>k__BackingField
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 5579394803312826129, guid: 522e5a3815afd3e438e904dee84e319b, type: 3}
+      propertyPath: REQUIREDTOBEKILLED
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6736363538314505777, guid: 522e5a3815afd3e438e904dee84e319b, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1543,6 +1605,7 @@ GameObject:
   - component: {fileID: 1397846796}
   - component: {fileID: 1397846795}
   - component: {fileID: 1397846794}
+  - component: {fileID: 1397846799}
   m_Layer: 8
   m_Name: Tilemap_Floor
   m_TagString: Untagged
@@ -4016,6 +4079,18 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
+--- !u!114 &1397846799
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1397846792}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: be88b08410cdde3479af7a9a4092fe47, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &1415678354 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 295112971720018467, guid: 9c3d0edbd1579b34289ef55c468efea6, type: 3}
@@ -4064,6 +4139,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1446674267}
     m_Modifications:
+    - target: {fileID: 252423242409917892, guid: 96119b1d7bec14c4da3371fa95abe294, type: 3}
+      propertyPath: REQUIREDTOBEKILLED
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3039482354374923524, guid: 96119b1d7bec14c4da3371fa95abe294, type: 3}
       propertyPath: autoPlay
       value: 1
@@ -4304,6 +4383,10 @@ PrefabInstance:
     - target: {fileID: 4364326735263776945, guid: 522e5a3815afd3e438e904dee84e319b, type: 3}
       propertyPath: managedReferences[5125869643372167184].<ToTrack>k__BackingField
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 5579394803312826129, guid: 522e5a3815afd3e438e904dee84e319b, type: 3}
+      propertyPath: REQUIREDTOBEKILLED
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6736363538314505777, guid: 522e5a3815afd3e438e904dee84e319b, type: 3}
       propertyPath: m_LocalPosition.x
@@ -5022,6 +5105,10 @@ PrefabInstance:
     - target: {fileID: 4364326735263776945, guid: 522e5a3815afd3e438e904dee84e319b, type: 3}
       propertyPath: managedReferences[5125869643372167184].<ToTrack>k__BackingField
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 5579394803312826129, guid: 522e5a3815afd3e438e904dee84e319b, type: 3}
+      propertyPath: REQUIREDTOBEKILLED
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6736363538314505777, guid: 522e5a3815afd3e438e904dee84e319b, type: 3}
       propertyPath: m_LocalPosition.x
@@ -5837,6 +5924,7 @@ MonoBehaviour:
         m_CallState: 2
   EnemiesToSpawn:
   - {fileID: 708918770}
+  _ExitDoor: {fileID: 201453535}
 --- !u!66 &4837895326159906515
 CompositeCollider2D:
   m_ObjectHideFlags: 0
@@ -7050,6 +7138,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 7946417358114292764, guid: d9f89a9092585b648a90cb32e3851f58, type: 3}
+      propertyPath: managedReferences[6140528800352174103].TargetShaker
+      value: 
+      objectReference: {fileID: 1292518895}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

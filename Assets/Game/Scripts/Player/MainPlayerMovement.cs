@@ -27,6 +27,7 @@ public class MainPlayerMovement : StateBase
         base.OnEnter();
         _mainPlayer.canCharge = true;
         _mainPlayer.canReflect = true;
+        _mainPlayer.teleported = false;
     }
 
     public override void OnLogic()

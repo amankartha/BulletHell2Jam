@@ -31,6 +31,8 @@ public class Enemy : MonoBehaviour, IBulletHitHandler
 
     public MMF_Player RobotDown;
     public MMF_Player RobotUp;
+
+    public bool REQUIREDTOBEKILLED = false;
     #endregion"
 
     #region Properties
@@ -95,6 +97,10 @@ public class Enemy : MonoBehaviour, IBulletHitHandler
         }
         else
         {
+            if (REQUIREDTOBEKILLED)
+            {
+                FindObjectOfType<ExitDoor>().IncreaseKillCounter();
+            }
             this.gameObject.SetActive(false);
         }
     }
