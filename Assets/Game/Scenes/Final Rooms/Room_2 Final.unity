@@ -5169,7 +5169,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5203343419209091373, guid: 96da924eeaa5553439bbdee0944f47e8, type: 3}
       propertyPath: managedReferences[6140528706069463045].DestinationSceneName
-      value: SampleScene
+      value: Room_3 Final
       objectReference: {fileID: 0}
     - target: {fileID: 7623495608409673026, guid: 96da924eeaa5553439bbdee0944f47e8, type: 3}
       propertyPath: m_Name
