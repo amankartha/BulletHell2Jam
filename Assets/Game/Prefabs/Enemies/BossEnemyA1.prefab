@@ -299,7 +299,7 @@ MonoBehaviour:
     PlayOnEnable: 1
     FireRate:
       isRandom: 0
-      minValue: 4
+      minValue: 6
       maxValue: 5
     Damage:
       isRandom: 0
@@ -311,7 +311,7 @@ MonoBehaviour:
       maxValue: 1
     Speed:
       isRandom: 0
-      minValue: 2
+      minValue: 3
       maxValue: 5
     StartColor: {r: 0.9433962, g: 0, b: 0, a: 1}
     StartSize:
@@ -327,7 +327,7 @@ MonoBehaviour:
   spawnShapeData:
     rotateSpeed: 0
     spawnDir: 2
-    numPoints: 3
+    numPoints: 5
     numPerSide: 1
     numPerGroup: 1
     groupRadius:
@@ -343,7 +343,7 @@ MonoBehaviour:
       maxValue: 0
     arc:
       isRandom: 0
-      minValue: 135
+      minValue: 75
       maxValue: 360
     randomise: 0
     onEdge: 0
@@ -354,9 +354,9 @@ MonoBehaviour:
   burstData:
     delay: 0
     maxActiveBullets: 0
-    burstCount: 3
-    burstDelay: 0.25
-    stackSpeedIncrease: 1
+    burstCount: 7
+    burstDelay: 0.5
+    stackSpeedIncrease: 0.25
     burstsUpdatePositionEveryBullet: 0
   subSpawners: []
   bulletModules: []
@@ -670,7 +670,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4091478042773928684}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -2, y: 5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0

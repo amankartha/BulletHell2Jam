@@ -65,7 +65,7 @@ MonoBehaviour:
       maxValue: 5
     Damage:
       isRandom: 0
-      minValue: 1
+      minValue: 2
       maxValue: 1
     Lifetime:
       isRandom: 0
@@ -197,6 +197,202 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 319825513765498618}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fa808113a8795c1408e94e3f5456bbe3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!1 &355473508865216855
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6144735653288426651}
+  - component: {fileID: 5717375313910817179}
+  - component: {fileID: 4573718155246429437}
+  m_Layer: 12
+  m_Name: BulletSpawnerRadial (2)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6144735653288426651
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 355473508865216855}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: -0.5, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7042323484709612660}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5717375313910817179
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 355473508865216855}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2583716d8b9a4cf9ae2a2a52c75333ec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  renderData:
+    singleData:
+      Camera: {fileID: 0}
+      Texture: {fileID: 2800000, guid: e97c8196946b3aa4f8b6c2a53a28cc78, type: 3}
+      Animated: 1
+      Rows: 3
+      Columns: 1
+      PerFrameLength: 0.5
+      Layer: 6
+      Priority: 0
+    sharedData: {fileID: 11400000, guid: 9aa15e800874f4e4c85c2ef94edf1a35, type: 2}
+  main:
+    FireMode: 0
+    PlayOnEnable: 1
+    FireRate:
+      isRandom: 0
+      minValue: 0.5
+      maxValue: 5
+    Damage:
+      isRandom: 0
+      minValue: 2
+      maxValue: 1
+    Lifetime:
+      isRandom: 0
+      minValue: 30
+      maxValue: 1
+    Speed:
+      isRandom: 0
+      minValue: 1.5
+      maxValue: 5
+    StartColor: {r: 0.9433962, g: 0, b: 0, a: 1}
+    StartSize:
+      isRandom: 0
+      minValue: 0.4
+      maxValue: 1
+    UseRotationForDirection: 1
+    MoveWithTransform: 0
+    RotateWithTransform: 0
+    ColliderType: 0
+    ColliderSize: 0.5
+    CapsuleLength: 0.4
+  spawnShapeData:
+    rotateSpeed: 0
+    spawnDir: 2
+    numPoints: 10
+    numPerSide: 1
+    numPerGroup: 1
+    groupRadius:
+      isRandom: 0
+      minValue: 0.25
+      maxValue: 0.25
+    spawnCentreBullet: 0
+    groupDirection: 0
+    removeFromEdgePercent: 0
+    radius:
+      isRandom: 0
+      minValue: 0.5
+      maxValue: 0
+    arc:
+      isRandom: 0
+      minValue: 360
+      maxValue: 360
+    randomise: 0
+    onEdge: 0
+    directionArc:
+      isRandom: 0
+      minValue: 360
+      maxValue: 360
+  burstData:
+    delay: 2
+    maxActiveBullets: 0
+    burstCount: 1
+    burstDelay: 0.25
+    stackSpeedIncrease: 1
+    burstsUpdatePositionEveryBullet: 0
+  subSpawners: []
+  bulletModules: []
+  bulletInitModules: []
+  spawnModules: []
+  allModules:
+  - rid: 5125869732736008192
+  - rid: 5125869789587439618
+  OnBulletDied:
+    m_PersistentCalls:
+      m_Calls: []
+  OnBulletCancelled:
+    m_PersistentCalls:
+      m_Calls: []
+  OnBulletSpawned:
+    m_PersistentCalls:
+      m_Calls: []
+  OnWeaponFired:
+    m_PersistentCalls:
+      m_Calls: []
+  references:
+    version: 2
+    RefIds:
+    - rid: 5125869732736008192
+      type: {class: BulletSizeOverTimeModule, ns: BulletFury.Modules, asm: WayfarerGames.BulletFury}
+      data:
+        Mode: 0
+        Time: 1
+        sizeOverTime:
+          serializedVersion: 2
+          m_Curve:
+          - serializedVersion: 3
+            time: 0
+            value: 1
+            inSlope: 0
+            outSlope: 0
+            tangentMode: 0
+            weightedMode: 0
+            inWeight: 0
+            outWeight: 0
+          - serializedVersion: 3
+            time: 0.9010986
+            value: 0.99969864
+            inSlope: 0
+            outSlope: 0
+            tangentMode: 0
+            weightedMode: 0
+            inWeight: 0.33333334
+            outWeight: 0.33333334
+          - serializedVersion: 3
+            time: 1.0500001
+            value: -0.0018502246
+            inSlope: 0
+            outSlope: 0
+            tangentMode: 0
+            weightedMode: 0
+            inWeight: 0
+            outWeight: 0
+          m_PreInfinity: 2
+          m_PostInfinity: 2
+          m_RotationOrder: 4
+    - rid: 5125869789587439618
+      type: {class: SpawnerRotateModule, ns: BulletFury.Modules, asm: WayfarerGames.BulletFury}
+      data:
+        angularSpeed: 5
+--- !u!114 &4573718155246429437
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 355473508865216855}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fa808113a8795c1408e94e3f5456bbe3, type: 3}
@@ -541,7 +737,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &7042323484709612660
 Transform:
   m_ObjectHideFlags: 0
@@ -555,8 +751,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 3084592026337937275}
   - {fileID: 7934581552469089566}
+  - {fileID: 6144735653288426651}
   - {fileID: 4194196843337492329}
   m_Father: {fileID: 2780924796050028244}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -621,207 +817,11 @@ MonoBehaviour:
     PlayOnEnable: 1
     FireRate:
       isRandom: 0
-      minValue: 1
-      maxValue: 5
-    Damage:
-      isRandom: 0
-      minValue: 1
-      maxValue: 1
-    Lifetime:
-      isRandom: 0
-      minValue: 30
-      maxValue: 1
-    Speed:
-      isRandom: 0
-      minValue: 0.75
-      maxValue: 5
-    StartColor: {r: 0.9433962, g: 0, b: 0, a: 1}
-    StartSize:
-      isRandom: 0
-      minValue: 0.4
-      maxValue: 1
-    UseRotationForDirection: 1
-    MoveWithTransform: 0
-    RotateWithTransform: 0
-    ColliderType: 0
-    ColliderSize: 0.5
-    CapsuleLength: 0.4
-  spawnShapeData:
-    rotateSpeed: 0
-    spawnDir: 2
-    numPoints: 10
-    numPerSide: 1
-    numPerGroup: 1
-    groupRadius:
-      isRandom: 0
-      minValue: 0.25
-      maxValue: 0.25
-    spawnCentreBullet: 0
-    groupDirection: 0
-    removeFromEdgePercent: 0
-    radius:
-      isRandom: 0
-      minValue: 0.5
-      maxValue: 0
-    arc:
-      isRandom: 0
-      minValue: 360
-      maxValue: 360
-    randomise: 0
-    onEdge: 0
-    directionArc:
-      isRandom: 0
-      minValue: 360
-      maxValue: 360
-  burstData:
-    delay: 2
-    maxActiveBullets: 0
-    burstCount: 1
-    burstDelay: 0.25
-    stackSpeedIncrease: 1
-    burstsUpdatePositionEveryBullet: 0
-  subSpawners: []
-  bulletModules: []
-  bulletInitModules: []
-  spawnModules: []
-  allModules:
-  - rid: 5125869732736008192
-  - rid: 5125869789587439618
-  OnBulletDied:
-    m_PersistentCalls:
-      m_Calls: []
-  OnBulletCancelled:
-    m_PersistentCalls:
-      m_Calls: []
-  OnBulletSpawned:
-    m_PersistentCalls:
-      m_Calls: []
-  OnWeaponFired:
-    m_PersistentCalls:
-      m_Calls: []
-  references:
-    version: 2
-    RefIds:
-    - rid: 5125869732736008192
-      type: {class: BulletSizeOverTimeModule, ns: BulletFury.Modules, asm: WayfarerGames.BulletFury}
-      data:
-        Mode: 0
-        Time: 1
-        sizeOverTime:
-          serializedVersion: 2
-          m_Curve:
-          - serializedVersion: 3
-            time: 0
-            value: 1
-            inSlope: 0
-            outSlope: 0
-            tangentMode: 0
-            weightedMode: 0
-            inWeight: 0
-            outWeight: 0
-          - serializedVersion: 3
-            time: 0.9010986
-            value: 0.99969864
-            inSlope: 0
-            outSlope: 0
-            tangentMode: 0
-            weightedMode: 0
-            inWeight: 0.33333334
-            outWeight: 0.33333334
-          - serializedVersion: 3
-            time: 1.0500001
-            value: -0.0018502246
-            inSlope: 0
-            outSlope: 0
-            tangentMode: 0
-            weightedMode: 0
-            inWeight: 0
-            outWeight: 0
-          m_PreInfinity: 2
-          m_PostInfinity: 2
-          m_RotationOrder: 4
-    - rid: 5125869789587439618
-      type: {class: SpawnerRotateModule, ns: BulletFury.Modules, asm: WayfarerGames.BulletFury}
-      data:
-        angularSpeed: 5
---- !u!114 &2773646636184799778
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1048415418072295080}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fa808113a8795c1408e94e3f5456bbe3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!1 &1082224850699921838
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 3084592026337937275}
-  - component: {fileID: 5756520161148651549}
-  - component: {fileID: 887789737089111329}
-  m_Layer: 12
-  m_Name: BulletSpawner
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &3084592026337937275
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1082224850699921838}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.5, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 7042323484709612660}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5756520161148651549
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1082224850699921838}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2583716d8b9a4cf9ae2a2a52c75333ec, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  renderData:
-    singleData:
-      Camera: {fileID: 0}
-      Texture: {fileID: 2800000, guid: e97c8196946b3aa4f8b6c2a53a28cc78, type: 3}
-      Animated: 1
-      Rows: 3
-      Columns: 1
-      PerFrameLength: 0.5
-      Layer: 6
-      Priority: 0
-    sharedData: {fileID: 11400000, guid: 9aa15e800874f4e4c85c2ef94edf1a35, type: 2}
-  main:
-    FireMode: 0
-    PlayOnEnable: 1
-    FireRate:
-      isRandom: 0
       minValue: 5
       maxValue: 5
     Damage:
       isRandom: 0
-      minValue: 1
+      minValue: 2
       maxValue: 1
     Lifetime:
       isRandom: 0
@@ -834,7 +834,7 @@ MonoBehaviour:
     StartColor: {r: 0.9433962, g: 0, b: 0, a: 1}
     StartSize:
       isRandom: 0
-      minValue: 0.6
+      minValue: 0.5
       maxValue: 1
     UseRotationForDirection: 1
     MoveWithTransform: 0
@@ -860,9 +860,9 @@ MonoBehaviour:
       minValue: 0.5
       maxValue: 0
     arc:
-      isRandom: 0
-      minValue: 135
-      maxValue: 360
+      isRandom: 1
+      minValue: 10
+      maxValue: 25
     randomise: 0
     onEdge: 0
     directionArc:
@@ -872,17 +872,17 @@ MonoBehaviour:
   burstData:
     delay: 2
     maxActiveBullets: 0
-    burstCount: 3
-    burstDelay: 0.25
-    stackSpeedIncrease: 1
+    burstCount: 40
+    burstDelay: 0.05
+    stackSpeedIncrease: 0
     burstsUpdatePositionEveryBullet: 0
   subSpawners: []
   bulletModules: []
   bulletInitModules: []
   spawnModules: []
   allModules:
-  - rid: 5125869643372167180
   - rid: 5125869732736008192
+  - rid: 5125869789587439619
   OnBulletDied:
     m_PersistentCalls:
       m_Calls: []
@@ -898,16 +898,6 @@ MonoBehaviour:
   references:
     version: 2
     RefIds:
-    - rid: 5125869643372167180
-      type: {class: AimedShotModule, ns: BulletFury.Modules, asm: WayfarerGames.BulletFury}
-      data:
-        thisTransform: {fileID: 0}
-        target: {fileID: 0}
-        type: 4
-        maxChangePerFrame: 1
-        lerpSpeed: 0.1
-        time: 0.5
-        lookAheadTime: 1
     - rid: 5125869732736008192
       type: {class: BulletSizeOverTimeModule, ns: BulletFury.Modules, asm: WayfarerGames.BulletFury}
       data:
@@ -946,13 +936,23 @@ MonoBehaviour:
           m_PreInfinity: 2
           m_PostInfinity: 2
           m_RotationOrder: 4
---- !u!114 &887789737089111329
+    - rid: 5125869789587439619
+      type: {class: AimedShotModule, ns: BulletFury.Modules, asm: WayfarerGames.BulletFury}
+      data:
+        thisTransform: {fileID: 0}
+        target: {fileID: 0}
+        type: 0
+        maxChangePerFrame: 10
+        lerpSpeed: 0.1
+        time: 0.5
+        lookAheadTime: 1
+--- !u!114 &2773646636184799778
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1082224850699921838}
+  m_GameObject: {fileID: 1048415418072295080}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fa808113a8795c1408e94e3f5456bbe3, type: 3}
@@ -1023,7 +1023,7 @@ MonoBehaviour:
       maxValue: 5
     Damage:
       isRandom: 0
-      minValue: 1
+      minValue: 2
       maxValue: 1
     Lifetime:
       isRandom: 0
@@ -1257,11 +1257,11 @@ MonoBehaviour:
     PlayOnEnable: 1
     FireRate:
       isRandom: 0
-      minValue: 1
+      minValue: 0.5
       maxValue: 5
     Damage:
       isRandom: 0
-      minValue: 1
+      minValue: 2
       maxValue: 1
     Lifetime:
       isRandom: 0
@@ -1269,7 +1269,7 @@ MonoBehaviour:
       maxValue: 1
     Speed:
       isRandom: 0
-      minValue: 0.75
+      minValue: 1.5
       maxValue: 5
     StartColor: {r: 0.9433962, g: 0, b: 0, a: 1}
     StartSize:
@@ -1492,7 +1492,7 @@ MonoBehaviour:
       maxValue: 5
     Damage:
       isRandom: 0
-      minValue: 1
+      minValue: 2
       maxValue: 1
     Lifetime:
       isRandom: 0
@@ -1694,7 +1694,7 @@ MonoBehaviour:
       maxValue: 5
     Damage:
       isRandom: 0
-      minValue: 1
+      minValue: 2
       maxValue: 1
     Lifetime:
       isRandom: 0
@@ -1702,7 +1702,7 @@ MonoBehaviour:
       maxValue: 1
     Speed:
       isRandom: 0
-      minValue: 1.5
+      minValue: 2.5
       maxValue: 5
     StartColor: {r: 0.9433962, g: 0, b: 0, a: 1}
     StartSize:
@@ -1890,7 +1890,7 @@ MonoBehaviour:
       maxValue: 5
     Damage:
       isRandom: 0
-      minValue: 1
+      minValue: 2
       maxValue: 1
     Lifetime:
       isRandom: 0
@@ -2287,7 +2287,7 @@ MonoBehaviour:
       maxValue: 5
     Damage:
       isRandom: 0
-      minValue: 1
+      minValue: 2
       maxValue: 1
     Lifetime:
       isRandom: 0
@@ -2452,7 +2452,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8748665584100552417}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -11, y: 14, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
