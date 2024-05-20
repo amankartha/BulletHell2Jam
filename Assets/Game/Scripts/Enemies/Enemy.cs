@@ -68,8 +68,10 @@ public class Enemy : MonoBehaviour, IBulletHitHandler
     {
         _bulletSpawner = this.GetComponentInChildren<BulletSpawner>();
         _doTweenPath = this.GetComponent<DOTweenPath>();
-        _bulletSpawner.OnBulletSpawnedEvent += OnBulletShot;
-        
+        if (_bulletSpawner != null)
+        {
+            _bulletSpawner.OnBulletSpawnedEvent += OnBulletShot;
+        }
     }
 
     // Update is called once per frame
@@ -85,7 +87,7 @@ public class Enemy : MonoBehaviour, IBulletHitHandler
 
     private void OnDisable()
     {
-        _bulletSpawner.OnBulletSpawnedEvent -= OnBulletShot;
+        if(_bulletSpawner != null)_bulletSpawner.OnBulletSpawnedEvent -= OnBulletShot;
     }
 
 
