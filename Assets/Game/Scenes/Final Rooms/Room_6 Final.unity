@@ -3632,7 +3632,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5203343419209091373, guid: 96da924eeaa5553439bbdee0944f47e8, type: 3}
       propertyPath: managedReferences[6140528706069463045].DestinationSceneName
-      value: Room_7 FInal
+      value: Room_7 Final
       objectReference: {fileID: 0}
     - target: {fileID: 6157406268155738666, guid: 96da924eeaa5553439bbdee0944f47e8, type: 3}
       propertyPath: ChangeHub
