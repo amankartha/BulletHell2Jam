@@ -6647,7 +6647,7 @@ MonoBehaviour:
         RemapRangeFalloff: {x: 0, y: 1}
         Owner: {fileID: 2590447092903048571}
         DebugActive: 0
-        LoadingSceneName: MMAdditiveLoadingScreen
+        LoadingSceneName: LoadingTest
         DestinationSceneName: Hub_Room
         LoadingMode: 2
         Priority: 4
