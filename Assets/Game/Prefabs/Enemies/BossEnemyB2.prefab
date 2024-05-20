@@ -282,7 +282,7 @@ MonoBehaviour:
       minValue: 360
       maxValue: 360
   burstData:
-    delay: 2.75
+    delay: 0.25
     maxActiveBullets: 0
     burstCount: 1
     burstDelay: 0.5
@@ -767,12 +767,12 @@ MonoBehaviour:
       maxValue: 1
     Speed:
       isRandom: 0
-      minValue: 2
+      minValue: 5
       maxValue: 5
     StartColor: {r: 0.94509804, g: 0, b: 0, a: 1}
     StartSize:
       isRandom: 0
-      minValue: 0.75
+      minValue: 1.5
       maxValue: 1
     UseRotationForDirection: 1
     MoveWithTransform: 0
@@ -808,7 +808,7 @@ MonoBehaviour:
       minValue: 360
       maxValue: 360
   burstData:
-    delay: 1.75
+    delay: 4
     maxActiveBullets: 0
     burstCount: 1
     burstDelay: 0.5
@@ -927,7 +927,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1389158778181345105}
+  m_Father: {fileID: 1314332662870115148}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &6621567055642020003
 MonoBehaviour:
@@ -1211,8 +1211,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 4602060463746953807}
-  - {fileID: 2802329959392890941}
+  - {fileID: 7438109429255521660}
+  - {fileID: 8965099159788906611}
   m_Father: {fileID: 2909738083676451486}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3677659055972043269
@@ -1244,7 +1244,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3677659055972043269}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -5.5, y: 7, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1264,8 +1264,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5e4e1affdc177a47b1c0aa1e4d73143, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _health: 100
-  MaxHealth: 100
+  _health: 200
+  MaxHealth: 200
   canRespawnAfterDelay: 0
   isRobot: 0
   delay: 3
@@ -1692,7 +1692,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa808113a8795c1408e94e3f5456bbe3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &4899929459219478458
+--- !u!1 &3930626759236445465
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1700,38 +1700,38 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 2802329959392890941}
-  - component: {fileID: 7572531736520810881}
-  - component: {fileID: 8388492616704709279}
+  - component: {fileID: 8965099159788906611}
+  - component: {fileID: 2172574478545412106}
+  - component: {fileID: 1617753289490830790}
   m_Layer: 12
-  m_Name: RotateAttack
+  m_Name: BulletSpawner
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &2802329959392890941
+--- !u!4 &8965099159788906611
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4899929459219478458}
+  m_GameObject: {fileID: 3930626759236445465}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.5, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 2, y: 2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1314332662870115148}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7572531736520810881
+--- !u!114 &2172574478545412106
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4899929459219478458}
+  m_GameObject: {fileID: 3930626759236445465}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2583716d8b9a4cf9ae2a2a52c75333ec, type: 3}
@@ -1747,14 +1747,14 @@ MonoBehaviour:
       PerFrameLength: 0.5
       Layer: 6
       Priority: 0
-    sharedData: {fileID: 11400000, guid: 9aa15e800874f4e4c85c2ef94edf1a35, type: 2}
+    sharedData: {fileID: 11400000, guid: d9f004339d47783469999981b771c2c4, type: 2}
   main:
     FireMode: 0
     PlayOnEnable: 1
     FireRate:
-      isRandom: 0
-      minValue: 3
-      maxValue: 5
+      isRandom: 1
+      minValue: 1
+      maxValue: 2
     Damage:
       isRandom: 0
       minValue: 1
@@ -1765,23 +1765,23 @@ MonoBehaviour:
       maxValue: 1
     Speed:
       isRandom: 0
-      minValue: 1.5
+      minValue: 0.75
       maxValue: 5
-    StartColor: {r: 0.9433962, g: 0, b: 0, a: 1}
+    StartColor: {r: 1, g: 0.009225906, b: 0, a: 1}
     StartSize:
       isRandom: 0
-      minValue: 0.4
+      minValue: 0.6
       maxValue: 1
     UseRotationForDirection: 1
     MoveWithTransform: 0
     RotateWithTransform: 1
     ColliderType: 1
-    ColliderSize: 0.5
+    ColliderSize: 0.228
     CapsuleLength: 0.4
   spawnShapeData:
     rotateSpeed: 0
     spawnDir: 2
-    numPoints: 8
+    numPoints: 1
     numPerSide: 1
     numPerGroup: 1
     groupRadius:
@@ -1797,7 +1797,7 @@ MonoBehaviour:
       maxValue: 0
     arc:
       isRandom: 0
-      minValue: 360
+      minValue: 180
       maxValue: 360
     randomise: 0
     onEdge: 0
@@ -1808,17 +1808,19 @@ MonoBehaviour:
   burstData:
     delay: 2
     maxActiveBullets: 0
-    burstCount: 3
-    burstDelay: 0.25
+    burstCount: 1
+    burstDelay: 0
     stackSpeedIncrease: 0
-    burstsUpdatePositionEveryBullet: 1
+    burstsUpdatePositionEveryBullet: 0
   subSpawners: []
   bulletModules: []
   bulletInitModules: []
   spawnModules: []
   allModules:
+  - rid: 5125869643372167180
+  - rid: 5125869643372167184
+  - rid: 5125869643372167185
   - rid: 5125869732736008192
-  - rid: 5125869789587439616
   OnBulletDied:
     m_PersistentCalls:
       m_Calls: []
@@ -1834,6 +1836,104 @@ MonoBehaviour:
   references:
     version: 2
     RefIds:
+    - rid: 5125869643372167180
+      type: {class: AimedShotModule, ns: BulletFury.Modules, asm: WayfarerGames.BulletFury}
+      data:
+        thisTransform: {fileID: 0}
+        target: {fileID: 0}
+        type: 0
+        maxChangePerFrame: 10
+        lerpSpeed: 0.1
+        time: 0.5
+        lookAheadTime: 1
+    - rid: 5125869643372167184
+      type: {class: TrackObjectModule, ns: BulletFury.Modules, asm: WayfarerGames.BulletFury}
+      data:
+        Mode: 0
+        Time: 0
+        <ToTrack>k__BackingField: {fileID: 31429914335782348, guid: d9f89a9092585b648a90cb32e3851f58, type: 3}
+        <TurnSpeed>k__BackingField: 2.5
+        turnSpeedOverTime:
+          serializedVersion: 2
+          m_Curve:
+          - serializedVersion: 3
+            time: 0.049987793
+            value: 0.0030212402
+            inSlope: 0
+            outSlope: 0
+            tangentMode: 0
+            weightedMode: 0
+            inWeight: 0
+            outWeight: 0
+          - serializedVersion: 3
+            time: 0.15003082
+            value: 1.0070491
+            inSlope: 0.06615555
+            outSlope: 0.06615555
+            tangentMode: 0
+            weightedMode: 0
+            inWeight: 0.2039295
+            outWeight: 0.33333334
+          - serializedVersion: 3
+            time: 0.172
+            value: 0.19999683
+            inSlope: 0
+            outSlope: 0
+            tangentMode: 0
+            weightedMode: 0
+            inWeight: 0
+            outWeight: 0
+          m_PreInfinity: 2
+          m_PostInfinity: 2
+          m_RotationOrder: 4
+    - rid: 5125869643372167185
+      type: {class: SpeedOverTimeModule, ns: BulletFury.Modules, asm: WayfarerGames.BulletFury}
+      data:
+        Mode: 0
+        Time: 0
+        speedOverTime:
+          serializedVersion: 2
+          m_Curve:
+          - serializedVersion: 3
+            time: 0.0011135354
+            value: 0.7266828
+            inSlope: 0.07266291
+            outSlope: 0.07266291
+            tangentMode: 0
+            weightedMode: 0
+            inWeight: 0
+            outWeight: 0.17636125
+          - serializedVersion: 3
+            time: 0.06713864
+            value: 0.2627427
+            inSlope: 0.24356498
+            outSlope: 0.24356498
+            tangentMode: 0
+            weightedMode: 0
+            inWeight: 0.16391706
+            outWeight: 0.19991218
+          - serializedVersion: 3
+            time: 0.13380367
+            value: 0.9143798
+            inSlope: 11.4788
+            outSlope: 11.4788
+            tangentMode: 0
+            weightedMode: 0
+            inWeight: 0.33333334
+            outWeight: 0.33333334
+          - serializedVersion: 3
+            time: 0.15100001
+            value: 0.99999976
+            inSlope: 0.44759724
+            outSlope: 0.44759724
+            tangentMode: 0
+            weightedMode: 0
+            inWeight: 0.8830736
+            outWeight: 0
+          m_PreInfinity: 2
+          m_PostInfinity: 2
+          m_RotationOrder: 4
+        scale: 6
     - rid: 5125869732736008192
       type: {class: BulletSizeOverTimeModule, ns: BulletFury.Modules, asm: WayfarerGames.BulletFury}
       data:
@@ -1872,17 +1972,13 @@ MonoBehaviour:
           m_PreInfinity: 2
           m_PostInfinity: 2
           m_RotationOrder: 4
-    - rid: 5125869789587439616
-      type: {class: SpawnerRotateModule, ns: BulletFury.Modules, asm: WayfarerGames.BulletFury}
-      data:
-        angularSpeed: 2
---- !u!114 &8388492616704709279
+--- !u!114 &1617753289490830790
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4899929459219478458}
+  m_GameObject: {fileID: 3930626759236445465}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fa808113a8795c1408e94e3f5456bbe3, type: 3}
@@ -2286,7 +2382,7 @@ MonoBehaviour:
       minValue: 360
       maxValue: 360
   burstData:
-    delay: 2.5
+    delay: 0.5
     maxActiveBullets: 0
     burstCount: 1
     burstDelay: 0.5
@@ -2384,7 +2480,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4602060463746953807}
   m_Layer: 13
-  m_Name: Attack A
+  m_Name: Attack B
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2408,7 +2504,7 @@ Transform:
   - {fileID: 1699057993423986009}
   - {fileID: 1174925305102648732}
   - {fileID: 8406041889594422942}
-  m_Father: {fileID: 1314332662870115148}
+  m_Father: {fileID: 1389158778181345105}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6920899384508029884
 GameObject:
@@ -2608,7 +2704,7 @@ MonoBehaviour:
       minValue: 360
       maxValue: 360
   burstData:
-    delay: 2.25
+    delay: 0.75
     maxActiveBullets: 0
     burstCount: 1
     burstDelay: 0.5
@@ -2725,7 +2821,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 7438109429255521660}
+  - {fileID: 4602060463746953807}
   - {fileID: 8245610474404668067}
   m_Father: {fileID: 2909738083676451486}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2843,7 +2939,7 @@ MonoBehaviour:
       minValue: 360
       maxValue: 360
   burstData:
-    delay: 3
+    delay: 0
     maxActiveBullets: 0
     burstCount: 1
     burstDelay: 0.5
