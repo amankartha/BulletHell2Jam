@@ -2065,7 +2065,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &8003955092595521509
 Transform:
   m_ObjectHideFlags: 0
@@ -2094,8 +2094,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5e4e1affdc177a47b1c0aa1e4d73143, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _health: 100
-  MaxHealth: 100
+  _health: 150
+  MaxHealth: 150
   canRespawnAfterDelay: 0
   isRobot: 0
   delay: 3
