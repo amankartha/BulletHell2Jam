@@ -26,6 +26,7 @@ public class MainPlayerShooting : StateBase
         _player.Anim.SetBool("Dump",true);
         _player.armBulletSpawner.Play();
         _player.canReflect = false;
+        _player.teleported = false;
     }
 
     public override void OnLogic()

@@ -1,13 +1,14 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using MoreMountains.Feedbacks;
 using UnityEngine;
 
 public class ChargingPad : MonoBehaviour
 {
     [SerializeField] private float HeatChargePerSecond = 5f;
     private ParticleSystem PS;
-
+    public MMF_Player feel;
     private void Start()
     {
         PS = this.gameObject.GetComponentInChildren<ParticleSystem>();
@@ -19,6 +20,7 @@ public class ChargingPad : MonoBehaviour
         if (col.gameObject == GameManager.Instance.MAINPLAYERGAMEOBJECT && GameManager.Instance.MAINPLAYERSCRIPT.canCharge)
         {
             PS.Play();
+            feel?.PlayFeedbacks();
         }
     }
 
@@ -36,6 +38,7 @@ public class ChargingPad : MonoBehaviour
         if (other.gameObject == GameManager.Instance.MAINPLAYERGAMEOBJECT)
         {
             PS.Stop();
+            feel?.StopFeedbacks();
         }
     }
 }

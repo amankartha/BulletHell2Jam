@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using BulletFury;
 using BulletFury.Data;
+using MoreMountains.Feedbacks;
 using UnityEngine;
 
 public class MainPlayerReflector : MonoBehaviour,IBulletHitHandler
@@ -17,7 +18,15 @@ public class MainPlayerReflector : MonoBehaviour,IBulletHitHandler
     [SerializeField] private Collider2D _reflectCollider;
 
     [SerializeField] private float _reflectTimerDuration = 0.4f;
-  
+
+
+    private MMF_Player audioFeedbacks;
+
+
+    private void Start()
+    {
+        audioFeedbacks = GetComponent<MMF_Player>();
+    }
 
     public void Hit(BulletContainer bullet)
     {
@@ -29,6 +38,7 @@ public class MainPlayerReflector : MonoBehaviour,IBulletHitHandler
         if (_player.canReflect&&_player.GetCurrentState() == "Melee" && Input.GetKeyDown(KeyCode.Mouse0))
         {
             _player.canReflect = false;
+            audioFeedbacks?.PlayFeedbacks();
             _reflectCollider.enabled = true;
             _player.Anim.SetTrigger("Attack");
             StartCoroutine(CoolDown());

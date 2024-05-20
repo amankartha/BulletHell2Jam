@@ -200,7 +200,7 @@ MonoBehaviour:
         DebugActive: 0
         SoundID: 1
         FadeDuration: 1
-        FinalVolume: 0.05
+        FinalVolume: 0.02
         FadeTween:
           MMTweenDefinitionType: 0
           MMTweenCurve: 9
@@ -910,7 +910,7 @@ MonoBehaviour:
         DebugActive: 0
         SoundID: 2
         FadeDuration: 1
-        FinalVolume: 0.05
+        FinalVolume: 0.02
         FadeTween:
           MMTweenDefinitionType: 0
           MMTweenCurve: 9
