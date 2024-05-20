@@ -11,7 +11,7 @@ public class RoomStartTrigger : MonoBehaviour,ITrigger
     
     public void ActivateTrigger()
     {
-        MethodstoCall.Invoke();
+        MethodstoCall?.Invoke();
         foreach (var Enemy in EnemiesToSpawn)
         {
             Enemy.SetActive(true);

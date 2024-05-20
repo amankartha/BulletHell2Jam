@@ -46,6 +46,7 @@ public class MainPlayer : MonoBehaviour, IBulletHitHandler
     [SerializeField] private MMProgressBar _healthBar;
     public MMF_Player OverChargedFeedbacks;
     public MMF_Player OverChargedFeedbacksEnd;
+    public MMF_Player DeathFeedbacks;
     
     
    
@@ -58,6 +59,10 @@ public class MainPlayer : MonoBehaviour, IBulletHitHandler
         {
             _health = math.clamp(value, 0, _maxHealth);
             _healthBar.UpdateBar01((float)_health/_maxHealth);
+            if (_health == 0)
+            {
+                Respawn();
+            }
         }
     }
     public int MaxHealth { get;private set; }
@@ -147,6 +152,13 @@ public class MainPlayer : MonoBehaviour, IBulletHitHandler
         
     }
 
+    private void Respawn()
+    {
+        DeathFeedbacks?.PlayFeedbacks();
+        Health = _maxHealth;
+        Heat = 0f;
+    }
+    
     public bool TryConsumeHeat(int value)
     {
         if (Heat >= value)
@@ -159,7 +171,6 @@ public class MainPlayer : MonoBehaviour, IBulletHitHandler
             return false;
         }
     }
-
     public float TeleportCooldown = 2.0f;
     private bool canTeleport = true;
 
