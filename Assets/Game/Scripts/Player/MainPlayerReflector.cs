@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using BulletFury;
 using BulletFury.Data;
 using MoreMountains.Feedbacks;
+using Unity.Mathematics;
 using UnityEngine;
 
 public class MainPlayerReflector : MonoBehaviour,IBulletHitHandler
@@ -19,8 +20,11 @@ public class MainPlayerReflector : MonoBehaviour,IBulletHitHandler
 
     [SerializeField] private float _reflectTimerDuration = 0.4f;
 
-
+    [SerializeField] private GameObject ExplosionVfx;
+    
     private MMF_Player audioFeedbacks;
+
+    public MMMiniObjectPooler _pooler;
 
 
     private void Start()
@@ -30,7 +34,13 @@ public class MainPlayerReflector : MonoBehaviour,IBulletHitHandler
 
     public void Hit(BulletContainer bullet)
     {
-        if(_reflectCollider.enabled) _player.Heat += HeatGained;
+        if (_reflectCollider.enabled)
+        {
+            _player.Heat += HeatGained;
+            var p = _pooler.GetPooledGameObject();
+                p.transform.position = bullet.Position;
+                p.SetActive(true);
+        }
     }
 
     private void Update()

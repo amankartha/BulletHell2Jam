@@ -316,6 +316,7 @@ GameObject:
   - component: {fileID: 5692651010108587286}
   - component: {fileID: 6418898393279631150}
   - component: {fileID: 5783193847798220454}
+  - component: {fileID: 4340920708563730706}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -497,6 +498,23 @@ Rigidbody2D:
   m_SleepingMode: 0
   m_CollisionDetection: 0
   m_Constraints: 4
+--- !u!114 &4340920708563730706
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 254829461606866309}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a2e3aab8bd306249afbd26c52205f46, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GameObjectToPool: {fileID: 342703150298809971, guid: 3e0a37fcbf5b6324d96bd28b06adaf22, type: 3}
+  PoolSize: 20
+  PoolCanExpand: 1
+  MutualizeWaitingPools: 0
+  NestWaitingPool: 1
 --- !u!1 &598145172173302203
 GameObject:
   m_ObjectHideFlags: 0
@@ -3766,6 +3784,8 @@ MonoBehaviour:
   HeatGained: 1
   _reflectCollider: {fileID: 6240852698510620333}
   _reflectTimerDuration: 0.4
+  ExplosionVfx: {fileID: 342703150298809971, guid: 3e0a37fcbf5b6324d96bd28b06adaf22, type: 3}
+  _pooler: {fileID: 4340920708563730706}
 --- !u!58 &6240852698510620333
 CircleCollider2D:
   m_ObjectHideFlags: 0
