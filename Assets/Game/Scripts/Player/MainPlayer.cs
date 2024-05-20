@@ -48,7 +48,7 @@ public class MainPlayer : MonoBehaviour, IBulletHitHandler
     public MMF_Player OverChargedFeedbacksEnd;
     public MMF_Player DeathFeedbacks;
     public MMF_Player TeleportFeedbacks;
-    
+    public MMF_Player ShootFeedbacks;
     
    
 
@@ -137,7 +137,7 @@ public class MainPlayer : MonoBehaviour, IBulletHitHandler
         fsm.Init();
 
         armBulletSpawner.Stop();
-
+        armBulletSpawner.OnWeaponFiredEvent += OnShoot;
     }
 
     // Update is called once per frame
@@ -152,6 +152,11 @@ public class MainPlayer : MonoBehaviour, IBulletHitHandler
         
     }
 
+    private void OnDisable()
+    {
+        armBulletSpawner.OnWeaponFiredEvent -= OnShoot;
+    }
+
     private void FixedUpdate()
     {
         
@@ -164,7 +169,11 @@ public class MainPlayer : MonoBehaviour, IBulletHitHandler
         Health = _maxHealth;
         Heat = 0f;
     }
-    
+
+    private void OnShoot()
+    {
+        ShootFeedbacks?.PlayFeedbacks();
+    }
     public bool TryConsumeHeat(int value)
     {
         if (Heat >= value)

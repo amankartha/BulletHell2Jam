@@ -1130,8 +1130,8 @@ MonoBehaviour:
         SequentialOrderHoldCooldownDuration: 2
         RandomUnique: 0
         SoundDataSO: {fileID: 0}
-        MinVolume: 1
-        MaxVolume: 1
+        MinVolume: 0.1
+        MaxVolume: 0.1
         MinPitch: 1.2
         MaxPitch: 1.3
         MmSoundManagerTrack: 0
