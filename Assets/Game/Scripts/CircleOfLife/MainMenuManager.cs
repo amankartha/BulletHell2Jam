@@ -6,10 +6,10 @@ using UnityEngine.SceneManagement;
 public class MainMenuManager : MonoBehaviour
 {
     public SceneReference GameScene;
-
+    public SceneReference System;
     public void LoadScene()
     {
-        SceneManager.LoadScene(GameScene.SceneName, LoadSceneMode.Single);
+        
     }
 
     public void QuiteGame()
