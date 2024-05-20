@@ -1757,6 +1757,7 @@ MonoBehaviour:
   StartFighting: {fileID: 7071564938741629119}
   FadeCalm: {fileID: 7492316622194690067}
   FadeFighting: {fileID: 5120866733570179393}
+  _virtualCamera: {fileID: 6697572611196026350}
 --- !u!1 &7255683348634614577
 GameObject:
   m_ObjectHideFlags: 0

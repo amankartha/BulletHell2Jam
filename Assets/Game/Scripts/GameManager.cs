@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Cinemachine;
 using MoreMountains.Feedbacks;
 using MoreMountains.Tools;
 using UnityEngine;
@@ -18,6 +19,7 @@ public class GameManager : MMPersistentSingleton<GameManager>
     public MMF_Player FadeCalm;
     public MMF_Player FadeFighting;
 
+    public CinemachineVirtualCamera _virtualCamera;
     private void OnEnable()
     {
         SceneManager.sceneLoaded += GetNewCollider;
@@ -40,5 +42,10 @@ public class GameManager : MMPersistentSingleton<GameManager>
     public void GetNewCollider(Scene scene,LoadSceneMode load)
     {
         CurrentRoomCollider = FindObjectOfType<THISCOLLIDER>().GetComponent<CompositeCollider2D>();
+    }
+
+    public void ChangeCamera(float size)
+    {
+        _virtualCamera.m_Lens.OrthographicSize = size;
     }
 }
