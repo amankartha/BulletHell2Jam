@@ -32,6 +32,7 @@ public class Enemy : MonoBehaviour, IBulletHitHandler
     public MMF_Player RobotDown;
     public MMF_Player RobotUp;
 
+    public MMF_Player ShootFeel;
     public bool REQUIREDTOBEKILLED = false;
     #endregion"
 
@@ -67,6 +68,8 @@ public class Enemy : MonoBehaviour, IBulletHitHandler
     {
         _bulletSpawner = this.GetComponentInChildren<BulletSpawner>();
         _doTweenPath = this.GetComponent<DOTweenPath>();
+        _bulletSpawner.OnBulletSpawnedEvent += OnBulletShot;
+        
     }
 
     // Update is called once per frame
@@ -75,7 +78,21 @@ public class Enemy : MonoBehaviour, IBulletHitHandler
         
     }
 
- 
+    private void OnEnable()
+    {
+        if(_bulletSpawner != null) _bulletSpawner.OnBulletSpawnedEvent += OnBulletShot;
+    }
+
+    private void OnDisable()
+    {
+        _bulletSpawner.OnBulletSpawnedEvent -= OnBulletShot;
+    }
+
+
+    private void OnBulletShot(int i, BulletContainer bc)
+    {
+        ShootFeel?.PlayFeedbacks();
+    }
 
     protected void Death()
     {
