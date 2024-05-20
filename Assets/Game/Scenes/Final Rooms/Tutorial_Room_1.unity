@@ -2761,14 +2761,6 @@ PrefabInstance:
       propertyPath: MinusAngleSpin
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5851169249432410733, guid: d9f89a9092585b648a90cb32e3851f58, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: -749.55005
-      objectReference: {fileID: 0}
-    - target: {fileID: 5851169249432410733, guid: d9f89a9092585b648a90cb32e3851f58, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: -51.99994
-      objectReference: {fileID: 0}
     - target: {fileID: 5948474306833863896, guid: d9f89a9092585b648a90cb32e3851f58, type: 3}
       propertyPath: m_Enabled
       value: 0
