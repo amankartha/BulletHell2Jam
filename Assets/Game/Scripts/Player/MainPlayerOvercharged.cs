@@ -19,6 +19,7 @@ public class MainPlayerOvercharged : StateBase
     {
         base.OnEnter();
         _player.canReflect = false;
+        _player.canTeleport = false;
         _player.SetOvercharging();
     }
 
@@ -44,6 +45,7 @@ public class MainPlayerOvercharged : StateBase
     {
         base.OnExit();
         _player.canReflect = true;
+        _player.canTeleport = true;
         _player.SetOverChargingOff();
     }
 }

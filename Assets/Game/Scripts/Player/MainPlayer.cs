@@ -84,6 +84,7 @@ public class MainPlayer : MonoBehaviour, IBulletHitHandler
     public bool canCharge = true;
     public bool canReflect = true;
     public bool canTakeDamage = true;
+    public bool teleported = false;
     #endregion
 
     #region Events
@@ -100,7 +101,7 @@ public class MainPlayer : MonoBehaviour, IBulletHitHandler
 
     public SpriteRenderer Renderer;
 
-   
+    public GameObject TeleportText;
 
     #endregion
     private void Awake()
@@ -125,10 +126,12 @@ public class MainPlayer : MonoBehaviour, IBulletHitHandler
         
         fsm.AddTransition(new Transition("Melee","Shooting",transition => TransitionToShooting()));
         fsm.AddTransition(new Transition("Shooting","Melee",transition => TransitionFromShooting()));
-        
+        fsm.AddTransition(new Transition("Shooting","Melee",transition => teleported));
+
         fsm.AddTransition(new Transition("Melee","OverCharged",transition => TransitionToOverheated()));
         fsm.AddTransition(new Transition("OverCharged","Melee",transition => TransitionFromOverheated()));
-
+        
+        
 
         fsm.SetStartState("Melee");
         fsm.Init();
@@ -142,6 +145,7 @@ public class MainPlayer : MonoBehaviour, IBulletHitHandler
     {
         fsm.OnLogic();
         
+        TeleportText.SetActive(canTeleport && Heat>TeleportCost);
         
         //teleport logic
         Teleport();
@@ -173,7 +177,7 @@ public class MainPlayer : MonoBehaviour, IBulletHitHandler
         }
     }
     public float TeleportCooldown = 2.0f;
-    private bool canTeleport = true;
+    public bool canTeleport = true;
 
     private void Teleport()
     {
@@ -186,6 +190,7 @@ public class MainPlayer : MonoBehaviour, IBulletHitHandler
     private void TeleportSequence()
     {
         TeleportFeedbacks?.PlayFeedbacks();
+        teleported = true;
         transform.position = (Vector2)mainCamera.ScreenToWorldPoint(Input.mousePosition);
         StartCoroutine(TeleportCoolDownCounter());
     }
