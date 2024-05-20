@@ -41,7 +41,7 @@ public class GameManager : MMPersistentSingleton<GameManager>
     
     public void GetNewCollider(Scene scene,LoadSceneMode load)
     {
-        if(scene.name != "GameOverScene") CurrentRoomCollider = FindObjectOfType<THISCOLLIDER>().GetComponent<CompositeCollider2D>();
+        if(scene.name != "GameOverScene" && scene.name != "MainMenu" && scene.name != "LoadingTest") CurrentRoomCollider = FindObjectOfType<THISCOLLIDER>().GetComponent<CompositeCollider2D>();
     }
 
     public void ChangeCamera(float size)

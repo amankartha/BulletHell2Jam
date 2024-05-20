@@ -18,7 +18,10 @@ public class RoomStartTrigger : MonoBehaviour,ITrigger
         foreach (var Enemy in EnemiesToSpawn)
         {
             Enemy.SetActive(true);
-            _ExitDoor.FindEnemies();
+            if (_ExitDoor != null)
+            {
+                _ExitDoor.FindEnemies();
+            }
         }
         gameObject.SetActive(false);
     }

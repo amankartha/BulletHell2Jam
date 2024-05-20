@@ -108,7 +108,7 @@ public class MainPlayer : MonoBehaviour, IBulletHitHandler
     {
           GameManager.Instance.MAINPLAYERGAMEOBJECT = this.gameObject;
           GameManager.Instance.MAINPLAYERSCRIPT = this;
-          
+          GameManager.Instance._virtualCamera.Follow = this.gameObject.transform;
           DontDestroyOnLoad(gameObject);
           SceneManager.sceneLoaded += SetPlayerPositionToSpawnPoint;
     }
