@@ -3634,6 +3634,10 @@ PrefabInstance:
       propertyPath: managedReferences[6140528706069463045].DestinationSceneName
       value: Room_7 FInal
       objectReference: {fileID: 0}
+    - target: {fileID: 6157406268155738666, guid: 96da924eeaa5553439bbdee0944f47e8, type: 3}
+      propertyPath: ChangeHub
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7623495608409673026, guid: 96da924eeaa5553439bbdee0944f47e8, type: 3}
       propertyPath: m_Name
       value: TeleportPad

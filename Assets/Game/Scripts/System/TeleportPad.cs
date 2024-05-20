@@ -8,7 +8,8 @@ public class TeleportPad : MonoBehaviour
 {
 
     [SerializeField] private MMF_Player teleportFeedback;
-    
+
+    [SerializeField] private bool ChangeHub = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -26,6 +27,10 @@ public class TeleportPad : MonoBehaviour
     {
         if (col.gameObject == GameManager.Instance.MAINPLAYERGAMEOBJECT)
         {
+            if (ChangeHub)
+            {
+                GameManager.Instance.MAINPLAYERSCRIPT.ChangeRespawn("Room_6 Final");
+            }
             teleportFeedback?.PlayFeedbacks();
         }
     }

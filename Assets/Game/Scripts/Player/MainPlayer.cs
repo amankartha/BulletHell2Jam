@@ -49,7 +49,7 @@ public class MainPlayer : MonoBehaviour, IBulletHitHandler
     public MMF_Player DeathFeedbacks;
     public MMF_Player TeleportFeedbacks;
     public MMF_Player ShootFeedbacks;
-    
+    public MMF_Player DEATHTOCHANGE;
    
 
     #endregion
@@ -152,6 +152,11 @@ public class MainPlayer : MonoBehaviour, IBulletHitHandler
         
     }
 
+
+    public void ChangeRespawn(string name)
+    {
+        DEATHTOCHANGE.GetFeedbackOfType<MMF_LoadScene>().DestinationSceneName = name;
+    }
     private void OnDisable()
     {
         armBulletSpawner.OnWeaponFiredEvent -= OnShoot;

@@ -381,6 +381,7 @@ MonoBehaviour:
   DeathFeedbacks: {fileID: 9092908165648070489}
   TeleportFeedbacks: {fileID: 7946417358114292764}
   ShootFeedbacks: {fileID: 214379599856255890}
+  DEATHTOCHANGE: {fileID: 2590447092903048571}
   canCharge: 1
   canReflect: 1
   canTakeDamage: 1

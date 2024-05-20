@@ -20,7 +20,10 @@ public class CameraChange : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D col)
     {
-        GameManager.Instance.ChangeCamera(size);
-        Destroy(this.gameObject);
+        if (col.gameObject == GameManager.Instance.MAINPLAYERGAMEOBJECT)
+        {
+            GameManager.Instance.ChangeCamera(size);
+            Destroy(this.gameObject);
+        }
     }
 }
