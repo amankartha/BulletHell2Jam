@@ -16,7 +16,7 @@ public class ExitDoor : MonoBehaviour
 
     public void FindEnemies()
     {
-        Enemy[] enemies = FindObjectsOfType<Enemy>();
+        Enemy[] enemies =  FindObjectsOfType<Enemy>(true);
 
 
         foreach (Enemy enemy in enemies)

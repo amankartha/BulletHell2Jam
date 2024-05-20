@@ -1787,14 +1787,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.18729413, g: 1, b: 0, a: 1}
+  m_Color: {r: 0.3688908, g: 0.8396226, b: 0.6244508, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -124195549, guid: 7387bc8a7a25a7444a9b9a9e9c2cebb3, type: 3}
+  m_Sprite: {fileID: 1329187390, guid: ee371c948cfd7074fb83e993b2cc6104, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -2027,7 +2027,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 1}
+  m_Color: {r: 0.48235294, g: 0.21960786, b: 0.25200146, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -6647,7 +6647,7 @@ MonoBehaviour:
         RemapRangeFalloff: {x: 0, y: 1}
         Owner: {fileID: 2590447092903048571}
         DebugActive: 0
-        LoadingSceneName: MMAdditiveLoadingScreen
+        LoadingSceneName: LoadingTest
         DestinationSceneName: Hub_Room
         LoadingMode: 2
         Priority: 4
