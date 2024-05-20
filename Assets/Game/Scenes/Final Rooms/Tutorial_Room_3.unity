@@ -855,7 +855,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: POWER PLATFORMS GIVE ENERGY
+  m_text: gain power on charge platforms
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: fb56ec506d478044b8df177e31c903e8, type: 2}
   m_sharedMaterial: {fileID: 4911384808728751679, guid: fb56ec506d478044b8df177e31c903e8, type: 2}

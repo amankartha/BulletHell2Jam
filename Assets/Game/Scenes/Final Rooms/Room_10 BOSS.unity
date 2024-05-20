@@ -984,6 +984,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: BossEnemyB2
       objectReference: {fileID: 0}
+    - target: {fileID: 3908983052424932800, guid: 09c0bbc71f75bac4e98cd8f313a92f53, type: 3}
+      propertyPath: _health
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 3908983052424932800, guid: 09c0bbc71f75bac4e98cd8f313a92f53, type: 3}
+      propertyPath: MaxHealth
+      value: 100
+      objectReference: {fileID: 0}
     - target: {fileID: 7238086500705105868, guid: 09c0bbc71f75bac4e98cd8f313a92f53, type: 3}
       propertyPath: m_LocalPosition.x
       value: -5.5

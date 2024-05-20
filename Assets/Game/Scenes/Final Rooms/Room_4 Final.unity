@@ -285,6 +285,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8090751791551186836, guid: f48d23ef7992d274498783100e3b5cd8, type: 3}
+      propertyPath: isRobot
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8477161354104613683, guid: f48d23ef7992d274498783100e3b5cd8, type: 3}
       propertyPath: m_LocalPosition.x
       value: 5.5

@@ -332,7 +332,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: WARNING! TOO MUCH ENERGY WILL CAUSE AN OVERLOAD!
+  m_text: WARNING! TOO MUCH power WILL CAUSE AN OVERLOAD!
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: fb56ec506d478044b8df177e31c903e8, type: 2}
   m_sharedMaterial: {fileID: 4911384808728751679, guid: fb56ec506d478044b8df177e31c903e8, type: 2}
@@ -1754,7 +1754,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: '[SPACE] TO TELEPORT TO MOUSE. *REQUIRES ENERGY*'
+  m_text: '[SPACE] TO TELEPORT TO MOUSE. *REQUIRES power*'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: fb56ec506d478044b8df177e31c903e8, type: 2}
   m_sharedMaterial: {fileID: 4911384808728751679, guid: fb56ec506d478044b8df177e31c903e8, type: 2}
@@ -5578,7 +5578,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 974439338841082425, guid: 604f46c20ba7ba94d8faab9470850619, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7752264144048435630, guid: 604f46c20ba7ba94d8faab9470850619, type: 3}
       propertyPath: m_LocalPosition.x
@@ -5994,7 +5994,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4817401514183107075, guid: 9ccbc1af9779d5646ac63d8f9339f564, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -6064,11 +6064,11 @@ SceneRoots:
   m_Roots:
   - {fileID: 3046984769644347704}
   - {fileID: 2668441444256814340}
+  - {fileID: 2711584254834158550}
   - {fileID: 3991813299120332117}
   - {fileID: 1697181874}
   - {fileID: 5477658978290322397}
   - {fileID: 961691623708731102}
-  - {fileID: 2711584254834158550}
   - {fileID: 9155299278586025278}
   - {fileID: 1969141655}
   - {fileID: 53256833}
