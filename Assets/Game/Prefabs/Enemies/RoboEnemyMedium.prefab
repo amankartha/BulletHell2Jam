@@ -992,7 +992,7 @@ MonoBehaviour:
   MaxHealth: 30
   canRespawnAfterDelay: 1
   isRobot: 0
-  delay: 8
+  delay: 15
   Child: {fileID: 7427282961813491753}
   colliderToDisable: {fileID: 5900924444364376331}
   PunchDamage: 15

@@ -209,7 +209,7 @@ MonoBehaviour:
       minValue: 0.75
       maxValue: 1
     UseRotationForDirection: 1
-    MoveWithTransform: 1
+    MoveWithTransform: 0
     RotateWithTransform: 0
     ColliderType: 0
     ColliderSize: 0.5
@@ -411,7 +411,7 @@ MonoBehaviour:
       minValue: 0.75
       maxValue: 1
     UseRotationForDirection: 1
-    MoveWithTransform: 1
+    MoveWithTransform: 0
     RotateWithTransform: 0
     ColliderType: 0
     ColliderSize: 0.5
@@ -809,7 +809,7 @@ MonoBehaviour:
       minValue: 0.75
       maxValue: 1
     UseRotationForDirection: 1
-    MoveWithTransform: 1
+    MoveWithTransform: 0
     RotateWithTransform: 0
     ColliderType: 0
     ColliderSize: 0.5
@@ -1888,7 +1888,7 @@ MonoBehaviour:
       minValue: 0.75
       maxValue: 1
     UseRotationForDirection: 1
-    MoveWithTransform: 1
+    MoveWithTransform: 0
     RotateWithTransform: 0
     ColliderType: 0
     ColliderSize: 0.5
