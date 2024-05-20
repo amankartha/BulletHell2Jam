@@ -365,8 +365,8 @@ MonoBehaviour:
   ShootThreshold: 0
   ShootingDrainPerSecond: 3
   OverchargeCooldownPerSecond: 2
-  _health: 5
-  _maxHealth: 5
+  _health: 15
+  _maxHealth: 15
   _heat: 0
   _maxHeat: 10
   Speed: 4

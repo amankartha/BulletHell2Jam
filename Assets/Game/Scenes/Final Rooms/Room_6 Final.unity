@@ -131,6 +131,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1367812491}
     m_Modifications:
+    - target: {fileID: 252423242409917892, guid: 96119b1d7bec14c4da3371fa95abe294, type: 3}
+      propertyPath: REQUIREDTOBEKILLED
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6813556962348288272, guid: 96119b1d7bec14c4da3371fa95abe294, type: 3}
       propertyPath: m_LocalScale.x
       value: 1.5
@@ -205,6 +209,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 723431583}
     m_Modifications:
+    - target: {fileID: 252423242409917892, guid: 96119b1d7bec14c4da3371fa95abe294, type: 3}
+      propertyPath: REQUIREDTOBEKILLED
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6813556962348288272, guid: 96119b1d7bec14c4da3371fa95abe294, type: 3}
       propertyPath: m_LocalScale.x
       value: 1.5
@@ -466,6 +474,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 358473439169415082, guid: 522e5a3815afd3e438e904dee84e319b, type: 3}
       propertyPath: path.timesTable.Array.data[2]
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5579394803312826129, guid: 522e5a3815afd3e438e904dee84e319b, type: 3}
+      propertyPath: REQUIREDTOBEKILLED
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6736363538314505777, guid: 522e5a3815afd3e438e904dee84e319b, type: 3}
@@ -741,6 +753,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 358473439169415082, guid: 522e5a3815afd3e438e904dee84e319b, type: 3}
       propertyPath: path.timesTable.Array.data[2]
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5579394803312826129, guid: 522e5a3815afd3e438e904dee84e319b, type: 3}
+      propertyPath: REQUIREDTOBEKILLED
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6736363538314505777, guid: 522e5a3815afd3e438e904dee84e319b, type: 3}
@@ -1526,6 +1542,10 @@ PrefabInstance:
       propertyPath: path.timesTable.Array.data[1]
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5579394803312826129, guid: 522e5a3815afd3e438e904dee84e319b, type: 3}
+      propertyPath: REQUIREDTOBEKILLED
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6736363538314505777, guid: 522e5a3815afd3e438e904dee84e319b, type: 3}
       propertyPath: m_LocalPosition.x
       value: -2
@@ -1758,6 +1778,10 @@ PrefabInstance:
       propertyPath: path.timesTable.Array.data[1]
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5579394803312826129, guid: 522e5a3815afd3e438e904dee84e319b, type: 3}
+      propertyPath: REQUIREDTOBEKILLED
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6736363538314505777, guid: 522e5a3815afd3e438e904dee84e319b, type: 3}
       propertyPath: m_LocalPosition.x
       value: -2
@@ -1899,6 +1923,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 358473439169415082, guid: 522e5a3815afd3e438e904dee84e319b, type: 3}
       propertyPath: path.timesTable.Array.data[1]
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5579394803312826129, guid: 522e5a3815afd3e438e904dee84e319b, type: 3}
+      propertyPath: REQUIREDTOBEKILLED
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6736363538314505777, guid: 522e5a3815afd3e438e904dee84e319b, type: 3}
@@ -3454,6 +3482,10 @@ PrefabInstance:
       propertyPath: path.timesTable.Array.data[2]
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5579394803312826129, guid: 522e5a3815afd3e438e904dee84e319b, type: 3}
+      propertyPath: REQUIREDTOBEKILLED
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6736363538314505777, guid: 522e5a3815afd3e438e904dee84e319b, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -3977,6 +4009,7 @@ GameObject:
   - component: {fileID: 8101521788522851853}
   - component: {fileID: 8351997284918064252}
   - component: {fileID: 8780193664025650493}
+  - component: {fileID: 8780193664025650494}
   m_Layer: 8
   m_Name: Tilemap_Floor
   m_TagString: Untagged
@@ -5912,6 +5945,7 @@ MonoBehaviour:
         m_CallState: 2
   EnemiesToSpawn:
   - {fileID: 708918770}
+  _ExitDoor: {fileID: 8947076767815948176}
 --- !u!66 &4837895326159906515
 CompositeCollider2D:
   m_ObjectHideFlags: 0
@@ -10066,6 +10100,18 @@ CompositeCollider2D:
   m_OffsetDistance: 0.00005
   m_UseDelaunayMesh: 0
   m_CompositeGameObject: {fileID: 3087260524609385505}
+--- !u!114 &8780193664025650494
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3087260524609385505}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: be88b08410cdde3479af7a9a4092fe47, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &8947076767815948175
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10123,6 +10169,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 18b1a842abfd2174293c24710842e77a, type: 3}
+--- !u!114 &8947076767815948176 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3945465321093273938, guid: 18b1a842abfd2174293c24710842e77a, type: 3}
+  m_PrefabInstance: {fileID: 8947076767815948175}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 208fe72db8e839143b20c7628b33745d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -10130,9 +10187,9 @@ SceneRoots:
   - {fileID: 6574106483688747113}
   - {fileID: 4428857389747813004}
   - {fileID: 8947076767815948175}
-  - {fileID: 6112369883782044295}
   - {fileID: 1043941944867415151}
   - {fileID: 5050574290262305796}
+  - {fileID: 6112369883782044295}
   - {fileID: 6087405299519120469}
   - {fileID: 296378913}
   - {fileID: 708918771}
