@@ -235,6 +235,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1735989852}
     m_Modifications:
+    - target: {fileID: 7565025278212214130, guid: bddeb2fde565cf643bbe6bd6545fe8da, type: 3}
+      propertyPath: delay
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 7565025278212214130, guid: bddeb2fde565cf643bbe6bd6545fe8da, type: 3}
+      propertyPath: isRobot
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8341298260601313959, guid: bddeb2fde565cf643bbe6bd6545fe8da, type: 3}
       propertyPath: m_Name
       value: RoboEnemyLarge
@@ -4561,6 +4569,7 @@ GameObject:
   - component: {fileID: 8101521788522851853}
   - component: {fileID: 8351997284918064252}
   - component: {fileID: 8780193664025650493}
+  - component: {fileID: 8780193664025650494}
   m_Layer: 8
   m_Name: Tilemap_Floor
   m_TagString: Untagged
@@ -6920,7 +6929,7 @@ MonoBehaviour:
         m_CallState: 2
   EnemiesToSpawn:
   - {fileID: 708918770}
-  _ExitDoor: {fileID: 0}
+  _ExitDoor: {fileID: 8947076767815948176}
 --- !u!66 &4837895326159906515
 CompositeCollider2D:
   m_ObjectHideFlags: 0
@@ -7495,7 +7504,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6841094020397526249, guid: 302e9991b3c727248aae2ec672abeba5, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7761232761454931462, guid: 302e9991b3c727248aae2ec672abeba5, type: 3}
       propertyPath: m_LocalPosition.x
@@ -7576,7 +7585,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 254829461606866309, guid: d9f89a9092585b648a90cb32e3851f58, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -10648,6 +10657,18 @@ CompositeCollider2D:
   m_OffsetDistance: 0.00005
   m_UseDelaunayMesh: 0
   m_CompositeGameObject: {fileID: 3087260524609385505}
+--- !u!114 &8780193664025650494
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3087260524609385505}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: be88b08410cdde3479af7a9a4092fe47, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &8947076767815948175
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10709,6 +10730,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 18b1a842abfd2174293c24710842e77a, type: 3}
+--- !u!114 &8947076767815948176 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3945465321093273938, guid: 18b1a842abfd2174293c24710842e77a, type: 3}
+  m_PrefabInstance: {fileID: 8947076767815948175}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 208fe72db8e839143b20c7628b33745d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
