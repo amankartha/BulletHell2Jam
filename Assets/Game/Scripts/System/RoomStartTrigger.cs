@@ -13,6 +13,7 @@ public class RoomStartTrigger : MonoBehaviour,ITrigger
     
     public void ActivateTrigger()
     {
+        GameManager.Instance.FadeFighting?.PlayFeedbacks();
         MethodstoCall?.Invoke();
         foreach (var Enemy in EnemiesToSpawn)
         {

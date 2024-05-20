@@ -160,6 +160,7 @@ public class MainPlayer : MonoBehaviour, IBulletHitHandler
     private void Respawn()
     {
         DeathFeedbacks?.PlayFeedbacks();
+        GameManager.Instance.FadeCalm?.PlayFeedbacks();
         Health = _maxHealth;
         Heat = 0f;
     }

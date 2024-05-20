@@ -36,6 +36,7 @@ public class ExitDoor : MonoBehaviour
         if (KillCount >= NumberofEnemiesTOKill)
         {
             MethodsToCall?.Invoke();
+            GameManager.Instance.FadeCalm?.PlayFeedbacks();
         }
     }
 }

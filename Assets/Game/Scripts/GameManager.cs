@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using MoreMountains.Feedbacks;
 using MoreMountains.Tools;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -11,6 +12,11 @@ public class GameManager : MMPersistentSingleton<GameManager>
 
     public GameObject MAINPLAYERGAMEOBJECT;
     public MainPlayer MAINPLAYERSCRIPT;
+
+    public MMF_Player StartCalm;
+    public MMF_Player StartFighting;
+    public MMF_Player FadeCalm;
+    public MMF_Player FadeFighting;
 
     private void OnEnable()
     {
