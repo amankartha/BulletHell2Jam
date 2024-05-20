@@ -3579,6 +3579,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 708918771}
     m_Modifications:
+    - target: {fileID: 51330672240831549, guid: a2db83078ab3acd4780bb7127aa7064c, type: 3}
+      propertyPath: main.Damage.minValue
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1482174067178920536, guid: a2db83078ab3acd4780bb7127aa7064c, type: 3}
+      propertyPath: main.Damage.minValue
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1538453911355746611, guid: a2db83078ab3acd4780bb7127aa7064c, type: 3}
+      propertyPath: _health
+      value: 500
+      objectReference: {fileID: 0}
+    - target: {fileID: 1538453911355746611, guid: a2db83078ab3acd4780bb7127aa7064c, type: 3}
+      propertyPath: MaxHealth
+      value: 500
+      objectReference: {fileID: 0}
     - target: {fileID: 2143555707466985287, guid: a2db83078ab3acd4780bb7127aa7064c, type: 3}
       propertyPath: m_LocalPosition.x
       value: -2
@@ -3619,9 +3635,29 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2735430380462155065, guid: a2db83078ab3acd4780bb7127aa7064c, type: 3}
+      propertyPath: main.Damage.minValue
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2992540804121715445, guid: a2db83078ab3acd4780bb7127aa7064c, type: 3}
+      propertyPath: main.Damage.minValue
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 4091478042773928684, guid: a2db83078ab3acd4780bb7127aa7064c, type: 3}
       propertyPath: m_Name
       value: BossEnemyA1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6424588309199808381, guid: a2db83078ab3acd4780bb7127aa7064c, type: 3}
+      propertyPath: main.Damage.minValue
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8063625342835121183, guid: a2db83078ab3acd4780bb7127aa7064c, type: 3}
+      propertyPath: main.Damage.isRandom
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8063625342835121183, guid: a2db83078ab3acd4780bb7127aa7064c, type: 3}
+      propertyPath: main.Damage.minValue
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
