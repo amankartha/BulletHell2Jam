@@ -1,37 +1,41 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using BulletFury;
 using BulletFury.Data;
 using UnityEngine;
+using UnityEngine.Events;
 
-public class ExitDoor : MonoBehaviour, IBulletHitHandler
+public class ExitDoor : MonoBehaviour
 {
-    private float health = 100f;
+    public int NumberofEnemiesTOKill = 0;
+    public int KillCount = 0;
 
-    public GameObject nextRoom;
-
-    public GameObject[] EnemiesToDespawn;
+    public UnityEvent MethodsToCall;
     
-    public void Hit(BulletContainer bullet)
-    {
-        health -= bullet.Damage;
 
-        if (health <= 0)
+    public void FindEnemies()
+    {
+        Enemy[] enemies = FindObjectsOfType<Enemy>();
+
+
+        foreach (Enemy enemy in enemies)
         {
-            ChargeDoor();
+            if (enemy.REQUIREDTOBEKILLED)
+            {
+                NumberofEnemiesTOKill++;
+            }
         }
     }
 
-    private void ChargeDoor()
-    {
-        DespawnEnemies();
-    }
 
-    private void DespawnEnemies()
+    public void IncreaseKillCounter()
     {
-        foreach (var enemies in EnemiesToDespawn)
+        KillCount++;
+
+        if (KillCount >= NumberofEnemiesTOKill)
         {
-            enemies.SetActive(false);
-        }   
+            MethodsToCall?.Invoke();
+        }
     }
 }

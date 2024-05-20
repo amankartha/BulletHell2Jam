@@ -47,6 +47,7 @@ public class MainPlayer : MonoBehaviour, IBulletHitHandler
     public MMF_Player OverChargedFeedbacks;
     public MMF_Player OverChargedFeedbacksEnd;
     public MMF_Player DeathFeedbacks;
+    public MMF_Player TeleportFeedbacks;
     
     
    
@@ -184,6 +185,7 @@ public class MainPlayer : MonoBehaviour, IBulletHitHandler
 
     private void TeleportSequence()
     {
+        TeleportFeedbacks?.PlayFeedbacks();
         transform.position = (Vector2)mainCamera.ScreenToWorldPoint(Input.mousePosition);
         StartCoroutine(TeleportCoolDownCounter());
     }
